@@ -4,7 +4,7 @@ const CONFIG = {
     name: "Cheoljun Park",
     image: "/avatar.png", // If you want to create your own notion avatar, check out https://notion-avatar.vercel.app
     role: "Backend Developer",
-    bio: "I develop everything using java.",
+    bio: "I SPRING the world.",
     email: "dkfnak6789@gmail.com",
     linkedin: "cheoljunpark",
     github: "cheoljunpark",
@@ -61,7 +61,7 @@ const CONFIG = {
     },
   },
   cusdis: {
-    enable: false,
+    enable: true,
     config: {
       host: "https://cusdis.com",
       appid: "", // Embed Code -> data-app-id value

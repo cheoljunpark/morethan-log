@@ -8,6 +8,7 @@ import {
 } from "react-icons/ai"
 import { CONFIG } from "site.config"
 import { Emoji } from "src/components/Emoji"
+import { BiBrain } from "react-icons/bi";
 
 const ContactCard: React.FC = () => {
   return (
@@ -55,6 +56,16 @@ const ContactCard: React.FC = () => {
           >
             <AiFillLinkedin className="icon" />
             <div className="name">linkedin</div>
+          </a>
+        )}
+        {CONFIG.profile.solved_ac && (
+          <a
+            href={`https://solved.ac/profile/${CONFIG.profile.solved_ac}`}
+            rel="noreferrer"
+            target="_blank"
+          >
+            <BiBrain className="icon" />
+            <div className="name">solved.ac</div>
           </a>
         )}
       </StyledWrapper>

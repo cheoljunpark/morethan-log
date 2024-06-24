@@ -3,8 +3,8 @@ const CONFIG = {
   profile: {
     name: "Cheoljun Park",
     image: "/avatar.png", // If you want to create your own notion avatar, check out https://notion-avatar.vercel.app
-    role: "Backend Developer",
-    bio: "I SPRING the world.",
+    role: "Frontend Developer",
+    bio: "I develop SEXY UI/UX.",
     email: "dkfnak6789@gmail.com",
     linkedin: "cheoljunpark",
     github: "cheoljunpark",
@@ -13,7 +13,27 @@ const CONFIG = {
   },
   projects: [
     {
-      name: `algorithm`,
+      name: `Vita`,
+      href: "https://github.com/cheoljunpark/vita",
+    },
+    {
+      name: `ErU`,
+      href: "https://github.com/cheoljunpark/eru",
+    },
+    {
+      name: `Mokkoji`,
+      href: "https://github.com/cheoljunpark/mokkoji",
+    },
+    {
+      name: `Trippin`,
+      href: "https://github.com/cheoljunpark/trippin",
+    },
+    {
+      name: `FPS`,
+      href: "https://github.com/cheoljunpark/fps",
+    },
+    {
+      name: `Algorithm`,
       href: "https://github.com/cheoljunpark/algorithm",
     },
   ],

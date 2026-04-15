@@ -124,10 +124,9 @@ const StyledWrapper = styled.div`
     padding-right: 1.5rem;
 
     @media (min-width: 1280px) {
-      display: grid;
-      grid-template-columns: minmax(0, 12.5rem) minmax(0, 1fr) minmax(0, 12.5rem);
-      gap: 1.25rem;
-      align-items: start;
+      position: relative;
+      padding-left: 13.25rem;
+      padding-right: 13.25rem;
     }
   }
 
@@ -152,10 +151,10 @@ const StyledWrapper = styled.div`
 
     @media (min-width: 1280px) {
       display: block;
-      position: sticky;
-      top: 6rem;
-      align-self: start;
+      position: absolute;
+      top: 0;
       min-width: 0;
+      width: 11.5rem;
       max-height: calc(100vh - 7.5rem);
       overflow-y: auto;
       scrollbar-width: none;
@@ -165,5 +164,13 @@ const StyledWrapper = styled.div`
         display: none;
       }
     }
+  }
+
+  .left-rail {
+    left: 0;
+  }
+
+  .right-rail {
+    right: 0;
   }
 `

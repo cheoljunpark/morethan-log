@@ -51,6 +51,8 @@ const StyledWrapper = styled.section`
 
   .card {
     display: block;
+    width: 100%;
+    min-width: 0;
     padding: 0.85rem 0.9rem;
     border-radius: 0.95rem;
     background-color: ${({ theme }) => theme.colors.gray3};
@@ -76,6 +78,7 @@ const StyledWrapper = styled.section`
     margin-bottom: 0.45rem;
     line-height: 1.6;
     font-weight: 700;
+    overflow-wrap: anywhere;
     color: ${({ theme }) => theme.colors.gray12};
   }
 
@@ -84,6 +87,7 @@ const StyledWrapper = styled.section`
     overflow: hidden;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
+    overflow-wrap: anywhere;
     line-height: 1.7;
     color: ${({ theme }) => theme.colors.gray11};
   }

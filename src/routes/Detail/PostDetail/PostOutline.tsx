@@ -62,11 +62,13 @@ const StyledWrapper = styled.aside`
 
   .item {
     display: block;
+    width: 100%;
     padding: 0.35rem 0.5rem;
     border-radius: 0.75rem;
     line-height: 1.5;
     color: ${({ theme }) => theme.colors.gray10};
-    word-break: keep-all;
+    overflow-wrap: anywhere;
+    word-break: break-word;
 
     &[data-level="2"] {
       padding-left: 0.9rem;

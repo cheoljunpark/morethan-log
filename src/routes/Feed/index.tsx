@@ -11,6 +11,8 @@ import ServiceCard from "./ServiceCard"
 import ContactCard from "./ContactCard"
 import PostList from "./PostList"
 import PinnedPosts from "./PostList/PinnedPosts"
+import FeaturedPosts from "./FeaturedPosts"
+import { DEFAULT_CATEGORY } from "src/constants"
 
 const HEADER_HEIGHT = 73
 
@@ -19,6 +21,15 @@ type Props = {}
 const Feed: React.FC<Props> = () => {
   const router = useRouter()
   const q = typeof router.query.q === "string" ? router.query.q : ""
+  const currentTag = typeof router.query.tag === "string" ? router.query.tag : ""
+  const currentCategory =
+    typeof router.query.category === "string"
+      ? router.query.category
+      : DEFAULT_CATEGORY
+  const currentOrder =
+    typeof router.query.order === "string" ? router.query.order : "desc"
+  const showFeatured =
+    !q && !currentTag && currentCategory === DEFAULT_CATEGORY && currentOrder === "desc"
 
   const handleSearchChange = (value: string) => {
     const nextQuery = {
@@ -51,6 +62,7 @@ const Feed: React.FC<Props> = () => {
       </div>
       <div className="mid">
         <MobileProfileCard />
+        <FeaturedPosts enabled={showFeatured} />
         <PinnedPosts q={q} />
         <SearchInput
           value={q}

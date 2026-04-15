@@ -54,7 +54,6 @@ const PostCard: React.FC<Props> = ({ data }) => {
           </div>
           <header className="top">
             <h2>{data.title}</h2>
-            <span className="arrow">Read</span>
           </header>
           <div className="date">
             <div className="content">
@@ -193,16 +192,6 @@ const StyledWrapper = styled(Link)`
           }
         }
 
-        .arrow {
-          flex-shrink: 0;
-          margin-top: 0.15rem;
-          font-size: 0.8rem;
-          line-height: 1.1rem;
-          font-weight: 700;
-          letter-spacing: 0.08em;
-          text-transform: uppercase;
-          color: #0f766e;
-        }
       }
       > .date {
         display: flex;

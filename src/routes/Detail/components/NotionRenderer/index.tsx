@@ -93,11 +93,20 @@ const StyledWrapper = styled.div`
   .notion-list {
     width: 100%;
   }
+  .notion-code {
+    overflow: hidden;
+  }
   .notion-code pre {
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
     scrollbar-width: none;
   }
   .notion-code pre::-webkit-scrollbar {
     width: 0;
     height: 0;
+  }
+  .notion-code code {
+    overflow-wrap: normal;
+    word-break: normal;
   }
 `

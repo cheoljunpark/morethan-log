@@ -15,13 +15,10 @@ const FeaturedPosts: React.FC<Props> = ({ enabled }) => {
   const posts = usePostsQuery()
 
   const featuredPosts = useMemo(() => {
-    const selected = posts.filter(
+    return posts.filter(
       (post) =>
         post.tags?.includes("Featured") || post.tags?.includes("Pinned")
     )
-
-    const base = selected.length >= 3 ? selected : posts
-    return base.slice(0, 3)
   }, [posts])
 
   const handleClick = (postId: string) => {
@@ -38,8 +35,7 @@ const FeaturedPosts: React.FC<Props> = ({ enabled }) => {
   return (
     <StyledWrapper>
       <div className="section-header">
-        <div className="eyebrow">Featured Writing</div>
-        <h2>Start Here</h2>
+        <h2>Featured Posts</h2>
       </div>
       <div className="grid">
         <Link
@@ -117,8 +113,8 @@ const StyledWrapper = styled.section`
   }
 
   h2 {
-    font-size: 1.75rem;
-    line-height: 2.2rem;
+    font-size: 1.4rem;
+    line-height: 1.9rem;
     font-weight: 800;
   }
 

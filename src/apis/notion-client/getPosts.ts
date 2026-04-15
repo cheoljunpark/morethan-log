@@ -13,16 +13,26 @@ import { TPosts } from "src/types"
 // TODO: react query를 사용해서 처음 불러온 뒤로는 해당데이터만 사용하도록 수정
 export const getPosts = async () => {
   let id = CONFIG.notionConfig.pageId as string
+  if (!id) {
+    return []
+  }
+
   const api = new NotionAPI()
 
   const response = await api.getPage(id)
   id = idToUuid(id)
-  const collectionValue = Object.values(response.collection)[0]?.value as any
+  const collectionValue = Object.values(response?.collection ?? {})[0]
+    ?.value as any
   const collection = collectionValue?.value ?? collectionValue
   const block = response.block
   const schema = collection?.schema
 
-  const blockValue = (block[id].value as any)?.value ?? block[id].value
+  const rootBlock = block?.[id]
+  if (!rootBlock) {
+    return []
+  }
+
+  const blockValue = (rootBlock.value as any)?.value ?? rootBlock.value
   const rawMetadata = blockValue
 
   // Check Type
@@ -38,8 +48,11 @@ export const getPosts = async () => {
     for (let i = 0; i < pageIds.length; i++) {
       const id = pageIds[i]
       const properties = (await getPageProperties(id, block, schema)) || null
+      if (!properties) continue
       // Add fullwidth, createdtime to properties
-      const pageBlockValue = (block[id].value as any)?.value ?? block[id].value
+      const pageBlock = block?.[id]
+      if (!pageBlock?.value) continue
+      const pageBlockValue = (pageBlock.value as any)?.value ?? pageBlock.value
       properties.createdTime = new Date(
         pageBlockValue?.created_time
       ).toString()

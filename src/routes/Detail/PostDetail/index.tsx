@@ -79,20 +79,20 @@ export default PostDetail
 
 const Backdrop = styled.div`
   width: 100%;
-  padding: 0.75rem 1rem 1.5rem;
+  padding: 0.75rem 1rem 0;
 
   @media (min-width: 1024px) {
-    padding: 1rem 2rem 2.5rem;
+    padding: 1rem 2rem 0;
   }
 `
 
 const StyledWrapper = styled.div`
   position: relative;
   padding-top: 2.5rem;
-  padding-bottom: 1.5rem;
+  padding-bottom: 1rem;
   border: 1px solid ${({ theme }) => theme.colors.gray6};
   border-radius: 1.75rem;
-  width: min(100%, 72rem);
+  width: min(100%, 88rem);
   background-color: ${({ theme }) =>
     theme.scheme === "light"
       ? "rgba(255, 255, 255, 0.78)"
@@ -124,17 +124,22 @@ const StyledWrapper = styled.div`
     padding-right: 1.5rem;
 
     @media (min-width: 1280px) {
-      position: relative;
-      padding-left: 14.75rem;
-      padding-right: 14.75rem;
+      display: grid;
+      grid-template-columns: minmax(0, 15rem) minmax(0, 42rem) minmax(0, 15rem);
+      gap: 1.5rem;
+      justify-content: center;
+      align-items: start;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
     }
   }
 
   article {
     margin: 0 auto;
-    max-width: 39rem;
+    width: 100%;
+    max-width: 42rem;
     min-width: 0;
-    padding-bottom: 0.5rem;
+    padding-bottom: 0;
   }
 
   .inline-outline {
@@ -151,10 +156,8 @@ const StyledWrapper = styled.div`
 
     @media (min-width: 1280px) {
       display: block;
-      position: absolute;
-      top: 0;
       min-width: 0;
-      width: 13rem;
+      width: 100%;
       max-height: calc(100vh - 7.5rem);
       overflow-y: auto;
       scrollbar-width: none;
@@ -164,13 +167,5 @@ const StyledWrapper = styled.div`
         display: none;
       }
     }
-  }
-
-  .left-rail {
-    left: 0;
-  }
-
-  .right-rail {
-    right: 0;
   }
 `

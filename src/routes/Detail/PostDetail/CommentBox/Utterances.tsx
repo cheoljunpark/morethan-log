@@ -47,4 +47,11 @@ export default Utterances
 
 const StyledWrapper = styled.div`
   margin-top: 2.5rem;
+  width: 100%;
+
+  .utterances,
+  .utterances-frame {
+    width: 100%;
+    max-width: 100%;
+  }
 `

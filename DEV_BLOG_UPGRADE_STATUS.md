@@ -5,16 +5,22 @@
 ## 진행예정
 
 - `pinned`를 Notion 속성 기반으로 전환
-- `updatedAt` 속성 지원 및 수정일 노출
-- 관련 글 추천 섹션 추가
 
 ## 진행중
 - 다음 작업 선택 전
 - 현재 배포 상태 확인
-- 다음 후보: `updatedAt` 또는 관련 글 추천
+- 다음 후보: `pinned` 또는 홈 피드 카드 UI 강화
 
 ## 진행완료
 
+- `updatedAt`과 관련 글 추천
+  - 타입에 `updatedAt` 추가
+  - 상세 헤더에 수정일 노출
+  - 메타 `dateModified` 반영
+  - 관련 글 추천 계산 훅 추가
+  - 상세 하단 추천 UI 추가
+  - 카드 바깥 클릭 복귀 추가
+  - 로컬 `npm run build` 검증 완료
 - 글 상세 TOC와 읽기 진행도
   - Notion 렌더링 후 헤딩 수집
   - 헤딩 anchor id 보정

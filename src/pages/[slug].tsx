@@ -59,6 +59,7 @@ const DetailPage: NextPageWithLayout = () => {
     `${CONFIG.ogImageGenerateURL}/${encodeURIComponent(post.title)}.png`
 
   const date = post.date?.start_date || post.createdTime || ""
+  const modifiedDate = post.updatedAt?.start_date || date
   const url = `${siteUrl}/${post.slug}`
   const keywords = [...(post.tags || []), ...(post.category || [])].filter(Boolean)
   const jsonLd = {
@@ -68,7 +69,7 @@ const DetailPage: NextPageWithLayout = () => {
     description: post.summary || CONFIG.blog.description,
     image: image ? [image] : undefined,
     datePublished: new Date(date).toISOString(),
-    dateModified: new Date(date).toISOString(),
+    dateModified: new Date(modifiedDate).toISOString(),
     author: {
       "@type": "Person",
       name: post.author?.[0]?.name || CONFIG.profile.name,

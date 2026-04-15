@@ -9,10 +9,13 @@ import usePostQuery from "src/hooks/usePostQuery"
 import usePostToc from "src/hooks/usePostToc"
 import useReadingProgress from "src/hooks/useReadingProgress"
 import PostOutline from "./PostOutline"
+import RelatedPosts from "./RelatedPosts"
+import { useRouter } from "next/router"
 
 type Props = {}
 
 const PostDetail: React.FC<Props> = () => {
+  const router = useRouter()
   const data = usePostQuery()
   const { items, activeId } = usePostToc("post-content")
   const progress = useReadingProgress("post-article")
@@ -20,41 +23,60 @@ const PostDetail: React.FC<Props> = () => {
   if (!data) return null
 
   const category = (data.category && data.category?.[0]) || undefined
+  const handleBackdropClick = () => {
+    if (typeof window !== "undefined" && window.history.length > 1) {
+      router.back()
+      return
+    }
+
+    router.push("/")
+  }
 
   return (
-    <StyledWrapper>
-      <div className="progress" aria-hidden="true">
-        <div className="bar" style={{ width: `${progress}%` }} />
-      </div>
-      <div className="layout">
-        <article id="post-article">
-          {category && (
-            <div css={{ marginBottom: "0.5rem" }}>
-              <Category readOnly={data.status?.[0] === "PublicOnDetail"}>
-                {category}
-              </Category>
-            </div>
-          )}
-          {data.type[0] === "Post" && <PostHeader data={data} />}
-          <div id="post-content">
-            <NotionRenderer recordMap={data.recordMap} />
-          </div>
-          {data.type[0] === "Post" && (
-            <>
-              <Footer />
-              <CommentBox data={data} />
-            </>
-          )}
-        </article>
-        <div className="outline">
-          <PostOutline items={items} activeId={activeId} />
+    <Backdrop onClick={handleBackdropClick}>
+      <StyledWrapper onClick={(event) => event.stopPropagation()}>
+        <div className="progress" aria-hidden="true">
+          <div className="bar" style={{ width: `${progress}%` }} />
         </div>
-      </div>
-    </StyledWrapper>
+        <div className="layout">
+          <article id="post-article">
+            {category && (
+              <div css={{ marginBottom: "0.5rem" }}>
+                <Category readOnly={data.status?.[0] === "PublicOnDetail"}>
+                  {category}
+                </Category>
+              </div>
+            )}
+            {data.type[0] === "Post" && <PostHeader data={data} />}
+            <div id="post-content">
+              <NotionRenderer recordMap={data.recordMap} />
+            </div>
+            {data.type[0] === "Post" && (
+              <>
+                <RelatedPosts />
+                <Footer />
+                <CommentBox data={data} />
+              </>
+            )}
+          </article>
+          <div className="outline">
+            <PostOutline items={items} activeId={activeId} />
+          </div>
+        </div>
+      </StyledWrapper>
+    </Backdrop>
   )
 }
 
 export default PostDetail
+
+const Backdrop = styled.div`
+  padding: 0.5rem 0;
+
+  @media (min-width: 1024px) {
+    padding: 1rem 0 2rem;
+  }
+`
 
 const StyledWrapper = styled.div`
   position: relative;
@@ -67,6 +89,7 @@ const StyledWrapper = styled.div`
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
   margin: 0 auto;
+  cursor: default;
 
   .progress {
     position: sticky;

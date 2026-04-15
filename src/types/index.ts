@@ -18,6 +18,7 @@ export type TPostType = "Post" | "Paper" | "Page"
 export type TPost = {
   id: string
   date: { start_date: string }
+  updatedAt?: { start_date: string }
   type: TPostType[]
   slug: string
   series?: string[]

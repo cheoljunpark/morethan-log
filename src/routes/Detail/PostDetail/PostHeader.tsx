@@ -16,6 +16,7 @@ const PostHeader: React.FC<Props> = ({ data }) => {
   const post = usePostQuery()
   const readingTime = useReadingTime(post)
   const series = data.series?.[0]
+  const updatedAt = data.updatedAt?.start_date
   const [shareLabel, setShareLabel] = useState("Copy Link")
 
   const handleShare = async () => {
@@ -77,6 +78,11 @@ const PostHeader: React.FC<Props> = ({ data }) => {
                   CONFIG.lang
                 )}
               </div>
+              {updatedAt && (
+                <div className="updated-at">
+                  Updated {formatDate(updatedAt, CONFIG.lang)}
+                </div>
+              )}
               {readingTime && (
                 <div className="reading-time">{readingTime} min read</div>
               )}
@@ -168,6 +174,9 @@ const StyledWrapper = styled.div`
           }
         }
         .reading-time {
+          color: ${({ theme }) => theme.colors.gray10};
+        }
+        .updated-at {
           color: ${({ theme }) => theme.colors.gray10};
         }
       }

@@ -111,6 +111,19 @@ const StyledWrapper = styled.div`
   .notion-page {
     padding: 0;
   }
+  .notion-full-page {
+    padding-bottom: 0 !important;
+  }
+  .notion-page-scroller {
+    min-height: 0 !important;
+  }
+  .notion-page-content {
+    width: 100%;
+  }
+  .notion-page-content-inner {
+    width: 100%;
+    max-width: 100%;
+  }
   .notion-list {
     width: 100%;
   }

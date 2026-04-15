@@ -125,8 +125,8 @@ const StyledWrapper = styled.div`
 
     @media (min-width: 1280px) {
       position: relative;
-      padding-left: 13.25rem;
-      padding-right: 13.25rem;
+      padding-left: 14.75rem;
+      padding-right: 14.75rem;
     }
   }
 
@@ -154,7 +154,7 @@ const StyledWrapper = styled.div`
       position: absolute;
       top: 0;
       min-width: 0;
-      width: 11.5rem;
+      width: 13rem;
       max-height: calc(100vh - 7.5rem);
       overflow-y: auto;
       scrollbar-width: none;

@@ -3,6 +3,7 @@ import { useRouter } from "next/router"
 import React from "react"
 import { Emoji } from "src/components/Emoji"
 import { useTagsQuery } from "src/hooks/useTagsQuery"
+import getFeedQuery from "src/libs/utils/router/getFeedQuery"
 
 type Props = {}
 
@@ -12,24 +13,20 @@ const TagList: React.FC<Props> = () => {
   const data = useTagsQuery()
 
   const handleClickTag = (value: any) => {
+    const nextQuery = {
+      ...getFeedQuery(router.query),
+      tag: currentTag === value ? undefined : value,
+    }
+
     // delete
-    if (currentTag === value) {
-      router.push({
-        query: {
-          ...router.query,
-          tag: undefined,
-        },
-      })
-    }
-    // add
-    else {
-      router.push({
-        query: {
-          ...router.query,
-          tag: value,
-        },
-      })
-    }
+    router.push(
+      {
+        pathname: "/",
+        query: nextQuery,
+      },
+      undefined,
+      { scroll: false }
+    )
   }
 
   return (

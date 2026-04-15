@@ -1,6 +1,7 @@
 import styled from "@emotion/styled"
 import { useRouter } from "next/router"
 import React from "react"
+import getFeedQuery from "src/libs/utils/router/getFeedQuery"
 
 type Props = {
   children: string
@@ -10,7 +11,17 @@ const Tag: React.FC<Props> = ({ children }) => {
   const router = useRouter()
 
   const handleClick = (value: string) => {
-    router.push(`/?tag=${value}`)
+    router.push(
+      {
+        pathname: "/",
+        query: {
+          ...getFeedQuery(router.query),
+          tag: value,
+        },
+      },
+      undefined,
+      { scroll: false }
+    )
   }
   return (
     <StyledWrapper onClick={() => handleClick(children)}>

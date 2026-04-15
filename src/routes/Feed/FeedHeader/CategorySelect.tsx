@@ -5,6 +5,7 @@ import { MdExpandMore } from "react-icons/md"
 import { DEFAULT_CATEGORY } from "src/constants"
 import styled from "@emotion/styled"
 import { useCategoriesQuery } from "src/hooks/useCategoriesQuery"
+import getFeedQuery from "src/libs/utils/router/getFeedQuery"
 
 type Props = {}
 
@@ -16,12 +17,17 @@ const CategorySelect: React.FC<Props> = () => {
   const currentCategory = `${router.query.category || ``}` || DEFAULT_CATEGORY
 
   const handleOptionClick = (category: string) => {
-    router.push({
-      query: {
-        ...router.query,
-        category,
+    router.push(
+      {
+        pathname: "/",
+        query: {
+          ...getFeedQuery(router.query),
+          category,
+        },
       },
-    })
+      undefined,
+      { scroll: false }
+    )
   }
   return (
     <StyledWrapper>

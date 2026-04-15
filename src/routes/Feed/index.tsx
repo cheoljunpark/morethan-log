@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useRouter } from "next/router"
 
 import SearchInput from "./SearchInput"
 import { FeedHeader } from "./FeedHeader"
@@ -17,7 +17,27 @@ const HEADER_HEIGHT = 73
 type Props = {}
 
 const Feed: React.FC<Props> = () => {
-  const [q, setQ] = useState("")
+  const router = useRouter()
+  const q = typeof router.query.q === "string" ? router.query.q : ""
+
+  const handleSearchChange = (value: string) => {
+    const nextQuery = {
+      ...router.query,
+      q: value || undefined,
+    }
+
+    router.replace(
+      {
+        pathname: "/",
+        query: nextQuery,
+      },
+      undefined,
+      {
+        shallow: true,
+        scroll: false,
+      }
+    )
+  }
 
   return (
     <StyledWrapper>
@@ -32,7 +52,10 @@ const Feed: React.FC<Props> = () => {
       <div className="mid">
         <MobileProfileCard />
         <PinnedPosts q={q} />
-        <SearchInput value={q} onChange={(e) => setQ(e.target.value)} />
+        <SearchInput
+          value={q}
+          onChange={(e) => handleSearchChange(e.target.value)}
+        />
         <div className="tags">
           <TagList />
         </div>

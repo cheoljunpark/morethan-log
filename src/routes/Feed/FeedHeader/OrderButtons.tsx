@@ -1,6 +1,7 @@
 import styled from "@emotion/styled"
 import { useRouter } from "next/router"
 import React from "react"
+import getFeedQuery from "src/libs/utils/router/getFeedQuery"
 
 type TOrder = "asc" | "desc"
 
@@ -12,12 +13,17 @@ const OrderButtons: React.FC<Props> = () => {
   const currentOrder = `${router.query.order || ``}` || ("desc" as TOrder)
 
   const handleClickOrderBy = (value: TOrder) => {
-    router.push({
-      query: {
-        ...router.query,
-        order: value,
+    router.push(
+      {
+        pathname: "/",
+        query: {
+          ...getFeedQuery(router.query),
+          order: value,
+        },
       },
-    })
+      undefined,
+      { scroll: false }
+    )
   }
   return (
     <StyledWrapper>

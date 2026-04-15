@@ -3,6 +3,7 @@ import React from "react"
 import { COLOR_SET } from "./constants"
 import styled from "@emotion/styled"
 import { colors } from "src/styles"
+import getFeedQuery from "src/libs/utils/router/getFeedQuery"
 
 export const getColorClassByName = (name: string): string => {
   try {
@@ -27,7 +28,17 @@ const Category: React.FC<Props> = ({ readOnly = false, children }) => {
 
   const handleClick = (value: string) => {
     if (readOnly) return
-    router.push(`/?category=${value}`)
+    router.push(
+      {
+        pathname: "/",
+        query: {
+          ...getFeedQuery(router.query),
+          category: value,
+        },
+      },
+      undefined,
+      { scroll: false }
+    )
   }
   return (
     <StyledWrapper

@@ -15,8 +15,9 @@ export const Global = () => {
           color: ${theme.colors.gray12};
           background-color: ${theme.colors.gray2};
           background-image: ${theme.scheme === "dark"
-            ? "radial-gradient(circle at top, rgba(141, 164, 255, 0.12), transparent 32%), radial-gradient(circle at right top, rgba(20, 184, 166, 0.08), transparent 22%)"
-            : "radial-gradient(circle at top, rgba(99, 102, 241, 0.08), transparent 28%), radial-gradient(circle at right top, rgba(20, 184, 166, 0.05), transparent 20%)"};
+            ? "linear-gradient(180deg, rgba(18, 22, 29, 0.98) 0%, rgba(23, 28, 36, 0.98) 100%), radial-gradient(circle at 12% 12%, rgba(135, 162, 255, 0.14), transparent 24%), radial-gradient(circle at 88% 10%, rgba(73, 166, 255, 0.10), transparent 20%)"
+            : "linear-gradient(180deg, rgba(245, 247, 251, 0.98) 0%, rgba(239, 243, 249, 0.98) 100%), radial-gradient(circle at 12% 10%, rgba(89, 115, 255, 0.10), transparent 26%), radial-gradient(circle at 88% 8%, rgba(22, 144, 255, 0.08), transparent 20%)"};
+          background-attachment: fixed;
           font-family: ${pretendard.style.fontFamily};
           font-weight: ${pretendard.style.fontWeight};
           font-style: ${pretendard.style.fontStyle};

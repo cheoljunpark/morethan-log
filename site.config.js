@@ -2,7 +2,7 @@ const CONFIG = {
   // profile setting (required)
   profile: {
     name: "Cheoljun Park",
-    image: "/avatar.png", // If you want to create your own notion avatar, check out https://notion-avatar.vercel.app
+    image: "/janggun.jpg", // If you want to create your own notion avatar, check out https://notion-avatar.vercel.app
     role: "Frontend Developer",
     bio: "I develop SEXY UI/UX.",
     email: "dkfnak6789@gmail.com",
@@ -39,9 +39,9 @@ const CONFIG = {
   ],
   // blog setting (required)
   blog: {
-    title: "Cheoljun's Blog",
+    title: "cheoljun.dev",
     description: "welcome to cheoljun's blog!",
-    scheme: "system", // 'light' | 'dark' | 'system'
+    scheme: "light", // 'light' | 'dark' | 'system'
   },
 
   // CONFIG configration (required)

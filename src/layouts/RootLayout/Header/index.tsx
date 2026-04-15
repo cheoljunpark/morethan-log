@@ -28,8 +28,11 @@ const StyledWrapper = styled.div`
   z-index: ${zIndexes.header};
   position: sticky;
   top: 0;
-  background-color: ${({ theme }) => theme.colors.gray2};
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  background-color: ${({ theme }) =>
+    theme.scheme === "dark" ? "rgba(23, 28, 36, 0.78)" : "rgba(245, 247, 251, 0.72)"};
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid ${({ theme }) => theme.colors.gray6};
+  box-shadow: 0 8px 30px -24px rgba(15, 23, 42, 0.28);
 
   .container {
     display: flex;

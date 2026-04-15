@@ -10,7 +10,7 @@ type Props = {
 
 const Header: React.FC<Props> = ({ fullWidth }) => {
   return (
-    <StyledWrapper>
+    <StyledWrapper data-detail-safe="true">
       <div data-full-width={fullWidth} className="container">
         <Logo />
         <div className="nav">

@@ -3,8 +3,8 @@ const CONFIG = {
   profile: {
     name: "Cheoljun Park",
     image: "/janggun-transparent.png", // If you want to create your own notion avatar, check out https://notion-avatar.vercel.app
-    role: "Frontend Developer",
-    bio: "I develop SEXY UI/UX.",
+    role: "Fullstack Developer",
+    bio: "구현 과정과 트러블슈팅, 배운 것들을 기록합니다.",
     email: "dkfnak6789@gmail.com",
     linkedin: "cheoljunpark",
     github: "cheoljunpark",
@@ -77,7 +77,8 @@ const CONFIG = {
   utterances: {
     enable: true,
     config: {
-      repo: process.env.NEXT_PUBLIC_UTTERANCES_REPO || "cheoljunpark/morethan-log",
+      repo:
+        process.env.NEXT_PUBLIC_UTTERANCES_REPO || "cheoljunpark/morethan-log",
       "issue-term": "og:title",
       label: "💬 Utterances",
     },
@@ -86,7 +87,7 @@ const CONFIG = {
     enable: false,
     config: {
       host: "https://cusdis.com",
-      appid: "", // Embed Code -> data-app-id value 
+      appid: "", // Embed Code -> data-app-id value
     },
   },
   isProd: process.env.VERCEL_ENV === "production", // distinguish between development and production environment (ref: https://vercel.com/docs/environment-variables#system-environment-variables)

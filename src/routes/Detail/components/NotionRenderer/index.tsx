@@ -118,6 +118,13 @@ const StyledWrapper = styled.div`
   .notion-full-page {
     padding-bottom: 0 !important;
   }
+  .notion-page-no-cover,
+  .notion-page-has-cover,
+  .notion-page-has-cover.notion-page-has-icon.notion-page-has-text-icon,
+  .notion-page-has-cover.notion-page-no-icon {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
   .notion-frame {
     height: auto !important;
     min-height: 0 !important;
@@ -125,15 +132,23 @@ const StyledWrapper = styled.div`
   .notion-page-scroller {
     height: auto !important;
     min-height: 0 !important;
+    padding-bottom: 0 !important;
   }
   .notion-page-content {
     width: 100%;
     min-height: 0 !important;
   }
+  .notion-page-content-has-aside {
+    width: 100% !important;
+    display: block !important;
+  }
   .notion-page-content-inner {
     width: 100%;
     max-width: 100%;
     min-height: 0 !important;
+  }
+  .notion-aside {
+    display: none !important;
   }
   .notion-list {
     width: 100%;

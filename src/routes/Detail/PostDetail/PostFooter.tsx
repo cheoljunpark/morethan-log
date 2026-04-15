@@ -7,6 +7,7 @@ import { CONFIG } from "site.config"
 import useAdjacentPosts from "src/hooks/useAdjacentPosts"
 import usePostQuery from "src/hooks/usePostQuery"
 import useSeriesPosts from "src/hooks/useSeriesPosts"
+import { storageKey } from "src/constants/storage"
 
 type Props = {}
 
@@ -18,12 +19,15 @@ const Footer: React.FC<Props> = () => {
   const author = post?.author?.[0]
 
   const handleBack = () => {
-    if (typeof window !== "undefined" && window.history.length > 1) {
-      router.back()
+    if (typeof window === "undefined") {
+      router.push("/")
       return
     }
 
-    router.push("/")
+    const feedQueryString =
+      window.sessionStorage.getItem(storageKey.feedQueryString) || ""
+
+    router.push(`/${feedQueryString}`, undefined, { scroll: false })
   }
 
   return (

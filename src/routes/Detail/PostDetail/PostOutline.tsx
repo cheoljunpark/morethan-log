@@ -38,6 +38,10 @@ const PostOutline: React.FC<Props> = ({ items, activeId }) => {
 export default PostOutline
 
 const StyledWrapper = styled.aside`
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
   border: 1px solid ${({ theme }) => theme.colors.gray6};
   border-radius: 1.1rem;
   padding: 0.9rem;
@@ -58,11 +62,15 @@ const StyledWrapper = styled.aside`
   .items {
     display: grid;
     gap: 0.35rem;
+    width: 100%;
+    min-width: 0;
   }
 
   .item {
     display: block;
     width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
     padding: 0.35rem 0.5rem;
     border-radius: 0.75rem;
     line-height: 1.5;

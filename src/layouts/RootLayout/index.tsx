@@ -3,6 +3,7 @@ import { ThemeProvider } from "./ThemeProvider"
 import useScheme from "src/hooks/useScheme"
 import Header from "./Header"
 import styled from "@emotion/styled"
+import { useRouter } from "next/router"
 import Scripts from "src/layouts/RootLayout/Scripts"
 import useGtagEffect from "./useGtagEffect"
 import Prism from "prismjs/prism"
@@ -45,19 +46,22 @@ type Props = {
 }
 
 const RootLayout = ({ children }: Props) => {
+  const router = useRouter()
   const [scheme] = useScheme()
   useGtagEffect()
   useEffect(() => {
     Prism.highlightAll();
   }, []);
 
+  const isDetailPage = router.pathname === "/[slug]"
+
   return (
     <ThemeProvider scheme={scheme}>
       <Scripts />
       {/* // TODO: replace react query */}
       {/* {metaConfig.type !== "Paper" && <Header />} */}
-      <Header fullWidth={false} />
-      <StyledMain>{children}</StyledMain>
+      <Header fullWidth={isDetailPage} />
+      <StyledMain data-detail-page={isDetailPage}>{children}</StyledMain>
     </ThemeProvider>
   )
 }
@@ -69,4 +73,9 @@ const StyledMain = styled.main`
   width: 100%;
   max-width: 1120px;
   padding: 0 1rem;
+
+  &[data-detail-page="true"] {
+    max-width: none;
+    padding: 0;
+  }
 `

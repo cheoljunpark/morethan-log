@@ -1,5 +1,5 @@
 import { CONFIG } from "site.config"
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 import styled from "@emotion/styled"
 import useScheme from "src/hooks/useScheme"
 import { useRouter } from "next/router"
@@ -13,13 +13,15 @@ type Props = {
 const Utterances: React.FC<Props> = ({ issueTerm }) => {
   const [scheme] = useScheme()
   const router = useRouter()
+  const anchorRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     const theme = scheme === "dark" ? "github-dark" : "github-light"
     const script = document.createElement("script")
-    const anchor = document.getElementById("comments")
+    const anchor = anchorRef.current
     if (!anchor) return
 
+    anchor.innerHTML = ""
     script.setAttribute("src", "https://utteranc.es/client.js")
     script.setAttribute("crossorigin", "anonymous")
     script.setAttribute("async", `true`)
@@ -36,8 +38,8 @@ const Utterances: React.FC<Props> = ({ issueTerm }) => {
   }, [issueTerm, router.asPath, scheme])
   return (
     <>
-      <StyledWrapper id="comments">
-        <div className="utterances-frame"></div>
+      <StyledWrapper>
+        <div ref={anchorRef} className="utterances-frame"></div>
       </StyledWrapper>
     </>
   )
@@ -48,10 +50,30 @@ export default Utterances
 const StyledWrapper = styled.div`
   margin-top: 2.5rem;
   width: 100%;
+  min-height: 14rem;
+  overflow: hidden;
 
   .utterances,
   .utterances-frame {
-    width: 100%;
-    max-width: 100%;
+    display: block;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+  }
+
+  .utterances-frame iframe,
+  iframe.utterances-frame {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .timeline {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  iframe.utterances-frame {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
   }
 `

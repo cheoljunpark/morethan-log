@@ -27,6 +27,10 @@ const RelatedPosts: React.FC = () => {
 export default RelatedPosts
 
 const StyledWrapper = styled.section`
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
   border: 1px solid ${({ theme }) => theme.colors.gray6};
   border-radius: 1.1rem;
   padding: 0.9rem;
@@ -47,12 +51,16 @@ const StyledWrapper = styled.section`
   .list {
     display: grid;
     gap: 0.75rem;
+    width: 100%;
+    min-width: 0;
   }
 
   .card {
     display: block;
     width: 100%;
+    max-width: 100%;
     min-width: 0;
+    box-sizing: border-box;
     padding: 0.85rem 0.9rem;
     border-radius: 0.95rem;
     background-color: ${({ theme }) => theme.colors.gray3};

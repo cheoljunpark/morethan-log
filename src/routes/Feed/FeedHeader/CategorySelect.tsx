@@ -1,7 +1,5 @@
-import useDropdown from "src/hooks/useDropdown"
 import { useRouter } from "next/router"
 import React from "react"
-import { MdExpandMore } from "react-icons/md"
 import { DEFAULT_CATEGORY } from "src/constants"
 import styled from "@emotion/styled"
 import { useCategoriesQuery } from "src/hooks/useCategoriesQuery"
@@ -12,7 +10,6 @@ type Props = {}
 const CategorySelect: React.FC<Props> = () => {
   const router = useRouter()
   const data = useCategoriesQuery()
-  const [dropdownRef, opened, handleOpen] = useDropdown()
 
   const currentCategory = `${router.query.category || ``}` || DEFAULT_CATEGORY
 
@@ -29,24 +26,24 @@ const CategorySelect: React.FC<Props> = () => {
       { scroll: false }
     )
   }
+
   return (
     <StyledWrapper>
-      <div ref={dropdownRef} className="wrapper" onClick={handleOpen}>
-        {currentCategory} Posts <MdExpandMore />
+      <div className="label">Category</div>
+      <div className="content">
+        {Object.keys(data).map((key, idx) => (
+          <button
+            className="item"
+            data-active={currentCategory === key}
+            key={idx}
+            type="button"
+            onClick={() => handleOptionClick(key)}
+          >
+            <span className="name">{key}</span>
+            <span className="count">{data[key]}</span>
+          </button>
+        ))}
       </div>
-      {opened && (
-        <div className="content">
-          {Object.keys(data).map((key, idx) => (
-            <div
-              className="item"
-              key={idx}
-              onClick={() => handleOptionClick(key)}
-            >
-              {`${key} (${data[key]})`}
-            </div>
-          ))}
-        </div>
-      )}
     </StyledWrapper>
   )
 }
@@ -54,39 +51,88 @@ const CategorySelect: React.FC<Props> = () => {
 export default CategorySelect
 
 const StyledWrapper = styled.div`
-  position: relative;
-  > .wrapper {
-    display: flex;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-    gap: 0.25rem;
-    align-items: center;
-    font-size: 1.25rem;
-    line-height: 1.75rem;
-    font-weight: 700;
-    cursor: pointer;
-  }
-  > .content {
-    position: absolute;
-    z-index: 40;
-    padding: 0.25rem;
-    border-radius: 0.75rem;
-    background-color: ${({ theme }) => theme.colors.gray2};
-    color: ${({ theme }) => theme.colors.gray10};
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-      0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    > .item {
-      padding: 0.25rem;
-      padding-left: 0.5rem;
-      padding-right: 0.5rem;
-      border-radius: 0.75rem;
-      font-size: 0.875rem;
-      line-height: 1.25rem;
-      white-space: nowrap;
-      cursor: pointer;
+  min-width: 0;
+  width: 100%;
 
-      :hover {
+  > .label {
+    margin-bottom: 0.55rem;
+    font-size: 0.72rem;
+    line-height: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: ${({ theme }) => theme.colors.gray10};
+  }
+
+  > .content {
+    display: grid;
+    gap: 0.45rem;
+
+    > .item {
+      display: flex;
+      width: 100%;
+      min-width: 0;
+      gap: 0.45rem;
+      align-items: center;
+      justify-content: space-between;
+      box-sizing: border-box;
+      padding: 0.58rem 0.72rem;
+      border: 1px solid ${({ theme }) => theme.colors.gray6};
+      border-radius: 0.9rem;
+      background-color: ${({ theme }) =>
+        theme.scheme === "light"
+          ? "rgba(255, 255, 255, 0.8)"
+          : "rgba(31, 39, 52, 0.82)"};
+      color: ${({ theme }) => theme.colors.gray11};
+      font-size: 0.8rem;
+      line-height: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: border-color 180ms ease, background-color 180ms ease,
+        transform 180ms ease, color 180ms ease;
+
+      .count {
+        flex-shrink: 0;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        min-width: 1.3rem;
+        height: 1.3rem;
+        padding: 0 0.32rem;
+        border-radius: 9999px;
         background-color: ${({ theme }) => theme.colors.gray4};
+        font-size: 0.68rem;
+        line-height: 0.9rem;
+        font-weight: 700;
+        color: ${({ theme }) => theme.colors.gray10};
+      }
+
+      .name {
+        min-width: 0;
+        word-break: keep-all;
+        overflow-wrap: break-word;
+        text-align: left;
+      }
+
+      &:hover {
+        transform: translateY(-1px);
+        border-color: ${({ theme }) => theme.colors.gray8};
+        background-color: ${({ theme }) => theme.colors.gray3};
+      }
+
+      &[data-active="true"] {
+        border-color: rgba(20, 184, 166, 0.35);
+        background: linear-gradient(
+          135deg,
+          rgba(20, 184, 166, 0.18),
+          rgba(15, 118, 110, 0.08)
+        );
+        color: ${({ theme }) => theme.colors.gray12};
+
+        .count {
+          background-color: rgba(20, 184, 166, 0.18);
+          color: #0f766e;
+        }
       }
     }
   }

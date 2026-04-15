@@ -3,10 +3,10 @@ import { CONFIG } from "site.config"
 import { formatDate } from "src/libs/utils"
 import Tag from "../../../components/Tag"
 import { TPost } from "../../../types"
-import Image from "next/image"
 import Category from "../../../components/Category"
 import styled from "@emotion/styled"
 import { storageKey } from "src/constants/storage"
+import AdaptiveThumbnail from "src/components/AdaptiveThumbnail"
 
 type Props = {
   data: TPost
@@ -17,11 +17,16 @@ const PostCard: React.FC<Props> = ({ data }) => {
   const series = data.series?.[0]
   const primaryTag = data.tags?.[0]
   const secondaryTags = data.tags?.slice(1, 4) || []
+  const showType = data.type[0] !== "Post"
   const handleClick = () => {
     if (typeof window === "undefined") return
 
     window.sessionStorage.setItem(storageKey.feedScrollY, `${window.scrollY}`)
     window.sessionStorage.setItem(storageKey.feedActivePostId, data.id)
+    window.sessionStorage.setItem(
+      storageKey.feedQueryString,
+      window.location.search || ""
+    )
   }
 
   return (
@@ -29,18 +34,18 @@ const PostCard: React.FC<Props> = ({ data }) => {
       <article data-post-id={data.id}>
         {data.thumbnail && (
           <div className="thumbnail">
-            <Image
+            <AdaptiveThumbnail
               src={data.thumbnail}
-              fill
               alt={data.title}
-              css={{ objectFit: "cover" }}
+              className="thumbnail-image"
+              sizes="(min-width: 1024px) 720px, 100vw"
             />
           </div>
         )}
         <div data-thumb={!!data.thumbnail} data-category={!!category} className="content">
           <div className="eyebrow">
             <div className="meta-left">
-              <span className="type">{data.type[0]}</span>
+              {showType && <span className="type">{data.type[0]}</span>}
               {series && <span className="series">{series}</span>}
             </div>
             <div className="meta-right">
@@ -101,15 +106,21 @@ const StyledWrapper = styled(Link)`
       border-color: ${({ theme }) => theme.colors.gray8};
       box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
         0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+      .thumbnail-image {
+        transform: scale(1.02);
+      }
     }
 
     > .thumbnail {
       position: relative;
       width: 100%;
-      background:
-        linear-gradient(135deg, rgba(15, 118, 110, 0.08), rgba(20, 184, 166, 0.02)),
-        ${({ theme }) => theme.colors.gray2};
+      background-color: ${({ theme }) => theme.colors.gray2};
       padding-bottom: 58%;
+
+      .thumbnail-image {
+        transition: transform 300ms ease;
+      }
 
       @media (min-width: 1024px) {
         padding-bottom: 42%;

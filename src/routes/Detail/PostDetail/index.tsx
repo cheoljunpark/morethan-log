@@ -11,32 +11,55 @@ import useReadingProgress from "src/hooks/useReadingProgress"
 import PostOutline from "./PostOutline"
 import RelatedPosts from "./RelatedPosts"
 import { useRouter } from "next/router"
+import { storageKey } from "src/constants/storage"
 
 type Props = {}
 
 const PostDetail: React.FC<Props> = () => {
   const router = useRouter()
-  const wrapperRef = useRef<HTMLDivElement | null>(null)
+  const articleRef = useRef<HTMLDivElement | null>(null)
+  const leftRailRef = useRef<HTMLElement | null>(null)
+  const rightRailRef = useRef<HTMLElement | null>(null)
   const data = usePostQuery()
   const { items, activeId } = usePostToc("post-content")
   const progress = useReadingProgress("post-article")
 
   const category = data?.category?.[0]
+
   const handleBackdropClick = useCallback(() => {
-    if (typeof window !== "undefined" && window.history.length > 1) {
-      router.back()
+    if (typeof window === "undefined") {
+      router.push("/")
       return
     }
 
-    router.push("/")
+    const feedQueryString =
+      window.sessionStorage.getItem(storageKey.feedQueryString) || ""
+
+    router.push(`/${feedQueryString}`, undefined, { scroll: false })
   }, [router])
 
   useEffect(() => {
     const handlePointerDown = (event: MouseEvent) => {
-      if (window.innerWidth < 1024) return
+      if (window.innerWidth < 1280) return
+
       const target = event.target as Node | null
       if (!target) return
-      if (wrapperRef.current?.contains(target)) return
+
+      if (
+        target instanceof Element &&
+        target.closest('[data-detail-safe="true"]')
+      ) {
+        return
+      }
+
+      const clickedInsideArticle = articleRef.current?.contains(target)
+      const clickedInsideLeftRail = leftRailRef.current?.contains(target)
+      const clickedInsideRightRail = rightRailRef.current?.contains(target)
+
+      if (clickedInsideArticle || clickedInsideLeftRail || clickedInsideRightRail) {
+        return
+      }
+
       handleBackdropClick()
     }
 
@@ -50,18 +73,18 @@ const PostDetail: React.FC<Props> = () => {
   if (!data) return null
 
   return (
-    <Backdrop>
-      <StyledWrapper ref={wrapperRef} onClick={(event) => event.stopPropagation()}>
-        <div className="progress" aria-hidden="true">
-          <div className="bar" style={{ width: `${progress}%` }} />
-        </div>
-        <div className="layout">
-          <aside className="left-rail">
-            <RelatedPosts />
-          </aside>
+    <Backdrop onClick={handleBackdropClick}>
+      <DesktopShell onClick={(event) => event.stopPropagation()}>
+        <aside ref={leftRailRef} className="desktop-rail left">
+          <RelatedPosts />
+        </aside>
+        <ArticleCard ref={articleRef}>
+          <div className="progress" aria-hidden="true">
+            <div className="bar" style={{ width: `${progress}%` }} />
+          </div>
           <article id="post-article">
             {category && (
-              <div css={{ marginBottom: "0.5rem" }}>
+              <div css={{ marginBottom: "0.75rem" }}>
                 <Category readOnly={data.status?.[0] === "PublicOnDetail"}>
                   {category}
                 </Category>
@@ -69,7 +92,7 @@ const PostDetail: React.FC<Props> = () => {
             )}
             {data.type[0] === "Post" && <PostHeader data={data} />}
             {items.length > 0 && (
-              <div className="inline-outline">
+              <div className="mobile-outline">
                 <PostOutline items={items} activeId={activeId} />
               </div>
             )}
@@ -83,11 +106,11 @@ const PostDetail: React.FC<Props> = () => {
               </>
             )}
           </article>
-          <aside className="right-rail">
-            <PostOutline items={items} activeId={activeId} />
-          </aside>
-        </div>
-      </StyledWrapper>
+        </ArticleCard>
+        <aside ref={rightRailRef} className="desktop-rail right">
+          <PostOutline items={items} activeId={activeId} />
+        </aside>
+      </DesktopShell>
     </Backdrop>
   )
 }
@@ -99,33 +122,77 @@ const Backdrop = styled.div`
   padding: 0.75rem 1rem 0;
 
   @media (min-width: 1024px) {
-    padding: 1rem 2rem 0;
+    padding: 1rem 1.5rem 0;
   }
 `
 
-const StyledWrapper = styled.div`
+const DesktopShell = styled.div`
+  display: block;
+  width: min(100%, 120rem);
+  margin: 0 auto;
+
+  @media (min-width: 1280px) {
+    display: grid;
+    grid-template-columns: minmax(14rem, 17rem) minmax(0, 52rem) minmax(14rem, 17rem);
+    gap: 1.5rem;
+    align-items: start;
+    justify-content: center;
+  }
+
+  .desktop-rail {
+    display: none;
+
+    @media (min-width: 1280px) {
+      display: block;
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
+      position: sticky;
+      top: 5.75rem;
+      max-height: calc(100vh - 7rem);
+      overflow-y: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+  }
+`
+
+const ArticleCard = styled.div`
   position: relative;
-  padding-top: 2.5rem;
-  padding-bottom: 1rem;
+  width: 100%;
+  max-width: 52rem;
+  margin: 0 auto;
   border: 1px solid ${({ theme }) => theme.colors.gray6};
-  border-radius: 1.75rem;
-  width: min(100%, 88rem);
+  border-radius: 1.9rem;
   background-color: ${({ theme }) =>
     theme.scheme === "light"
-      ? "rgba(255, 255, 255, 0.78)"
-      : "rgba(35, 44, 58, 0.72)"};
-  backdrop-filter: blur(18px);
-  box-shadow: 0 30px 80px -48px rgba(15, 23, 42, 0.45);
-  margin: 0 auto;
-  cursor: default;
+      ? "rgba(255, 255, 255, 0.88)"
+      : "rgba(28, 35, 46, 0.86)"};
+  backdrop-filter: blur(16px);
+  box-shadow: 0 30px 80px -48px rgba(15, 23, 42, 0.35);
+  overflow: clip;
+
+  article {
+    width: 100%;
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 2rem 1.35rem 1.1rem;
+
+    @media (min-width: 768px) {
+      padding: 2.25rem 2rem 1.25rem;
+    }
+  }
 
   .progress {
     position: sticky;
-    z-index: 20;
     top: 0;
-    margin: -2.5rem -1.5rem 1.25rem;
+    z-index: 10;
     height: 3px;
-    background-color: transparent;
+    background: transparent;
 
     .bar {
       height: 100%;
@@ -135,54 +202,11 @@ const StyledWrapper = styled.div`
     }
   }
 
-  .layout {
-    display: block;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-
-    @media (min-width: 1280px) {
-      display: grid;
-      grid-template-columns: minmax(0, 15rem) minmax(0, 42rem) minmax(0, 15rem);
-      gap: 1.5rem;
-      justify-content: center;
-      align-items: start;
-      padding-left: 1.5rem;
-      padding-right: 1.5rem;
-    }
-  }
-
-  article {
-    margin: 0 auto;
-    width: 100%;
-    max-width: 42rem;
-    min-width: 0;
-    padding-bottom: 0;
-  }
-
-  .inline-outline {
+  .mobile-outline {
     margin-bottom: 1.5rem;
 
     @media (min-width: 1280px) {
       display: none;
-    }
-  }
-
-  .left-rail,
-  .right-rail {
-    display: none;
-
-    @media (min-width: 1280px) {
-      display: block;
-      min-width: 0;
-      width: 100%;
-      max-height: calc(100vh - 7.5rem);
-      overflow-y: auto;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-
-      &::-webkit-scrollbar {
-        display: none;
-      }
     }
   }
 `

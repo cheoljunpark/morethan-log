@@ -7,6 +7,7 @@ import React, { useState } from "react"
 import styled from "@emotion/styled"
 import useReadingTime from "src/hooks/useReadingTime"
 import usePostQuery from "src/hooks/usePostQuery"
+import AdaptiveThumbnail from "src/components/AdaptiveThumbnail"
 
 type Props = {
   data: TPost
@@ -92,11 +93,11 @@ const PostHeader: React.FC<Props> = ({ data }) => {
           </div>
           {data.thumbnail && (
             <div className="thumbnail">
-              <Image
+              <AdaptiveThumbnail
                 src={data.thumbnail}
-                css={{ objectFit: "cover" }}
-                fill
+                className="thumbnail-image"
                 alt={data.title}
+                sizes="(min-width: 1024px) 832px, 100vw"
               />
             </div>
           )}
@@ -212,8 +213,12 @@ const StyledWrapper = styled.div`
       margin-bottom: 1.75rem;
       border-radius: 1.5rem;
       width: 100%;
-      background-color: ${({ theme }) => theme.colors.gray4};
+      background-color: ${({ theme }) => theme.colors.gray3};
       padding-bottom: 66%;
+
+      .thumbnail-image {
+        transition: transform 300ms ease;
+      }
 
       @media (min-width: 1024px) {
         padding-bottom: 50%;

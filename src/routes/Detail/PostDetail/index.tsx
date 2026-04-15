@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useCallback, useEffect, useRef } from "react"
 import PostHeader from "./PostHeader"
 import Footer from "./PostFooter"
 import CommentBox from "./CommentBox"
@@ -16,25 +16,42 @@ type Props = {}
 
 const PostDetail: React.FC<Props> = () => {
   const router = useRouter()
+  const wrapperRef = useRef<HTMLDivElement | null>(null)
   const data = usePostQuery()
   const { items, activeId } = usePostToc("post-content")
   const progress = useReadingProgress("post-article")
 
-  if (!data) return null
-
-  const category = (data.category && data.category?.[0]) || undefined
-  const handleBackdropClick = () => {
+  const category = data?.category?.[0]
+  const handleBackdropClick = useCallback(() => {
     if (typeof window !== "undefined" && window.history.length > 1) {
       router.back()
       return
     }
 
     router.push("/")
-  }
+  }, [router])
+
+  useEffect(() => {
+    const handlePointerDown = (event: MouseEvent) => {
+      if (window.innerWidth < 1024) return
+      const target = event.target as Node | null
+      if (!target) return
+      if (wrapperRef.current?.contains(target)) return
+      handleBackdropClick()
+    }
+
+    document.addEventListener("mousedown", handlePointerDown)
+
+    return () => {
+      document.removeEventListener("mousedown", handlePointerDown)
+    }
+  }, [handleBackdropClick])
+
+  if (!data) return null
 
   return (
-    <Backdrop onClick={handleBackdropClick}>
-      <StyledWrapper onClick={(event) => event.stopPropagation()}>
+    <Backdrop>
+      <StyledWrapper ref={wrapperRef} onClick={(event) => event.stopPropagation()}>
         <div className="progress" aria-hidden="true">
           <div className="bar" style={{ width: `${progress}%` }} />
         </div>

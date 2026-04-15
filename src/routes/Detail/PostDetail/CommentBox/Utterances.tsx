@@ -15,7 +15,7 @@ const Utterances: React.FC<Props> = ({ issueTerm }) => {
   const router = useRouter()
 
   useEffect(() => {
-    const theme = `github-${scheme}`
+    const theme = scheme === "dark" ? "github-dark" : "github-light"
     const script = document.createElement("script")
     const anchor = document.getElementById("comments")
     if (!anchor) return
@@ -23,17 +23,17 @@ const Utterances: React.FC<Props> = ({ issueTerm }) => {
     script.setAttribute("src", "https://utteranc.es/client.js")
     script.setAttribute("crossorigin", "anonymous")
     script.setAttribute("async", `true`)
-    script.setAttribute("issue-term", issueTerm)
     script.setAttribute("theme", theme)
     const config: Record<string, string> = CONFIG.utterances.config
     Object.keys(config).forEach((key) => {
       script.setAttribute(key, config[key])
     })
+    script.setAttribute("issue-term", issueTerm)
     anchor.appendChild(script)
     return () => {
       anchor.innerHTML = ""
     }
-  }, [scheme, router])
+  }, [issueTerm, router.asPath, scheme])
   return (
     <>
       <StyledWrapper id="comments">

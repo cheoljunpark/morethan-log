@@ -21,6 +21,9 @@ export const Global = () => {
           font-family: ${pretendard.style.fontFamily};
           font-weight: ${pretendard.style.fontWeight};
           font-style: ${pretendard.style.fontStyle};
+          letter-spacing: -0.01em;
+          -webkit-font-smoothing: antialiased;
+          text-rendering: optimizeLegibility;
           min-height: 100vh;
         }
 

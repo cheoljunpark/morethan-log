@@ -93,12 +93,15 @@ const StyledWrapper = styled.div`
   position: relative;
   padding-top: 3rem;
   padding-bottom: 3rem;
-  border-radius: 1.5rem;
-  width: min(100%, 68rem);
+  border: 1px solid ${({ theme }) => theme.colors.gray6};
+  border-radius: 1.75rem;
+  width: min(100%, 72rem);
   background-color: ${({ theme }) =>
-    theme.scheme === "light" ? "white" : theme.colors.gray4};
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    theme.scheme === "light"
+      ? "rgba(255, 255, 255, 0.78)"
+      : "rgba(35, 44, 58, 0.72)"};
+  backdrop-filter: blur(18px);
+  box-shadow: 0 30px 80px -48px rgba(15, 23, 42, 0.45);
   margin: 0 auto;
   cursor: default;
 
@@ -125,15 +128,16 @@ const StyledWrapper = styled.div`
 
     @media (min-width: 1280px) {
       display: grid;
-      grid-template-columns: minmax(0, 15rem) minmax(0, 42rem) minmax(0, 15rem);
-      gap: 1.5rem;
+      grid-template-columns: minmax(0, 12.5rem) minmax(0, 1fr) minmax(0, 12.5rem);
+      gap: 1.25rem;
       align-items: start;
     }
   }
 
   article {
     margin: 0 auto;
-    max-width: 42rem;
+    max-width: 39rem;
+    min-width: 0;
   }
 
   .inline-outline {
@@ -153,6 +157,7 @@ const StyledWrapper = styled.div`
       position: sticky;
       top: 6rem;
       align-self: start;
+      min-width: 0;
     }
   }
 `

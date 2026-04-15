@@ -27,7 +27,12 @@ const RelatedPosts: React.FC = () => {
 export default RelatedPosts
 
 const StyledWrapper = styled.section`
-  margin-top: 2rem;
+  border: 1px solid ${({ theme }) => theme.colors.gray6};
+  border-radius: 1.1rem;
+  padding: 0.9rem;
+  background-color: ${({ theme }) =>
+    theme.scheme === "light" ? "rgba(255, 255, 255, 0.62)" : "rgba(29, 36, 48, 0.72)"};
+  backdrop-filter: blur(14px);
 
   .title {
     margin-bottom: 1rem;
@@ -46,11 +51,13 @@ const StyledWrapper = styled.section`
 
   .card {
     display: block;
-    padding: 1rem;
-    border-radius: 1rem;
+    padding: 0.85rem 0.9rem;
+    border-radius: 0.95rem;
     background-color: ${({ theme }) => theme.colors.gray3};
+    border: 1px solid transparent;
 
     &:hover {
+      border-color: ${({ theme }) => theme.colors.gray6};
       background-color: ${({ theme }) => theme.colors.gray4};
     }
   }
@@ -73,6 +80,10 @@ const StyledWrapper = styled.section`
   }
 
   p {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
     line-height: 1.7;
     color: ${({ theme }) => theme.colors.gray11};
   }

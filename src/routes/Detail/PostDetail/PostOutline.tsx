@@ -38,11 +38,12 @@ const PostOutline: React.FC<Props> = ({ items, activeId }) => {
 export default PostOutline
 
 const StyledWrapper = styled.aside`
-  position: sticky;
-  top: 6rem;
-  padding: 1rem;
-  border-radius: 1rem;
-  background-color: ${({ theme }) => theme.colors.gray3};
+  border: 1px solid ${({ theme }) => theme.colors.gray6};
+  border-radius: 1.1rem;
+  padding: 0.9rem;
+  background-color: ${({ theme }) =>
+    theme.scheme === "light" ? "rgba(255, 255, 255, 0.62)" : "rgba(29, 36, 48, 0.72)"};
+  backdrop-filter: blur(14px);
 
   .title {
     margin-bottom: 0.85rem;
@@ -65,6 +66,7 @@ const StyledWrapper = styled.aside`
     border-radius: 0.75rem;
     line-height: 1.5;
     color: ${({ theme }) => theme.colors.gray10};
+    word-break: keep-all;
 
     &[data-level="2"] {
       padding-left: 0.9rem;

@@ -79,6 +79,7 @@ const Footer: React.FC<Props> = () => {
             alt={author?.name || CONFIG.profile.name}
             width={44}
             height={44}
+            style={{ objectFit: "contain" }}
           />
           <div>
             <div className="author-name">{author?.name || CONFIG.profile.name}</div>

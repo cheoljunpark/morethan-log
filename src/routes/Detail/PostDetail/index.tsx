@@ -92,7 +92,7 @@ const Backdrop = styled.div`
 const StyledWrapper = styled.div`
   position: relative;
   padding-top: 3rem;
-  padding-bottom: 3rem;
+  padding-bottom: 2.25rem;
   border: 1px solid ${({ theme }) => theme.colors.gray6};
   border-radius: 1.75rem;
   width: min(100%, 72rem);
@@ -158,6 +158,14 @@ const StyledWrapper = styled.div`
       top: 6rem;
       align-self: start;
       min-width: 0;
+      max-height: calc(100vh - 7.5rem);
+      overflow-y: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
     }
   }
 `

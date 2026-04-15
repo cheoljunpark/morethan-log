@@ -14,7 +14,12 @@ const ProfileCard: React.FC<Props> = () => {
       </div>
       <div className="content">
         <div className="top">
-          <Image src={CONFIG.profile.image} fill alt="" />
+          <Image
+            src={CONFIG.profile.image}
+            fill
+            alt=""
+            css={{ objectFit: "contain", padding: "0.5rem" }}
+          />
         </div>
         <div className="mid">
           <div className=" name">{CONFIG.profile.name}</div>
@@ -38,7 +43,11 @@ const StyledWrapper = styled.div`
     border-radius: 1rem;
     width: 100%;
     background-color: ${({ theme }) =>
-      theme.scheme === "light" ? "white" : theme.colors.gray4};
+      theme.scheme === "light"
+        ? "rgba(255, 255, 255, 0.84)"
+        : "rgba(29, 36, 48, 0.84)"};
+    border: 1px solid ${({ theme }) => theme.colors.gray6};
+    backdrop-filter: blur(14px);
     @media (min-width: 768px) {
       padding: 1rem;
     }
@@ -48,6 +57,8 @@ const StyledWrapper = styled.div`
     .top {
       position: relative;
       width: 100%;
+      border-radius: 1rem;
+      overflow: hidden;
       &:after {
         content: "";
         display: block;
@@ -62,8 +73,8 @@ const StyledWrapper = styled.div`
       .name {
         font-size: 1.25rem;
         line-height: 1.75rem;
-        font-style: italic;
         font-weight: 700;
+        letter-spacing: -0.03em;
       }
       .role {
         margin-bottom: 1rem;

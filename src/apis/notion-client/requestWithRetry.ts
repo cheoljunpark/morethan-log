@@ -5,7 +5,7 @@ const sleep = (ms: number) =>
 
 export async function requestWithRetry<T>(
   request: () => Promise<T>,
-  retries = 3
+  retries = 5
 ): Promise<T> {
   let lastError: unknown
 
@@ -19,7 +19,7 @@ export async function requestWithRetry<T>(
         throw error
       }
 
-      await sleep(1000 * (attempt + 1))
+      await sleep(1200 * (attempt + 1))
     }
   }
 

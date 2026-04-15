@@ -200,10 +200,10 @@ const StyledWrapper = styled(Link)`
         align-items: center;
 
         .content {
-          font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-            "Liberation Mono", "Courier New", monospace;
           font-size: 0.875rem;
           line-height: 1.25rem;
+          font-weight: 500;
+          letter-spacing: -0.01em;
           color: ${({ theme }) => theme.colors.gray10};
           @media (min-width: 768px) {
             margin-left: 0;

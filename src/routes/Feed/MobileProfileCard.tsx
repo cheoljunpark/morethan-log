@@ -17,7 +17,11 @@ const MobileProfileCard: React.FC<Props> = () => {
             src={CONFIG.profile.image}
             width={90}
             height={90}
-            css={{ position: "relative" }}
+            css={{
+              position: "relative",
+              objectFit: "contain",
+              padding: "0.2rem",
+            }}
             alt="profile_image"
           />
           <div className="wrapper">
@@ -49,7 +53,11 @@ const StyledWrapper = styled.div`
     margin-bottom: 1rem;
     border-radius: 1rem;
     background-color: ${({ theme }) =>
-      theme.scheme === "light" ? "white" : theme.colors.gray4};
+      theme.scheme === "light"
+        ? "rgba(255, 255, 255, 0.84)"
+        : "rgba(29, 36, 48, 0.84)"};
+    border: 1px solid ${({ theme }) => theme.colors.gray6};
+    backdrop-filter: blur(14px);
     > .wrapper {
       display: flex;
       gap: 0.5rem;
@@ -59,8 +67,8 @@ const StyledWrapper = styled.div`
         > .top {
           font-size: 1.25rem;
           line-height: 1.75rem;
-          font-style: italic;
           font-weight: 700;
+          letter-spacing: -0.03em;
         }
         > .mid {
           margin-bottom: 0.5rem;

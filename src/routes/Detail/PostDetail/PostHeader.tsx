@@ -119,9 +119,10 @@ const StyledWrapper = styled.div`
     color: ${({ theme }) => theme.colors.gray10};
   }
   .title {
-    font-size: 1.875rem;
-    line-height: 2.25rem;
-    font-weight: 700;
+    font-size: 2rem;
+    line-height: 2.45rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
   }
   nav {
     margin-top: 1.5rem;
@@ -149,12 +150,17 @@ const StyledWrapper = styled.div`
           gap: 0.5rem;
           align-items: center;
           min-height: 2rem;
-          padding: 0.35rem 0.75rem;
+          padding: 0.4rem 0.8rem;
           border: 1px solid ${({ theme }) => theme.colors.gray6};
           border-radius: 9999px;
-          background-color: ${({ theme }) => theme.colors.gray3};
+          background-color: ${({ theme }) =>
+            theme.scheme === "light"
+              ? "rgba(255, 255, 255, 0.82)"
+              : "rgba(29, 36, 48, 0.82)"};
           font-size: 0.875rem;
           line-height: 1.25rem;
+          font-weight: 600;
+          letter-spacing: -0.01em;
           color: ${({ theme }) => theme.colors.gray11};
         }
         .reading-time {
@@ -172,12 +178,15 @@ const StyledWrapper = styled.div`
         border: 1px solid ${({ theme }) => theme.colors.gray6};
         border-radius: 9999px;
         width: fit-content;
-        padding: 0.5rem 0.9rem;
+        padding: 0.55rem 0.95rem;
         font-size: 0.875rem;
         line-height: 1.25rem;
         font-weight: 600;
         color: ${({ theme }) => theme.colors.gray12};
-        background-color: ${({ theme }) => theme.colors.gray3};
+        background-color: ${({ theme }) =>
+          theme.scheme === "light"
+            ? "rgba(255, 255, 255, 0.82)"
+            : "rgba(29, 36, 48, 0.82)"};
         cursor: pointer;
 
         &:hover {

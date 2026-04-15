@@ -18,11 +18,14 @@ export const Global = () => {
             ? "linear-gradient(180deg, rgba(18, 22, 29, 0.98) 0%, rgba(23, 28, 36, 0.98) 100%), radial-gradient(circle at 12% 12%, rgba(135, 162, 255, 0.14), transparent 24%), radial-gradient(circle at 88% 10%, rgba(73, 166, 255, 0.10), transparent 20%)"
             : "linear-gradient(180deg, rgba(245, 247, 251, 0.98) 0%, rgba(239, 243, 249, 0.98) 100%), radial-gradient(circle at 12% 10%, rgba(89, 115, 255, 0.10), transparent 26%), radial-gradient(circle at 88% 8%, rgba(22, 144, 255, 0.08), transparent 20%)"};
           background-attachment: fixed;
-          font-family: ${pretendard.style.fontFamily};
+          font-family: ${pretendard.style.fontFamily}, "Pretendard Variable",
+            "Inter Variable", "Inter", "SF Pro Display", "Segoe UI", sans-serif;
           font-weight: ${pretendard.style.fontWeight};
           font-style: ${pretendard.style.fontStyle};
-          letter-spacing: -0.01em;
+          letter-spacing: -0.012em;
+          line-height: 1.6;
           -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
           text-rendering: optimizeLegibility;
           min-height: 100vh;
         }
@@ -41,6 +44,7 @@ export const Global = () => {
           margin: 0;
           font-weight: inherit;
           font-style: inherit;
+          letter-spacing: -0.03em;
         }
 
         a {

@@ -13,7 +13,7 @@ import "prismjs/themes/prism-tomorrow.css"
 // used for rendering equations (optional)
 
 import "katex/dist/katex.min.css"
-import { FC } from "react"
+import { FC, useEffect } from "react"
 import styled from "@emotion/styled"
 
 const _NotionRenderer = dynamic(
@@ -60,6 +60,27 @@ type Props = {
 
 const NotionRenderer: FC<Props> = ({ recordMap }) => {
   const [scheme] = useScheme()
+
+  useEffect(() => {
+    const originalLog = console.log
+
+    console.log = (...args: unknown[]) => {
+      const [firstArg] = args
+      if (
+        typeof firstArg === "string" &&
+        firstArg.toLowerCase().includes("missing user")
+      ) {
+        return
+      }
+
+      originalLog(...args)
+    }
+
+    return () => {
+      console.log = originalLog
+    }
+  }, [])
+
   return (
     <StyledWrapper>
       <_NotionRenderer

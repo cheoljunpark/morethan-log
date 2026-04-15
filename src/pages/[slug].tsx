@@ -20,18 +20,9 @@ const filter: FilterPostsOptions = {
 export const getStaticPaths = async () => {
   const posts = await getPosts()
   const detailPosts = filterPosts(posts, filter)
-  const recentPosts = detailPosts.slice(0, 12)
-  const featuredPosts = detailPosts.filter(
-    (post) => post.tags?.includes("Featured") || post.tags?.includes("Pinned")
-  )
-  const staticPosts = Array.from(
-    new Map(
-      [...featuredPosts, ...recentPosts].map((post) => [post.slug, post])
-    ).values()
-  )
 
   return {
-    paths: staticPosts.map((post) => ({
+    paths: detailPosts.map((post) => ({
       params: {
         slug: post.slug,
       },
@@ -49,7 +40,14 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   const detailPosts = filterPosts(posts, filter)
   const postDetail = detailPosts.find((t: any) => t.slug === slug)
-  const recordMap = await getRecordMap(postDetail?.id!)
+  if (!postDetail) {
+    return {
+      notFound: true,
+      revalidate: CONFIG.revalidateTime,
+    }
+  }
+
+  const recordMap = await getRecordMap(postDetail.id, postDetail.author)
 
   await queryClient.prefetchQuery(queryKey.post(`${slug}`), () => ({
     ...postDetail,

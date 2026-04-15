@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { CONFIG } from "site.config"
 import styled from "@emotion/styled"
-import { roboto } from "src/assets"
+import { pretendard } from "src/assets"
 
 const Logo = () => {
   return (
@@ -14,10 +14,10 @@ const Logo = () => {
 export default Logo
 
 const StyledWrapper = styled(Link)`
-  font-family: ${roboto.style.fontFamily}, sans-serif;
-  font-size: 1.05rem;
+  font-family: ${pretendard.style.fontFamily}, sans-serif;
+  font-size: 1rem;
   line-height: 1;
-  font-weight: 900;
-  letter-spacing: -0.04em;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   color: ${({ theme }) => theme.colors.gray12};
 `

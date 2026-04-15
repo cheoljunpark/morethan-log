@@ -6,6 +6,7 @@ import { TPost } from "../../../types"
 import Image from "next/image"
 import Category from "../../../components/Category"
 import styled from "@emotion/styled"
+import { storageKey } from "src/constants/storage"
 
 type Props = {
   data: TPost
@@ -13,10 +14,16 @@ type Props = {
 
 const PostCard: React.FC<Props> = ({ data }) => {
   const category = (data.category && data.category?.[0]) || undefined
+  const handleClick = () => {
+    if (typeof window === "undefined") return
+
+    window.sessionStorage.setItem(storageKey.feedScrollY, `${window.scrollY}`)
+    window.sessionStorage.setItem(storageKey.feedActivePostId, data.id)
+  }
 
   return (
-    <StyledWrapper href={`/${data.slug}`}>
-      <article>
+    <StyledWrapper href={`/${data.slug}`} onClick={handleClick}>
+      <article data-post-id={data.id}>
         {category && (
           <div className="category">
             <Category>{category}</Category>

@@ -5,12 +5,17 @@ import { formatDate } from "src/libs/utils"
 import Image from "next/image"
 import React from "react"
 import styled from "@emotion/styled"
+import useReadingTime from "src/hooks/useReadingTime"
+import usePostQuery from "src/hooks/usePostQuery"
 
 type Props = {
   data: TPost
 }
 
 const PostHeader: React.FC<Props> = ({ data }) => {
+  const post = usePostQuery()
+  const readingTime = useReadingTime(post)
+
   return (
     <StyledWrapper>
       <h1 className="title">{data.title}</h1>
@@ -38,6 +43,7 @@ const PostHeader: React.FC<Props> = ({ data }) => {
                 CONFIG.lang
               )}
             </div>
+            {readingTime && <div className="reading-time">{readingTime} min read</div>}
           </div>
           <div className="mid">
             {data.tags && (
@@ -98,6 +104,9 @@ const StyledWrapper = styled.div`
         @media (min-width: 768px) {
           margin-left: 0;
         }
+      }
+      .reading-time {
+        color: ${({ theme }) => theme.colors.gray10};
       }
     }
     > .mid {

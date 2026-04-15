@@ -15,6 +15,7 @@ type Props = {
 const PostHeader: React.FC<Props> = ({ data }) => {
   const post = usePostQuery()
   const readingTime = useReadingTime(post)
+  const series = data.series?.[0]
   const [shareLabel, setShareLabel] = useState("Copy Link")
 
   const handleShare = async () => {
@@ -49,6 +50,7 @@ const PostHeader: React.FC<Props> = ({ data }) => {
 
   return (
     <StyledWrapper>
+      {series && <div className="series">{series}</div>}
       <h1 className="title">{data.title}</h1>
       {data.type[0] !== "Paper" && (
         <nav>
@@ -111,6 +113,15 @@ const PostHeader: React.FC<Props> = ({ data }) => {
 export default PostHeader
 
 const StyledWrapper = styled.div`
+  .series {
+    margin-bottom: 0.75rem;
+    font-size: 0.8rem;
+    line-height: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: ${({ theme }) => theme.colors.gray10};
+  }
   .title {
     font-size: 1.875rem;
     line-height: 2.25rem;

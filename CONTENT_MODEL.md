@@ -23,7 +23,7 @@ These are not strictly required, but they make the blog much better.
 - `category`: feed grouping and navigation
 - `thumbnail`: feed card and social preview image
 - `author`: post author metadata
-- `series`: group related posts together later
+- `series`: group related posts together and build series navigation
 - `pinned`: mark standout posts for the top of the feed
 - `updatedAt`: future support for updated timestamps
 - `hideFromHome`: future support for private landing pages

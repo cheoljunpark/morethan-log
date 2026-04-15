@@ -14,6 +14,7 @@ type Props = {
 
 const PostCard: React.FC<Props> = ({ data }) => {
   const category = (data.category && data.category?.[0]) || undefined
+  const series = data.series?.[0]
   const handleClick = () => {
     if (typeof window === "undefined") return
 
@@ -41,6 +42,7 @@ const PostCard: React.FC<Props> = ({ data }) => {
         )}
         <div data-thumb={!!data.thumbnail} data-category={!!category} className="content">
           <header className="top">
+            {series && <div className="series">{series}</div>}
             <h2>{data.title}</h2>
           </header>
           <div className="date">
@@ -118,6 +120,16 @@ const StyledWrapper = styled(Link)`
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+
+        .series {
+          margin-bottom: 0.4rem;
+          font-size: 0.75rem;
+          line-height: 1rem;
+          font-weight: 700;
+          letter-spacing: 0.04em;
+          text-transform: uppercase;
+          color: ${({ theme }) => theme.colors.gray10};
+        }
 
         @media (min-width: 768px) {
           flex-direction: row;

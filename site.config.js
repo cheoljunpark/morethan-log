@@ -41,6 +41,7 @@ const CONFIG = {
   blog: {
     title: "Cheoljun's Blog",
     description: "welcome to cheoljun's blog!",
+    scheme: "system", // 'light' | 'dark' | 'system'
   },
 
   // CONFIG configration (required)

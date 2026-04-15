@@ -93,4 +93,11 @@ const StyledWrapper = styled.div`
   .notion-list {
     width: 100%;
   }
+  .notion-code pre {
+    scrollbar-width: none;
+  }
+  .notion-code pre::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
 `

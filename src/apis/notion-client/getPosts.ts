@@ -101,6 +101,13 @@ export const getPosts = async () => {
       properties.createdTime = new Date(
         pageBlockValue?.created_time
       ).toString()
+      if (!properties.updatedAt && pageBlockValue?.last_edited_time) {
+        properties.updatedAt = {
+          start_date: new Date(pageBlockValue.last_edited_time)
+            .toISOString()
+            .slice(0, 10),
+        }
+      }
       properties.fullWidth =
         (pageBlockValue?.format as any)?.page_full_width ?? false
 

@@ -9,10 +9,17 @@
 ## 진행중
 - 다음 작업 선택 전
 - 현재 배포 상태 확인
-- 다음 후보: `pinned` 또는 댓글 설정 마무리
+- 다음 후보: `pinned` 또는 아카이브/태그 페이지
 
 ## 진행완료
 
+- 상세 가독성 마감과 댓글 설정 정리
+  - 코드 블록 스크롤바 시각 정리
+  - `Copy Link`를 항상 클립보드 복사로 변경
+  - `updatedAt` fallback 추가
+  - TOC를 제목 아래로 이동
+  - 기본 댓글 방식을 `Utterances` 중심으로 정리
+  - 로컬 `npm run build` 검증 완료
 - 홈 상단 Featured Writing 강화
   - Featured 글 선정 규칙 추가
   - 홈 상단 hero + secondary 카드 구성

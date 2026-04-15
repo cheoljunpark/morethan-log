@@ -38,31 +38,31 @@ const PostDetail: React.FC<Props> = () => {
         <div className="progress" aria-hidden="true">
           <div className="bar" style={{ width: `${progress}%` }} />
         </div>
-        <div className="layout">
-          <article id="post-article">
-            {category && (
-              <div css={{ marginBottom: "0.5rem" }}>
-                <Category readOnly={data.status?.[0] === "PublicOnDetail"}>
-                  {category}
-                </Category>
-              </div>
-            )}
-            {data.type[0] === "Post" && <PostHeader data={data} />}
-            <div id="post-content">
-              <NotionRenderer recordMap={data.recordMap} />
+        <article id="post-article">
+          {category && (
+            <div css={{ marginBottom: "0.5rem" }}>
+              <Category readOnly={data.status?.[0] === "PublicOnDetail"}>
+                {category}
+              </Category>
             </div>
-            {data.type[0] === "Post" && (
-              <>
-                <RelatedPosts />
-                <Footer />
-                <CommentBox data={data} />
-              </>
-            )}
-          </article>
-          <div className="outline">
-            <PostOutline items={items} activeId={activeId} />
+          )}
+          {data.type[0] === "Post" && <PostHeader data={data} />}
+          {items.length > 0 && (
+            <div className="inline-outline">
+              <PostOutline items={items} activeId={activeId} />
+            </div>
+          )}
+          <div id="post-content">
+            <NotionRenderer recordMap={data.recordMap} />
           </div>
-        </div>
+          {data.type[0] === "Post" && (
+            <>
+              <RelatedPosts />
+              <Footer />
+              <CommentBox data={data} />
+            </>
+          )}
+        </article>
       </StyledWrapper>
     </Backdrop>
   )
@@ -111,29 +111,15 @@ const StyledWrapper = styled.div`
     }
   }
 
-  .layout {
+  > article {
     display: block;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
-
-    @media (min-width: 1280px) {
-      display: grid;
-      grid-template-columns: minmax(0, 42rem) 16rem;
-      gap: 2rem;
-      align-items: start;
-    }
-  }
-
-  > .layout > article {
     margin: 0 auto;
     max-width: 42rem;
   }
 
-  .outline {
-    display: none;
-
-    @media (min-width: 1280px) {
-      display: block;
-    }
+  .inline-outline {
+    margin-bottom: 1.5rem;
   }
 `

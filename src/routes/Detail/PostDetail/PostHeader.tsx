@@ -26,14 +26,7 @@ const PostHeader: React.FC<Props> = ({ data }) => {
     const shareUrl = `${baseUrl}/${data.slug}`
 
     try {
-      if (navigator.share) {
-        await navigator.share({
-          title: data.title,
-          text: data.summary || data.title,
-          url: shareUrl,
-        })
-        setShareLabel("Shared")
-      } else if (navigator.clipboard?.writeText) {
+      if (navigator.clipboard?.writeText) {
         await navigator.clipboard.writeText(shareUrl)
         setShareLabel("Copied")
       } else {

@@ -5,6 +5,7 @@ import { idToUuid } from "notion-utils"
 import getAllPageIds from "src/libs/utils/notion/getAllPageIds"
 import getPageProperties from "src/libs/utils/notion/getPageProperties"
 import { TPosts } from "src/types"
+import { requestWithRetry } from "./requestWithRetry"
 
 /**
  * @param {{ includePages: boolean }} - false: posts only / true: include pages
@@ -18,22 +19,66 @@ export const getPosts = async () => {
   }
 
   const api = new NotionAPI()
-
-  const response = await api.getPage(id)
+  const normalizeValue = (entry: any) => entry?.value?.value ?? entry?.value
+  const response = await requestWithRetry(() =>
+    api.getPage(id, { fetchCollections: false })
+  )
   id = idToUuid(id)
-  const collectionValue = Object.values(response?.collection ?? {})[0]
-    ?.value as any
+  const collectionValue = normalizeValue(
+    Object.values(response?.collection ?? {})[0]
+  ) as any
   const collection = collectionValue?.value ?? collectionValue
-  const block = response.block
-  const schema = collection?.schema
-
+  let block = response.block
   const rootBlock = block?.[id]
   if (!rootBlock) {
     return []
   }
 
-  const blockValue = (rootBlock.value as any)?.value ?? rootBlock.value
+  const blockValue = normalizeValue(rootBlock)
   const rawMetadata = blockValue
+
+  const viewId = rawMetadata?.view_ids?.[0]
+  const collectionId = rawMetadata?.collection_id
+  const collectionView = normalizeValue(response?.collection_view?.[viewId])
+
+  if (collectionId && viewId && collectionView) {
+    const collectionData: any = await requestWithRetry(() =>
+      api.getCollectionData(collectionId, viewId, collectionView)
+    )
+
+    block = {
+      ...block,
+      ...(collectionData?.recordMap?.block ?? {}),
+    }
+
+    response.collection = {
+      ...(response.collection ?? {}),
+      ...(collectionData?.recordMap?.collection ?? {}),
+    }
+
+    response.collection_view = {
+      ...(response.collection_view ?? {}),
+      ...(collectionData?.recordMap?.collection_view ?? {}),
+    }
+
+    response.notion_user = {
+      ...(response.notion_user ?? {}),
+      ...(collectionData?.recordMap?.notion_user ?? {}),
+    }
+
+    response.collection_query = {
+      ...(response.collection_query ?? {}),
+      [collectionId]: {
+        ...(response.collection_query?.[collectionId] ?? {}),
+        [viewId]: collectionData?.result?.reducerResults,
+      },
+    }
+  }
+
+  const schema = normalizeValue(response?.collection?.[collectionId])?.schema
+  if (!schema) {
+    return []
+  }
 
   // Check Type
   if (

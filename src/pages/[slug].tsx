@@ -18,8 +18,24 @@ const filter: FilterPostsOptions = {
 }
 
 export const getStaticPaths = async () => {
+  const posts = await getPosts()
+  const detailPosts = filterPosts(posts, filter)
+  const recentPosts = detailPosts.slice(0, 12)
+  const featuredPosts = detailPosts.filter(
+    (post) => post.tags?.includes("Featured") || post.tags?.includes("Pinned")
+  )
+  const staticPosts = Array.from(
+    new Map(
+      [...featuredPosts, ...recentPosts].map((post) => [post.slug, post])
+    ).values()
+  )
+
   return {
-    paths: [],
+    paths: staticPosts.map((post) => ({
+      params: {
+        slug: post.slug,
+      },
+    })),
     fallback: "blocking",
   }
 }

@@ -51,33 +51,30 @@ const PostHeader: React.FC<Props> = ({ data }) => {
           <div className="top">
             <div className="meta">
               {data.author && data.author[0] && data.author[0].name && (
-                <>
-                  <div className="author">
-                    <Image
-                      css={{ borderRadius: "50%" }}
-                      src={data.author[0].profile_photo || CONFIG.profile.image}
-                      alt="profile_photo"
-                      width={24}
-                      height={24}
-                    />
-                    <div className="">{data.author[0].name}</div>
-                  </div>
-                  <div className="hr"></div>
-                </>
+                <div className="meta-pill author-pill">
+                  <Image
+                    css={{ borderRadius: "50%" }}
+                    src={data.author[0].profile_photo || CONFIG.profile.image}
+                    alt="profile_photo"
+                    width={22}
+                    height={22}
+                  />
+                  <div>{data.author[0].name}</div>
+                </div>
               )}
-              <div className="date">
+              <div className="meta-pill date">
                 {formatDate(
                   data?.date?.start_date || data.createdTime,
                   CONFIG.lang
                 )}
               </div>
               {updatedAt && (
-                <div className="updated-at">
+                <div className="meta-pill updated-at">
                   Updated {formatDate(updatedAt, CONFIG.lang)}
                 </div>
               )}
               {readingTime && (
-                <div className="reading-time">{readingTime} min read</div>
+                <div className="meta-pill reading-time">{readingTime} min read</div>
               )}
             </div>
             <button className="share" onClick={handleShare} type="button">
@@ -147,35 +144,32 @@ const StyledWrapper = styled.div`
         gap: 0.75rem;
         align-items: center;
 
-        .author {
+        .meta-pill {
           display: flex;
           gap: 0.5rem;
           align-items: center;
-        }
-        .hr {
-          margin-top: 0.25rem;
-          margin-bottom: 0.25rem;
-          align-self: stretch;
-          width: 1px;
-          background-color: ${({ theme }) => theme.colors.gray10};
-        }
-        .date {
-          margin-right: 0.5rem;
-
-          @media (min-width: 768px) {
-            margin-left: 0;
-          }
+          min-height: 2rem;
+          padding: 0.35rem 0.75rem;
+          border: 1px solid ${({ theme }) => theme.colors.gray6};
+          border-radius: 9999px;
+          background-color: ${({ theme }) => theme.colors.gray3};
+          font-size: 0.875rem;
+          line-height: 1.25rem;
+          color: ${({ theme }) => theme.colors.gray11};
         }
         .reading-time {
-          color: ${({ theme }) => theme.colors.gray10};
+          color: ${({ theme }) => theme.colors.gray11};
         }
         .updated-at {
-          color: ${({ theme }) => theme.colors.gray10};
+          color: ${({ theme }) => theme.colors.gray11};
+        }
+        .author-pill {
+          font-weight: 600;
         }
       }
 
       .share {
-        border: none;
+        border: 1px solid ${({ theme }) => theme.colors.gray6};
         border-radius: 9999px;
         width: fit-content;
         padding: 0.5rem 0.9rem;
@@ -183,11 +177,11 @@ const StyledWrapper = styled.div`
         line-height: 1.25rem;
         font-weight: 600;
         color: ${({ theme }) => theme.colors.gray12};
-        background-color: ${({ theme }) => theme.colors.gray4};
+        background-color: ${({ theme }) => theme.colors.gray3};
         cursor: pointer;
 
         &:hover {
-          background-color: ${({ theme }) => theme.colors.gray5};
+          background-color: ${({ theme }) => theme.colors.gray4};
         }
       }
     }

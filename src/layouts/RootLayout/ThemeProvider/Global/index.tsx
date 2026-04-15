@@ -14,9 +14,13 @@ export const Global = () => {
           padding: 0;
           color: ${theme.colors.gray12};
           background-color: ${theme.colors.gray2};
+          background-image: ${theme.scheme === "dark"
+            ? "radial-gradient(circle at top, rgba(141, 164, 255, 0.12), transparent 32%), radial-gradient(circle at right top, rgba(20, 184, 166, 0.08), transparent 22%)"
+            : "radial-gradient(circle at top, rgba(99, 102, 241, 0.08), transparent 28%), radial-gradient(circle at right top, rgba(20, 184, 166, 0.05), transparent 20%)"};
           font-family: ${pretendard.style.fontFamily};
           font-weight: ${pretendard.style.fontWeight};
           font-style: ${pretendard.style.fontStyle};
+          min-height: 100vh;
         }
 
         * {

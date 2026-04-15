@@ -71,10 +71,14 @@ const PostDetail: React.FC<Props> = () => {
 export default PostDetail
 
 const Backdrop = styled.div`
-  padding: 0.5rem 0;
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  margin-left: -50vw;
+  padding: 0.75rem 1rem 1.5rem;
 
   @media (min-width: 1024px) {
-    padding: 1rem 0 2rem;
+    padding: 1rem 2rem 2.5rem;
   }
 `
 
@@ -83,7 +87,7 @@ const StyledWrapper = styled.div`
   padding-top: 3rem;
   padding-bottom: 3rem;
   border-radius: 1.5rem;
-  max-width: 72rem;
+  width: min(100%, 68rem);
   background-color: ${({ theme }) =>
     theme.scheme === "light" ? "white" : theme.colors.gray4};
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),

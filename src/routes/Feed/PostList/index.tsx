@@ -18,7 +18,7 @@ const PostList: React.FC<Props> = ({ q }) => {
   const currentCategory = `${router.query.category || ``}` || DEFAULT_CATEGORY
   const currentOrder = `${router.query.order || ``}` || "desc"
 
-  useFeedScrollRestoration(
+  const isRestored = useFeedScrollRestoration(
     JSON.stringify([
       filteredPosts.length,
       currentTag,
@@ -65,7 +65,13 @@ const PostList: React.FC<Props> = ({ q }) => {
 
   return (
     <>
-      <div className="my-2">
+      <div
+        className="my-2"
+        style={{
+          opacity: isRestored ? 1 : 0,
+          transition: "opacity 120ms ease-out",
+        }}
+      >
         {!filteredPosts.length && (
           <p className="text-gray-500 dark:text-gray-300">Nothing! 😺</p>
         )}

@@ -1,9 +1,13 @@
-import { useEffect } from "react"
+import { useLayoutEffect, useState } from "react"
 import { storageKey } from "src/constants/storage"
 
 const useFeedScrollRestoration = (dependencyKey: string) => {
-  useEffect(() => {
+  const [isRestored, setIsRestored] = useState(false)
+
+  useLayoutEffect(() => {
     if (typeof window === "undefined") return
+
+    setIsRestored(false)
 
     const restore = () => {
       const activePostId = window.sessionStorage.getItem(storageKey.feedActivePostId)
@@ -15,7 +19,10 @@ const useFeedScrollRestoration = (dependencyKey: string) => {
         ) as HTMLElement | null
 
         if (target) {
-          target.scrollIntoView({ block: "center" })
+          const targetTop =
+            target.getBoundingClientRect().top + window.scrollY - 120
+          window.scrollTo({ top: Math.max(0, targetTop), behavior: "auto" })
+          setIsRestored(true)
           return
         }
       }
@@ -23,11 +30,15 @@ const useFeedScrollRestoration = (dependencyKey: string) => {
       if (savedScrollY) {
         window.scrollTo({ top: Number(savedScrollY), behavior: "auto" })
       }
+
+      setIsRestored(true)
     }
 
-    const timer = window.setTimeout(restore, 50)
-    return () => window.clearTimeout(timer)
+    const frame = window.requestAnimationFrame(restore)
+    return () => window.cancelAnimationFrame(frame)
   }, [dependencyKey])
+
+  return isRestored
 }
 
 export default useFeedScrollRestoration

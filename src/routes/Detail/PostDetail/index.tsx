@@ -38,31 +38,38 @@ const PostDetail: React.FC<Props> = () => {
         <div className="progress" aria-hidden="true">
           <div className="bar" style={{ width: `${progress}%` }} />
         </div>
-        <article id="post-article">
-          {category && (
-            <div css={{ marginBottom: "0.5rem" }}>
-              <Category readOnly={data.status?.[0] === "PublicOnDetail"}>
-                {category}
-              </Category>
+        <div className="layout">
+          <aside className="left-rail">
+            <RelatedPosts />
+          </aside>
+          <article id="post-article">
+            {category && (
+              <div css={{ marginBottom: "0.5rem" }}>
+                <Category readOnly={data.status?.[0] === "PublicOnDetail"}>
+                  {category}
+                </Category>
+              </div>
+            )}
+            {data.type[0] === "Post" && <PostHeader data={data} />}
+            {items.length > 0 && (
+              <div className="inline-outline">
+                <PostOutline items={items} activeId={activeId} />
+              </div>
+            )}
+            <div id="post-content">
+              <NotionRenderer recordMap={data.recordMap} />
             </div>
-          )}
-          {data.type[0] === "Post" && <PostHeader data={data} />}
-          {items.length > 0 && (
-            <div className="inline-outline">
-              <PostOutline items={items} activeId={activeId} />
-            </div>
-          )}
-          <div id="post-content">
-            <NotionRenderer recordMap={data.recordMap} />
-          </div>
-          {data.type[0] === "Post" && (
-            <>
-              <RelatedPosts />
-              <Footer />
-              <CommentBox data={data} />
-            </>
-          )}
-        </article>
+            {data.type[0] === "Post" && (
+              <>
+                <Footer />
+                <CommentBox data={data} />
+              </>
+            )}
+          </article>
+          <aside className="right-rail">
+            <PostOutline items={items} activeId={activeId} />
+          </aside>
+        </div>
       </StyledWrapper>
     </Backdrop>
   )
@@ -111,15 +118,41 @@ const StyledWrapper = styled.div`
     }
   }
 
-  > article {
+  .layout {
     display: block;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
+
+    @media (min-width: 1280px) {
+      display: grid;
+      grid-template-columns: minmax(0, 15rem) minmax(0, 42rem) minmax(0, 15rem);
+      gap: 1.5rem;
+      align-items: start;
+    }
+  }
+
+  article {
     margin: 0 auto;
     max-width: 42rem;
   }
 
   .inline-outline {
     margin-bottom: 1.5rem;
+
+    @media (min-width: 1280px) {
+      display: none;
+    }
+  }
+
+  .left-rail,
+  .right-rail {
+    display: none;
+
+    @media (min-width: 1280px) {
+      display: block;
+      position: sticky;
+      top: 6rem;
+      align-self: start;
+    }
   }
 `

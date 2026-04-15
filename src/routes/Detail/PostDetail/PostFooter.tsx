@@ -2,15 +2,20 @@ import styled from "@emotion/styled"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import React from "react"
+import Image from "next/image"
+import { CONFIG } from "site.config"
 import useAdjacentPosts from "src/hooks/useAdjacentPosts"
+import usePostQuery from "src/hooks/usePostQuery"
 import useSeriesPosts from "src/hooks/useSeriesPosts"
 
 type Props = {}
 
 const Footer: React.FC<Props> = () => {
   const router = useRouter()
+  const post = usePostQuery()
   const { previousPost, nextPost } = useAdjacentPosts()
   const { currentSeries, currentIndex, seriesPosts, totalCount } = useSeriesPosts()
+  const author = post?.author?.[0]
 
   const handleBack = () => {
     if (typeof window !== "undefined" && window.history.length > 1) {
@@ -55,16 +60,31 @@ const Footer: React.FC<Props> = () => {
       <div className="adjacent">
         {previousPost && (
           <Link href={`/${previousPost.slug}`} className="card prev">
-            <div className="label">Previous</div>
+            <div className="label">← Previous</div>
             <div className="title">{previousPost.title}</div>
           </Link>
         )}
         {nextPost && (
           <Link href={`/${nextPost.slug}`} className="card next">
-            <div className="label">Next</div>
+            <div className="label">Next →</div>
             <div className="title">{nextPost.title}</div>
           </Link>
         )}
+      </div>
+      <div className="author-card">
+        <div className="author-label">Written by</div>
+        <div className="author-body">
+          <Image
+            src={author?.profile_photo || CONFIG.profile.image}
+            alt={author?.name || CONFIG.profile.name}
+            width={44}
+            height={44}
+          />
+          <div>
+            <div className="author-name">{author?.name || CONFIG.profile.name}</div>
+            <div className="author-role">{CONFIG.profile.role}</div>
+          </div>
+        </div>
       </div>
     </StyledWrapper>
   )
@@ -185,5 +205,45 @@ const StyledWrapper = styled.div`
   .title {
     line-height: 1.6;
     font-weight: 600;
+  }
+
+  .author-card {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    background-color: ${({ theme }) => theme.colors.gray3};
+  }
+
+  .author-label {
+    margin-bottom: 0.6rem;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: ${({ theme }) => theme.colors.gray10};
+  }
+
+  .author-body {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+
+    img {
+      border-radius: 9999px;
+    }
+  }
+
+  .author-name {
+    line-height: 1.4;
+    font-weight: 700;
+    color: ${({ theme }) => theme.colors.gray12};
+  }
+
+  .author-role {
+    margin-top: 0.15rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    color: ${({ theme }) => theme.colors.gray10};
   }
 `

@@ -8,6 +8,9 @@ export type MetaConfigProps = {
   date?: string
   image?: string
   url: string
+  canonicalUrl?: string
+  keywords?: string[]
+  jsonLd?: Record<string, any> | null
 }
 
 const MetaConfig: React.FC<MetaConfigProps> = (props) => {
@@ -17,6 +20,10 @@ const MetaConfig: React.FC<MetaConfigProps> = (props) => {
       <meta name="robots" content="follow, index" />
       <meta charSet="UTF-8" />
       <meta name="description" content={props.description} />
+      {props.keywords?.length && (
+        <meta name="keywords" content={props.keywords.join(", ")} />
+      )}
+      <link rel="canonical" href={props.canonicalUrl || props.url} />
       {/* og */}
       <meta property="og:type" content={props.type} />
       <meta property="og:title" content={props.title} />
@@ -35,6 +42,15 @@ const MetaConfig: React.FC<MetaConfigProps> = (props) => {
           <meta property="article:published_time" content={props.date} />
           <meta property="article:author" content={CONFIG.profile.name} />
         </>
+      )}
+      {props.jsonLd && (
+        <script
+          key="json-ld"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(props.jsonLd),
+          }}
+        />
       )}
     </Head>
   )

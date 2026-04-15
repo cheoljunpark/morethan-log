@@ -53,12 +53,36 @@ const DetailPage: NextPageWithLayout = () => {
 
   if (!post) return <CustomError />
 
+  const siteUrl = CONFIG.link.replace(/\/$/, "")
   const image =
     post.thumbnail ??
-    CONFIG.ogImageGenerateURL ??
     `${CONFIG.ogImageGenerateURL}/${encodeURIComponent(post.title)}.png`
 
   const date = post.date?.start_date || post.createdTime || ""
+  const url = `${siteUrl}/${post.slug}`
+  const keywords = [...(post.tags || []), ...(post.category || [])].filter(Boolean)
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.summary || CONFIG.blog.description,
+    image: image ? [image] : undefined,
+    datePublished: new Date(date).toISOString(),
+    dateModified: new Date(date).toISOString(),
+    author: {
+      "@type": "Person",
+      name: post.author?.[0]?.name || CONFIG.profile.name,
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": url,
+    },
+    publisher: {
+      "@type": "Person",
+      name: CONFIG.profile.name,
+    },
+    keywords,
+  }
 
   const meta = {
     title: post.title,
@@ -66,7 +90,10 @@ const DetailPage: NextPageWithLayout = () => {
     image: image,
     description: post.summary || "",
     type: post.type[0],
-    url: `${CONFIG.link}/${post.slug}`,
+    url,
+    canonicalUrl: url,
+    keywords,
+    jsonLd,
   }
 
   return (

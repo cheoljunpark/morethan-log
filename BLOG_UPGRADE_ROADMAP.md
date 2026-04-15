@@ -9,6 +9,31 @@ Turn this Notion-powered blog into a more polished personal publishing platform 
 - better 운영 편의성
 - safer Notion integration
 
+## Recently Added
+
+- Notion response normalization for newer API shapes
+- safer post collection parsing and fallback handling
+- detail page reading time
+- previous / next post navigation
+- feed scroll restoration after returning from a post
+- feed search and filters persisted in URL
+
+## Next Best Upgrades
+
+These now have the best payoff for this repo.
+
+### A. Share and Metadata
+
+- Add copy link / share button on post detail
+- Add canonical URL and article keywords
+- Add structured data for posts
+
+Why:
+
+- Makes posts easier to share
+- Improves search understanding of the page
+- Pairs well with the new detail-page upgrades
+
 ## 1. High Priority
 
 These are the best next upgrades because they improve user experience quickly.
@@ -139,11 +164,11 @@ Suggested purpose:
 
 If we continue from here, the best next implementation candidates are:
 
-1. Add `reading time` on post detail
-2. Add `previous / next post`
+1. Add `copy link / share` on post detail
+2. Add `structured data` for posts
 3. Add `pinned` property support from Notion
 4. Add `series` support
-5. Add `structured data` for posts
+5. Add stronger SEO meta and canonical handling
 
 ## Notes For This Repo
 

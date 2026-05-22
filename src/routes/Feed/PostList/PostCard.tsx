@@ -13,7 +13,7 @@ type Props = {
 }
 
 const PostCard: React.FC<Props> = ({ data }) => {
-  const category = (data.category && data.category?.[0]) || undefined
+  const category = data.menu?.[0]
   const series = data.series?.[0]
   const primaryTag = data.tags?.[0]
   const secondaryTags = data.tags?.slice(1, 4) || []

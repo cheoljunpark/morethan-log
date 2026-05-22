@@ -11,7 +11,7 @@ const CategorySelect: React.FC<Props> = () => {
   const router = useRouter()
   const data = useCategoriesQuery()
 
-  const currentCategory = `${router.query.category || ``}` || DEFAULT_CATEGORY
+  const currentCategory = `${router.query.menu || ``}` || DEFAULT_CATEGORY
 
   const handleOptionClick = (category: string) => {
     router.push(
@@ -19,7 +19,7 @@ const CategorySelect: React.FC<Props> = () => {
         pathname: "/",
         query: {
           ...getFeedQuery(router.query),
-          category,
+          menu: category,
         },
       },
       undefined,
@@ -29,7 +29,7 @@ const CategorySelect: React.FC<Props> = () => {
 
   return (
     <StyledWrapper>
-      <div className="label">Category</div>
+      <div className="label">Menu</div>
       <div className="content">
         {Object.keys(data).map((key, idx) => (
           <button

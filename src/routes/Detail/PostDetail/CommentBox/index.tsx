@@ -2,6 +2,7 @@ import { TPost } from "src/types"
 import { CONFIG } from "site.config"
 import dynamic from "next/dynamic"
 import styled from "@emotion/styled"
+import { useUiLanguage } from "src/contexts/UiLanguageContext"
 
 const UtterancesComponent = dynamic(
   () => {
@@ -21,10 +22,11 @@ type Props = {
 }
 
 const CommentBox: React.FC<Props> = ({ data }) => {
+  const { language } = useUiLanguage()
   return (
     <StyledWrapper>
       <div className="comment-shell">
-        <div className="title">Comments</div>
+        <div className="title">{language === "ko" ? "댓글" : "Comments"}</div>
         {CONFIG.utterances.enable && <UtterancesComponent issueTerm={data.id} />}
         {CONFIG.cusdis.enable && (
           <CusdisComponent id={data.id} slug={data.slug} title={data.title} />

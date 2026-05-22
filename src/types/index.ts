@@ -19,11 +19,15 @@ export type TPost = {
   id: string
   date: { start_date: string }
   updatedAt?: { start_date: string }
+  prerequisites?: string
+  references?: string
   type: TPostType[]
   slug: string
   series?: string[]
+  menu?: string[]
+  submenu?: string[]
+  menuIcon?: string
   tags?: string[]
-  category?: string[]
   summary?: string
   author?: {
     id: string

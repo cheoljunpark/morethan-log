@@ -58,6 +58,135 @@ type Props = {
   recordMap: ExtendedRecordMap
 }
 
+const getCodeLanguage = (codeElement: HTMLElement | null) => {
+  if (!codeElement) return "code"
+
+  const classNames = codeElement.className.split(" ")
+  const languageClass = classNames.find((name) => name.startsWith("language-"))
+
+  if (!languageClass) return "code"
+
+  return languageClass.replace("language-", "") || "code"
+}
+
+const decorateCodeBlocks = () => {
+  if (typeof window === "undefined") return
+
+  const blocks = document.querySelectorAll<HTMLElement>("pre.notion-code")
+
+  blocks.forEach((block) => {
+    if (block.dataset.enhanced === "true") return
+
+    const code = block.querySelector<HTMLElement>("code")
+    if (!code) return
+
+    const language = getCodeLanguage(code)
+    const lineCount = code.innerText.split("\n").length
+    const isLongCode = lineCount > 18
+    const existingCopy = block.querySelector<HTMLElement>(".notion-code-copy")
+
+    const toolbar = document.createElement("div")
+    toolbar.className = "notion-code-toolbar"
+
+    const languageBadge = document.createElement("span")
+    languageBadge.className = "notion-code-language"
+    languageBadge.innerText = language
+
+    const actions = document.createElement("div")
+    actions.className = "notion-code-actions"
+
+    if (existingCopy) {
+      actions.appendChild(existingCopy)
+    }
+
+    if (isLongCode) {
+      block.dataset.collapsed = "true"
+      block.dataset.collapsed = "true"
+
+      const toggleButton = document.createElement("button")
+      toggleButton.type = "button"
+      toggleButton.className = "notion-code-action"
+      toggleButton.innerText = "Expand"
+      toggleButton.onclick = () => {
+        const nextCollapsed = block.dataset.collapsed !== "true"
+        block.dataset.collapsed = nextCollapsed ? "true" : "false"
+        toggleButton.innerText = nextCollapsed ? "Expand" : "Collapse"
+      }
+
+      actions.appendChild(toggleButton)
+    }
+
+    toolbar.appendChild(languageBadge)
+    toolbar.appendChild(actions)
+    block.prepend(toolbar)
+    block.dataset.enhanced = "true"
+  })
+}
+
+const getCalloutTone = (callout: HTMLElement) => {
+  const iconText =
+    callout.querySelector<HTMLElement>(".notion-page-icon-inline")?.innerText || ""
+  const text =
+    callout.querySelector<HTMLElement>(".notion-callout-text")?.innerText.toLowerCase() || ""
+
+  const source = `${iconText} ${text}`
+
+  if (
+    source.includes("주의") ||
+    source.includes("warning") ||
+    source.includes("warn") ||
+    source.includes("⚠") ||
+    source.includes("❗")
+  ) {
+    return "warning"
+  }
+
+  if (
+    source.includes("실수") ||
+    source.includes("pitfall") ||
+    source.includes("error") ||
+    source.includes("mistake") ||
+    source.includes("⛔") ||
+    source.includes("🚫")
+  ) {
+    return "danger"
+  }
+
+  if (
+    source.includes("팁") ||
+    source.includes("tip") ||
+    source.includes("추천") ||
+    source.includes("💡") ||
+    source.includes("✨")
+  ) {
+    return "tip"
+  }
+
+  if (
+    source.includes("핵심") ||
+    source.includes("요약") ||
+    source.includes("정리") ||
+    source.includes("summary") ||
+    source.includes("key point") ||
+    source.includes("📌") ||
+    source.includes("✅")
+  ) {
+    return "key"
+  }
+
+  return "default"
+}
+
+const decorateCallouts = () => {
+  if (typeof window === "undefined") return
+
+  const callouts = document.querySelectorAll<HTMLElement>(".notion-callout")
+
+  callouts.forEach((callout) => {
+    callout.dataset.tone = getCalloutTone(callout)
+  })
+}
+
 const NotionRenderer: FC<Props> = ({ recordMap }) => {
   const [scheme] = useScheme()
 
@@ -80,6 +209,25 @@ const NotionRenderer: FC<Props> = ({ recordMap }) => {
       console.log = originalLog
     }
   }, [])
+
+  useEffect(() => {
+    decorateCodeBlocks()
+    decorateCallouts()
+
+    const observer = new MutationObserver(() => {
+      decorateCodeBlocks()
+      decorateCallouts()
+    })
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+    })
+
+    return () => {
+      observer.disconnect()
+    }
+  }, [recordMap])
 
   return (
     <StyledWrapper>
@@ -153,13 +301,159 @@ const StyledWrapper = styled.div`
   .notion-list {
     width: 100%;
   }
+  .notion-callout {
+    margin: 0.95rem 0 !important;
+    padding: 1rem 1rem 1rem 0.9rem !important;
+    border: 1px solid ${({ theme }) => theme.colors.gray6} !important;
+    border-radius: 1rem !important;
+    background-color: ${({ theme }) =>
+      theme.scheme === "light" ? "rgba(246, 248, 252, 0.94)" : "rgba(29, 36, 48, 0.92)"} !important;
+    box-shadow: 0 10px 20px -18px rgba(0, 0, 0, 0.18);
+  }
+  .notion-callout[data-tone="key"] {
+    border-color: rgba(59, 130, 246, 0.28) !important;
+    background: linear-gradient(
+      135deg,
+      rgba(59, 130, 246, 0.14),
+      rgba(37, 99, 235, 0.04)
+    ) !important;
+  }
+  .notion-callout[data-tone="tip"] {
+    border-color: rgba(16, 185, 129, 0.28) !important;
+    background: linear-gradient(
+      135deg,
+      rgba(16, 185, 129, 0.14),
+      rgba(5, 150, 105, 0.04)
+    ) !important;
+  }
+  .notion-callout[data-tone="warning"] {
+    border-color: rgba(245, 158, 11, 0.3) !important;
+    background: linear-gradient(
+      135deg,
+      rgba(245, 158, 11, 0.14),
+      rgba(217, 119, 6, 0.04)
+    ) !important;
+  }
+  .notion-callout[data-tone="danger"] {
+    border-color: rgba(239, 68, 68, 0.3) !important;
+    background: linear-gradient(
+      135deg,
+      rgba(239, 68, 68, 0.14),
+      rgba(220, 38, 38, 0.04)
+    ) !important;
+  }
+  .notion-callout .notion-page-icon-inline {
+    width: 2rem !important;
+    height: 2rem !important;
+    line-height: 2rem !important;
+    font-size: 1.15rem !important;
+    margin-right: 0.2rem !important;
+  }
+  .notion-callout-text {
+    margin-left: 0.7rem !important;
+    color: ${({ theme }) => theme.colors.gray12};
+    line-height: 1.75rem;
+  }
+  .notion-callout-text b,
+  .notion-callout-text strong {
+    color: ${({ theme }) => theme.colors.gray12};
+  }
   .notion-code {
     overflow: hidden;
+    border: 1px solid ${({ theme }) => theme.colors.gray6};
+    border-radius: 1rem;
+    background-color: ${({ theme }) =>
+      theme.scheme === "light" ? "rgba(245, 247, 251, 0.94)" : "rgba(21, 28, 38, 0.92)"};
+  }
+  .notion-code-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.65rem 0.8rem 0.55rem;
+    border-bottom: 1px solid ${({ theme }) => theme.colors.gray6};
+    background-color: ${({ theme }) =>
+      theme.scheme === "light" ? "rgba(238, 242, 248, 0.96)" : "rgba(26, 34, 46, 0.96)"};
+  }
+  .notion-code-language {
+    display: inline-flex;
+    align-items: center;
+    min-height: 1.5rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 9999px;
+    background-color: ${({ theme }) => theme.colors.gray3};
+    color: ${({ theme }) => theme.colors.gray10};
+    font-size: 0.72rem;
+    line-height: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .notion-code-actions {
+    display: inline-flex;
+    gap: 0.45rem;
+    align-items: center;
+  }
+  .notion-code-copy {
+    position: static !important;
+    display: inline-flex;
+    align-items: center;
+  }
+  .notion-code-copy-button {
+    position: static !important;
+    transform: none !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.75rem;
+    min-height: 1.75rem;
+    border: 1px solid ${({ theme }) => theme.colors.gray6};
+    border-radius: 9999px;
+    color: ${({ theme }) => theme.colors.gray10};
+    background-color: transparent;
+  }
+  .notion-code-copy-tooltip {
+    position: static !important;
+    margin-left: 0.35rem;
+    transform: none !important;
+  }
+  .notion-code-action {
+    display: inline-flex;
+    align-items: center;
+    min-height: 1.5rem;
+    padding: 0.2rem 0.55rem;
+    border: 1px solid ${({ theme }) => theme.colors.gray6};
+    border-radius: 9999px;
+    background-color: transparent;
+    color: ${({ theme }) => theme.colors.gray10};
+    font-size: 0.72rem;
+    line-height: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+
+    &:hover {
+      background-color: ${({ theme }) => theme.colors.gray3};
+      color: ${({ theme }) => theme.colors.gray12};
+    }
   }
   .notion-code pre {
     overflow-x: auto !important;
     overflow-y: hidden !important;
     scrollbar-width: none;
+  }
+  pre.notion-code {
+    margin: 0 !important;
+    padding: 0 !important;
+    max-height: none;
+  }
+  pre.notion-code[data-collapsed="true"] code {
+    max-height: 22rem;
+    display: block;
+    overflow: hidden;
+  }
+  pre.notion-code code {
+    display: block;
+    padding: 0.95rem 1rem 1rem !important;
   }
   .notion-code pre::-webkit-scrollbar {
     width: 0;

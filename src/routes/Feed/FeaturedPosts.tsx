@@ -2,7 +2,7 @@ import styled from "@emotion/styled"
 import Image from "next/image"
 import Link from "next/link"
 import { useMemo } from "react"
-import { CONFIG } from "site.config"
+import { useUiLanguage } from "src/contexts/UiLanguageContext"
 import { storageKey } from "src/constants/storage"
 import usePostsQuery from "src/hooks/usePostsQuery"
 import { formatDate } from "src/libs/utils"
@@ -12,13 +12,21 @@ type Props = {
 }
 
 const FeaturedPosts: React.FC<Props> = ({ enabled }) => {
+  const { language, locale } = useUiLanguage()
   const posts = usePostsQuery()
 
   const featuredPosts = useMemo(() => {
-    return posts.filter(
-      (post) =>
-        post.tags?.includes("Featured") || post.tags?.includes("Pinned")
-    )
+    return posts
+      .filter((post) => post.tags?.includes("Featured") || post.tags?.includes("Pinned"))
+      .sort((a, b) => {
+        const score = (post: (typeof posts)[number]) => {
+          if (post.tags?.includes("Featured")) return 2
+          if (post.tags?.includes("Pinned")) return 1
+          return 0
+        }
+
+        return score(b) - score(a)
+      })
   }, [posts])
 
   const handleClick = (postId: string) => {
@@ -33,9 +41,9 @@ const FeaturedPosts: React.FC<Props> = ({ enabled }) => {
   const [primaryPost, ...secondaryPosts] = featuredPosts
 
   return (
-    <StyledWrapper>
+    <StyledWrapper id="featured-posts">
       <div className="section-header">
-        <h2>Featured Posts</h2>
+        <h2>{language === "ko" ? "대표 글" : "Featured posts"}</h2>
       </div>
       <div className="grid">
         <Link
@@ -55,7 +63,9 @@ const FeaturedPosts: React.FC<Props> = ({ enabled }) => {
           )}
           <div className="content">
             <div className="meta">
-              <span>{primaryPost.type[0]}</span>
+              <span>
+                {primaryPost.menu?.[0] || (language === "ko" ? "글" : "Post")}
+              </span>
               {primaryPost.series?.[0] && <span>{primaryPost.series[0]}</span>}
             </div>
             <h3>{primaryPost.title}</h3>
@@ -63,7 +73,7 @@ const FeaturedPosts: React.FC<Props> = ({ enabled }) => {
             <div className="date">
               {formatDate(
                 primaryPost.date?.start_date || primaryPost.createdTime,
-                CONFIG.lang
+                locale
               )}
             </div>
           </div>
@@ -77,13 +87,15 @@ const FeaturedPosts: React.FC<Props> = ({ enabled }) => {
               onClick={() => handleClick(post.id)}
             >
               <div className="meta">
-                <span>{post.type[0]}</span>
+                <span>
+                  {post.menu?.[0] || (language === "ko" ? "글" : "Post")}
+                </span>
                 {post.series?.[0] && <span>{post.series[0]}</span>}
               </div>
               <h3>{post.title}</h3>
               {post.summary && <p>{post.summary}</p>}
               <div className="date">
-                {formatDate(post.date?.start_date || post.createdTime, CONFIG.lang)}
+                {formatDate(post.date?.start_date || post.createdTime, locale)}
               </div>
             </Link>
           ))}
@@ -97,6 +109,7 @@ export default FeaturedPosts
 
 const StyledWrapper = styled.section`
   margin-bottom: 1.5rem;
+  scroll-margin-top: 5rem;
 
   .section-header {
     margin-bottom: 1rem;

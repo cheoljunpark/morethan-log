@@ -6,6 +6,7 @@ import styled from "@emotion/styled"
 import { useRouter } from "next/router"
 import Scripts from "src/layouts/RootLayout/Scripts"
 import useGtagEffect from "./useGtagEffect"
+import { UiLanguageProvider } from "src/contexts/UiLanguageContext"
 import Prism from "prismjs/prism"
 import 'prismjs/components/prism-markup-templating.js'
 import 'prismjs/components/prism-markup.js'
@@ -54,14 +55,19 @@ const RootLayout = ({ children }: Props) => {
   }, []);
 
   const isDetailPage = router.pathname === "/[slug]"
+  const isHomePage = router.pathname === "/"
 
   return (
     <ThemeProvider scheme={scheme}>
-      <Scripts />
-      {/* // TODO: replace react query */}
-      {/* {metaConfig.type !== "Paper" && <Header />} */}
-      <Header fullWidth={isDetailPage} />
-      <StyledMain data-detail-page={isDetailPage}>{children}</StyledMain>
+      <UiLanguageProvider>
+        <Scripts />
+        {/* // TODO: replace react query */}
+        {/* {metaConfig.type !== "Paper" && <Header />} */}
+        <Header fullWidth={isDetailPage} />
+        <StyledMain data-detail-page={isDetailPage} data-home-page={isHomePage}>
+          {children}
+        </StyledMain>
+      </UiLanguageProvider>
     </ThemeProvider>
   )
 }
@@ -77,5 +83,10 @@ const StyledMain = styled.main`
   &[data-detail-page="true"] {
     max-width: none;
     padding: 0;
+  }
+
+  &[data-home-page="true"] {
+    max-width: 1380px;
+    padding: 0 0.85rem;
   }
 `

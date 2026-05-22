@@ -2,8 +2,10 @@ import { ParsedUrlQuery } from "querystring"
 
 type FeedQuery = {
   category?: string
+  menu?: string
   order?: string
   q?: string
+  submenu?: string
   tag?: string
 }
 
@@ -13,8 +15,10 @@ const getFeedQuery = (query: ParsedUrlQuery): FeedQuery => {
 
   return {
     category: toStringValue(query.category),
+    menu: toStringValue(query.menu),
     order: toStringValue(query.order),
     q: toStringValue(query.q),
+    submenu: toStringValue(query.submenu),
     tag: toStringValue(query.tag),
   }
 }

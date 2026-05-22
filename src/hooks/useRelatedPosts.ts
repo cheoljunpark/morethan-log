@@ -10,7 +10,7 @@ const useRelatedPosts = () => {
     if (!currentPost) return []
 
     const currentTags = new Set(currentPost.tags || [])
-    const currentCategory = currentPost.category?.[0]
+    const currentCategory = currentPost.menu?.[0]
     const currentSeries = currentPost.series?.[0]
 
     return posts
@@ -19,8 +19,7 @@ const useRelatedPosts = () => {
         const sharedTags = (post.tags || []).filter((tag) =>
           currentTags.has(tag)
         ).length
-        const sameCategory =
-          currentCategory && post.category?.includes(currentCategory) ? 2 : 0
+        const sameCategory = currentCategory && post.menu?.includes(currentCategory) ? 2 : 0
         const sameSeries =
           currentSeries && post.series?.[0] === currentSeries ? 4 : 0
 

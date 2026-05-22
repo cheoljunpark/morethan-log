@@ -1,16 +1,18 @@
 import styled from "@emotion/styled"
 import Link from "next/link"
 import React from "react"
+import { useUiLanguage } from "src/contexts/UiLanguageContext"
 import useRelatedPosts from "src/hooks/useRelatedPosts"
 
 const RelatedPosts: React.FC = () => {
+  const { language } = useUiLanguage()
   const posts = useRelatedPosts()
 
   if (posts.length === 0) return null
 
   return (
     <StyledWrapper>
-      <div className="title">Related Posts</div>
+      <div className="title">{language === "ko" ? "관련 글" : "Related posts"}</div>
       <div className="list">
         {posts.map((post) => (
           <Link href={`/${post.slug}`} key={post.id} className="card">

@@ -1,7 +1,7 @@
-import { CONFIG } from "site.config"
+import styled from "@emotion/styled"
 import Image from "next/image"
 import React from "react"
-import styled from "@emotion/styled"
+import { CONFIG } from "site.config"
 
 type Props = {
   className?: string
@@ -10,20 +10,20 @@ type Props = {
 const MobileProfileCard: React.FC<Props> = () => {
   return (
     <StyledWrapper>
-      <div className="top">💻 Profile</div>
       <div className="mid">
         <div className="wrapper">
-          <Image
-            src={CONFIG.profile.image}
-            width={90}
-            height={90}
-            css={{
-              position: "relative",
-              objectFit: "contain",
-              padding: "0.2rem",
-            }}
-            alt="profile_image"
-          />
+          <div className="avatar">
+            <Image
+              src={CONFIG.profile.image}
+              fill
+              css={{
+                position: "relative",
+                objectFit: "contain",
+                padding: "0.2rem",
+              }}
+              alt="profile_image"
+            />
+          </div>
           <div className="wrapper">
             <div className="top">{CONFIG.profile.name}</div>
             <div className="mid">{CONFIG.profile.role}</div>
@@ -44,12 +44,8 @@ const StyledWrapper = styled.div`
     display: none;
   }
 
-  > .top {
-    padding: 0.25rem;
-    margin-bottom: 0.75rem;
-  }
   > .mid {
-    padding: 0.5rem;
+    padding: 0.65rem 0.8rem;
     margin-bottom: 1rem;
     border-radius: 1rem;
     background-color: ${({ theme }) =>
@@ -58,29 +54,47 @@ const StyledWrapper = styled.div`
         : "rgba(29, 36, 48, 0.84)"};
     border: 1px solid ${({ theme }) => theme.colors.gray6};
     backdrop-filter: blur(14px);
+
     > .wrapper {
       display: flex;
-      gap: 0.5rem;
+      gap: 0.7rem;
       align-items: center;
-      > .wrapper {
-        height: fit-content;
-        > .top {
-          font-size: 1.25rem;
-          line-height: 1.75rem;
-          font-weight: 700;
-          letter-spacing: -0.03em;
-        }
-        > .mid {
-          margin-bottom: 0.5rem;
-          font-size: 0.875rem;
-          line-height: 1.25rem;
-          color: ${({ theme }) => theme.colors.gray11};
-        }
-        > .btm {
-          font-size: 0.875rem;
-          line-height: 1.25rem;
-        }
-      }
+    }
+
+    .avatar {
+      position: relative;
+      flex-shrink: 0;
+      width: 4.35rem;
+      height: 4.35rem;
+      border-radius: 9999px;
+      overflow: hidden;
+      background-color: ${({ theme }) => theme.colors.gray2};
+      box-shadow: inset 0 0 0 1px ${({ theme }) => theme.colors.gray5};
+    }
+
+    > .wrapper > .wrapper {
+      height: fit-content;
+      min-width: 0;
+    }
+
+    > .wrapper > .wrapper > .top {
+      font-size: 1.12rem;
+      line-height: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    > .wrapper > .wrapper > .mid {
+      margin-bottom: 0.35rem;
+      font-size: 0.84rem;
+      line-height: 1.18rem;
+      color: ${({ theme }) => theme.colors.gray11};
+    }
+
+    > .wrapper > .wrapper > .btm {
+      font-size: 0.8rem;
+      line-height: 1.3rem;
+      color: ${({ theme }) => theme.colors.gray10};
     }
   }
 `

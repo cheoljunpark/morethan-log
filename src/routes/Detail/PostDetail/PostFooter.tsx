@@ -1,18 +1,20 @@
 import styled from "@emotion/styled"
+import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import React from "react"
-import Image from "next/image"
 import { CONFIG } from "site.config"
+import { storageKey } from "src/constants/storage"
+import { useUiLanguage } from "src/contexts/UiLanguageContext"
 import useAdjacentPosts from "src/hooks/useAdjacentPosts"
 import usePostQuery from "src/hooks/usePostQuery"
 import useSeriesPosts from "src/hooks/useSeriesPosts"
-import { storageKey } from "src/constants/storage"
 
 type Props = {}
 
 const Footer: React.FC<Props> = () => {
   const router = useRouter()
+  const { language } = useUiLanguage()
   const post = usePostQuery()
   const { previousPost, nextPost } = useAdjacentPosts()
   const { currentSeries, currentIndex, seriesPosts, totalCount } = useSeriesPosts()
@@ -41,42 +43,44 @@ const Footer: React.FC<Props> = () => {
             </div>
           </div>
           <div className="series-list">
-            {seriesPosts.map((post, index) => (
+            {seriesPosts.map((item, index) => (
               <Link
-                href={`/${post.slug}`}
-                key={post.id}
+                href={`/${item.slug}`}
+                key={item.id}
                 className="series-item"
-                data-active={post.slug === router.query.slug}
+                data-active={item.slug === router.query.slug}
               >
-                <div className="series-step">Part {index + 1}</div>
-                <div className="series-name">{post.title}</div>
+                <div className="series-step">
+                  {language === "ko" ? `${index + 1}편` : `Part ${index + 1}`}
+                </div>
+                <div className="series-name">{item.title}</div>
               </Link>
             ))}
           </div>
         </div>
       )}
       <div className="actions">
-        <a onClick={handleBack}>Back</a>
+        <a onClick={handleBack}>{language === "ko" ? "목록으로" : "Back to list"}</a>
         <a onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
-          Top
+          {language === "ko" ? "맨 위로" : "Back to top"}
         </a>
       </div>
       <div className="adjacent">
         {previousPost && (
           <Link href={`/${previousPost.slug}`} className="card prev">
-            <div className="label">← Previous</div>
+            <div className="label">{language === "ko" ? "이전 글" : "Previous"}</div>
             <div className="title">{previousPost.title}</div>
           </Link>
         )}
         {nextPost && (
           <Link href={`/${nextPost.slug}`} className="card next">
-            <div className="label">Next →</div>
+            <div className="label">{language === "ko" ? "다음 글" : "Next"}</div>
             <div className="title">{nextPost.title}</div>
           </Link>
         )}
       </div>
       <div className="author-card">
-        <div className="author-label">Written by</div>
+        <div className="author-label">{language === "ko" ? "작성자" : "Written by"}</div>
         <div className="author-body">
           <Image
             src={author?.profile_photo || CONFIG.profile.image}

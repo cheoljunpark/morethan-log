@@ -10,7 +10,14 @@ async function getPageProperties(
   const blockEntry = block?.[id]?.value as any
   const blockValue = blockEntry?.value ?? blockEntry
   const rawProperties = Object.entries(blockValue?.properties || [])
-  const excludeProperties = ["date", "select", "multi_select", "person", "file"]
+  const excludeProperties = [
+    "date",
+    "select",
+    "multi_select",
+    "person",
+    "file",
+    "checkbox",
+  ]
   const properties: any = {}
   for (let i = 0; i < rawProperties.length; i++) {
     const [key, val]: any = rawProperties[i]
@@ -66,6 +73,12 @@ async function getPageProperties(
             }
           }
           properties[schema[key].name] = users
+          break
+        }
+        case "checkbox": {
+          const rawValue = val?.[0]?.[0]
+          properties[schema[key].name] =
+            rawValue === "Yes" || rawValue === "true" || rawValue === true
           break
         }
         default:

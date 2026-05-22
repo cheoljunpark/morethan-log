@@ -3,7 +3,7 @@ import { CONFIG } from "site.config"
 
 const Scripts: React.FC = () => (
   <>
-    {CONFIG?.googleAnalytics?.enable === true && (
+    {CONFIG.isProd && CONFIG?.googleAnalytics?.enable === true && (
       <>
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${CONFIG.googleAnalytics.config.measurementId}`}

@@ -29,7 +29,7 @@ const TagList: React.FC<Props> = () => {
 
   return (
     <StyledWrapper>
-      <div className="top">Explore Tags</div>
+      <div className="top">태그</div>
       <div className="list">
         {Object.entries(data).map(([key, count]) => (
           <button

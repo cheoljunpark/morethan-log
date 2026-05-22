@@ -33,7 +33,7 @@ const Category: React.FC<Props> = ({ readOnly = false, children }) => {
         pathname: "/",
         query: {
           ...getFeedQuery(router.query),
-          category: value,
+          menu: value,
         },
       },
       undefined,

@@ -1,25 +1,22 @@
-import { CONFIG } from "site.config"
-import React from "react"
-import { AiFillCodeSandboxCircle } from "react-icons/ai"
 import styled from "@emotion/styled"
-import { Emoji } from "src/components/Emoji"
+import Image from "next/image"
+import React from "react"
+import { useUiLanguage } from "src/contexts/UiLanguageContext"
+import { CONFIG } from "site.config"
 
 const ServiceCard: React.FC = () => {
+  const { language } = useUiLanguage()
   if (!CONFIG.projects) return null
+
   return (
     <>
-      <StyledTitle>
-        <Emoji>🌟</Emoji> My Projects Repo
-      </StyledTitle>
+      <StyledTitle>{language === "ko" ? "프로젝트" : "Projects"}</StyledTitle>
       <StyledWrapper>
         {CONFIG.projects.map((project, idx) => (
-          <a
-            key={idx}
-            href={`${project.href}`}
-            rel="noreferrer"
-            target="_blank"
-          >
-            <AiFillCodeSandboxCircle className="icon" />
+          <a key={idx} href={project.href} rel="noreferrer" target="_blank">
+            <span className="icon">
+              <Image src="/project.svg" alt="" fill />
+            </span>
             <div className="name">{project.name}</div>
           </a>
         ))}
@@ -31,18 +28,19 @@ const ServiceCard: React.FC = () => {
 export default ServiceCard
 
 const StyledTitle = styled.div`
-  padding: 0.25rem;
-  margin-bottom: 0.75rem;
+  padding: 0;
+  margin-bottom: 0;
 `
 
 const StyledWrapper = styled.div`
   display: flex;
   padding: 0.25rem;
-  margin-bottom: 2.25rem;
+  margin-bottom: 0.9rem;
   flex-direction: column;
   border-radius: 1rem;
   background-color: ${({ theme }) =>
     theme.scheme === "light" ? "white" : theme.colors.gray4};
+
   > a {
     display: flex;
     padding: 0.75rem;
@@ -56,10 +54,18 @@ const StyledWrapper = styled.div`
       color: ${({ theme }) => theme.colors.gray12};
       background-color: ${({ theme }) => theme.colors.gray5};
     }
+
     .icon {
-      font-size: 1.5rem;
-      line-height: 2rem;
+      position: relative;
+      flex-shrink: 0;
+      width: 1.35rem;
+      height: 1.35rem;
+
+      :global(img) {
+        object-fit: contain;
+      }
     }
+
     .name {
       font-size: 0.875rem;
       line-height: 1.25rem;

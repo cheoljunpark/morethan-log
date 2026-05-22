@@ -75,7 +75,10 @@ const DetailPage: NextPageWithLayout = () => {
   const date = post.date?.start_date || post.createdTime || ""
   const modifiedDate = post.updatedAt?.start_date || date
   const url = `${siteUrl}/${post.slug}`
-  const keywords = [...(post.tags || []), ...(post.category || [])].filter(Boolean)
+  const keywords = [
+    ...(post.tags || []),
+    ...(post.menu || []),
+  ].filter(Boolean)
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",

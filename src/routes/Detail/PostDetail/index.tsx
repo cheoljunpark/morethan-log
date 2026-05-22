@@ -12,6 +12,7 @@ import PostOutline from "./PostOutline"
 import RelatedPosts from "./RelatedPosts"
 import { useRouter } from "next/router"
 import { storageKey } from "src/constants/storage"
+import PostSummaryCard from "./PostSummaryCard"
 
 type Props = {}
 
@@ -24,7 +25,7 @@ const PostDetail: React.FC<Props> = () => {
   const { items, activeId } = usePostToc("post-content")
   const progress = useReadingProgress("post-article")
 
-  const category = data?.category?.[0]
+  const category = data?.menu?.[0]
 
   const handleBackdropClick = useCallback(() => {
     if (typeof window === "undefined") {
@@ -91,6 +92,7 @@ const PostDetail: React.FC<Props> = () => {
               </div>
             )}
             {data.type[0] === "Post" && <PostHeader data={data} />}
+            {data.type[0] === "Post" && <PostSummaryCard data={data} />}
             {items.length > 0 && (
               <div className="mobile-outline">
                 <PostOutline items={items} activeId={activeId} />

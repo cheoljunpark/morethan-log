@@ -1,5 +1,6 @@
 import styled from "@emotion/styled"
 import React from "react"
+import { useUiLanguage } from "src/contexts/UiLanguageContext"
 
 type TocItem = {
   id: string
@@ -13,11 +14,12 @@ type Props = {
 }
 
 const PostOutline: React.FC<Props> = ({ items, activeId }) => {
+  const { language } = useUiLanguage()
   if (items.length === 0) return null
 
   return (
     <StyledWrapper>
-      <div className="title">On This Page</div>
+      <div className="title">{language === "ko" ? "이 페이지에서" : "On this page"}</div>
       <div className="items">
         {items.map((item) => (
           <a

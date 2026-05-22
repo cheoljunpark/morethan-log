@@ -20,13 +20,13 @@ export function filterPosts({
     .filter((post) => {
       const tagContent = post.tags ? post.tags.join(" ") : ""
       const seriesContent = post.series ? post.series.join(" ") : ""
+      const menuContent = post.menu ? post.menu.join(" ") : ""
       const searchContent =
-        post.title + post.summary + tagContent + seriesContent
+        post.title + post.summary + tagContent + seriesContent + menuContent
       return (
         searchContent.toLowerCase().includes(q.toLowerCase()) &&
         (!tag || (post.tags && post.tags.includes(tag))) &&
-        (category === DEFAULT_CATEGORY ||
-          (post.category && post.category.includes(category)))
+        (category === DEFAULT_CATEGORY || (post.menu && post.menu.includes(category)))
       )
     })
     .sort((a, b) => {

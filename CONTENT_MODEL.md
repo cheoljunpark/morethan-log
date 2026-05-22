@@ -20,14 +20,14 @@ These should exist on every post row.
 These are not strictly required, but they make the blog much better.
 
 - `tags`: search, filtering, and keywords
-- `category`: feed grouping and navigation
+- `menu`: feed grouping and navigation
+- `menuIcon`: optional menu icon shown in the left navigation
 - `thumbnail`: feed card and social preview image
 - `author`: post author metadata
 - `series`: group related posts together and build series navigation
-- `pinned`: mark standout posts for the top of the feed
-- `updatedAt`: future support for updated timestamps
-- `hideFromHome`: future support for private landing pages
-- `hideFromSitemap`: future support for SEO control
+- `updatedAt`: show when a post was last revised
+- `prerequisites`: short setup or background knowledge items
+- `references`: useful links, docs, or companion resources
 
 ## Supported Values
 
@@ -55,12 +55,14 @@ These are not strictly required, but they make the blog much better.
 
 1. Write in Notion
 2. Fill in `title`, `slug`, `summary`, `status`, `type`, and `date`
-3. Add `tags`, `category`, and `thumbnail` if available
-4. Change `status` to `Public`
-5. Verify the detail page and feed after deploy
+3. Add `tags`, `menu`, `thumbnail`, and `series` if available
+4. Add `prerequisites` and `references` when the post benefits from setup notes or follow-up links
+5. Change `status` to `Public`
+6. Verify the detail page and feed after deploy
 
 ## Notes
 
 - This repo relies on Notion response parsing, so schema consistency matters
 - If something disappears from the feed, check `status`, `type`, and `slug` first
 - If a detail page fails, check whether the Notion page is still public
+- `prerequisites` and `references` are optional and only affect the detail summary card

@@ -5,20 +5,25 @@ import { formatDate } from "src/libs/utils"
 import Image from "next/image"
 import React, { useState } from "react"
 import styled from "@emotion/styled"
+import { useUiLanguage } from "src/contexts/UiLanguageContext"
 import useReadingTime from "src/hooks/useReadingTime"
 import usePostQuery from "src/hooks/usePostQuery"
 import AdaptiveThumbnail from "src/components/AdaptiveThumbnail"
+import Link from "next/link"
 
 type Props = {
   data: TPost
 }
 
 const PostHeader: React.FC<Props> = ({ data }) => {
+  const { language, locale } = useUiLanguage()
   const post = usePostQuery()
   const readingTime = useReadingTime(post)
   const series = data.series?.[0]
   const updatedAt = data.updatedAt?.start_date
-  const [shareLabel, setShareLabel] = useState("Copy Link")
+  const [shareLabel, setShareLabel] = useState(
+    language === "ko" ? "링크 복사" : "Copy link"
+  )
 
   const handleShare = async () => {
     if (typeof window === "undefined") return
@@ -29,23 +34,30 @@ const PostHeader: React.FC<Props> = ({ data }) => {
     try {
       if (navigator.clipboard?.writeText) {
         await navigator.clipboard.writeText(shareUrl)
-        setShareLabel("Copied")
+        setShareLabel(language === "ko" ? "복사됨" : "Copied")
       } else {
-        window.prompt("Copy this link", shareUrl)
-        setShareLabel("Ready")
+        window.prompt(
+          language === "ko" ? "이 링크를 복사하세요" : "Copy this link",
+          shareUrl
+        )
+        setShareLabel(language === "ko" ? "복사 준비" : "Ready")
       }
     } catch {
-      setShareLabel("Copy Link")
+      setShareLabel(language === "ko" ? "링크 복사" : "Copy link")
     }
 
     window.setTimeout(() => {
-      setShareLabel("Copy Link")
+      setShareLabel(language === "ko" ? "링크 복사" : "Copy link")
     }, 2000)
   }
 
   return (
     <StyledWrapper>
-      {series && <div className="series">{series}</div>}
+      {series && (
+        <Link href={`/series?series=${encodeURIComponent(series)}`} className="series">
+          {series}
+        </Link>
+      )}
       <h1 className="title">{data.title}</h1>
       {data.type[0] !== "Paper" && (
         <nav>
@@ -66,16 +78,18 @@ const PostHeader: React.FC<Props> = ({ data }) => {
               <div className="meta-pill date">
                 {formatDate(
                   data?.date?.start_date || data.createdTime,
-                  CONFIG.lang
+                  locale
                 )}
               </div>
               {updatedAt && (
                 <div className="meta-pill updated-at">
-                  Updated {formatDate(updatedAt, CONFIG.lang)}
+                  {language === "ko" ? "수정일" : "Updated"} {formatDate(updatedAt, locale)}
                 </div>
               )}
               {readingTime && (
-                <div className="meta-pill reading-time">{readingTime} min read</div>
+                <div className="meta-pill reading-time">
+                  {language === "ko" ? `읽기 ${readingTime}분` : `${readingTime} min read`}
+                </div>
               )}
             </div>
             <button className="share" onClick={handleShare} type="button">

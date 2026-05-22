@@ -2,27 +2,21 @@ import styled from "@emotion/styled"
 import Image from "next/image"
 import React from "react"
 import { CONFIG } from "site.config"
-import { Emoji } from "src/components/Emoji"
 
-type Props = {}
-
-const ProfileCard: React.FC<Props> = () => {
+const ProfileCard: React.FC = () => {
   return (
     <StyledWrapper>
-      <div className="title">
-        <Emoji>💻</Emoji> Profile
-      </div>
       <div className="content">
-        <div className="top">
+        <div className="avatar">
           <Image
             src={CONFIG.profile.image}
             fill
             alt=""
-            css={{ objectFit: "contain", padding: "0.5rem" }}
+            css={{ objectFit: "contain", padding: "0.35rem" }}
           />
         </div>
         <div className="mid">
-          <div className=" name">{CONFIG.profile.name}</div>
+          <div className="name">{CONFIG.profile.name}</div>
           <div className="role">{CONFIG.profile.role}</div>
           <div className="bio">{CONFIG.profile.bio}</div>
         </div>
@@ -34,62 +28,60 @@ const ProfileCard: React.FC<Props> = () => {
 export default ProfileCard
 
 const StyledWrapper = styled.div`
-  > .title {
-    padding: 0.25rem;
-    margin-bottom: 0.75rem;
-  }
   > .content {
-    margin-bottom: 2.25rem;
-    border-radius: 1rem;
+    display: flex;
+    margin-bottom: 0;
     width: 100%;
+    padding: 1rem 1rem 1.1rem;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid ${({ theme }) => theme.colors.gray6};
+    border-radius: 1rem;
     background-color: ${({ theme }) =>
       theme.scheme === "light"
         ? "rgba(255, 255, 255, 0.84)"
         : "rgba(29, 36, 48, 0.84)"};
-    border: 1px solid ${({ theme }) => theme.colors.gray6};
     backdrop-filter: blur(14px);
-    @media (min-width: 768px) {
-      padding: 1rem;
-    }
-    @media (min-width: 1024px) {
-      padding: 1rem;
-    }
-    .top {
+
+    .avatar {
       position: relative;
-      width: 100%;
-      border-radius: 1rem;
+      width: 7.2rem;
+      height: 7.2rem;
+      margin-bottom: 0.95rem;
+      border-radius: 9999px;
       overflow: hidden;
-      &:after {
-        content: "";
-        display: block;
-        padding-bottom: 100%;
-      }
+      background-color: ${({ theme }) => theme.colors.gray2};
+      box-shadow: inset 0 0 0 1px ${({ theme }) => theme.colors.gray5};
     }
+
     .mid {
       display: flex;
-      padding: 0.5rem;
+      padding: 0.2rem 0.5rem 0;
       flex-direction: column;
       align-items: center;
-      .name {
-        font-size: 1.25rem;
-        line-height: 1.75rem;
-        font-weight: 700;
-        letter-spacing: -0.03em;
-      }
-      .role {
-        margin-bottom: 1rem;
-        font-size: 0.875rem;
-        line-height: 1.25rem;
-        color: ${({ theme }) => theme.colors.gray11};
-      }
-      .bio {
-        margin-bottom: 0.25rem;
-        font-size: 0.78rem;
-        line-height: 1.45rem;
-        letter-spacing: -0.01em;
-        text-align: center;
-        color: ${({ theme }) => theme.colors.gray10};
-      }
+    }
+
+    .name {
+      font-size: 1.18rem;
+      line-height: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .role {
+      margin-bottom: 0.8rem;
+      font-size: 0.84rem;
+      line-height: 1.2rem;
+      color: ${({ theme }) => theme.colors.gray11};
+    }
+
+    .bio {
+      margin-bottom: 0.1rem;
+      font-size: 0.76rem;
+      line-height: 1.42rem;
+      letter-spacing: -0.01em;
+      text-align: center;
+      color: ${({ theme }) => theme.colors.gray10};
     }
   }
 `

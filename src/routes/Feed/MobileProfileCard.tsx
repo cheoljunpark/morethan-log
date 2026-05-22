@@ -45,8 +45,8 @@ const StyledWrapper = styled.div`
   }
 
   > .mid {
-    padding: 0.65rem 0.8rem;
-    margin-bottom: 1rem;
+    padding: 0.55rem 0.7rem;
+    margin-bottom: 0.8rem;
     border-radius: 1rem;
     background-color: ${({ theme }) =>
       theme.scheme === "light"
@@ -64,8 +64,8 @@ const StyledWrapper = styled.div`
     .avatar {
       position: relative;
       flex-shrink: 0;
-      width: 4.35rem;
-      height: 4.35rem;
+      width: 3.75rem;
+      height: 3.75rem;
       border-radius: 9999px;
       overflow: hidden;
       background-color: ${({ theme }) => theme.colors.gray2};
@@ -78,22 +78,22 @@ const StyledWrapper = styled.div`
     }
 
     > .wrapper > .wrapper > .top {
-      font-size: 1.12rem;
-      line-height: 1.5rem;
+      font-size: 1rem;
+      line-height: 1.35rem;
       font-weight: 700;
       letter-spacing: -0.03em;
     }
 
     > .wrapper > .wrapper > .mid {
-      margin-bottom: 0.35rem;
-      font-size: 0.84rem;
-      line-height: 1.18rem;
+      margin-bottom: 0.2rem;
+      font-size: 0.8rem;
+      line-height: 1.08rem;
       color: ${({ theme }) => theme.colors.gray11};
     }
 
     > .wrapper > .wrapper > .btm {
-      font-size: 0.8rem;
-      line-height: 1.3rem;
+      font-size: 0.76rem;
+      line-height: 1.18rem;
       color: ${({ theme }) => theme.colors.gray10};
     }
   }

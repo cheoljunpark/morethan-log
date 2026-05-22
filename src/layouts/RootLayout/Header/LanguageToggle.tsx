@@ -113,4 +113,13 @@ const StyledWrapper = styled.div`
       opacity: 0.88;
     }
   }
+
+  @media (max-width: 768px) {
+    --toggle-width: 4.1rem;
+    --toggle-height: 1.62rem;
+
+    button {
+      font-size: 0.68rem;
+    }
+  }
 `

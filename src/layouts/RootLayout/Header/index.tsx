@@ -106,6 +106,12 @@ const StyledWrapper = styled.div`
     margin: 0 auto;
     padding: 0 1rem;
 
+    @media (max-width: 768px) {
+      gap: 0.45rem;
+      min-height: 2.8rem;
+      padding: 0 0.65rem;
+    }
+
     &[data-full-width="true"] {
       @media (min-width: 768px) {
         padding-left: 6rem;
@@ -137,5 +143,9 @@ const StyledWrapper = styled.div`
     gap: 0.6rem;
     align-items: center;
     flex-shrink: 0;
+
+    @media (max-width: 768px) {
+      gap: 0.25rem;
+    }
   }
 `

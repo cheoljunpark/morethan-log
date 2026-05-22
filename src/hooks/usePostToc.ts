@@ -37,6 +37,8 @@ const usePostToc = (containerId: string) => {
             heading.id = `${slugify(text) || "section"}-${index + 1}`
           }
 
+          heading.style.scrollMarginTop = "5.5rem"
+
           const level = Number(heading.tagName.replace("H", ""))
 
           return {

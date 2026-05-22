@@ -139,7 +139,7 @@ const StyledWrapper = styled.div`
 
   @media (max-width: 768px) {
     display: block;
-    padding: 0.5rem 0 1.2rem;
+    padding: 0.35rem 0 1rem;
   }
 
   @media (min-width: 1024px) {
@@ -208,6 +208,13 @@ const StyledWrapper = styled.div`
     @media (min-width: 1024px) {
       display: none;
     }
+
+    @media (max-width: 768px) {
+      gap: 0.65rem;
+      margin-bottom: 0.8rem;
+      padding: 0.85rem 0.9rem;
+      border-radius: 1.2rem;
+    }
   }
 
   .toolbar-top {
@@ -233,6 +240,10 @@ const StyledWrapper = styled.div`
 
     @media (min-width: 1024px) {
       display: none;
+    }
+
+    @media (max-width: 768px) {
+      margin-bottom: 0.8rem;
     }
   }
 

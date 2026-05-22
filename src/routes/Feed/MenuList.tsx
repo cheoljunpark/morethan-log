@@ -235,11 +235,19 @@ const StyledWrapper = styled.div`
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: ${({ theme }) => theme.colors.gray10};
+
+    @media (max-width: 768px) {
+      margin-bottom: 0.5rem;
+    }
   }
 
   > .content {
     display: grid;
     gap: 0.55rem;
+
+    @media (max-width: 768px) {
+      gap: 0.45rem;
+    }
   }
 
   .menu-group {
@@ -284,6 +292,12 @@ const StyledWrapper = styled.div`
           rgba(16, 185, 129, 0.08)
         ),
         ${({ theme }) => theme.colors.gray2};
+    }
+
+    @media (max-width: 768px) {
+      gap: 0.6rem;
+      padding: 0.72rem 0.78rem;
+      border-radius: 1rem;
     }
   }
 

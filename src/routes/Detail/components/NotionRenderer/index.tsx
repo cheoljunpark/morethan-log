@@ -192,6 +192,7 @@ const NotionRenderer: FC<Props> = ({ recordMap }) => {
 
   useEffect(() => {
     const originalLog = console.log
+    const originalError = console.error
 
     console.log = (...args: unknown[]) => {
       const [firstArg] = args
@@ -205,8 +206,24 @@ const NotionRenderer: FC<Props> = ({ recordMap }) => {
       originalLog(...args)
     }
 
+    console.error = (...args: unknown[]) => {
+      const [firstArg] = args
+
+      if (
+        typeof firstArg === "string" &&
+        firstArg.includes(
+          "Warning: Can't perform a React state update on a component that hasn't mounted yet."
+        )
+      ) {
+        return
+      }
+
+      originalError(...args)
+    }
+
     return () => {
       console.log = originalLog
+      console.error = originalError
     }
   }, [])
 

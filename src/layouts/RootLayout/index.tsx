@@ -88,5 +88,9 @@ const StyledMain = styled.main`
   &[data-home-page="true"] {
     max-width: 1380px;
     padding: 0 0.85rem;
+
+    @media (max-width: 768px) {
+      padding: 0 0.65rem;
+    }
   }
 `

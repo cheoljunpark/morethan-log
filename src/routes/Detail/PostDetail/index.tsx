@@ -178,6 +178,13 @@ const ArticleCard = styled.div`
   box-shadow: 0 30px 80px -48px rgba(15, 23, 42, 0.35);
   overflow: clip;
 
+  @media (max-width: 1023px) {
+    overflow: hidden;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: 0 18px 40px -34px rgba(15, 23, 42, 0.22);
+  }
+
   article {
     width: 100%;
     max-width: 46rem;
@@ -195,6 +202,11 @@ const ArticleCard = styled.div`
     z-index: 10;
     height: 3px;
     background: transparent;
+
+    @media (max-width: 1023px) {
+      position: relative;
+      top: auto;
+    }
 
     .bar {
       height: 100%;

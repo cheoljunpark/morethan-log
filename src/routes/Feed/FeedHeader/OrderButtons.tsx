@@ -123,5 +123,14 @@ const StyledWrapper = styled.div`
       background-color: ${({ theme }) => theme.colors.gray4};
       box-shadow: 0 8px 16px -14px rgba(15, 23, 42, 0.42);
     }
+
+    @media (max-width: 768px) {
+      width: 4.45rem;
+      min-width: 4.45rem;
+      min-height: 1.8rem;
+      padding: 0.28rem 0.55rem;
+      font-size: 0.72rem;
+      line-height: 0.92rem;
+    }
   }
 `

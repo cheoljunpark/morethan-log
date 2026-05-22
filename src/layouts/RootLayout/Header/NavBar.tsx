@@ -46,6 +46,10 @@ const StyledWrapper = styled.div`
     flex-direction: row;
     align-items: center;
     gap: 0.02rem;
+
+    @media (max-width: 768px) {
+      gap: 0;
+    }
   }
 
   li {
@@ -87,6 +91,15 @@ const StyledWrapper = styled.div`
     &[data-active="true"] {
       color: ${({ theme }) => theme.colors.gray12};
       background-color: ${({ theme }) => theme.colors.gray2};
+    }
+
+    @media (max-width: 768px) {
+      width: 2.75rem;
+      min-width: 2.75rem;
+      min-height: 1.8rem;
+      padding: 0.22rem 0.1rem;
+      font-size: 0.72rem;
+      line-height: 0.9rem;
     }
   }
 `

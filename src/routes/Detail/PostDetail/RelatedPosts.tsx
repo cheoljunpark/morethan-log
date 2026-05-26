@@ -16,7 +16,6 @@ const RelatedPosts: React.FC = () => {
       <div className="list">
         {posts.map((post) => (
           <Link href={`/${post.slug}`} key={post.id} className="card">
-            {post.series?.[0] && <div className="series">{post.series[0]}</div>}
             <div className="post-title">{post.title}</div>
             {post.summary && <p>{post.summary}</p>}
           </Link>
@@ -72,16 +71,6 @@ const StyledWrapper = styled.section`
       border-color: ${({ theme }) => theme.colors.gray6};
       background-color: ${({ theme }) => theme.colors.gray4};
     }
-  }
-
-  .series {
-    margin-bottom: 0.35rem;
-    font-size: 0.75rem;
-    line-height: 1rem;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: ${({ theme }) => theme.colors.gray10};
   }
 
   .post-title {

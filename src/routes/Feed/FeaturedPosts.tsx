@@ -66,7 +66,6 @@ const FeaturedPosts: React.FC<Props> = ({ enabled }) => {
               <span>
                 {primaryPost.menu?.[0] || (language === "ko" ? "글" : "Post")}
               </span>
-              {primaryPost.series?.[0] && <span>{primaryPost.series[0]}</span>}
             </div>
             <h3>{primaryPost.title}</h3>
             {primaryPost.summary && <p>{primaryPost.summary}</p>}
@@ -90,7 +89,6 @@ const FeaturedPosts: React.FC<Props> = ({ enabled }) => {
                 <span>
                   {post.menu?.[0] || (language === "ko" ? "글" : "Post")}
                 </span>
-                {post.series?.[0] && <span>{post.series[0]}</span>}
               </div>
               <h3>{post.title}</h3>
               {post.summary && <p>{post.summary}</p>}
@@ -161,9 +159,7 @@ const StyledWrapper = styled.section`
     position: relative;
     width: 100%;
     padding-bottom: 58%;
-    background:
-      linear-gradient(135deg, rgba(15, 118, 110, 0.12), rgba(20, 184, 166, 0.03)),
-      ${({ theme }) => theme.colors.gray2};
+    background-color: ${({ theme }) => theme.colors.gray2};
   }
 
   .content,

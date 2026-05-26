@@ -9,7 +9,6 @@ import { useUiLanguage } from "src/contexts/UiLanguageContext"
 import useReadingTime from "src/hooks/useReadingTime"
 import usePostQuery from "src/hooks/usePostQuery"
 import AdaptiveThumbnail from "src/components/AdaptiveThumbnail"
-import Link from "next/link"
 
 type Props = {
   data: TPost
@@ -19,7 +18,6 @@ const PostHeader: React.FC<Props> = ({ data }) => {
   const { language, locale } = useUiLanguage()
   const post = usePostQuery()
   const readingTime = useReadingTime(post)
-  const series = data.series?.[0]
   const updatedAt = data.updatedAt?.start_date
   const [shareLabel, setShareLabel] = useState(
     language === "ko" ? "링크 복사" : "Copy link"
@@ -53,11 +51,6 @@ const PostHeader: React.FC<Props> = ({ data }) => {
 
   return (
     <StyledWrapper>
-      {series && (
-        <Link href={`/series?series=${encodeURIComponent(series)}`} className="series">
-          {series}
-        </Link>
-      )}
       <h1 className="title">{data.title}</h1>
       {data.type[0] !== "Paper" && (
         <nav>
@@ -124,15 +117,6 @@ const PostHeader: React.FC<Props> = ({ data }) => {
 export default PostHeader
 
 const StyledWrapper = styled.div`
-  .series {
-    margin-bottom: 0.75rem;
-    font-size: 0.8rem;
-    line-height: 1.1rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: ${({ theme }) => theme.colors.gray10};
-  }
   .title {
     font-size: 2rem;
     line-height: 2.45rem;

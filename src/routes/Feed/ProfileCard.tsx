@@ -32,22 +32,23 @@ const StyledWrapper = styled.div`
     display: flex;
     margin-bottom: 0;
     width: 100%;
-    padding: 1rem 1rem 1.1rem;
+    padding: 1.15rem 1rem 1.15rem;
     flex-direction: column;
     align-items: center;
     border: 1px solid ${({ theme }) => theme.colors.gray6};
-    border-radius: 1rem;
+    border-radius: 1.25rem;
     background-color: ${({ theme }) =>
       theme.scheme === "light"
-        ? "rgba(255, 255, 255, 0.84)"
-        : "rgba(29, 36, 48, 0.84)"};
+        ? "rgba(255, 255, 255, 0.86)"
+        : "rgba(29, 36, 48, 0.86)"};
     backdrop-filter: blur(14px);
+    box-shadow: 0 18px 34px -28px rgba(15, 23, 42, 0.22);
 
     .avatar {
       position: relative;
       width: 7.2rem;
       height: 7.2rem;
-      margin-bottom: 0.95rem;
+      margin-bottom: 1rem;
       border-radius: 9999px;
       overflow: hidden;
       background-color: ${({ theme }) => theme.colors.gray2};

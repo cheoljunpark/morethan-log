@@ -1,0 +1,1916 @@
+'yarn'Àº(´Â) ³»ºÎ ¶Ç´Â ¿ÜºÎ ¸í·É, ½ÇÇàÇÒ ¼ö ÀÖ´Â ÇÁ·Î±×·¥, ¶Ç´Â
+¹èÄ¡ ÆÄÀÏÀÌ ¾Æ´Õ´Ï´Ù.
+(node:29228) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: data for page "/[slug]" (path "/%ED%98%BC%EA%B3%B5%EC%BB%B4%EA%B5%AC") is 225 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: data for page "/" is 225 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+upstream image response failed for https://www.notion.so/image/https%3A%2F%2Fs3.ap-northeast-2.amazonaws.com%2Fblog.spartacodingclub.kr%2F1661480656483-0823_algorithm_2.png?table=block&id=5166da57-ed90-4c9a-8546-f6998f69e7af&cache=v2 [33m404[39m
+upstream image response failed for https://www.notion.so/image/https%3A%2F%2Fstatic.blex.me%2Fimages%2Ftitle%2F2023%2F8%2F4%2F2170004487z%2F14_iQVv7ALE.png?table=block&id=8d217ce9-8c35-4f12-be14-fad940e6002d&cache=v2 [33m500[39m
+Warning: data for page "/[slug]" (path "/gerrit-%EA%B5%AC%EC%B6%95") is 303 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: data for page "/" is 303 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+upstream image response failed for https://www.notion.so/image/https%3A%2F%2Fstatic.blex.me%2Fimages%2Ftitle%2F2023%2F8%2F4%2F2170004487z%2F14_iQVv7ALE.png?table=block&id=8d217ce9-8c35-4f12-be14-fad940e6002d&cache=v2 [33m500[39m
+Warning: data for page "/[slug]" (path "/it-5%EB%B6%84-%EC%9E%A1%ED%95%99%EC%82%AC%EC%A0%84") is 438 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: data for page "/" is 437 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+upstream image response failed for https://www.notion.so/image/https%3A%2F%2Fstatic.blex.me%2Fimages%2Ftitle%2F2023%2F8%2F4%2F2170004487z%2F14_iQVv7ALE.png?table=block&id=8d217ce9-8c35-4f12-be14-fad940e6002d&cache=v2 [33m500[39m
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+upstream image response failed for https://www.notion.so/image/https%3A%2F%2Fstatic.blex.me%2Fimages%2Ftitle%2F2023%2F8%2F4%2F2170004487z%2F14_iQVv7ALE.png?table=block&id=8d217ce9-8c35-4f12-be14-fad940e6002d&cache=v2 [33m500[39m
+Warning: data for page "/[slug]" (path "/it-5%EB%B6%84-%EC%9E%A1%ED%95%99%EC%82%AC%EC%A0%84") is 158 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+upstream image response failed for https://www.notion.so/image/https%3A%2F%2Fstatic.blex.me%2Fimages%2Ftitle%2F2023%2F8%2F4%2F2170004487z%2F14_iQVv7ALE.png?table=block&id=8d217ce9-8c35-4f12-be14-fad940e6002d&cache=v2 [33m500[39m
+upstream image response failed for https://www.notion.so/image/https%3A%2F%2Fs3.ap-northeast-2.amazonaws.com%2Fblog.spartacodingclub.kr%2F1661480656483-0823_algorithm_2.png?table=block&id=5166da57-ed90-4c9a-8546-f6998f69e7af&cache=v2 [33m404[39m
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: data for page "/[slug]" (path "/socketio-%EC%84%A4%EC%B9%98%EB%B0%A9%EB%B2%95") is 161 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: data for page "/" is 161 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: data for page "/[slug]" (path "/socketio-%EA%B8%B0%EB%8A%A5%EB%B3%84-%EA%B5%AC%ED%98%84") is 184 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: data for page "/" is 184 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: data for page "/[slug]" (path "/npmvsnpx") is 184 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: data for page "/" is 184 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: data for page "/[slug]" (path "/gulp-%EC%82%AC%EC%9A%A9%EB%B0%A9%EB%B2%95") is 184 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: data for page "/" is 184 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: data for page "/[slug]" (path "/socketio-%EC%84%A4%EC%B9%98%EB%B0%A9%EB%B2%95") is 184 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: data for page "/" is 184 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: data for page "/[slug]" (path "/gulp-%EC%82%AC%EC%9A%A9%EB%B0%A9%EB%B2%95") is 184 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: data for page "/" is 184 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: data for page "/[slug]" (path "/socketio-%EC%84%A4%EC%B9%98%EB%B0%A9%EB%B2%95") is 184 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: data for page "/" is 184 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: data for page "/[slug]" (path "/gulp-%EC%82%AC%EC%9A%A9%EB%B0%A9%EB%B2%95") is 184 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: data for page "/" is 184 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: data for page "/[slug]" (path "/socketio-%EC%84%A4%EC%B9%98%EB%B0%A9%EB%B2%95") is 184 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: data for page "/" is 184 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: data for page "/[slug]" (path "/npmvsnpx") is 184 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: data for page "/" is 184 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: data for page "/[slug]" (path "/npmvsnpx") is 184 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: data for page "/" is 184 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: data for page "/[slug]" (path "/npmvsnpx") is 184 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: data for page "/" is 184 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: data for page "/[slug]" (path "/macinit") is 244 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: data for page "/" is 244 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: data for page "/[slug]" (path "/visual-studio-code-%EA%B0%9C%EB%B0%9C-%EC%84%B8%ED%8C%85") is 287 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: data for page "/[slug]" (path "/socketio-%EA%B8%B0%EB%8A%A5%EB%B3%84-%EA%B5%AC%ED%98%84") is 142 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: data for page "/" is 142 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: data for page "/[slug]" (path "/nodejs-%EC%84%B8%ED%8C%85") is 200 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: data for page "/" is 200 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: data for page "/[slug]" (path "/%ED%98%BC%EA%B3%B5%EC%96%84%EC%BD%94") is 229 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: data for page "/" is 229 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+upstream image response failed for https://www.notion.so/image/https%3A%2F%2Fs3.ap-northeast-2.amazonaws.com%2Fblog.spartacodingclub.kr%2F1661480656483-0823_algorithm_2.png?table=block&id=5166da57-ed90-4c9a-8546-f6998f69e7af&cache=v2 [33m404[39m
+upstream image response failed for https://www.notion.so/image/https%3A%2F%2Fstatic.blex.me%2Fimages%2Ftitle%2F2023%2F8%2F4%2F2170004487z%2F14_iQVv7ALE.png?table=block&id=8d217ce9-8c35-4f12-be14-fad940e6002d&cache=v2 [33m500[39m
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: data for page "/[slug]" (path "/%ED%98%BC%EA%B3%B5%EC%BB%B4%EC%9A%B4") is 200 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: data for page "/" is 200 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: data for page "/[slug]" (path "/%ED%98%BC%EA%B3%B5%EC%BB%B4%EA%B5%AC") is 343 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: data for page "/" is 343 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: data for page "/[slug]" (path "/%ED%98%BC%EA%B3%B5%EC%BB%B4%EA%B5%AC") is 343 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: data for page "/" is 343 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+upstream image response failed for https://www.notion.so/image/https%3A%2F%2Fstatic.blex.me%2Fimages%2Ftitle%2F2023%2F8%2F4%2F2170004487z%2F14_iQVv7ALE.png?table=block&id=8d217ce9-8c35-4f12-be14-fad940e6002d&cache=v2 [33m500[39m
+upstream image response failed for https://www.notion.so/image/https%3A%2F%2Fs3.ap-northeast-2.amazonaws.com%2Fblog.spartacodingclub.kr%2F1661480656483-0823_algorithm_2.png?table=block&id=5166da57-ed90-4c9a-8546-f6998f69e7af&cache=v2 [33m404[39m
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+upstream image response failed for https://www.notion.so/image/https%3A%2F%2Fs3.ap-northeast-2.amazonaws.com%2Fblog.spartacodingclub.kr%2F1661480656483-0823_algorithm_2.png?table=block&id=5166da57-ed90-4c9a-8546-f6998f69e7af&cache=v2 [33m404[39m
+upstream image response failed for https://www.notion.so/image/https%3A%2F%2Fstatic.blex.me%2Fimages%2Ftitle%2F2023%2F8%2F4%2F2170004487z%2F14_iQVv7ALE.png?table=block&id=8d217ce9-8c35-4f12-be14-fad940e6002d&cache=v2 [33m500[39m
+upstream image response failed for https://www.notion.so/image/https%3A%2F%2Fs3.ap-northeast-2.amazonaws.com%2Fblog.spartacodingclub.kr%2F1661480656483-0823_algorithm_2.png?table=block&id=5166da57-ed90-4c9a-8546-f6998f69e7af&cache=v2 [33m404[39m
+upstream image response failed for https://www.notion.so/image/https%3A%2F%2Fstatic.blex.me%2Fimages%2Ftitle%2F2023%2F8%2F4%2F2170004487z%2F14_iQVv7ALE.png?table=block&id=8d217ce9-8c35-4f12-be14-fad940e6002d&cache=v2 [33m500[39m
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: data for page "/[slug]" (path "/macinit") is 143 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: data for page "/" is 143 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+upstream image response failed for https://www.notion.so/image/https%3A%2F%2Fs3.ap-northeast-2.amazonaws.com%2Fblog.spartacodingclub.kr%2F1661480656483-0823_algorithm_2.png?table=block&id=5166da57-ed90-4c9a-8546-f6998f69e7af&cache=v2 [33m404[39m
+upstream image response failed for https://www.notion.so/image/https%3A%2F%2Fstatic.blex.me%2Fimages%2Ftitle%2F2023%2F8%2F4%2F2170004487z%2F14_iQVv7ALE.png?table=block&id=8d217ce9-8c35-4f12-be14-fad940e6002d&cache=v2 [33m500[39m
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: data for page "/[slug]" (path "/macinit") is 143 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: data for page "/" is 143 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: data for page "/[slug]" (path "/%ED%98%BC%EA%B3%B5%EB%84%A4%ED%8A%B8") is 255 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: data for page "/" is 255 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: data for page "/" is 255 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+- [33mwarn[39m Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+Warning: data for page "/[slug]" (path "/%ED%98%BC%EA%B3%B5%EB%84%A4%ED%8A%B8") is 135 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: data for page "/" is 135 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: data for page "/[slug]" (path "/frontend-%EC%84%B8%ED%8C%85%EB%B0%A9%EB%B2%95") is 179 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: data for page "/" is 179 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: data for page "/[slug]" (path "/npmvsnpx") is 238 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: data for page "/" is 238 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+upstream image response failed for https://www.notion.so/image/https%3A%2F%2Fs3.ap-northeast-2.amazonaws.com%2Fblog.spartacodingclub.kr%2F1661480656483-0823_algorithm_2.png?table=block&id=5166da57-ed90-4c9a-8546-f6998f69e7af&cache=v2 [33m404[39m
+upstream image response failed for https://www.notion.so/image/https%3A%2F%2Fstatic.blex.me%2Fimages%2Ftitle%2F2023%2F8%2F4%2F2170004487z%2F14_iQVv7ALE.png?table=block&id=8d217ce9-8c35-4f12-be14-fad940e6002d&cache=v2 [33m500[39m
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: data for page "/[slug]" (path "/macinit") is 173 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: data for page "/" is 173 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+upstream image response failed for https://www.notion.so/image/https%3A%2F%2Fs3.ap-northeast-2.amazonaws.com%2Fblog.spartacodingclub.kr%2F1661480656483-0823_algorithm_2.png?table=block&id=5166da57-ed90-4c9a-8546-f6998f69e7af&cache=v2 [33m404[39m
+upstream image response failed for https://www.notion.so/image/https%3A%2F%2Fstatic.blex.me%2Fimages%2Ftitle%2F2023%2F8%2F4%2F2170004487z%2F14_iQVv7ALE.png?table=block&id=8d217ce9-8c35-4f12-be14-fad940e6002d&cache=v2 [33m500[39m
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at PostList (webpack-internal:///./src/routes/Feed/PostList/index.tsx:24:21)
+    at div
+    at div
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at Feed (webpack-internal:///./src/routes/Feed/index.tsx:41:74)
+    at FeedPage
+    at main
+    at C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:70:25
+    at ThemeProvider (C:\Users\user\Desktop\pcj\morethan-log\node_modules\@emotion\react\dist\emotion-element-48d2c2e4.cjs.dev.js:125:32)
+    at ThemeProvider (webpack-internal:///./src/layouts/RootLayout/ThemeProvider/index.tsx:16:26)
+    at RootLayout (webpack-internal:///./src/layouts/RootLayout/index.tsx:128:23)
+    at Hydrate (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/Hydrate.mjs:23:3)
+    at QueryClientProvider (file:///C:/Users/user/Desktop/pcj/morethan-log/node_modules/@tanstack/react-query/build/lib/QueryClientProvider.mjs:41:3)
+    at App (webpack-internal:///./src/pages/_app.tsx:16:16)
+    at StyleRegistry (C:\Users\user\Desktop\pcj\morethan-log\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\shared\lib\router\adapters.js:78:11)
+    at AppContainer (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:346:29)
+    at AppContainerWithIsomorphicFiberStructure (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:382:57)
+    at div
+    at Body (C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\render.js:682:21)
+upstream image response failed for https://www.notion.so/image/https%3A%2F%2Fs3.ap-northeast-2.amazonaws.com%2Fblog.spartacodingclub.kr%2F1661480656483-0823_algorithm_2.png?table=block&id=5166da57-ed90-4c9a-8546-f6998f69e7af&cache=v2 [33m404[39m
+upstream image response failed for https://www.notion.so/image/https%3A%2F%2Fstatic.blex.me%2Fimages%2Ftitle%2F2023%2F8%2F4%2F2170004487z%2F14_iQVv7ALE.png?table=block&id=8d217ce9-8c35-4f12-be14-fad940e6002d&cache=v2 [33m500[39m
+Error: Cannot find module 'C:\Users\user\Desktop\pcj\morethan-log\.next\server\pages\_document.js'
+Require stack:
+- C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\require.js
+- C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\next-server.js
+- C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\dev\next-dev-server.js
+- C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\next.js
+- C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\lib\render-server.js
+- C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\compiled\jest-worker\processChild.js
+[90m    at Function.<anonymous> (node:internal/modules/cjs/loader:1365:15)[39m
+    at [90mC:\Users\user\Desktop\pcj\morethan-log\[39mnode_modules\[4mnext[24m\dist\server\require-hook.js:185:36
+[90m    at defaultResolveImpl (node:internal/modules/cjs/loader:1021:19)[39m
+[90m    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1026:22)[39m
+[90m    at Function._load (node:internal/modules/cjs/loader:1175:37)[39m
+[90m    at TracingChannel.traceSync (node:diagnostics_channel:322:14)[39m
+[90m    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)[39m
+[90m    at Module.require (node:internal/modules/cjs/loader:1445:12)[39m
+[90m    at require (node:internal/modules/helpers:135:16)[39m
+    at requirePage [90m(C:\Users\user\Desktop\pcj\morethan-log\[39mnode_modules\[4mnext[24m\dist\server\require.js:156:12[90m)[39m
+    at [90mC:\Users\user\Desktop\pcj\morethan-log\[39mnode_modules\[4mnext[24m\dist\server\load-components.js:67:65
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)[39m
+    at async Promise.all (index 0)
+    at async loadComponentsImpl [90m(C:\Users\user\Desktop\pcj\morethan-log\[39mnode_modules\[4mnext[24m\dist\server\load-components.js:66:33[90m)[39m
+    at async DevServer.findPageComponentsImpl [90m(C:\Users\user\Desktop\pcj\morethan-log\[39mnode_modules\[4mnext[24m\dist\server\next-server.js:772:36[90m)[39m {
+  code: [32m'MODULE_NOT_FOUND'[39m,
+  requireStack: [
+    [32m'C:\\Users\\user\\Desktop\\pcj\\morethan-log\\node_modules\\next\\dist\\server\\require.js'[39m,
+    [32m'C:\\Users\\user\\Desktop\\pcj\\morethan-log\\node_modules\\next\\dist\\server\\next-server.js'[39m,
+    [32m'C:\\Users\\user\\Desktop\\pcj\\morethan-log\\node_modules\\next\\dist\\server\\dev\\next-dev-server.js'[39m,
+    [32m'C:\\Users\\user\\Desktop\\pcj\\morethan-log\\node_modules\\next\\dist\\server\\next.js'[39m,
+    [32m'C:\\Users\\user\\Desktop\\pcj\\morethan-log\\node_modules\\next\\dist\\server\\lib\\render-server.js'[39m,
+    [32m'C:\\Users\\user\\Desktop\\pcj\\morethan-log\\node_modules\\next\\dist\\compiled\\jest-worker\\processChild.js'[39m
+  ]
+}
+Error: Cannot find module 'C:\Users\user\Desktop\pcj\morethan-log\.next\server\pages\_document.js'
+Require stack:
+- C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\require.js
+- C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\next-server.js
+- C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\dev\next-dev-server.js
+- C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\next.js
+- C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\server\lib\render-server.js
+- C:\Users\user\Desktop\pcj\morethan-log\node_modules\next\dist\compiled\jest-worker\processChild.js
+[90m    at Function.<anonymous> (node:internal/modules/cjs/loader:1365:15)[39m
+    at [90mC:\Users\user\Desktop\pcj\morethan-log\[39mnode_modules\[4mnext[24m\dist\server\require-hook.js:185:36
+[90m    at defaultResolveImpl (node:internal/modules/cjs/loader:1021:19)[39m
+[90m    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1026:22)[39m
+[90m    at Function._load (node:internal/modules/cjs/loader:1175:37)[39m
+[90m    at TracingChannel.traceSync (node:diagnostics_channel:322:14)[39m
+[90m    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)[39m
+[90m    at Module.require (node:internal/modules/cjs/loader:1445:12)[39m
+[90m    at require (node:internal/modules/helpers:135:16)[39m
+    at requirePage [90m(C:\Users\user\Desktop\pcj\morethan-log\[39mnode_modules\[4mnext[24m\dist\server\require.js:156:12[90m)[39m
+    at [90mC:\Users\user\Desktop\pcj\morethan-log\[39mnode_modules\[4mnext[24m\dist\server\load-components.js:67:65
+    at async Promise.all (index 0)
+    at async loadComponentsImpl [90m(C:\Users\user\Desktop\pcj\morethan-log\[39mnode_modules\[4mnext[24m\dist\server\load-components.js:66:33[90m)[39m
+    at async DevServer.findPageComponentsImpl [90m(C:\Users\user\Desktop\pcj\morethan-log\[39mnode_modules\[4mnext[24m\dist\server\next-server.js:772:36[90m)[39m {
+  code: [32m'MODULE_NOT_FOUND'[39m,
+  requireStack: [
+    [32m'C:\\Users\\user\\Desktop\\pcj\\morethan-log\\node_modules\\next\\dist\\server\\require.js'[39m,
+    [32m'C:\\Users\\user\\Desktop\\pcj\\morethan-log\\node_modules\\next\\dist\\server\\next-server.js'[39m,
+    [32m'C:\\Users\\user\\Desktop\\pcj\\morethan-log\\node_modules\\next\\dist\\server\\dev\\next-dev-server.js'[39m,
+    [32m'C:\\Users\\user\\Desktop\\pcj\\morethan-log\\node_modules\\next\\dist\\server\\next.js'[39m,
+    [32m'C:\\Users\\user\\Desktop\\pcj\\morethan-log\\node_modules\\next\\dist\\server\\lib\\render-server.js'[39m,
+    [32m'C:\\Users\\user\\Desktop\\pcj\\morethan-log\\node_modules\\next\\dist\\compiled\\jest-worker\\processChild.js'[39m
+  ]
+}

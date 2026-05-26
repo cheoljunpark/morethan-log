@@ -13,6 +13,7 @@ import RelatedPosts from "./RelatedPosts"
 import { useRouter } from "next/router"
 import { storageKey } from "src/constants/storage"
 import PostSummaryCard from "./PostSummaryCard"
+import normalizeFeedQueryString from "src/libs/utils/router/normalizeFeedQueryString"
 
 type Props = {}
 
@@ -33,8 +34,9 @@ const PostDetail: React.FC<Props> = () => {
       return
     }
 
-    const feedQueryString =
+    const feedQueryString = normalizeFeedQueryString(
       window.sessionStorage.getItem(storageKey.feedQueryString) || ""
+    )
 
     router.push(`/${feedQueryString}`, undefined, { scroll: false })
   }, [router])

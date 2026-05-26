@@ -8,16 +8,13 @@ import { storageKey } from "src/constants/storage"
 import { useUiLanguage } from "src/contexts/UiLanguageContext"
 import useAdjacentPosts from "src/hooks/useAdjacentPosts"
 import usePostQuery from "src/hooks/usePostQuery"
-import useSeriesPosts from "src/hooks/useSeriesPosts"
+import normalizeFeedQueryString from "src/libs/utils/router/normalizeFeedQueryString"
 
-type Props = {}
-
-const Footer: React.FC<Props> = () => {
+const Footer: React.FC = () => {
   const router = useRouter()
   const { language } = useUiLanguage()
   const post = usePostQuery()
   const { previousPost, nextPost } = useAdjacentPosts()
-  const { currentSeries, currentIndex, seriesPosts, totalCount } = useSeriesPosts()
   const author = post?.author?.[0]
 
   const handleBack = () => {
@@ -26,39 +23,15 @@ const Footer: React.FC<Props> = () => {
       return
     }
 
-    const feedQueryString =
+    const feedQueryString = normalizeFeedQueryString(
       window.sessionStorage.getItem(storageKey.feedQueryString) || ""
+    )
 
     router.push(`/${feedQueryString}`, undefined, { scroll: false })
   }
 
   return (
     <StyledWrapper>
-      {currentSeries && totalCount > 1 && (
-        <div className="series">
-          <div className="series-header">
-            <div className="series-title">{currentSeries}</div>
-            <div className="series-progress">
-              {currentIndex + 1} / {totalCount}
-            </div>
-          </div>
-          <div className="series-list">
-            {seriesPosts.map((item, index) => (
-              <Link
-                href={`/${item.slug}`}
-                key={item.id}
-                className="series-item"
-                data-active={item.slug === router.query.slug}
-              >
-                <div className="series-step">
-                  {language === "ko" ? `${index + 1}편` : `Part ${index + 1}`}
-                </div>
-                <div className="series-name">{item.title}</div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      )}
       <div className="actions">
         <a onClick={handleBack}>{language === "ko" ? "목록으로" : "Back to list"}</a>
         <a onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
@@ -103,67 +76,6 @@ export default Footer
 
 const StyledWrapper = styled.div`
   margin-top: 2rem;
-
-  .series {
-    margin-bottom: 1.75rem;
-    padding: 1rem;
-    border-radius: 1rem;
-    background-color: ${({ theme }) => theme.colors.gray3};
-  }
-
-  .series-header {
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-    align-items: baseline;
-    margin-bottom: 1rem;
-  }
-
-  .series-title {
-    font-size: 1rem;
-    line-height: 1.5rem;
-    font-weight: 700;
-    color: ${({ theme }) => theme.colors.gray12};
-  }
-
-  .series-progress {
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-    color: ${({ theme }) => theme.colors.gray10};
-  }
-
-  .series-list {
-    display: grid;
-    gap: 0.75rem;
-  }
-
-  .series-item {
-    display: block;
-    padding: 0.85rem 1rem;
-    border-radius: 0.9rem;
-    background-color: ${({ theme }) => theme.colors.gray4};
-
-    &[data-active="true"] {
-      outline: 1px solid ${({ theme }) => theme.colors.gray8};
-      background-color: ${({ theme }) => theme.colors.gray5};
-    }
-  }
-
-  .series-step {
-    margin-bottom: 0.35rem;
-    font-size: 0.75rem;
-    line-height: 1rem;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: ${({ theme }) => theme.colors.gray10};
-  }
-
-  .series-name {
-    line-height: 1.6;
-    font-weight: 600;
-    color: ${({ theme }) => theme.colors.gray12};
-  }
 
   .actions {
     display: flex;

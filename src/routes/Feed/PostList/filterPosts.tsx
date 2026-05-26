@@ -19,10 +19,9 @@ export function filterPosts({
   return posts
     .filter((post) => {
       const tagContent = post.tags ? post.tags.join(" ") : ""
-      const seriesContent = post.series ? post.series.join(" ") : ""
       const menuContent = post.menu ? post.menu.join(" ") : ""
       const searchContent =
-        post.title + post.summary + tagContent + seriesContent + menuContent
+        post.title + post.summary + tagContent + menuContent
       return (
         searchContent.toLowerCase().includes(q.toLowerCase()) &&
         (!tag || (post.tags && post.tags.includes(tag))) &&

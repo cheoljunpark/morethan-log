@@ -122,11 +122,7 @@ const StyledWrapper = styled.div`
 
       &[data-active="true"] {
         border-color: rgba(20, 184, 166, 0.35);
-        background: linear-gradient(
-          135deg,
-          rgba(20, 184, 166, 0.18),
-          rgba(15, 118, 110, 0.08)
-        );
+        background-color: ${({ theme }) => theme.colors.gray2};
         color: ${({ theme }) => theme.colors.gray12};
 
         .count {

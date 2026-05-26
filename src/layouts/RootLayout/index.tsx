@@ -55,7 +55,7 @@ const RootLayout = ({ children }: Props) => {
   }, []);
 
   const isDetailPage = router.pathname === "/[slug]"
-  const isHomePage = router.pathname === "/"
+  const isWidePage = ["/", "/archive", "/tags", "/about"].includes(router.pathname)
 
   return (
     <ThemeProvider scheme={scheme}>
@@ -64,7 +64,7 @@ const RootLayout = ({ children }: Props) => {
         {/* // TODO: replace react query */}
         {/* {metaConfig.type !== "Paper" && <Header />} */}
         <Header fullWidth={isDetailPage} />
-        <StyledMain data-detail-page={isDetailPage} data-home-page={isHomePage}>
+        <StyledMain data-detail-page={isDetailPage} data-wide-page={isWidePage}>
           {children}
         </StyledMain>
       </UiLanguageProvider>
@@ -85,7 +85,7 @@ const StyledMain = styled.main`
     padding: 0;
   }
 
-  &[data-home-page="true"] {
+  &[data-wide-page="true"] {
     max-width: 1380px;
     padding: 0 0.85rem;
 

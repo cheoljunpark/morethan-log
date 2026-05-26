@@ -77,16 +77,25 @@ export default ContactCard
 
 const StyledTitle = styled.div`
   padding: 0;
-  margin-bottom: 0;
+  margin-bottom: 0.45rem;
+  font-size: 0.74rem;
+  line-height: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: ${({ theme }) => theme.colors.gray10};
 `
 
 const StyledWrapper = styled.div`
   display: flex;
-  padding: 0.25rem;
+  padding: 0.35rem;
   flex-direction: column;
-  border-radius: 1rem;
+  border: 1px solid ${({ theme }) => theme.colors.gray6};
+  border-radius: 1.25rem;
   background-color: ${({ theme }) =>
-    theme.scheme === "light" ? "white" : theme.colors.gray4};
+    theme.scheme === "light" ? "rgba(255, 255, 255, 0.84)" : "rgba(29, 36, 48, 0.84)"};
+  backdrop-filter: blur(12px);
+  box-shadow: 0 18px 34px -28px rgba(15, 23, 42, 0.18);
 
   a {
     display: flex;

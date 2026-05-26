@@ -14,7 +14,6 @@ type Props = {
 
 const Header: React.FC<Props> = ({ fullWidth }) => {
   const router = useRouter()
-  const isHomePage = router.pathname === "/"
   const q = typeof router.query.q === "string" ? router.query.q : ""
   const [searchValue, setSearchValue] = useState(q)
   const [isComposing, setIsComposing] = useState(false)
@@ -48,36 +47,33 @@ const Header: React.FC<Props> = ({ fullWidth }) => {
     <StyledWrapper data-detail-safe="true">
       <div
         data-full-width={fullWidth}
-        data-home-page={isHomePage}
         className="container"
       >
         <Logo />
 
-        {isHomePage && (
-          <div className="search-slot">
-            <SearchInput
-              value={searchValue}
-              onChange={(e) => {
-                const value = e.target.value
-                setSearchValue(value)
-                if (!isComposing) handleSearchChange(value)
-              }}
-              onCompositionStart={() => setIsComposing(true)}
-              onCompositionEnd={(e) => {
-                const value = e.currentTarget.value
-                setIsComposing(false)
-                setSearchValue(value)
-                handleSearchChange(value)
-              }}
-            />
-          </div>
-        )}
+        <div className="search-slot">
+          <SearchInput
+            value={searchValue}
+            onChange={(e) => {
+              const value = e.target.value
+              setSearchValue(value)
+              if (!isComposing) handleSearchChange(value)
+            }}
+            onCompositionStart={() => setIsComposing(true)}
+            onCompositionEnd={(e) => {
+              const value = e.currentTarget.value
+              setIsComposing(false)
+              setSearchValue(value)
+              handleSearchChange(value)
+            }}
+          />
+        </div>
 
-        <div className="nav">
+        <div className="controls">
           <LanguageToggle />
           <ThemeToggle />
-          <NavBar />
         </div>
+        <NavBar className="header-links" />
       </div>
     </StyledWrapper>
   )
@@ -107,22 +103,16 @@ const StyledWrapper = styled.div`
     padding: 0 1rem;
 
     @media (max-width: 768px) {
-      gap: 0.45rem;
-      min-height: 2.8rem;
-      padding: 0 0.65rem;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 0.35rem 0.45rem;
+      min-height: auto;
+      padding: 0.45rem 0.65rem;
     }
 
-    &[data-full-width="true"] {
-      @media (min-width: 768px) {
-        padding-left: 6rem;
-        padding-right: 6rem;
-      }
-    }
-
-    &[data-home-page="true"] {
-      @media (min-width: 1024px) {
-        max-width: 1380px;
-      }
+    @media (min-width: 1024px) {
+      max-width: 1380px;
     }
   }
 
@@ -138,7 +128,7 @@ const StyledWrapper = styled.div`
     }
   }
 
-  .nav {
+  .controls {
     display: flex;
     gap: 0.6rem;
     align-items: center;
@@ -146,6 +136,16 @@ const StyledWrapper = styled.div`
 
     @media (max-width: 768px) {
       gap: 0.25rem;
+      justify-self: end;
+    }
+  }
+
+  .header-links {
+    min-width: 0;
+
+    @media (max-width: 768px) {
+      grid-column: 1 / -1;
+      width: 100%;
     }
   }
 `

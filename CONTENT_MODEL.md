@@ -24,7 +24,6 @@ These are not strictly required, but they make the blog much better.
 - `menuIcon`: optional menu icon shown in the left navigation
 - `thumbnail`: feed card and social preview image
 - `author`: post author metadata
-- `series`: group related posts together and build series navigation
 - `updatedAt`: show when a post was last revised
 - `prerequisites`: short setup or background knowledge items
 - `references`: useful links, docs, or companion resources
@@ -55,7 +54,7 @@ These are not strictly required, but they make the blog much better.
 
 1. Write in Notion
 2. Fill in `title`, `slug`, `summary`, `status`, `type`, and `date`
-3. Add `tags`, `menu`, `thumbnail`, and `series` if available
+3. Add `tags`, `menu`, and `thumbnail` if available
 4. Add `prerequisites` and `references` when the post benefits from setup notes or follow-up links
 5. Change `status` to `Public`
 6. Verify the detail page and feed after deploy

@@ -23,7 +23,6 @@ export type TPost = {
   references?: string
   type: TPostType[]
   slug: string
-  series?: string[]
   menu?: string[]
   submenu?: string[]
   menuIcon?: string

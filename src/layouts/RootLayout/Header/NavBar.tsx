@@ -3,25 +3,25 @@ import Link from "next/link"
 import { useRouter } from "next/router"
 import { useUiLanguage } from "src/contexts/UiLanguageContext"
 
-const NavBar: React.FC = () => {
+type Props = {
+  className?: string
+}
+
+const NavBar: React.FC<Props> = ({ className }) => {
   const router = useRouter()
   const { language } = useUiLanguage()
 
   const links = [
     { id: 1, name: language === "ko" ? "아카이브" : "Archive", to: "/archive" },
     { id: 2, name: language === "ko" ? "태그" : "Tags", to: "/tags" },
-    { id: 3, name: language === "ko" ? "시리즈" : "Series", to: "/series" },
-    { id: 4, name: language === "ko" ? "소개" : "About", to: "/about" },
+    { id: 3, name: language === "ko" ? "소개" : "About", to: "/about" },
   ]
 
   return (
-    <StyledWrapper>
+    <StyledWrapper className={className}>
       <ul>
         {links.map((link) => {
-          const active =
-            link.to === "/about"
-              ? router.pathname === "/about"
-              : router.pathname === link.to
+          const active = router.pathname === link.to
 
           return (
             <li key={link.id}>
@@ -49,6 +49,13 @@ const StyledWrapper = styled.div`
 
     @media (max-width: 768px) {
       gap: 0;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
     }
   }
 
@@ -67,39 +74,37 @@ const StyledWrapper = styled.div`
     padding: 0.28rem 0.2rem;
     border-radius: 9999px;
     color: ${({ theme }) => theme.colors.gray11};
-    font-size: 0.86rem;
+    font-size: 0.84rem;
     line-height: 1rem;
     font-weight: 600;
-    text-align: center;
-    white-space: nowrap;
-    transform: translateY(0);
+    text-decoration: none;
     transition:
-      transform 180ms ease,
+      background-color 180ms ease,
       color 180ms ease,
-      background-color 180ms ease;
+      transform 180ms ease,
+      box-shadow 180ms ease;
 
     &:hover {
-      transform: translateY(-1px);
+      background-color: ${({ theme }) => theme.colors.gray3};
       color: ${({ theme }) => theme.colors.gray12};
-      background-color: ${({ theme }) => theme.colors.gray2};
-    }
-
-    &:active {
-      transform: translateY(0);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px -14px rgba(15, 23, 42, 0.3);
     }
 
     &[data-active="true"] {
+      background-color: ${({ theme }) =>
+        theme.scheme === "light"
+          ? "rgba(59, 130, 246, 0.08)"
+          : "rgba(59, 130, 246, 0.12)"};
       color: ${({ theme }) => theme.colors.gray12};
-      background-color: ${({ theme }) => theme.colors.gray2};
     }
 
     @media (max-width: 768px) {
-      width: 2.75rem;
-      min-width: 2.75rem;
+      width: auto;
+      min-width: 3.4rem;
       min-height: 1.8rem;
-      padding: 0.22rem 0.1rem;
-      font-size: 0.72rem;
-      line-height: 0.9rem;
+      padding: 0.24rem 0.6rem;
+      font-size: 0.77rem;
     }
   }
 `

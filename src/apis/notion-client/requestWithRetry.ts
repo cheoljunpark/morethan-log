@@ -8,6 +8,7 @@ export async function requestWithRetry<T>(
   retries = 5
 ): Promise<T> {
   let lastError: unknown
+  const retryableStatusCodes = new Set([429, 502, 503, 504])
 
   for (let attempt = 0; attempt <= retries; attempt++) {
     try {
@@ -15,7 +16,7 @@ export async function requestWithRetry<T>(
     } catch (error: any) {
       lastError = error
       const statusCode = error?.response?.statusCode
-      if (statusCode !== 429 || attempt === retries) {
+      if (!retryableStatusCodes.has(statusCode) || attempt === retries) {
         throw error
       }
 

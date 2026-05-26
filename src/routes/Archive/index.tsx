@@ -9,6 +9,12 @@ import { formatDate } from "src/libs/utils"
 import { filterPosts } from "src/libs/utils/notion"
 
 const DEFAULT_YEAR = "전체 연도"
+const PAGE_SIZE = 9
+
+const getPageFromQuery = (value: unknown) => {
+  const page = Number(typeof value === "string" ? value : "1")
+  return Number.isFinite(page) && page > 0 ? Math.floor(page) : 1
+}
 
 const Archive: React.FC = () => {
   const router = useRouter()
@@ -19,103 +25,70 @@ const Archive: React.FC = () => {
     typeof router.query.year === "string" && router.query.year.length > 0
       ? router.query.year
       : DEFAULT_YEAR
-  const currentCategory =
+  const currentMenu =
     typeof router.query.category === "string" && router.query.category.length > 0
       ? router.query.category
       : DEFAULT_CATEGORY
+  const currentPage = getPageFromQuery(router.query.page)
 
-  const { groups, totalCount, years, categories } = useMemo(() => {
+  const { groups, menus, years, totalCount, totalPages, safePage } = useMemo(() => {
     const publicPosts = filterPosts(posts)
     const yearSet = new Set<string>()
-    const categoryMap = new Map<string, number>()
+    const menuMap = new Map<string, number>()
 
     publicPosts.forEach((post) => {
       const rawDate = post.date?.start_date || post.createdTime
-      const date = new Date(rawDate)
-      yearSet.add(`${date.getFullYear()}`)
+      yearSet.add(`${new Date(rawDate).getFullYear()}`)
 
-      const category = post.menu?.[0]
-      if (category) {
-        categoryMap.set(category, (categoryMap.get(category) || 0) + 1)
+      const menu = post.menu?.[0]
+      if (menu) {
+        menuMap.set(menu, (menuMap.get(menu) || 0) + 1)
       }
     })
 
     const filteredPosts = publicPosts.filter((post) => {
       const rawDate = post.date?.start_date || post.createdTime
-      const postYear = `${new Date(rawDate).getFullYear()}`
-      const postCategory = post.menu?.[0] || DEFAULT_CATEGORY
+      const year = `${new Date(rawDate).getFullYear()}`
+      const menu = post.menu?.[0] || DEFAULT_CATEGORY
 
-      const matchesYear = currentYear === DEFAULT_YEAR || postYear === currentYear
-      const matchesCategory =
-        currentCategory === DEFAULT_CATEGORY || postCategory === currentCategory
-
-      return matchesYear && matchesCategory
+      return (
+        (currentYear === DEFAULT_YEAR || currentYear === year) &&
+        (currentMenu === DEFAULT_CATEGORY || currentMenu === menu)
+      )
     })
 
-    const archiveMap = new Map<
-      string,
-      {
-        year: string
-        months: Map<
-          string,
-          {
-            monthLabel: string
-            posts: typeof filteredPosts
-          }
-        >
-      }
-    >()
+    const totalPages = Math.max(1, Math.ceil(filteredPosts.length / PAGE_SIZE))
+    const safePage = Math.min(currentPage, totalPages)
+    const visiblePosts = filteredPosts.slice(
+      (safePage - 1) * PAGE_SIZE,
+      safePage * PAGE_SIZE
+    )
+    const groupMap = new Map<string, typeof visiblePosts>()
 
-    filteredPosts.forEach((post) => {
+    visiblePosts.forEach((post) => {
       const rawDate = post.date?.start_date || post.createdTime
-      const date = new Date(rawDate)
-      const year = `${date.getFullYear()}`
-      const monthKey = `${date.getMonth() + 1}`.padStart(2, "0")
-      const monthLabel = date.toLocaleString(locale, {
-        month: "long",
-      })
-
-      if (!archiveMap.has(year)) {
-        archiveMap.set(year, { year, months: new Map() })
-      }
-
-      const yearEntry = archiveMap.get(year)!
-
-      if (!yearEntry.months.has(monthKey)) {
-        yearEntry.months.set(monthKey, {
-          monthLabel,
-          posts: [],
-        })
-      }
-
-      yearEntry.months.get(monthKey)!.posts.push(post)
+      const year = `${new Date(rawDate).getFullYear()}`
+      const items = groupMap.get(year) || []
+      items.push(post)
+      groupMap.set(year, items)
     })
-
-    const nextGroups = Array.from(archiveMap.values())
-      .sort((a, b) => Number(b.year) - Number(a.year))
-      .map((yearEntry) => ({
-        year: yearEntry.year,
-        months: Array.from(yearEntry.months.entries())
-          .sort(([a], [b]) => Number(b) - Number(a))
-          .map(([month, value]) => ({
-            month,
-            monthLabel: value.monthLabel,
-            posts: value.posts,
-          })),
-      }))
 
     return {
-      groups: nextGroups,
-      totalCount: filteredPosts.length,
-      years: [DEFAULT_YEAR, ...Array.from(yearSet).sort((a, b) => Number(b) - Number(a))],
-      categories: [
+      groups: Array.from(groupMap.entries())
+        .sort((a, b) => Number(b[0]) - Number(a[0]))
+        .map(([year, posts]) => ({ year, posts })),
+      menus: [
         { name: DEFAULT_CATEGORY, count: publicPosts.length },
-        ...Array.from(categoryMap.entries())
+        ...Array.from(menuMap.entries())
           .sort((a, b) => b[1] - a[1])
           .map(([name, count]) => ({ name, count })),
       ],
+      years: [DEFAULT_YEAR, ...Array.from(yearSet).sort((a, b) => Number(b) - Number(a))],
+      totalCount: filteredPosts.length,
+      totalPages,
+      safePage,
     }
-  }, [currentCategory, currentYear, locale, posts])
+  }, [currentMenu, currentPage, currentYear, posts])
 
   const updateQuery = (next: { year?: string; category?: string }) => {
     router.replace(
@@ -134,114 +107,171 @@ const Archive: React.FC = () => {
     )
   }
 
+  const updatePage = (page: number) => {
+    router.replace(
+      {
+        pathname: "/archive",
+        query: {
+          year: currentYear !== DEFAULT_YEAR ? currentYear : undefined,
+          category: currentMenu !== DEFAULT_CATEGORY ? currentMenu : undefined,
+          page: page > 1 ? page : undefined,
+        },
+      },
+      undefined,
+      { shallow: true, scroll: false }
+    )
+  }
+
   return (
     <StyledWrapper>
       <header className="hero">
         <div className="eyebrow">{language === "ko" ? "아카이브" : "Archive"}</div>
-        <h1>
-          {language === "ko"
-            ? "연도와 메뉴 기준으로 글을 다시 찾아보는 공간입니다"
-            : "Browse posts again by year and menu"}
-        </h1>
+        <h1>{language === "ko" ? "연도별로 글 다시 보기" : "Browse posts by year"}</h1>
         <p>
           {language === "ko"
-            ? "최신 글만 훑는 대신, 어떤 시기에 무엇을 공부하고 기록했는지 한 번에 살펴볼 수 있도록 정리했습니다."
-            : "Instead of only reading the latest posts, this archive helps you revisit what was studied and recorded over time."}
+            ? "왼쪽에서 연도와 메뉴를 고르면, 조건에 맞는 글만 오른쪽에 정리됩니다."
+            : "Pick a year and menu on the left, then browse matching posts on the right."}
         </p>
-        <div className="stats">
-          <span>{language === "ko" ? `${totalCount}개 글` : `${totalCount} posts`}</span>
-          <span>{language === "ko" ? `${groups.length}개 연도` : `${groups.length} years`}</span>
-        </div>
       </header>
 
-      <section className="filters">
-        <div className="filter-block">
-          <div className="filter-label">{language === "ko" ? "연도" : "Year"}</div>
-          <div className="chip-list">
-            {years.map((year) => (
-              <button
-                key={year}
-                type="button"
-                data-active={currentYear === year}
-                onClick={() => updateQuery({ year, category: currentCategory })}
-              >
-                {year}
-              </button>
-            ))}
+      <section className="layout">
+        <aside className="sidebar">
+          <div className="side-card">
+            <div className="side-title">{language === "ko" ? "연도" : "Year"}</div>
+            <div className="menu-list">
+              {years.map((year) => (
+                <button
+                  key={year}
+                  type="button"
+                  className="menu-item"
+                  data-active={currentYear === year}
+                  onClick={() => updateQuery({ year, category: currentMenu })}
+                >
+                  <span>{year}</span>
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
 
-        <div className="filter-block">
-          <div className="filter-label">{language === "ko" ? "메뉴" : "Menu"}</div>
-          <div className="chip-list">
-            {categories.map((category) => (
-              <button
-                key={category.name}
-                type="button"
-                data-active={currentCategory === category.name}
-                onClick={() =>
-                  updateQuery({ year: currentYear, category: category.name })
-                }
-              >
-                <span>{category.name}</span>
-                <span className="count">{category.count}</span>
-              </button>
-            ))}
+          <div className="side-card">
+            <div className="side-title">{language === "ko" ? "메뉴" : "Menu"}</div>
+            <div className="menu-list">
+              {menus.map((menu) => (
+                <button
+                  key={menu.name}
+                  type="button"
+                  className="menu-item"
+                  data-active={currentMenu === menu.name}
+                  onClick={() => updateQuery({ year: currentYear, category: menu.name })}
+                >
+                  <span>{menu.name}</span>
+                  <span className="count">{menu.count}</span>
+                </button>
+              ))}
+            </div>
           </div>
+        </aside>
+
+        <div className="result-panel">
+          <div className="result-header">
+            <div>
+              <div className="result-eyebrow">{language === "ko" ? "결과" : "Results"}</div>
+              <h2>
+                {language === "ko" ? `${totalCount}개의 글` : `${totalCount} posts`}
+              </h2>
+            </div>
+            <div className="result-meta">
+              {currentYear !== DEFAULT_YEAR && <span>{currentYear}</span>}
+              {currentMenu !== DEFAULT_CATEGORY && <span>{currentMenu}</span>}
+              {totalPages > 1 && <span>{`${safePage} / ${totalPages}`}</span>}
+            </div>
+          </div>
+
+          {groups.length === 0 ? (
+            <div className="empty-state">
+              <h3>{language === "ko" ? "조건에 맞는 글이 아직 없어요." : "No matching posts yet."}</h3>
+              <p>
+                {language === "ko"
+                  ? "왼쪽에서 다른 연도나 메뉴를 골라보세요."
+                  : "Choose another year or menu from the left."}
+              </p>
+            </div>
+          ) : (
+            <div className="year-sections">
+              {groups.map((group) => (
+                <section key={group.year} className="year-section">
+                  <div className="year-header">
+                    <h3>{group.year}</h3>
+                    <span>{language === "ko" ? `${group.posts.length}개` : group.posts.length}</span>
+                  </div>
+                  <div className="post-grid">
+                    {group.posts.map((post, index) => (
+                      <Link key={post.id} href={`/${post.slug}`} className="post-card">
+                        <span className="post-index">
+                          {String((safePage - 1) * PAGE_SIZE + index + 1).padStart(2, "0")}
+                        </span>
+                        <div className="post-body">
+                          <h4>{post.title}</h4>
+                          {post.summary && <p>{post.summary}</p>}
+                        </div>
+                        <div className="post-top">
+                          {post.menu?.[0] && <span className="badge">{post.menu[0]}</span>}
+                          <span className="date">
+                            {formatDate(post.date?.start_date || post.createdTime, locale)}
+                          </span>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </section>
+              ))}
+            </div>
+          )}
+
+          {totalPages > 1 && (
+            <nav className="pagination" aria-label="Archive pagination">
+              <button
+                type="button"
+                disabled={safePage <= 1}
+                onClick={() => updatePage(1)}
+              >
+                {"<<"}
+              </button>
+              <button
+                type="button"
+                disabled={safePage <= 1}
+                onClick={() => updatePage(safePage - 1)}
+              >
+                {"<"}
+              </button>
+              {Array.from({ length: totalPages }, (_, index) => index + 1).map((page) => (
+                <button
+                  key={page}
+                  type="button"
+                  data-active={page === safePage}
+                  onClick={() => updatePage(page)}
+                >
+                  {page}
+                </button>
+              ))}
+              <button
+                type="button"
+                disabled={safePage >= totalPages}
+                onClick={() => updatePage(safePage + 1)}
+              >
+                {">"}
+              </button>
+              <button
+                type="button"
+                disabled={safePage >= totalPages}
+                onClick={() => updatePage(totalPages)}
+              >
+                {">>"}
+              </button>
+            </nav>
+          )}
         </div>
       </section>
-
-      {groups.length === 0 ? (
-        <div className="empty-state">
-          <h2>조건에 맞는 글이 아직 없어요.</h2>
-          <p>
-            {language === "ko"
-              ? "연도나 메뉴 필터를 바꾸면 다른 기록을 바로 찾아볼 수 있습니다."
-              : "Try a different year or menu filter to find other entries."}
-          </p>
-        </div>
-      ) : (
-        <div className="timeline">
-          {groups.map((group) => (
-            <section key={group.year} className="year-section">
-              <div className="year">{group.year}</div>
-              <div className="months">
-                {group.months.map((month) => (
-                  <section key={`${group.year}-${month.month}`} className="month-block">
-                    <div className="month-header">
-                      <h2>{month.monthLabel}</h2>
-                      <span>{month.posts.length}</span>
-                    </div>
-                    <div className="post-list">
-                      {month.posts.map((post) => (
-                        <Link key={post.id} href={`/${post.slug}`} className="post-row">
-                          <div className="post-main">
-                            <h3>{post.title}</h3>
-                            {post.summary && <p>{post.summary}</p>}
-                          </div>
-                          <div className="post-meta">
-                            {post.menu?.[0] && (
-                              <span className="category">
-                                {post.menu?.[0]}
-                              </span>
-                            )}
-                            <time>
-                              {formatDate(
-                                post.date?.start_date || post.createdTime,
-                                locale
-                              )}
-                            </time>
-                          </div>
-                        </Link>
-                      ))}
-                    </div>
-                  </section>
-                ))}
-              </div>
-            </section>
-          ))}
-        </div>
-      )}
     </StyledWrapper>
   )
 }
@@ -249,292 +279,316 @@ const Archive: React.FC = () => {
 export default Archive
 
 const StyledWrapper = styled.div`
-  padding: 2rem 0 3rem;
+  display: grid;
+  gap: 1.2rem;
+  padding: 1.5rem 0 3rem;
 
   .hero {
-    margin-bottom: 1.25rem;
-    padding: 1.4rem 1.5rem;
+    padding: 1.5rem 1.6rem;
     border: 1px solid ${({ theme }) => theme.colors.gray6};
     border-radius: 1.4rem;
     background-color: ${({ theme }) =>
-      theme.scheme === "light" ? "rgba(255, 255, 255, 0.78)" : "rgba(29, 36, 48, 0.84)"};
-
-    .eyebrow {
-      margin-bottom: 0.6rem;
-      font-size: 0.78rem;
-      line-height: 1rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: ${({ theme }) => theme.colors.gray10};
-    }
-
-    h1 {
-      margin-bottom: 0.85rem;
-      font-size: 2rem;
-      line-height: 2.45rem;
-      font-weight: 800;
-    }
-
-    p {
-      max-width: 42rem;
-      margin: 0 0 1rem;
-      line-height: 1.8rem;
-      color: ${({ theme }) => theme.colors.gray11};
-    }
+      theme.scheme === "light" ? "rgba(255, 255, 255, 0.82)" : "rgba(29, 36, 48, 0.84)"};
   }
 
-  .stats {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.55rem;
-
-    span {
-      display: inline-flex;
-      align-items: center;
-      min-height: 1.9rem;
-      padding: 0.3rem 0.7rem;
-      border-radius: 9999px;
-      background-color: ${({ theme }) => theme.colors.gray3};
-      color: ${({ theme }) => theme.colors.gray10};
-      font-size: 0.82rem;
-      line-height: 1rem;
-      font-weight: 600;
-    }
-  }
-
-  .filters {
-    display: grid;
-    gap: 0.9rem;
-    margin-bottom: 1.5rem;
-    padding: 1rem 1.05rem;
-    border: 1px solid ${({ theme }) => theme.colors.gray6};
-    border-radius: 1.2rem;
-    background-color: ${({ theme }) =>
-      theme.scheme === "light" ? "rgba(255, 255, 255, 0.72)" : "rgba(29, 36, 48, 0.8)"};
-  }
-
-  .filter-block {
-    display: grid;
-    gap: 0.55rem;
-  }
-
-  .filter-label {
-    font-size: 0.76rem;
+  .eyebrow,
+  .result-eyebrow,
+  .side-title {
+    margin-bottom: 0.5rem;
+    color: ${({ theme }) => theme.colors.gray10};
+    font-size: 0.78rem;
     line-height: 1rem;
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: ${({ theme }) => theme.colors.gray10};
   }
 
-  .chip-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-
-    button {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      min-height: 1.95rem;
-      padding: 0.35rem 0.72rem;
-      border: 1px solid ${({ theme }) => theme.colors.gray6};
-      border-radius: 9999px;
-      background-color: ${({ theme }) => theme.colors.gray2};
-      color: ${({ theme }) => theme.colors.gray10};
-      font-size: 0.8rem;
-      line-height: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: border-color 180ms ease, background-color 180ms ease,
-        color 180ms ease, transform 180ms ease;
-
-      &:hover {
-        transform: translateY(-1px);
-        border-color: ${({ theme }) => theme.colors.gray8};
-        background-color: ${({ theme }) => theme.colors.gray3};
-      }
-
-      &[data-active="true"] {
-        border-color: rgba(20, 184, 166, 0.35);
-        background: linear-gradient(
-          135deg,
-          rgba(20, 184, 166, 0.18),
-          rgba(15, 118, 110, 0.08)
-        );
-        color: ${({ theme }) => theme.colors.gray12};
-      }
-    }
-
-    .count {
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      min-width: 1.25rem;
-      height: 1.25rem;
-      padding: 0 0.28rem;
-      border-radius: 9999px;
-      background-color: ${({ theme }) => theme.colors.gray4};
-      font-size: 0.68rem;
-      line-height: 0.9rem;
-      font-weight: 700;
-      color: ${({ theme }) => theme.colors.gray10};
-    }
+  h1 {
+    margin-bottom: 0.8rem;
+    font-size: 2rem;
+    line-height: 2.45rem;
+    font-weight: 800;
   }
 
-  .empty-state {
-    padding: 1.5rem;
-    border: 1px solid ${({ theme }) => theme.colors.gray6};
-    border-radius: 1.2rem;
-    background-color: ${({ theme }) =>
-      theme.scheme === "light" ? "rgba(255, 255, 255, 0.74)" : "rgba(29, 36, 48, 0.8)"};
-
-    h2 {
-      margin-bottom: 0.5rem;
-      font-size: 1.05rem;
-      line-height: 1.45rem;
-      font-weight: 700;
-    }
-
-    p {
-      color: ${({ theme }) => theme.colors.gray11};
-      line-height: 1.7rem;
-    }
+  .hero p {
+    max-width: 40rem;
+    color: ${({ theme }) => theme.colors.gray11};
+    line-height: 1.75rem;
   }
 
-  .timeline {
-    display: grid;
-    gap: 1.5rem;
-  }
-
-  .year-section {
+  .layout {
     display: grid;
     gap: 1rem;
+    min-width: 0;
 
     @media (min-width: 1024px) {
-      grid-template-columns: 7rem minmax(0, 1fr);
+      grid-template-columns: minmax(212px, 0.76fr) minmax(0, 2.84fr);
       align-items: start;
     }
   }
 
-  .year {
-    position: sticky;
-    top: 4.5rem;
-    align-self: start;
-    font-size: 1.7rem;
-    line-height: 2rem;
-    font-weight: 800;
-    letter-spacing: -0.03em;
-  }
-
-  .months {
+  .sidebar {
     display: grid;
     gap: 1rem;
+    min-width: 0;
   }
 
-  .month-block {
-    padding: 1rem 1rem 0.5rem;
+  .side-card,
+  .result-panel {
+    min-width: 0;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+    padding: 1rem;
     border: 1px solid ${({ theme }) => theme.colors.gray6};
     border-radius: 1.25rem;
     background-color: ${({ theme }) =>
-      theme.scheme === "light" ? "rgba(255, 255, 255, 0.8)" : "rgba(29, 36, 48, 0.82)"};
+      theme.scheme === "light" ? "rgba(255, 255, 255, 0.82)" : "rgba(29, 36, 48, 0.84)"};
   }
 
-  .month-header {
+  .menu-list {
+    display: grid;
+    gap: 0.55rem;
+    min-width: 0;
+  }
+
+  .menu-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 1rem;
-    margin-bottom: 0.75rem;
-
-    h2 {
-      font-size: 1rem;
-      line-height: 1.4rem;
-      font-weight: 700;
-    }
-
-    span {
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      min-width: 1.6rem;
-      height: 1.6rem;
-      padding: 0 0.45rem;
-      border-radius: 9999px;
-      background-color: ${({ theme }) => theme.colors.gray3};
-      color: ${({ theme }) => theme.colors.gray10};
-      font-size: 0.75rem;
-      line-height: 1rem;
-      font-weight: 700;
-    }
-  }
-
-  .post-list {
-    display: grid;
-  }
-
-  .post-row {
-    display: grid;
-    gap: 0.75rem;
-    padding: 0.9rem 0;
-    border-top: 1px solid ${({ theme }) => theme.colors.gray5};
-
-    &:first-of-type {
-      border-top: none;
-      padding-top: 0;
-    }
-
-    @media (min-width: 768px) {
-      grid-template-columns: minmax(0, 1fr) auto;
-      align-items: start;
-    }
-  }
-
-  .post-main {
+    gap: 0.6rem;
+    width: 100%;
     min-width: 0;
+    min-height: 2.9rem;
+    box-sizing: border-box;
+    overflow: hidden;
+    padding: 0.65rem 0.82rem;
+    border: 1px solid ${({ theme }) => theme.colors.gray6};
+    border-radius: 1rem;
+    background-color: ${({ theme }) => theme.colors.gray2};
+    color: ${({ theme }) => theme.colors.gray11};
+    font-size: 0.88rem;
+    line-height: 1.25rem;
+    font-weight: 600;
+    text-align: left;
+    transition:
+      border-color 180ms ease,
+      background-color 180ms ease,
+      transform 180ms ease;
 
-    h3 {
-      margin-bottom: 0.35rem;
-      font-size: 1.02rem;
-      line-height: 1.55rem;
-      font-weight: 700;
+    &:hover {
+      transform: translateY(-1px);
+      border-color: ${({ theme }) => theme.colors.gray8};
+      background-color: ${({ theme }) => theme.colors.gray3};
     }
 
-    p {
-      margin: 0;
-      color: ${({ theme }) => theme.colors.gray11};
-      line-height: 1.65rem;
-      display: -webkit-box;
-      overflow: hidden;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
+    &[data-active="true"] {
+      border-color: rgba(59, 130, 246, 0.28);
+      background-color: ${({ theme }) =>
+        theme.scheme === "light" ? "rgba(226, 232, 240, 0.86)" : "rgba(51, 65, 85, 0.72)"};
+      color: ${({ theme }) => theme.colors.gray12};
     }
   }
 
-  .post-meta {
+  .count,
+  .result-meta span,
+  .badge,
+  .date,
+  .year-header span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 1.8rem;
+    padding: 0.28rem 0.68rem;
+    border-radius: 9999px;
+    background-color: ${({ theme }) =>
+      theme.scheme === "light" ? "rgba(241, 245, 249, 0.72)" : "rgba(45, 55, 72, 0.78)"};
+    color: ${({ theme }) => theme.colors.gray10};
+    font-size: 0.76rem;
+    line-height: 1rem;
+    font-weight: 600;
+  }
+
+  .result-panel,
+  .year-sections,
+  .year-section {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .result-header,
+  .year-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .result-header h2 {
+    font-size: 1.35rem;
+    line-height: 1.8rem;
+    font-weight: 800;
+  }
+
+  .result-meta {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
-    align-items: center;
+    justify-content: flex-end;
+    gap: 0.45rem;
+  }
 
-    @media (min-width: 768px) {
-      justify-content: flex-end;
+  .empty-state {
+    padding: 1.25rem 1rem;
+    border-radius: 1rem;
+    background-color: ${({ theme }) => theme.colors.gray2};
+  }
+
+  .empty-state h3 {
+    margin-bottom: 0.45rem;
+    font-size: 1.08rem;
+    line-height: 1.6rem;
+    font-weight: 700;
+  }
+
+  .empty-state p {
+    color: ${({ theme }) => theme.colors.gray11};
+    line-height: 1.7rem;
+  }
+
+  .year-header h3 {
+    font-size: 1rem;
+    line-height: 1.4rem;
+    font-weight: 800;
+    color: ${({ theme }) => theme.colors.gray11};
+  }
+
+  .post-grid {
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .post-card {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 0.9rem;
+    align-items: center;
+    padding: 0.9rem 0.95rem;
+    border-bottom: 1px solid ${({ theme }) =>
+      theme.scheme === "light" ? "rgba(203, 213, 225, 0.56)" : "rgba(71, 85, 105, 0.5)"};
+    border-radius: 0.9rem;
+    transition:
+      color 180ms ease,
+      background-color 180ms ease;
+
+    &:hover {
+      background-color: ${({ theme }) =>
+        theme.scheme === "light" ? "rgba(248, 250, 252, 0.72)" : "rgba(31, 41, 55, 0.52)"};
     }
 
-    .category,
-    time {
-      display: inline-flex;
-      align-items: center;
-      min-height: 1.75rem;
-      padding: 0.25rem 0.6rem;
-      border-radius: 9999px;
-      background-color: ${({ theme }) => theme.colors.gray3};
-      color: ${({ theme }) => theme.colors.gray10};
-      font-size: 0.76rem;
-      line-height: 1rem;
-      font-weight: 600;
-      white-space: nowrap;
+    &:last-child {
+      border-bottom: 0;
+    }
+  }
+
+  .post-index {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 2.15rem;
+    height: 2.15rem;
+    border-radius: 0.75rem;
+    background-color: ${({ theme }) =>
+      theme.scheme === "light" ? "rgba(226, 232, 240, 0.86)" : "rgba(45, 55, 72, 0.82)"};
+    color: ${({ theme }) => theme.colors.gray10};
+    font-size: 0.76rem;
+    line-height: 1rem;
+    font-weight: 800;
+  }
+
+  .post-body {
+    min-width: 0;
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .post-top {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .post-card h4 {
+    font-size: 1rem;
+    line-height: 1.45rem;
+    font-weight: 700;
+    color: ${({ theme }) => theme.colors.gray12};
+    word-break: keep-all;
+  }
+
+  .post-card p {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    color: ${({ theme }) => theme.colors.gray11};
+    font-size: 0.88rem;
+    line-height: 1.55rem;
+    word-break: keep-all;
+  }
+
+  @media (max-width: 768px) {
+    .post-card {
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 0.65rem;
+      padding: 0.85rem 0.75rem;
+    }
+
+    .post-top {
+      justify-content: flex-start;
+      grid-column: 2;
+    }
+  }
+
+  .pagination {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.45rem;
+    padding-top: 0.35rem;
+  }
+
+  .pagination button {
+    min-width: 1.8rem;
+    height: 1.8rem;
+    padding: 0 0.25rem;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: ${({ theme }) => theme.colors.gray8};
+    opacity: 0.58;
+    font-size: 0.82rem;
+    line-height: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+      opacity 180ms ease,
+      color 180ms ease;
+
+    &:hover:not(:disabled) {
+      color: ${({ theme }) => theme.colors.gray12};
+      opacity: 1;
+    }
+
+    &[data-active="true"] {
+      color: ${({ theme }) => theme.colors.gray12};
+      opacity: 1;
+    }
+
+    &:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
     }
   }
 `

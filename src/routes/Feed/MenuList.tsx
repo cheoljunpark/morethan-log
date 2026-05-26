@@ -9,20 +9,11 @@ import getFeedQuery from "src/libs/utils/router/getFeedQuery"
 const DEFAULT_MENU = "전체"
 
 const getMenuAccent = (name: string) => {
-  const palette = [
-    { bg: "rgba(59, 130, 246, 0.14)", fg: "#1d4ed8" },
-    { bg: "rgba(16, 185, 129, 0.14)", fg: "#047857" },
-    { bg: "rgba(249, 115, 22, 0.14)", fg: "#c2410c" },
-    { bg: "rgba(168, 85, 247, 0.14)", fg: "#7e22ce" },
-    { bg: "rgba(236, 72, 153, 0.14)", fg: "#be185d" },
-    { bg: "rgba(14, 165, 233, 0.14)", fg: "#0369a1" },
-  ]
+  if (name === DEFAULT_MENU) {
+    return { bg: "rgba(59, 130, 246, 0.14)", fg: "#1d4ed8" }
+  }
 
-  const seed = name
-    .split("")
-    .reduce((acc, char) => acc + char.charCodeAt(0), 0)
-
-  return palette[seed % palette.length]
+  return { bg: "rgba(255, 255, 255, 0.86)", fg: "#64748b" }
 }
 
 const getMenuLabel = (name: string) => {
@@ -117,9 +108,11 @@ const MenuList: React.FC = () => {
         query: {
           ...nextFeedQuery,
           category: undefined,
+          page: undefined,
           tag: undefined,
           submenu: undefined,
           menu: menu !== DEFAULT_MENU ? menu : undefined,
+          view: menu === DEFAULT_MENU ? "all" : undefined,
         },
       },
       undefined,
@@ -139,9 +132,11 @@ const MenuList: React.FC = () => {
         query: {
           ...nextFeedQuery,
           category: undefined,
+          page: undefined,
           tag: undefined,
           menu: menu !== DEFAULT_MENU ? menu : undefined,
           submenu,
+          view: undefined,
         },
       },
       undefined,
@@ -285,13 +280,7 @@ const StyledWrapper = styled.div`
 
     &[data-active="true"] {
       border-color: rgba(59, 130, 246, 0.28);
-      background:
-        linear-gradient(
-          135deg,
-          rgba(59, 130, 246, 0.14),
-          rgba(16, 185, 129, 0.08)
-        ),
-        ${({ theme }) => theme.colors.gray2};
+      background-color: ${({ theme }) => theme.colors.gray2};
     }
 
     @media (max-width: 768px) {
@@ -398,9 +387,7 @@ const StyledWrapper = styled.div`
 
     &[data-active="true"] {
       border-color: rgba(59, 130, 246, 0.24);
-      background:
-        linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(16, 185, 129, 0.06)),
-        ${({ theme }) => theme.colors.gray2};
+      background-color: ${({ theme }) => theme.colors.gray2};
       color: ${({ theme }) => theme.colors.gray12};
     }
   }

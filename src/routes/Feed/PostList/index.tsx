@@ -13,6 +13,13 @@ type Props = {
   q: string
 }
 
+const PAGE_SIZE = 9
+
+const getPageFromQuery = (value: unknown) => {
+  const page = Number(typeof value === "string" ? value : "1")
+  return Number.isFinite(page) && page > 0 ? Math.floor(page) : 1
+}
+
 const PostList: React.FC<Props> = ({ q }) => {
   const router = useRouter()
   const { language } = useUiLanguage()
@@ -23,20 +30,20 @@ const PostList: React.FC<Props> = ({ q }) => {
   const currentMenu = `${router.query.menu || ""}` || undefined
   const currentSubmenu = `${router.query.submenu || ""}` || undefined
   const currentOrder = `${router.query.order || ""}` || "desc"
+  const currentPage = getPageFromQuery(router.query.page)
+  const currentView = `${router.query.view || ""}` || undefined
 
   const filteredPosts = useMemo(() => {
     let nextPosts = [...data]
 
     nextPosts = nextPosts.filter((post) => {
       const tagContent = post.tags ? post.tags.join(" ") : ""
-      const seriesContent = post.series ? post.series.join(" ") : ""
       const menuContent = post.menu ? post.menu.join(" ") : ""
       const submenuContent = post.submenu ? post.submenu.join(" ") : ""
       const searchContent =
         post.title +
         (post.summary || "") +
         tagContent +
-        seriesContent +
         menuContent +
         submenuContent
 
@@ -74,14 +81,44 @@ const PostList: React.FC<Props> = ({ q }) => {
     return nextPosts
   }, [currentCategory, currentMenu, currentOrder, currentSubmenu, currentTag, data, q])
 
+  const totalPages = Math.max(1, Math.ceil(filteredPosts.length / PAGE_SIZE))
+  const safePage = Math.min(currentPage, totalPages)
+  const visiblePosts = filteredPosts.slice(
+    (safePage - 1) * PAGE_SIZE,
+    safePage * PAGE_SIZE
+  )
+
+  const updatePage = (page: number) => {
+    router.replace(
+      {
+        pathname: "/",
+        query: {
+          q: q || undefined,
+          tag: currentTag,
+          category:
+            currentCategory !== DEFAULT_CATEGORY ? currentCategory : undefined,
+          menu: currentMenu,
+          submenu: currentSubmenu,
+          order: currentOrder !== "desc" ? currentOrder : undefined,
+          view: currentView,
+          page: page > 1 ? page : undefined,
+        },
+      },
+      undefined,
+      { shallow: true, scroll: false }
+    )
+  }
+
   const isRestored = useFeedScrollRestoration(
     JSON.stringify([
       filteredPosts.length,
+      safePage,
       currentTag,
       currentCategory,
       currentMenu,
       currentSubmenu,
       currentOrder,
+      currentView,
       q,
     ])
   )
@@ -171,9 +208,52 @@ const PostList: React.FC<Props> = ({ q }) => {
             </div>
           </div>
         ) : (
-          filteredPosts.map((post) => <PostCard key={post.id} data={post} />)
+          visiblePosts.map((post) => <PostCard key={post.id} data={post} />)
         )}
       </div>
+
+      {totalPages > 1 && (
+        <nav className="pagination" aria-label="Feed pagination">
+          <button
+            type="button"
+            disabled={safePage <= 1}
+            onClick={() => updatePage(1)}
+          >
+            {"<<"}
+          </button>
+          <button
+            type="button"
+            disabled={safePage <= 1}
+            onClick={() => updatePage(safePage - 1)}
+          >
+            {"<"}
+          </button>
+          {Array.from({ length: totalPages }, (_, index) => index + 1).map((page) => (
+            <button
+              key={page}
+              type="button"
+              data-active={page === safePage}
+              onClick={() => updatePage(page)}
+            >
+              {page}
+            </button>
+          ))}
+          <button
+            type="button"
+            disabled={safePage >= totalPages}
+            onClick={() => updatePage(safePage + 1)}
+          >
+            {">"}
+          </button>
+          <button
+            type="button"
+            disabled={safePage >= totalPages}
+            onClick={() => updatePage(totalPages)}
+          >
+            {">>"}
+          </button>
+        </nav>
+      )}
     </StyledWrapper>
   )
 }
@@ -186,12 +266,10 @@ const StyledWrapper = styled.section`
     padding: 0.85rem 0.95rem;
     border: 1px solid ${({ theme }) => theme.colors.gray6};
     border-radius: 1.2rem;
-    background:
-      linear-gradient(180deg, rgba(59, 130, 246, 0.04), transparent),
-      ${({ theme }) =>
-        theme.scheme === "light"
-          ? "rgba(255, 255, 255, 0.76)"
-          : "rgba(29, 36, 48, 0.82)"};
+    background-color: ${({ theme }) =>
+      theme.scheme === "light"
+        ? "rgba(255, 255, 255, 0.76)"
+        : "rgba(29, 36, 48, 0.82)"};
   }
 
   .heading-row {
@@ -323,5 +401,46 @@ const StyledWrapper = styled.section`
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
+  }
+
+  .pagination {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.45rem;
+    padding-top: 1rem;
+  }
+
+  .pagination button {
+    min-width: 1.8rem;
+    height: 1.8rem;
+    padding: 0 0.25rem;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: ${({ theme }) => theme.colors.gray8};
+    opacity: 0.58;
+    font-size: 0.82rem;
+    line-height: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+      opacity 180ms ease,
+      color 180ms ease;
+
+    &:hover:not(:disabled) {
+      color: ${({ theme }) => theme.colors.gray12};
+      opacity: 1;
+    }
+
+    &[data-active="true"] {
+      color: ${({ theme }) => theme.colors.gray12};
+      opacity: 1;
+    }
+
+    &:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
   }
 `

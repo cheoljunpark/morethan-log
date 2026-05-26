@@ -7,6 +7,7 @@ import Category from "../../../components/Category"
 import styled from "@emotion/styled"
 import { storageKey } from "src/constants/storage"
 import AdaptiveThumbnail from "src/components/AdaptiveThumbnail"
+import normalizeFeedQueryString from "src/libs/utils/router/normalizeFeedQueryString"
 
 type Props = {
   data: TPost
@@ -14,7 +15,6 @@ type Props = {
 
 const PostCard: React.FC<Props> = ({ data }) => {
   const category = data.menu?.[0]
-  const series = data.series?.[0]
   const primaryTag = data.tags?.[0]
   const secondaryTags = data.tags?.slice(1, 4) || []
   const showType = data.type[0] !== "Post"
@@ -25,7 +25,7 @@ const PostCard: React.FC<Props> = ({ data }) => {
     window.sessionStorage.setItem(storageKey.feedActivePostId, data.id)
     window.sessionStorage.setItem(
       storageKey.feedQueryString,
-      window.location.search || ""
+      normalizeFeedQueryString(window.location.search || "")
     )
   }
 
@@ -46,7 +46,6 @@ const PostCard: React.FC<Props> = ({ data }) => {
           <div className="eyebrow">
             <div className="meta-left">
               {showType && <span className="type">{data.type[0]}</span>}
-              {series && <span className="series">{series}</span>}
             </div>
             <div className="meta-right">
               {category && (
@@ -143,21 +142,48 @@ const StyledWrapper = styled(Link)`
         .meta-left,
         .meta-right {
           display: flex;
-          flex-wrap: wrap;
-          gap: 0.5rem;
+          gap: 0.3rem;
           align-items: center;
         }
 
+        .meta-left {
+          flex-wrap: wrap;
+        }
+
+        .meta-right {
+          flex-wrap: nowrap;
+          min-width: 0;
+          max-width: 100%;
+          overflow: hidden;
+        }
+
+        .category,
+        .primary-tag {
+          flex: 0 0 auto;
+          white-space: nowrap;
+        }
+
+        .category > div {
+          height: 1.42rem;
+          min-height: 1.42rem;
+          padding: 0 0.34rem;
+          font-size: 0.62rem;
+          line-height: 1;
+          font-weight: 700;
+          letter-spacing: 0.04em;
+          text-transform: uppercase;
+        }
+
         .type,
-        .series,
         .primary-tag {
           display: inline-flex;
           align-items: center;
-          min-height: 1.7rem;
-          padding: 0.2rem 0.55rem;
+          justify-content: center;
+          min-height: 1.42rem;
+          padding: 0 0.34rem;
           border-radius: 9999px;
-          font-size: 0.75rem;
-          line-height: 1rem;
+          font-size: 0.62rem;
+          line-height: 1;
           font-weight: 700;
           letter-spacing: 0.04em;
           text-transform: uppercase;
@@ -166,11 +192,6 @@ const StyledWrapper = styled(Link)`
         .type {
           color: #115e59;
           background: rgba(20, 184, 166, 0.14);
-        }
-
-        .series {
-          color: ${({ theme }) => theme.colors.gray10};
-          background-color: ${({ theme }) => theme.colors.gray3};
         }
 
         .primary-tag {
@@ -235,8 +256,16 @@ const StyledWrapper = styled(Link)`
       }
       > .tags {
         display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
+        flex-wrap: nowrap;
+        gap: 0.35rem;
+        max-width: 100%;
+        overflow: hidden;
+
+        > div {
+          padding: 0.18rem 0.42rem;
+          font-size: 0.68rem;
+          line-height: 0.95rem;
+        }
       }
     }
   }

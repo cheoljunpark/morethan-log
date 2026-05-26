@@ -29,7 +29,9 @@ const Feed: React.FC = () => {
       : DEFAULT_CATEGORY
   const currentOrder =
     typeof router.query.order === "string" ? router.query.order : "desc"
+  const currentView = typeof router.query.view === "string" ? router.query.view : ""
   const showCurated =
+    currentView !== "all" &&
     !q &&
     !currentTag &&
     !currentMenu &&
@@ -50,6 +52,7 @@ const Feed: React.FC = () => {
     const nextQuery = {
       ...router.query,
       q: value || undefined,
+      page: undefined,
     }
 
     router.replace(
@@ -175,12 +178,10 @@ const StyledWrapper = styled.div`
     padding: 1rem;
     border: 1px solid ${({ theme }) => theme.colors.gray6};
     border-radius: 1.35rem;
-    background:
-      linear-gradient(180deg, rgba(59, 130, 246, 0.04), transparent),
-      ${({ theme }) =>
-        theme.scheme === "light"
-          ? "rgba(255, 255, 255, 0.84)"
-          : "rgba(29, 36, 48, 0.84)"};
+    background-color: ${({ theme }) =>
+      theme.scheme === "light"
+        ? "rgba(255, 255, 255, 0.84)"
+        : "rgba(29, 36, 48, 0.84)"};
   }
 
   .content-column {
@@ -198,12 +199,10 @@ const StyledWrapper = styled.div`
     padding: 1rem 1.1rem;
     border: 1px solid ${({ theme }) => theme.colors.gray6};
     border-radius: 1.4rem;
-    background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.3), transparent),
-      ${({ theme }) =>
-        theme.scheme === "light"
-          ? "rgba(255, 255, 255, 0.84)"
-          : "rgba(29, 36, 48, 0.84)"};
+    background-color: ${({ theme }) =>
+      theme.scheme === "light"
+        ? "rgba(255, 255, 255, 0.84)"
+        : "rgba(29, 36, 48, 0.84)"};
 
     @media (min-width: 1024px) {
       display: none;

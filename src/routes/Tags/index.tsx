@@ -4,60 +4,81 @@ import { useRouter } from "next/router"
 import { useMemo } from "react"
 import { DEFAULT_CATEGORY } from "src/constants"
 import { useUiLanguage } from "src/contexts/UiLanguageContext"
-import { useCategoriesQuery } from "src/hooks/useCategoriesQuery"
 import usePostsQuery from "src/hooks/usePostsQuery"
-import { useTagsQuery } from "src/hooks/useTagsQuery"
 import { formatDate } from "src/libs/utils"
 import { filterPosts } from "src/libs/utils/notion"
 
 const DEFAULT_TAG = "전체 태그"
+const PAGE_SIZE = 9
+
+const getPageFromQuery = (value: unknown) => {
+  const page = Number(typeof value === "string" ? value : "1")
+  return Number.isFinite(page) && page > 0 ? Math.floor(page) : 1
+}
 
 const Tags: React.FC = () => {
   const router = useRouter()
   const { language, locale } = useUiLanguage()
   const posts = usePostsQuery()
-  const tags = useTagsQuery()
-  const categories = useCategoriesQuery()
 
   const currentTag =
     typeof router.query.tag === "string" && router.query.tag.length > 0
       ? router.query.tag
       : DEFAULT_TAG
-  const currentCategory =
+  const currentMenu =
     typeof router.query.category === "string" && router.query.category.length > 0
       ? router.query.category
       : DEFAULT_CATEGORY
+  const currentPage = getPageFromQuery(router.query.page)
 
-  const { filteredPosts, sortedTags, sortedCategories } = useMemo(() => {
+  const { visiblePosts, tags, menus, totalCount, totalPages, safePage } = useMemo(() => {
     const publicPosts = filterPosts(posts)
-    const nextFilteredPosts = publicPosts.filter((post) => {
-      const matchesTag =
-        currentTag === DEFAULT_TAG || (post.tags && post.tags.includes(currentTag))
-      const matchesCategory =
-        currentCategory === DEFAULT_CATEGORY ||
-        post.menu?.[0] === currentCategory
+    const tagMap = new Map<string, number>()
+    const menuMap = new Map<string, number>()
 
-      return matchesTag && matchesCategory
+    publicPosts.forEach((post) => {
+      post.tags?.forEach((tag) => {
+        tagMap.set(tag, (tagMap.get(tag) || 0) + 1)
+      })
+
+      const menu = post.menu?.[0]
+      if (menu) {
+        menuMap.set(menu, (menuMap.get(menu) || 0) + 1)
+      }
     })
 
-    const nextSortedTags = [
-      { name: DEFAULT_TAG, count: publicPosts.length },
-      ...Object.entries(tags)
-        .sort((a, b) => b[1] - a[1])
-        .map(([name, count]) => ({ name, count })),
-    ]
+    const filteredPosts = publicPosts.filter((post) => {
+      return (
+        (currentTag === DEFAULT_TAG || Boolean(post.tags?.includes(currentTag))) &&
+        (currentMenu === DEFAULT_CATEGORY || post.menu?.[0] === currentMenu)
+      )
+    })
 
-    const nextSortedCategories = Object.entries(categories).map(([name, count]) => ({
-      name,
-      count,
-    }))
+    const totalPages = Math.max(1, Math.ceil(filteredPosts.length / PAGE_SIZE))
+    const safePage = Math.min(currentPage, totalPages)
 
     return {
-      filteredPosts: nextFilteredPosts,
-      sortedTags: nextSortedTags,
-      sortedCategories: nextSortedCategories,
+      visiblePosts: filteredPosts.slice(
+        (safePage - 1) * PAGE_SIZE,
+        safePage * PAGE_SIZE
+      ),
+      tags: [
+        { name: DEFAULT_TAG, count: publicPosts.length },
+        ...Array.from(tagMap.entries())
+          .sort((a, b) => b[1] - a[1])
+          .map(([name, count]) => ({ name, count })),
+      ],
+      menus: [
+        { name: DEFAULT_CATEGORY, count: publicPosts.length },
+        ...Array.from(menuMap.entries())
+          .sort((a, b) => b[1] - a[1])
+          .map(([name, count]) => ({ name, count })),
+      ],
+      totalCount: filteredPosts.length,
+      totalPages,
+      safePage,
     }
-  }, [categories, currentCategory, currentTag, posts, tags])
+  }, [currentMenu, currentPage, currentTag, posts])
 
   const updateQuery = (next: { tag?: string; category?: string }) => {
     router.replace(
@@ -76,108 +97,162 @@ const Tags: React.FC = () => {
     )
   }
 
+  const updatePage = (page: number) => {
+    router.replace(
+      {
+        pathname: "/tags",
+        query: {
+          tag: currentTag !== DEFAULT_TAG ? currentTag : undefined,
+          category: currentMenu !== DEFAULT_CATEGORY ? currentMenu : undefined,
+          page: page > 1 ? page : undefined,
+        },
+      },
+      undefined,
+      { shallow: true, scroll: false }
+    )
+  }
+
   return (
     <StyledWrapper>
       <header className="hero">
         <div className="eyebrow">{language === "ko" ? "태그" : "Tags"}</div>
-        <h1>
-          {language === "ko"
-            ? "태그 중심으로 글을 다시 묶어 보는 탐색 페이지입니다"
-            : "Explore posts again through tags"}
-        </h1>
+        <h1>{language === "ko" ? "태그별로 글 다시 보기" : "Browse posts by tag"}</h1>
         <p>
           {language === "ko"
-            ? "React, Next.js, 트러블슈팅 같은 주제별로 글을 다시 모아 보면 블로그를 조금 더 자료처럼 둘러보기 좋아집니다."
-            : "Grouping posts again by topics like React, Next.js, and troubleshooting makes the blog easier to use as a reference."}
+            ? "왼쪽에서 태그와 메뉴를 고르면, 그 주제에 맞는 글만 오른쪽에 정리됩니다."
+            : "Pick a tag and menu on the left, then browse matching posts on the right."}
         </p>
-        <div className="stats">
-          <span>
-            {language === "ko"
-              ? `${Object.keys(tags).length}개 태그`
-              : `${Object.keys(tags).length} tags`}
-          </span>
-          <span>{language === "ko" ? `${filteredPosts.length}개 글` : `${filteredPosts.length} posts`}</span>
-        </div>
       </header>
 
-      <section className="filters">
-        <div className="filter-block">
-          <div className="filter-label">{language === "ko" ? "태그" : "Tags"}</div>
-          <div className="chip-list">
-            {sortedTags.map((tag) => (
-              <button
-                key={tag.name}
-                type="button"
-                data-active={currentTag === tag.name}
-                onClick={() => updateQuery({ tag: tag.name, category: currentCategory })}
-              >
-                <span>
-                  {tag.name === DEFAULT_TAG
-                    ? language === "ko"
-                      ? "전체 태그"
-                      : "All tags"
-                    : `#${tag.name}`}
-                </span>
-                <span className="count">{tag.count}</span>
-              </button>
-            ))}
+      <section className="layout">
+        <aside className="sidebar">
+          <div className="side-card">
+            <div className="side-title">{language === "ko" ? "태그" : "Tags"}</div>
+            <div className="menu-list">
+              {tags.map((tag) => (
+                <button
+                  key={tag.name}
+                  type="button"
+                  className="menu-item"
+                  data-active={currentTag === tag.name}
+                  onClick={() => updateQuery({ tag: tag.name, category: currentMenu })}
+                >
+                  <span>{tag.name === DEFAULT_TAG ? DEFAULT_TAG : `#${tag.name}`}</span>
+                  <span className="count">{tag.count}</span>
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
 
-        <div className="filter-block">
-          <div className="filter-label">{language === "ko" ? "메뉴" : "Menu"}</div>
-          <div className="chip-list">
-            {sortedCategories.map((category) => (
-              <button
-                key={category.name}
-                type="button"
-                data-active={currentCategory === category.name}
-                onClick={() =>
-                  updateQuery({ tag: currentTag, category: category.name })
-                }
-              >
-                <span>{category.name}</span>
-                <span className="count">{category.count}</span>
-              </button>
-            ))}
+          <div className="side-card">
+            <div className="side-title">{language === "ko" ? "메뉴" : "Menu"}</div>
+            <div className="menu-list">
+              {menus.map((menu) => (
+                <button
+                  key={menu.name}
+                  type="button"
+                  className="menu-item"
+                  data-active={currentMenu === menu.name}
+                  onClick={() => updateQuery({ tag: currentTag, category: menu.name })}
+                >
+                  <span>{menu.name}</span>
+                  <span className="count">{menu.count}</span>
+                </button>
+              ))}
+            </div>
           </div>
+        </aside>
+
+        <div className="result-panel">
+          <div className="result-header">
+            <div>
+              <div className="result-eyebrow">{language === "ko" ? "결과" : "Results"}</div>
+              <h2>
+                {language === "ko" ? `${totalCount}개의 글` : `${totalCount} posts`}
+              </h2>
+            </div>
+            <div className="result-meta">
+              {currentTag !== DEFAULT_TAG && <span>#{currentTag}</span>}
+              {currentMenu !== DEFAULT_CATEGORY && <span>{currentMenu}</span>}
+              {totalPages > 1 && <span>{`${safePage} / ${totalPages}`}</span>}
+            </div>
+          </div>
+
+          {visiblePosts.length === 0 ? (
+            <div className="empty-state">
+              <h3>{language === "ko" ? "조건에 맞는 글이 아직 없어요." : "No matching posts yet."}</h3>
+              <p>
+                {language === "ko"
+                  ? "왼쪽에서 다른 태그나 메뉴를 골라보세요."
+                  : "Choose another tag or menu from the left."}
+              </p>
+            </div>
+          ) : (
+            <div className="post-grid">
+              {visiblePosts.map((post, index) => (
+                <Link key={post.id} href={`/${post.slug}`} className="post-card">
+                  <span className="post-index">
+                    {String((safePage - 1) * PAGE_SIZE + index + 1).padStart(2, "0")}
+                  </span>
+                  <div className="post-body">
+                    <h3>{post.title}</h3>
+                    {post.summary && <p>{post.summary}</p>}
+                  </div>
+                  <div className="meta">
+                    {post.menu?.[0] && <span className="badge">{post.menu[0]}</span>}
+                    <span className="date">
+                      {formatDate(post.date?.start_date || post.createdTime, locale)}
+                    </span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          )}
+
+          {totalPages > 1 && (
+            <nav className="pagination" aria-label="Tags pagination">
+              <button
+                type="button"
+                disabled={safePage <= 1}
+                onClick={() => updatePage(1)}
+              >
+                {"<<"}
+              </button>
+              <button
+                type="button"
+                disabled={safePage <= 1}
+                onClick={() => updatePage(safePage - 1)}
+              >
+                {"<"}
+              </button>
+              {Array.from({ length: totalPages }, (_, index) => index + 1).map((page) => (
+                <button
+                  key={page}
+                  type="button"
+                  data-active={page === safePage}
+                  onClick={() => updatePage(page)}
+                >
+                  {page}
+                </button>
+              ))}
+              <button
+                type="button"
+                disabled={safePage >= totalPages}
+                onClick={() => updatePage(safePage + 1)}
+              >
+                {">"}
+              </button>
+              <button
+                type="button"
+                disabled={safePage >= totalPages}
+                onClick={() => updatePage(totalPages)}
+              >
+                {">>"}
+              </button>
+            </nav>
+          )}
         </div>
       </section>
-
-      {filteredPosts.length === 0 ? (
-        <div className="empty-state">
-          <h2>{language === "ko" ? "조건에 맞는 글이 아직 없어요." : "No matching posts yet."}</h2>
-          <p>
-            {language === "ko"
-              ? "태그나 메뉴를 바꾸면 다른 기록을 바로 찾아볼 수 있습니다."
-              : "Try a different tag or menu to browse other posts."}
-          </p>
-        </div>
-      ) : (
-        <div className="post-list">
-          {filteredPosts.map((post) => (
-            <Link key={post.id} href={`/${post.slug}`} className="post-card">
-              <div className="meta">
-                {post.menu?.[0] && (
-                  <span className="category">{post.menu?.[0]}</span>
-                )}
-                <time>{formatDate(post.date?.start_date || post.createdTime, locale)}</time>
-              </div>
-              <h2>{post.title}</h2>
-              {post.summary && <p>{post.summary}</p>}
-              {!!post.tags?.length && (
-                <div className="tag-row">
-                  {post.tags.slice(0, 4).map((tag) => (
-                    <span key={tag} className="tag">
-                      #{tag}
-                    </span>
-                  ))}
-                </div>
-              )}
-            </Link>
-          ))}
-        </div>
-      )}
     </StyledWrapper>
   )
 }
@@ -185,106 +260,101 @@ const Tags: React.FC = () => {
 export default Tags
 
 const StyledWrapper = styled.div`
-  padding: 2rem 0 3rem;
+  display: grid;
+  gap: 1.2rem;
+  padding: 1.5rem 0 3rem;
 
   .hero {
-    margin-bottom: 1.25rem;
-    padding: 1.4rem 1.5rem;
+    padding: 1.5rem 1.6rem;
     border: 1px solid ${({ theme }) => theme.colors.gray6};
     border-radius: 1.4rem;
     background-color: ${({ theme }) =>
-      theme.scheme === "light" ? "rgba(255, 255, 255, 0.78)" : "rgba(29, 36, 48, 0.84)"};
+      theme.scheme === "light" ? "rgba(255, 255, 255, 0.82)" : "rgba(29, 36, 48, 0.84)"};
   }
 
-  .eyebrow {
-    margin-bottom: 0.6rem;
+  .eyebrow,
+  .result-eyebrow,
+  .side-title {
+    margin-bottom: 0.5rem;
+    color: ${({ theme }) => theme.colors.gray10};
     font-size: 0.78rem;
     line-height: 1rem;
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: ${({ theme }) => theme.colors.gray10};
   }
 
   h1 {
-    margin-bottom: 0.85rem;
+    margin-bottom: 0.8rem;
     font-size: 2rem;
     line-height: 2.45rem;
     font-weight: 800;
   }
 
   .hero p {
-    max-width: 42rem;
-    margin: 0 0 1rem;
-    line-height: 1.8rem;
+    max-width: 40rem;
     color: ${({ theme }) => theme.colors.gray11};
+    line-height: 1.75rem;
   }
 
-  .stats {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.55rem;
+  .layout {
+    display: grid;
+    gap: 1rem;
+    min-width: 0;
 
-    span {
-      display: inline-flex;
-      align-items: center;
-      min-height: 1.9rem;
-      padding: 0.3rem 0.7rem;
-      border-radius: 9999px;
-      background-color: ${({ theme }) => theme.colors.gray3};
-      color: ${({ theme }) => theme.colors.gray10};
-      font-size: 0.82rem;
-      line-height: 1rem;
-      font-weight: 600;
+    @media (min-width: 1024px) {
+      grid-template-columns: minmax(212px, 0.76fr) minmax(0, 2.84fr);
+      align-items: start;
     }
   }
 
-  .filters {
+  .sidebar {
     display: grid;
-    gap: 0.9rem;
-    margin-bottom: 1.5rem;
-    padding: 1rem 1.05rem;
-    border: 1px solid ${({ theme }) => theme.colors.gray6};
-    border-radius: 1.2rem;
-    background-color: ${({ theme }) =>
-      theme.scheme === "light" ? "rgba(255, 255, 255, 0.72)" : "rgba(29, 36, 48, 0.8)"};
+    gap: 1rem;
+    min-width: 0;
   }
 
-  .filter-block {
+  .side-card,
+  .result-panel {
+    min-width: 0;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+    padding: 1rem;
+    border: 1px solid ${({ theme }) => theme.colors.gray6};
+    border-radius: 1.25rem;
+    background-color: ${({ theme }) =>
+      theme.scheme === "light" ? "rgba(255, 255, 255, 0.82)" : "rgba(29, 36, 48, 0.84)"};
+  }
+
+  .menu-list {
     display: grid;
     gap: 0.55rem;
+    min-width: 0;
   }
 
-  .filter-label {
-    font-size: 0.76rem;
-    line-height: 1rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: ${({ theme }) => theme.colors.gray10};
-  }
-
-  .chip-list {
+  .menu-item {
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-
-  .chip-list button {
-    display: inline-flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 0.45rem;
-    min-height: 1.95rem;
-    padding: 0.35rem 0.72rem;
+    gap: 0.6rem;
+    width: 100%;
+    min-width: 0;
+    min-height: 2.9rem;
+    box-sizing: border-box;
+    overflow: hidden;
+    padding: 0.65rem 0.82rem;
     border: 1px solid ${({ theme }) => theme.colors.gray6};
-    border-radius: 9999px;
+    border-radius: 1rem;
     background-color: ${({ theme }) => theme.colors.gray2};
-    color: ${({ theme }) => theme.colors.gray10};
-    font-size: 0.8rem;
-    line-height: 1rem;
+    color: ${({ theme }) => theme.colors.gray11};
+    font-size: 0.88rem;
+    line-height: 1.25rem;
     font-weight: 600;
-    cursor: pointer;
-    transition: border-color 180ms ease, background-color 180ms ease, color 180ms ease,
+    text-align: left;
+    transition:
+      border-color 180ms ease,
+      background-color 180ms ease,
       transform 180ms ease;
 
     &:hover {
@@ -295,42 +365,70 @@ const StyledWrapper = styled.div`
 
     &[data-active="true"] {
       border-color: rgba(59, 130, 246, 0.28);
-      background: linear-gradient(
-        135deg,
-        rgba(59, 130, 246, 0.14),
-        rgba(37, 99, 235, 0.06)
-      );
+      background-color: ${({ theme }) =>
+        theme.scheme === "light" ? "rgba(226, 232, 240, 0.86)" : "rgba(51, 65, 85, 0.72)"};
       color: ${({ theme }) => theme.colors.gray12};
     }
   }
 
-  .count {
+  .count,
+  .result-meta span,
+  .badge,
+  .date {
     display: inline-flex;
-    justify-content: center;
     align-items: center;
-    min-width: 1.25rem;
-    height: 1.25rem;
-    padding: 0 0.28rem;
+    justify-content: center;
+    min-height: 1.8rem;
+    padding: 0.28rem 0.68rem;
     border-radius: 9999px;
-    background-color: ${({ theme }) => theme.colors.gray4};
-    font-size: 0.68rem;
-    line-height: 0.9rem;
-    font-weight: 700;
+    background-color: ${({ theme }) =>
+      theme.scheme === "light" ? "rgba(241, 245, 249, 0.72)" : "rgba(45, 55, 72, 0.78)"};
     color: ${({ theme }) => theme.colors.gray10};
+    font-size: 0.76rem;
+    line-height: 1rem;
+    font-weight: 600;
+  }
+
+  .result-panel {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .result-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .result-header h2 {
+    font-size: 1.35rem;
+    line-height: 1.8rem;
+    font-weight: 800;
+  }
+
+  .result-meta,
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    align-items: center;
+  }
+
+  .result-meta {
+    justify-content: flex-end;
   }
 
   .empty-state {
-    padding: 1.5rem;
-    border: 1px solid ${({ theme }) => theme.colors.gray6};
-    border-radius: 1.2rem;
-    background-color: ${({ theme }) =>
-      theme.scheme === "light" ? "rgba(255, 255, 255, 0.74)" : "rgba(29, 36, 48, 0.8)"};
+    padding: 1.25rem 1rem;
+    border-radius: 1rem;
+    background-color: ${({ theme }) => theme.colors.gray2};
   }
 
-  .empty-state h2 {
-    margin-bottom: 0.5rem;
-    font-size: 1.05rem;
-    line-height: 1.45rem;
+  .empty-state h3 {
+    margin-bottom: 0.45rem;
+    font-size: 1.08rem;
+    line-height: 1.6rem;
     font-weight: 700;
   }
 
@@ -339,70 +437,129 @@ const StyledWrapper = styled.div`
     line-height: 1.7rem;
   }
 
-  .post-list {
+  .post-grid {
     display: grid;
-    gap: 1rem;
+    gap: 0.35rem;
   }
 
   .post-card {
-    display: block;
-    padding: 1.1rem 1.15rem;
-    border: 1px solid ${({ theme }) => theme.colors.gray6};
-    border-radius: 1.2rem;
-    background-color: ${({ theme }) =>
-      theme.scheme === "light" ? "rgba(255, 255, 255, 0.8)" : "rgba(29, 36, 48, 0.82)"};
-    transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 0.9rem;
+    align-items: start;
+    padding: 0.9rem 0.95rem;
+    border-radius: 0.9rem;
+    border-bottom: 1px solid ${({ theme }) =>
+      theme.scheme === "light" ? "rgba(203, 213, 225, 0.56)" : "rgba(71, 85, 105, 0.5)"};
+    transition:
+      color 180ms ease,
+      background-color 180ms ease;
 
     &:hover {
-      transform: translateY(-2px);
-      border-color: ${({ theme }) => theme.colors.gray8};
-      box-shadow: 0 12px 20px -14px rgba(0, 0, 0, 0.18);
+      background-color: ${({ theme }) =>
+        theme.scheme === "light" ? "rgba(248, 250, 252, 0.72)" : "rgba(31, 41, 55, 0.52)"};
+    }
+
+    &:last-child {
+      border-bottom: 0;
     }
   }
 
-  .meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 0.7rem;
-  }
-
-  .category,
-  time,
-  .tag {
+  .post-index {
     display: inline-flex;
+    justify-content: center;
     align-items: center;
-    min-height: 1.75rem;
-    padding: 0.25rem 0.6rem;
-    border-radius: 9999px;
-    background-color: ${({ theme }) => theme.colors.gray3};
+    width: 2.15rem;
+    height: 2.15rem;
+    border-radius: 0.75rem;
+    background-color: ${({ theme }) =>
+      theme.scheme === "light" ? "rgba(226, 232, 240, 0.86)" : "rgba(45, 55, 72, 0.82)"};
     color: ${({ theme }) => theme.colors.gray10};
     font-size: 0.76rem;
     line-height: 1rem;
-    font-weight: 600;
-    white-space: nowrap;
-  }
-
-  h2 {
-    margin-bottom: 0.55rem;
-    font-size: 1.15rem;
-    line-height: 1.75rem;
     font-weight: 800;
   }
 
-  .post-card p {
-    margin: 0 0 0.9rem;
-    color: ${({ theme }) => theme.colors.gray11};
-    line-height: 1.7rem;
-    display: -webkit-box;
-    overflow: hidden;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
+  .post-body {
+    min-width: 0;
+    display: grid;
+    gap: 0.35rem;
   }
 
-  .tag-row {
+  .meta {
+    justify-content: flex-end;
+  }
+
+  .post-card h3 {
+    font-size: 1rem;
+    line-height: 1.45rem;
+    font-weight: 700;
+    color: ${({ theme }) => theme.colors.gray12};
+    word-break: keep-all;
+  }
+
+  .post-card p {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    color: ${({ theme }) => theme.colors.gray11};
+    font-size: 0.88rem;
+    line-height: 1.55rem;
+    word-break: keep-all;
+  }
+
+  @media (max-width: 768px) {
+    .post-card {
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 0.65rem;
+      padding: 0.85rem 0.75rem;
+    }
+
+    .meta {
+      justify-content: flex-start;
+      grid-column: 2;
+    }
+  }
+
+  .pagination {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 0.45rem;
+    padding-top: 0.35rem;
+  }
+
+  .pagination button {
+    min-width: 1.8rem;
+    height: 1.8rem;
+    padding: 0 0.25rem;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: ${({ theme }) => theme.colors.gray8};
+    opacity: 0.58;
+    font-size: 0.82rem;
+    line-height: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+      opacity 180ms ease,
+      color 180ms ease;
+
+    &:hover:not(:disabled) {
+      color: ${({ theme }) => theme.colors.gray12};
+      opacity: 1;
+    }
+
+    &[data-active="true"] {
+      color: ${({ theme }) => theme.colors.gray12};
+      opacity: 1;
+    }
+
+    &:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
   }
 `

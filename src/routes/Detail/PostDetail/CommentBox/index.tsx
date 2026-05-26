@@ -27,7 +27,7 @@ const CommentBox: React.FC<Props> = ({ data }) => {
     <StyledWrapper>
       <div className="comment-shell">
         <div className="title">{language === "ko" ? "댓글" : "Comments"}</div>
-        {CONFIG.utterances.enable && <UtterancesComponent issueTerm={data.id} />}
+        {CONFIG.utterances.enable && <UtterancesComponent />}
         {CONFIG.cusdis.enable && (
           <CusdisComponent id={data.id} slug={data.slug} title={data.title} />
         )}

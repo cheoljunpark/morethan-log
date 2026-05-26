@@ -7,7 +7,7 @@ import { useRouter } from "next/router"
 //TODO: useRef?
 
 type Props = {
-  issueTerm: string
+  issueTerm?: string
 }
 
 const Utterances: React.FC<Props> = ({ issueTerm }) => {
@@ -30,7 +30,10 @@ const Utterances: React.FC<Props> = ({ issueTerm }) => {
     Object.keys(config).forEach((key) => {
       script.setAttribute(key, config[key])
     })
-    script.setAttribute("issue-term", issueTerm)
+    script.setAttribute(
+      "issue-term",
+      config["issue-term"] || issueTerm || "pathname"
+    )
     anchor.appendChild(script)
     return () => {
       anchor.innerHTML = ""

@@ -178,10 +178,10 @@ const ArticleCard = styled.div`
       : "rgba(28, 35, 46, 0.86)"};
   backdrop-filter: blur(16px);
   box-shadow: 0 30px 80px -48px rgba(15, 23, 42, 0.35);
-  overflow: clip;
+  overflow: visible;
 
   @media (max-width: 1023px) {
-    overflow: hidden;
+    overflow: visible;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
     box-shadow: 0 18px 40px -34px rgba(15, 23, 42, 0.22);

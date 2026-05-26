@@ -53,8 +53,8 @@ export default Utterances
 const StyledWrapper = styled.div`
   margin-top: 2.5rem;
   width: 100%;
-  min-height: 14rem;
-  overflow: hidden;
+  min-height: 24rem;
+  overflow: visible;
 
   .utterances,
   .utterances-frame {
@@ -68,6 +68,7 @@ const StyledWrapper = styled.div`
   iframe.utterances-frame {
     width: 100% !important;
     max-width: 100% !important;
+    min-height: 24rem !important;
   }
 
   .timeline {

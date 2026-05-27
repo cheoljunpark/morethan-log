@@ -53,6 +53,7 @@ const PinnedPosts: React.FC<Props> = ({ q, compact = false }) => {
             <Link
               key={post.slug}
               href={`/${post.slug}`}
+              prefetch={false}
               className="item"
               onClick={() => handleClick(post.id)}
             >

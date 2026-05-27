@@ -1,9 +1,9 @@
 import styled from "@emotion/styled"
+import dynamic from "next/dynamic"
 import { useRouter } from "next/router"
-import { useEffect, useState } from "react"
 import { DEFAULT_CATEGORY } from "src/constants"
+import useDebouncedFeedSearch from "src/hooks/useDebouncedFeedSearch"
 
-import ContactCard from "./ContactCard"
 import { FeedHeader } from "./FeedHeader"
 import Footer from "./Footer"
 import HomeLanding from "./HomeLanding"
@@ -12,9 +12,16 @@ import MobileProfileCard from "./MobileProfileCard"
 import PostList from "./PostList"
 import ProfileCard from "./ProfileCard"
 import SearchInput from "./SearchInput"
-import ServiceCard from "./ServiceCard"
 
 const HEADER_HEIGHT = 73
+
+const ContactCard = dynamic(() => import("./ContactCard"), {
+  ssr: false,
+})
+
+const ServiceCard = dynamic(() => import("./ServiceCard"), {
+  ssr: false,
+})
 
 const Feed: React.FC = () => {
   const router = useRouter()
@@ -39,42 +46,12 @@ const Feed: React.FC = () => {
     currentCategory === DEFAULT_CATEGORY &&
     currentOrder === "desc"
 
-  const [searchValue, setSearchValue] = useState(q)
-  const [isComposing, setIsComposing] = useState(false)
-
-  useEffect(() => {
-    if (!isComposing) {
-      setSearchValue(q)
-    }
-  }, [isComposing, q])
-
-  const handleSearchChange = (value: string) => {
-    const nextQuery = {
-      ...router.query,
-      q: value || undefined,
-      page: undefined,
-    }
-
-    router.replace(
-      {
-        pathname: "/",
-        query: nextQuery,
-      },
-      undefined,
-      {
-        shallow: true,
-        scroll: false,
-      }
-    )
-  }
-
-  const handleSearchInputChange = (value: string) => {
-    setSearchValue(value)
-
-    if (!isComposing) {
-      handleSearchChange(value)
-    }
-  }
+  const {
+    searchValue,
+    handleChange,
+    handleCompositionStart,
+    handleCompositionEnd,
+  } = useDebouncedFeedSearch({ resetPage: true })
 
   return (
     <StyledWrapper>
@@ -107,13 +84,10 @@ const Feed: React.FC = () => {
           <div className="toolbar-search">
             <SearchInput
               value={searchValue}
-              onChange={(e) => handleSearchInputChange(e.target.value)}
-              onCompositionStart={() => setIsComposing(true)}
+              onChange={(e) => handleChange(e.target.value)}
+              onCompositionStart={handleCompositionStart}
               onCompositionEnd={(e) => {
-                const value = e.currentTarget.value
-                setIsComposing(false)
-                setSearchValue(value)
-                handleSearchChange(value)
+                handleCompositionEnd(e.currentTarget.value)
               }}
             />
           </div>

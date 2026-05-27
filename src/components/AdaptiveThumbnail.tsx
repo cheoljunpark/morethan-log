@@ -14,15 +14,17 @@ const AdaptiveThumbnail: React.FC<Props> = ({ src, alt, className, sizes }) => {
 
   return (
     <StyledWrapper className={className} data-portrait={isPortrait}>
-      <Image
-        src={src}
-        fill
-        alt=""
-        aria-hidden="true"
-        className="thumbnail-bg"
-        sizes={sizes}
-        css={{ objectFit: "cover" }}
-      />
+      {isPortrait && (
+        <Image
+          src={src}
+          fill
+          alt=""
+          aria-hidden="true"
+          className="thumbnail-bg"
+          sizes={sizes}
+          css={{ objectFit: "cover" }}
+        />
+      )}
       <Image
         src={src}
         fill

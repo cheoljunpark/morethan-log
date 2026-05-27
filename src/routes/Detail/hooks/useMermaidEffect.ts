@@ -1,24 +1,21 @@
-import { useQuery, useQueryClient } from "@tanstack/react-query"
-import mermaid from "mermaid"
-import { useEffect, useState } from "react"
-import { queryKey } from "src/constants/queryKey"
+import { useEffect, useRef } from "react"
 import useScheme from "src/hooks/useScheme"
 
 /**
  *  Wait for mermaid to be defined in the dom
  *  Additionally, verify that the HTML CollectionOf has an array value.
  */
-const waitForMermaid = (interval = 100, timeout = 5000) => {
-  return new Promise<HTMLCollectionOf<Element>>((resolve, reject) => {
+const waitForMermaidElements = (interval = 100, timeout = 5000) => {
+  return new Promise<HTMLCollectionOf<Element>>((resolve) => {
     const startTime = Date.now()
     const elements: HTMLCollectionOf<Element> =
       document.getElementsByClassName("language-mermaid")
 
     const checkMerMaidCode = () => {
-      if (mermaid.render !== undefined && elements.length > 0) {
+      if (elements.length > 0) {
         resolve(elements)
       } else if (Date.now() - startTime >= timeout) {
-        reject(new Error(`mermaid is not defined within the timeout period.`))
+        resolve(elements)
       } else {
         setTimeout(checkMerMaidCode, interval)
       }
@@ -27,30 +24,33 @@ const waitForMermaid = (interval = 100, timeout = 5000) => {
   })
 }
 const useMermaidEffect = () => {
-  const [memoMermaid, setMemoMermaid] = useState<Map<number, string>>(new Map())
-
-  const { data, isFetched } = useQuery({
-    queryKey: queryKey.scheme(),
-    enabled: false,
-  })
+  const [scheme] = useScheme()
+  const memoMermaid = useRef<Map<number, string>>(new Map())
 
   useEffect(() => {
-    if (!isFetched) return
-    mermaid.initialize({
-      startOnLoad: true,
-      theme: (data as "dark" | "light") === "dark" ? "dark" : "default",
-    })
+    if (typeof document === "undefined") return
 
-    if (!document) return
+    let isCancelled = false
 
-    waitForMermaid()
+    waitForMermaidElements()
       .then(async (elements) => {
+        if (isCancelled || elements.length === 0) return
+
+        const mermaid = (await import("mermaid")).default
+
+        if (isCancelled) return
+
+        mermaid.initialize({
+          startOnLoad: true,
+          theme: scheme === "dark" ? "dark" : "default",
+        })
+
         const promises = Array.from(elements)
           .filter((elements) => elements.tagName === "PRE")
           .map(async (element, i) => {
-            if (memoMermaid.get(i) !== undefined) {
+            if (memoMermaid.current.get(i) !== undefined) {
               const svg = await mermaid
-                .render("mermaid" + i, memoMermaid.get(i) || "")
+                .render("mermaid" + i, memoMermaid.current.get(i) || "")
                 .then((res) => res.svg)
               element.animate(
                 [
@@ -65,15 +65,16 @@ const useMermaidEffect = () => {
             const svg = await mermaid
               .render("mermaid" + i, element.textContent || "")
               .then((res) => res.svg)
-            setMemoMermaid(memoMermaid.set(i, element.textContent ?? ""))
+            memoMermaid.current.set(i, element.textContent ?? "")
             element.innerHTML = svg
           })
         await Promise.all(promises)
       })
-      .catch((error) => {
-        console.warn(error)
-      })
-  }, [data, isFetched])
+
+    return () => {
+      isCancelled = true
+    }
+  }, [scheme])
 
   return
 }

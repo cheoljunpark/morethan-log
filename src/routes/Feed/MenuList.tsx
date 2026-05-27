@@ -191,7 +191,11 @@ const MenuList: React.FC = () => {
                   }}
                 >
                   {isIconUrl(row.icon) ? (
-                    <img src={row.icon || ""} alt="" />
+                    <span
+                      className="icon-image"
+                      style={{ backgroundImage: `url("${row.icon}")` }}
+                      aria-hidden="true"
+                    />
                   ) : (
                     row.icon || getMenuLabel(row.name)
                   )}
@@ -319,11 +323,13 @@ const StyledWrapper = styled.div`
     text-transform: uppercase;
     overflow: hidden;
 
-    img {
+    .icon-image {
       width: 1.15rem;
       height: 1.15rem;
-      object-fit: contain;
       display: block;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
     }
   }
 

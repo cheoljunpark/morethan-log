@@ -33,22 +33,27 @@ const PostList: React.FC<Props> = ({ q }) => {
   const currentPage = getPageFromQuery(router.query.page)
   const currentView = `${router.query.view || ""}` || undefined
 
+  const searchIndex = useMemo(() => {
+    return new Map(
+      data.map((post) => {
+        const tagContent = post.tags ? post.tags.join(" ") : ""
+        const menuContent = post.menu ? post.menu.join(" ") : ""
+        const submenuContent = post.submenu ? post.submenu.join(" ") : ""
+        const searchContent =
+          post.title +
+          (post.summary || "") +
+          tagContent +
+          menuContent +
+          submenuContent
+
+        return [post.id, searchContent.toLowerCase()]
+      })
+    )
+  }, [data])
+
   const filteredPosts = useMemo(() => {
     let nextPosts = [...data]
-
-    nextPosts = nextPosts.filter((post) => {
-      const tagContent = post.tags ? post.tags.join(" ") : ""
-      const menuContent = post.menu ? post.menu.join(" ") : ""
-      const submenuContent = post.submenu ? post.submenu.join(" ") : ""
-      const searchContent =
-        post.title +
-        (post.summary || "") +
-        tagContent +
-        menuContent +
-        submenuContent
-
-      return searchContent.toLowerCase().includes(q.toLowerCase())
-    })
+    const normalizedQuery = q.trim().toLowerCase()
 
     if (currentTag) {
       nextPosts = nextPosts.filter(
@@ -74,12 +79,18 @@ const PostList: React.FC<Props> = ({ q }) => {
       )
     }
 
+    if (normalizedQuery) {
+      nextPosts = nextPosts.filter((post) => {
+        return (searchIndex.get(post.id) || "").includes(normalizedQuery)
+      })
+    }
+
     if (currentOrder !== "desc") {
       nextPosts = [...nextPosts].reverse()
     }
 
     return nextPosts
-  }, [currentCategory, currentMenu, currentOrder, currentSubmenu, currentTag, data, q])
+  }, [currentCategory, currentMenu, currentOrder, currentSubmenu, currentTag, data, q, searchIndex])
 
   const totalPages = Math.max(1, Math.ceil(filteredPosts.length / PAGE_SIZE))
   const safePage = Math.min(currentPage, totalPages)

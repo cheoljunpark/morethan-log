@@ -1,11 +1,14 @@
 import styled from "@emotion/styled"
 import Link from "next/link"
 import { useRouter } from "next/router"
+import { useCallback, useEffect } from "react"
 import { useUiLanguage } from "src/contexts/UiLanguageContext"
 
 type Props = {
   className?: string
 }
+
+const PREFETCH_PATHS = ["/archive", "/tags", "/about"]
 
 const NavBar: React.FC<Props> = ({ className }) => {
   const router = useRouter()
@@ -16,6 +19,31 @@ const NavBar: React.FC<Props> = ({ className }) => {
     { id: 2, name: language === "ko" ? "태그" : "Tags", to: "/tags" },
     { id: 3, name: language === "ko" ? "소개" : "About", to: "/about" },
   ]
+  const prefetchStaticPages = useCallback(() => {
+    PREFETCH_PATHS.forEach((path) => {
+      void router.prefetch(path)
+    })
+  }, [router])
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+
+    if ("requestIdleCallback" in window) {
+      const idleId = window.requestIdleCallback(prefetchStaticPages, {
+        timeout: 1500,
+      })
+
+      return () => {
+        window.cancelIdleCallback(idleId)
+      }
+    }
+
+    const timer = globalThis.setTimeout(prefetchStaticPages, 800)
+
+    return () => {
+      globalThis.clearTimeout(timer)
+    }
+  }, [prefetchStaticPages])
 
   return (
     <StyledWrapper className={className}>
@@ -25,7 +53,16 @@ const NavBar: React.FC<Props> = ({ className }) => {
 
           return (
             <li key={link.id}>
-              <Link href={link.to} data-active={active}>
+              <Link
+                href={link.to}
+                data-active={active}
+                onFocus={() => {
+                  void router.prefetch(link.to)
+                }}
+                onMouseEnter={() => {
+                  void router.prefetch(link.to)
+                }}
+              >
                 {link.name}
               </Link>
             </li>

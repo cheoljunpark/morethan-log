@@ -13,7 +13,7 @@ import "prismjs/themes/prism-tomorrow.css"
 // used for rendering equations (optional)
 
 import "katex/dist/katex.min.css"
-import { FC, useEffect } from "react"
+import { FC, useEffect, useRef } from "react"
 import styled from "@emotion/styled"
 
 const _NotionRenderer = dynamic(
@@ -58,6 +58,61 @@ type Props = {
   recordMap: ExtendedRecordMap
 }
 
+type PrismApi = {
+  highlightAllUnder: (container: ParentNode) => void
+}
+
+let prismPromise: Promise<PrismApi> | null = null
+
+const loadPrism = () => {
+  if (!prismPromise) {
+    prismPromise = import("prismjs/prism").then(async (prismModule) => {
+      await Promise.all([
+        import("prismjs/components/prism-markup-templating.js"),
+        import("prismjs/components/prism-markup.js"),
+        import("prismjs/components/prism-bash.js"),
+        import("prismjs/components/prism-c.js"),
+        import("prismjs/components/prism-cpp.js"),
+        import("prismjs/components/prism-csharp.js"),
+        import("prismjs/components/prism-docker.js"),
+        import("prismjs/components/prism-java.js"),
+        import("prismjs/components/prism-js-templates.js"),
+        import("prismjs/components/prism-coffeescript.js"),
+        import("prismjs/components/prism-diff.js"),
+        import("prismjs/components/prism-git.js"),
+        import("prismjs/components/prism-go.js"),
+        import("prismjs/components/prism-kotlin.js"),
+        import("prismjs/components/prism-graphql.js"),
+        import("prismjs/components/prism-handlebars.js"),
+        import("prismjs/components/prism-less.js"),
+        import("prismjs/components/prism-makefile.js"),
+        import("prismjs/components/prism-markdown.js"),
+        import("prismjs/components/prism-objectivec.js"),
+        import("prismjs/components/prism-ocaml.js"),
+        import("prismjs/components/prism-python.js"),
+        import("prismjs/components/prism-reason.js"),
+        import("prismjs/components/prism-rust.js"),
+        import("prismjs/components/prism-sass.js"),
+        import("prismjs/components/prism-scss.js"),
+        import("prismjs/components/prism-solidity.js"),
+        import("prismjs/components/prism-sql.js"),
+        import("prismjs/components/prism-stylus.js"),
+        import("prismjs/components/prism-swift.js"),
+        import("prismjs/components/prism-wasm.js"),
+        import("prismjs/components/prism-yaml.js"),
+      ])
+
+      const moduleWithDefault = prismModule as typeof prismModule & {
+        default?: PrismApi
+      }
+
+      return moduleWithDefault.default || (prismModule as PrismApi)
+    })
+  }
+
+  return prismPromise
+}
+
 const getCodeLanguage = (codeElement: HTMLElement | null) => {
   if (!codeElement) return "code"
 
@@ -69,10 +124,28 @@ const getCodeLanguage = (codeElement: HTMLElement | null) => {
   return languageClass.replace("language-", "") || "code"
 }
 
-const decorateCodeBlocks = () => {
+const copyText = async (text: string) => {
+  if (navigator.clipboard?.writeText) {
+    await navigator.clipboard.writeText(text)
+    return
+  }
+
+  const textarea = document.createElement("textarea")
+  textarea.value = text
+  textarea.setAttribute("readonly", "true")
+  textarea.style.position = "fixed"
+  textarea.style.top = "-9999px"
+  textarea.style.opacity = "0"
+  document.body.appendChild(textarea)
+  textarea.select()
+  document.execCommand("copy")
+  textarea.remove()
+}
+
+const decorateCodeBlocks = (root: ParentNode = document) => {
   if (typeof window === "undefined") return
 
-  const blocks = document.querySelectorAll<HTMLElement>("pre.notion-code")
+  const blocks = root.querySelectorAll<HTMLElement>("pre.notion-code")
 
   blocks.forEach((block) => {
     if (block.dataset.enhanced === "true") return
@@ -84,6 +157,7 @@ const decorateCodeBlocks = () => {
     const lineCount = code.innerText.split("\n").length
     const isLongCode = lineCount > 18
     const existingCopy = block.querySelector<HTMLElement>(".notion-code-copy")
+    const codeText = code.innerText
 
     const toolbar = document.createElement("div")
     toolbar.className = "notion-code-toolbar"
@@ -96,11 +170,33 @@ const decorateCodeBlocks = () => {
     actions.className = "notion-code-actions"
 
     if (existingCopy) {
-      actions.appendChild(existingCopy)
+      existingCopy.remove()
     }
 
+    const copyButton = document.createElement("button")
+    copyButton.type = "button"
+    copyButton.className = "notion-code-action notion-code-copy-action"
+    copyButton.setAttribute("aria-label", "Copy code")
+    copyButton.dataset.copied = "false"
+    copyButton.onclick = async (event) => {
+      event.preventDefault()
+      event.stopPropagation()
+
+      try {
+        await copyText(codeText)
+      } catch {
+        return
+      }
+
+      copyButton.dataset.copied = "true"
+      window.setTimeout(() => {
+        copyButton.dataset.copied = "false"
+      }, 1200)
+    }
+
+    actions.appendChild(copyButton)
+
     if (isLongCode) {
-      block.dataset.collapsed = "true"
       block.dataset.collapsed = "true"
 
       const toggleButton = document.createElement("button")
@@ -177,10 +273,10 @@ const getCalloutTone = (callout: HTMLElement) => {
   return "default"
 }
 
-const decorateCallouts = () => {
+const decorateCallouts = (root: ParentNode = document) => {
   if (typeof window === "undefined") return
 
-  const callouts = document.querySelectorAll<HTMLElement>(".notion-callout")
+  const callouts = root.querySelectorAll<HTMLElement>(".notion-callout")
 
   callouts.forEach((callout) => {
     callout.dataset.tone = getCalloutTone(callout)
@@ -189,6 +285,7 @@ const decorateCallouts = () => {
 
 const NotionRenderer: FC<Props> = ({ recordMap }) => {
   const [scheme] = useScheme()
+  const wrapperRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     const originalLog = console.log
@@ -228,26 +325,80 @@ const NotionRenderer: FC<Props> = ({ recordMap }) => {
   }, [])
 
   useEffect(() => {
-    decorateCodeBlocks()
-    decorateCallouts()
+    let animationFrame: number | null = null
+    let fallbackTimer: number | null = null
+    let hasHighlighted = false
+    let isDisposed = false
 
-    const observer = new MutationObserver(() => {
-      decorateCodeBlocks()
-      decorateCallouts()
-    })
+    const highlightCodeBlocks = async () => {
+      const wrapper = wrapperRef.current
 
-    observer.observe(document.body, {
+      if (
+        hasHighlighted ||
+        !wrapper ||
+        !wrapper.querySelector("pre.notion-code code[class*='language-']")
+      ) {
+        return
+      }
+
+      hasHighlighted = true
+
+      try {
+        const Prism = await loadPrism()
+        if (!isDisposed && wrapperRef.current) {
+          Prism.highlightAllUnder(wrapperRef.current)
+        }
+      } catch {
+        hasHighlighted = false
+      }
+    }
+
+    const runDecorations = () => {
+      animationFrame = null
+      const wrapper = wrapperRef.current
+      if (!wrapper) return
+
+      decorateCodeBlocks(wrapper)
+      decorateCallouts(wrapper)
+      void highlightCodeBlocks()
+    }
+
+    const scheduleDecorations = () => {
+      if (animationFrame !== null) return
+      animationFrame = window.requestAnimationFrame(runDecorations)
+    }
+
+    scheduleDecorations()
+
+    if (wrapperRef.current) {
+      fallbackTimer = window.setTimeout(scheduleDecorations, 250)
+    }
+
+    const observer = new MutationObserver(scheduleDecorations)
+
+    if (!wrapperRef.current) {
+      return undefined
+    }
+
+    observer.observe(wrapperRef.current, {
       childList: true,
       subtree: true,
     })
 
     return () => {
+      isDisposed = true
+      if (animationFrame !== null) {
+        window.cancelAnimationFrame(animationFrame)
+      }
+      if (fallbackTimer !== null) {
+        window.clearTimeout(fallbackTimer)
+      }
       observer.disconnect()
     }
   }, [recordMap])
 
   return (
-    <StyledWrapper>
+    <StyledWrapper ref={wrapperRef}>
       <_NotionRenderer
         darkMode={scheme === "dark"}
         recordMap={recordMap}
@@ -387,7 +538,7 @@ const StyledWrapper = styled.div`
     justify-content: space-between;
     align-items: center;
     gap: 0.75rem;
-    padding: 0.65rem 0.8rem 0.55rem;
+    padding: 0.2rem 0.56rem;
     border-bottom: 1px solid ${({ theme }) => theme.colors.gray6};
     background-color: ${({ theme }) =>
       theme.scheme === "light" ? "rgba(238, 242, 248, 0.96)" : "rgba(26, 34, 46, 0.96)"};
@@ -395,8 +546,8 @@ const StyledWrapper = styled.div`
   .notion-code-language {
     display: inline-flex;
     align-items: center;
-    min-height: 1.5rem;
-    padding: 0.2rem 0.5rem;
+    min-height: 0.95rem;
+    padding: 0 0.3rem;
     border-radius: 9999px;
     background-color: ${({ theme }) => theme.colors.gray3};
     color: ${({ theme }) => theme.colors.gray10};
@@ -436,9 +587,10 @@ const StyledWrapper = styled.div`
   }
   .notion-code-action {
     display: inline-flex;
+    justify-content: center;
     align-items: center;
-    min-height: 1.5rem;
-    padding: 0.2rem 0.55rem;
+    min-height: 1.16rem;
+    padding: 0.06rem 0.4rem;
     border: 1px solid ${({ theme }) => theme.colors.gray6};
     border-radius: 9999px;
     background-color: transparent;
@@ -451,6 +603,38 @@ const StyledWrapper = styled.div`
     &:hover {
       background-color: ${({ theme }) => theme.colors.gray3};
       color: ${({ theme }) => theme.colors.gray12};
+    }
+  }
+  .notion-code-copy-action {
+    width: 1.25rem;
+    min-width: 1.25rem;
+    height: 1.25rem;
+    min-height: 1.25rem;
+    padding: 0;
+
+    &::before {
+      content: "";
+      width: 0.68rem;
+      height: 0.68rem;
+      background-color: currentColor;
+      mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='9' y='9' width='13' height='13' rx='2' ry='2'/%3E%3Cpath d='M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1'/%3E%3C/svg%3E")
+        center / contain no-repeat;
+      -webkit-mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='9' y='9' width='13' height='13' rx='2' ry='2'/%3E%3Cpath d='M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1'/%3E%3C/svg%3E")
+        center / contain no-repeat;
+    }
+
+    &[data-copied="true"] {
+      color: ${({ theme }) =>
+        theme.scheme === "light" ? "#0f766e" : "#5eead4"};
+      border-color: ${({ theme }) =>
+        theme.scheme === "light"
+          ? "rgba(15, 118, 110, 0.28)"
+          : "rgba(94, 234, 212, 0.28)"};
+    }
+
+    &[data-copied="true"]::before {
+      mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
+      -webkit-mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
     }
   }
   .notion-code pre {

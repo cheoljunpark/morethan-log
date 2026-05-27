@@ -1,6 +1,5 @@
-import { useRouter } from "next/router"
-import { useEffect, useState } from "react"
 import styled from "@emotion/styled"
+import useDebouncedFeedSearch from "src/hooks/useDebouncedFeedSearch"
 import SearchInput from "src/routes/Feed/SearchInput"
 import { zIndexes } from "src/styles/zIndexes"
 import LanguageToggle from "./LanguageToggle"
@@ -13,35 +12,12 @@ type Props = {
 }
 
 const Header: React.FC<Props> = ({ fullWidth }) => {
-  const router = useRouter()
-  const q = typeof router.query.q === "string" ? router.query.q : ""
-  const [searchValue, setSearchValue] = useState(q)
-  const [isComposing, setIsComposing] = useState(false)
-
-  useEffect(() => {
-    if (!isComposing) {
-      setSearchValue(q)
-    }
-  }, [isComposing, q])
-
-  const handleSearchChange = (value: string) => {
-    const nextQuery = {
-      ...router.query,
-      q: value || undefined,
-    }
-
-    router.replace(
-      {
-        pathname: "/",
-        query: nextQuery,
-      },
-      undefined,
-      {
-        shallow: true,
-        scroll: false,
-      }
-    )
-  }
+  const {
+    searchValue,
+    handleChange,
+    handleCompositionStart,
+    handleCompositionEnd,
+  } = useDebouncedFeedSearch()
 
   return (
     <StyledWrapper data-detail-safe="true">
@@ -55,16 +31,11 @@ const Header: React.FC<Props> = ({ fullWidth }) => {
           <SearchInput
             value={searchValue}
             onChange={(e) => {
-              const value = e.target.value
-              setSearchValue(value)
-              if (!isComposing) handleSearchChange(value)
+              handleChange(e.target.value)
             }}
-            onCompositionStart={() => setIsComposing(true)}
+            onCompositionStart={handleCompositionStart}
             onCompositionEnd={(e) => {
-              const value = e.currentTarget.value
-              setIsComposing(false)
-              setSearchValue(value)
-              handleSearchChange(value)
+              handleCompositionEnd(e.currentTarget.value)
             }}
           />
         </div>

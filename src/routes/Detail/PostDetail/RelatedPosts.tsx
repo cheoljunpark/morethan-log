@@ -15,7 +15,7 @@ const RelatedPosts: React.FC = () => {
       <div className="title">{language === "ko" ? "관련 글" : "Related posts"}</div>
       <div className="list">
         {posts.map((post) => (
-          <Link href={`/${post.slug}`} key={post.id} className="card">
+          <Link href={`/${post.slug}`} prefetch={false} key={post.id} className="card">
             <div className="post-title">{post.title}</div>
             {post.summary && <p>{post.summary}</p>}
           </Link>

@@ -48,6 +48,7 @@ const FeaturedPosts: React.FC<Props> = ({ enabled }) => {
       <div className="grid">
         <Link
           href={`/${primaryPost.slug}`}
+          prefetch={false}
           className="primary"
           onClick={() => handleClick(primaryPost.id)}
         >
@@ -81,6 +82,7 @@ const FeaturedPosts: React.FC<Props> = ({ enabled }) => {
           {secondaryPosts.map((post) => (
             <Link
               href={`/${post.slug}`}
+              prefetch={false}
               className="secondary-card"
               key={post.id}
               onClick={() => handleClick(post.id)}

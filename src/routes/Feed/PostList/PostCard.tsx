@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { CONFIG } from "site.config"
+import { memo } from "react"
 import { formatDate } from "src/libs/utils"
 import Tag from "../../../components/Tag"
 import { TPost } from "../../../types"
@@ -32,7 +33,7 @@ const PostCard: React.FC<Props> = ({ data }) => {
   }
 
   return (
-    <StyledWrapper href={`/${data.slug}`} onClick={handleClick}>
+    <StyledWrapper href={`/${data.slug}`} prefetch={false} onClick={handleClick}>
       <article data-post-id={data.id}>
         <div className="thumbnail" data-empty={!data.thumbnail}>
           {data.thumbnail && (
@@ -40,7 +41,7 @@ const PostCard: React.FC<Props> = ({ data }) => {
               src={data.thumbnail}
               alt={data.title}
               className="thumbnail-image"
-              sizes="(min-width: 1024px) 720px, 100vw"
+              sizes="(min-width: 1480px) 360px, (min-width: 1024px) 520px, 100vw"
             />
           )}
           {!data.thumbnail && (
@@ -92,10 +93,12 @@ const PostCard: React.FC<Props> = ({ data }) => {
   )
 }
 
-export default PostCard
+export default memo(PostCard)
 
 const StyledWrapper = styled(Link)`
   article {
+    content-visibility: auto;
+    contain-intrinsic-size: 24rem 30rem;
     overflow: hidden;
     position: relative;
     margin-bottom: 1.5rem;

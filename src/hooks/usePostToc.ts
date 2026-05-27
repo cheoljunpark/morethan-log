@@ -6,6 +6,19 @@ type TocItem = {
   text: string
 }
 
+const isSameItems = (prev: TocItem[], next: TocItem[]) => {
+  if (prev.length !== next.length) return false
+
+  return prev.every((item, index) => {
+    const nextItem = next[index]
+    return (
+      item.id === nextItem.id &&
+      item.level === nextItem.level &&
+      item.text === nextItem.text
+    )
+  })
+}
+
 const slugify = (value: string) =>
   value
     .toLowerCase()
@@ -22,8 +35,10 @@ const usePostToc = (containerId: string) => {
 
     const container = document.getElementById(containerId)
     if (!container) return
+    let frame: number | null = null
 
     const syncHeadings = () => {
+      frame = null
       const headings = Array.from(
         container.querySelectorAll("h1, h2, h3")
       ) as HTMLElement[]
@@ -49,21 +64,32 @@ const usePostToc = (containerId: string) => {
         })
         .filter(Boolean) as TocItem[]
 
-      setItems(nextItems)
+      setItems((prevItems) =>
+        isSameItems(prevItems, nextItems) ? prevItems : nextItems
+      )
     }
 
-    syncHeadings()
+    const scheduleSyncHeadings = () => {
+      if (frame !== null) return
+      frame = window.requestAnimationFrame(syncHeadings)
+    }
 
-    const observer = new MutationObserver(() => {
-      syncHeadings()
-    })
+    scheduleSyncHeadings()
+
+    const observer = new MutationObserver(scheduleSyncHeadings)
 
     observer.observe(container, {
       childList: true,
       subtree: true,
     })
 
-    return () => observer.disconnect()
+    return () => {
+      if (frame !== null) {
+        window.cancelAnimationFrame(frame)
+      }
+
+      observer.disconnect()
+    }
   }, [containerId])
 
   useEffect(() => {
@@ -84,7 +110,10 @@ const usePostToc = (containerId: string) => {
           )
 
         if (visibleEntries[0]) {
-          setActiveId(visibleEntries[0].target.id)
+          const nextActiveId = visibleEntries[0].target.id
+          setActiveId((prevActiveId) =>
+            prevActiveId === nextActiveId ? prevActiveId : nextActiveId
+          )
         }
       },
       {

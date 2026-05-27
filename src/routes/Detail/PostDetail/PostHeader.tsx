@@ -19,9 +19,7 @@ const PostHeader: React.FC<Props> = ({ data }) => {
   const post = usePostQuery()
   const readingTime = useReadingTime(post)
   const updatedAt = data.updatedAt?.start_date
-  const [shareLabel, setShareLabel] = useState(
-    language === "ko" ? "링크 복사" : "Copy link"
-  )
+  const [isShareCopied, setIsShareCopied] = useState(false)
 
   const handleShare = async () => {
     if (typeof window === "undefined") return
@@ -32,21 +30,21 @@ const PostHeader: React.FC<Props> = ({ data }) => {
     try {
       if (navigator.clipboard?.writeText) {
         await navigator.clipboard.writeText(shareUrl)
-        setShareLabel(language === "ko" ? "복사됨" : "Copied")
+        setIsShareCopied(true)
       } else {
         window.prompt(
           language === "ko" ? "이 링크를 복사하세요" : "Copy this link",
           shareUrl
         )
-        setShareLabel(language === "ko" ? "복사 준비" : "Ready")
+        setIsShareCopied(true)
       }
     } catch {
-      setShareLabel(language === "ko" ? "링크 복사" : "Copy link")
+      setIsShareCopied(false)
     }
 
     window.setTimeout(() => {
-      setShareLabel(language === "ko" ? "링크 복사" : "Copy link")
-    }, 2000)
+      setIsShareCopied(false)
+    }, 1200)
   }
 
   return (
@@ -85,8 +83,14 @@ const PostHeader: React.FC<Props> = ({ data }) => {
                 </div>
               )}
             </div>
-            <button className="share" onClick={handleShare} type="button">
-              {shareLabel}
+            <button
+              className="share"
+              data-copied={isShareCopied}
+              onClick={handleShare}
+              type="button"
+              aria-label={isShareCopied ? "Copied link" : "Copy link"}
+            >
+              <span className="share-icon" aria-hidden="true" />
             </button>
           </div>
           <div className="mid">
@@ -174,13 +178,14 @@ const StyledWrapper = styled.div`
       }
 
       .share {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
         border: 1px solid ${({ theme }) => theme.colors.gray6};
         border-radius: 9999px;
-        width: fit-content;
-        padding: 0.55rem 0.95rem;
-        font-size: 0.875rem;
-        line-height: 1.25rem;
-        font-weight: 600;
+        width: 2.1rem;
+        height: 2.1rem;
+        padding: 0;
         color: ${({ theme }) => theme.colors.gray12};
         background-color: ${({ theme }) =>
           theme.scheme === "light"
@@ -191,6 +196,30 @@ const StyledWrapper = styled.div`
         &:hover {
           background-color: ${({ theme }) => theme.colors.gray4};
         }
+
+        &[data-copied="true"] {
+          color: ${({ theme }) =>
+            theme.scheme === "light" ? "#0f766e" : "#5eead4"};
+          border-color: ${({ theme }) =>
+            theme.scheme === "light"
+              ? "rgba(15, 118, 110, 0.28)"
+              : "rgba(94, 234, 212, 0.28)"};
+        }
+      }
+
+      .share-icon {
+        width: 1rem;
+        height: 1rem;
+        background-color: currentColor;
+        mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='9' y='9' width='13' height='13' rx='2' ry='2'/%3E%3Cpath d='M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1'/%3E%3C/svg%3E")
+          center / contain no-repeat;
+        -webkit-mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='9' y='9' width='13' height='13' rx='2' ry='2'/%3E%3Cpath d='M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1'/%3E%3C/svg%3E")
+          center / contain no-repeat;
+      }
+
+      .share[data-copied="true"] .share-icon {
+        mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
+        -webkit-mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
       }
     }
     > .mid {

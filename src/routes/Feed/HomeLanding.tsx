@@ -103,7 +103,7 @@ const HomeLanding: React.FC = () => {
               </time>
               <CommentBadge title={recommendedPost.title} />
             </div>
-            <Link href={`/${recommendedPost.slug}`} className="hero-link mobile" onClick={() => saveFeedPosition(recommendedPost.id)}>
+            <Link href={`/${recommendedPost.slug}`} prefetch={false} className="hero-link mobile" onClick={() => saveFeedPosition(recommendedPost.id)}>
               {language === "ko" ? "바로 읽기" : "Read now"}
             </Link>
           </div>
@@ -114,6 +114,7 @@ const HomeLanding: React.FC = () => {
                 src={recommendedPost.thumbnail}
                 fill
                 alt=""
+                priority
                 sizes="(min-width: 1024px) 360px, 100vw"
                 css={{ objectFit: "cover" }}
               />
@@ -124,7 +125,7 @@ const HomeLanding: React.FC = () => {
                 </span>
               </div>
             )}
-            <Link href={`/${recommendedPost.slug}`} className="hero-link desktop" onClick={() => saveFeedPosition(recommendedPost.id)}>
+            <Link href={`/${recommendedPost.slug}`} prefetch={false} className="hero-link desktop" onClick={() => saveFeedPosition(recommendedPost.id)}>
               {language === "ko" ? "바로 읽기" : "Read now"}
             </Link>
           </div>
@@ -143,6 +144,7 @@ const HomeLanding: React.FC = () => {
               <Link
                 key={post.id}
                 href={`/${post.slug}`}
+                prefetch={false}
                 className="list-item"
                 data-post-id={post.id}
                 onClick={() => saveFeedPosition(post.id)}
@@ -182,6 +184,7 @@ const HomeLanding: React.FC = () => {
               <Link
                 key={post.id}
                 href={`/${post.slug}`}
+                prefetch={false}
                 className="spotlight-card"
                 data-post-id={post.id}
                 onClick={() => saveFeedPosition(post.id)}

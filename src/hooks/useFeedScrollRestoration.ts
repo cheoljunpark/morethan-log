@@ -1,10 +1,13 @@
-import { useLayoutEffect, useState } from "react"
+import { useEffect, useLayoutEffect, useState } from "react"
 import { storageKey } from "src/constants/storage"
+
+const useIsomorphicLayoutEffect =
+  typeof window === "undefined" ? useEffect : useLayoutEffect
 
 const useFeedScrollRestoration = (dependencyKey: string) => {
   const [isRestored, setIsRestored] = useState(false)
 
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (typeof window === "undefined") return
 
     setIsRestored(false)

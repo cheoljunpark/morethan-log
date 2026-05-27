@@ -2,6 +2,7 @@ import styled from "@emotion/styled"
 import { useRouter } from "next/router"
 import { useMemo } from "react"
 import { useUiLanguage } from "src/contexts/UiLanguageContext"
+import { storageKey } from "src/constants/storage"
 import usePostsQuery from "src/hooks/usePostsQuery"
 import { filterPosts } from "src/libs/utils/notion"
 import getFeedQuery from "src/libs/utils/router/getFeedQuery"
@@ -102,7 +103,12 @@ const MenuList: React.FC = () => {
   const handleClick = (menu: string) => {
     const nextFeedQuery = getFeedQuery(router.query)
 
-    router.replace(
+    if (typeof window !== "undefined") {
+      window.sessionStorage.removeItem(storageKey.feedActivePostId)
+      window.sessionStorage.removeItem(storageKey.feedScrollY)
+    }
+
+    void router.replace(
       {
         pathname: "/",
         query: {
@@ -118,15 +124,22 @@ const MenuList: React.FC = () => {
       undefined,
       {
         shallow: true,
-        scroll: false,
+        scroll: true,
       }
-    )
+    ).then(() => {
+      window.scrollTo({ top: 0, behavior: "auto" })
+    })
   }
 
   const handleSubmenuClick = (menu: string, submenu: string) => {
     const nextFeedQuery = getFeedQuery(router.query)
 
-    router.replace(
+    if (typeof window !== "undefined") {
+      window.sessionStorage.removeItem(storageKey.feedActivePostId)
+      window.sessionStorage.removeItem(storageKey.feedScrollY)
+    }
+
+    void router.replace(
       {
         pathname: "/",
         query: {
@@ -142,9 +155,11 @@ const MenuList: React.FC = () => {
       undefined,
       {
         shallow: true,
-        scroll: false,
+        scroll: true,
       }
-    )
+    ).then(() => {
+      window.scrollTo({ top: 0, behavior: "auto" })
+    })
   }
 
   return (

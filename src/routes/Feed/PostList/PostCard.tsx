@@ -8,6 +8,7 @@ import styled from "@emotion/styled"
 import { storageKey } from "src/constants/storage"
 import AdaptiveThumbnail from "src/components/AdaptiveThumbnail"
 import normalizeFeedQueryString from "src/libs/utils/router/normalizeFeedQueryString"
+import useUtterancesCommentCount from "src/hooks/useUtterancesCommentCount"
 
 type Props = {
   data: TPost
@@ -18,6 +19,7 @@ const PostCard: React.FC<Props> = ({ data }) => {
   const primaryTag = data.tags?.[0]
   const secondaryTags = data.tags?.slice(1, 4) || []
   const showType = data.type[0] !== "Post"
+  const commentCount = useUtterancesCommentCount(data.title)
   const handleClick = () => {
     if (typeof window === "undefined") return
 
@@ -32,17 +34,20 @@ const PostCard: React.FC<Props> = ({ data }) => {
   return (
     <StyledWrapper href={`/${data.slug}`} onClick={handleClick}>
       <article data-post-id={data.id}>
-        {data.thumbnail && (
-          <div className="thumbnail">
+        <div className="thumbnail" data-empty={!data.thumbnail}>
+          {data.thumbnail && (
             <AdaptiveThumbnail
               src={data.thumbnail}
               alt={data.title}
               className="thumbnail-image"
               sizes="(min-width: 1024px) 720px, 100vw"
             />
-          </div>
-        )}
-        <div data-thumb={!!data.thumbnail} data-category={!!category} className="content">
+          )}
+          {!data.thumbnail && (
+            <div className="default-thumbnail" aria-hidden="true" />
+          )}
+        </div>
+        <div data-category={!!category} className="content">
           <div className="eyebrow">
             <div className="meta-left">
               {showType && <span className="type">{data.type[0]}</span>}
@@ -66,6 +71,12 @@ const PostCard: React.FC<Props> = ({ data }) => {
                 CONFIG.lang
               )}
             </div>
+            {typeof commentCount === "number" && (
+              <span className="comment-badge" aria-label={`댓글 ${commentCount}개`}>
+                <span className="comment-icon" aria-hidden="true" />
+                {commentCount}
+              </span>
+            )}
           </div>
           <div className="summary">
             <p>{data.summary}</p>
@@ -117,8 +128,21 @@ const StyledWrapper = styled(Link)`
       background-color: ${({ theme }) => theme.colors.gray2};
       padding-bottom: 58%;
 
+      &[data-empty="true"] {
+        background-color: #111111;
+      }
+
       .thumbnail-image {
         transition: transform 300ms ease;
+      }
+
+      .default-thumbnail {
+        position: absolute;
+        inset: 0;
+        background-image: url("/logo.png");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: min(34%, 7rem) auto;
       }
 
       @media (min-width: 1024px) {
@@ -126,18 +150,17 @@ const StyledWrapper = styled(Link)`
       }
     }
     > .content {
+      display: grid;
+      grid-template-rows: 1.42rem 4rem 1.45rem;
+      row-gap: 0.62rem;
       padding: 1.15rem 1.15rem 1.2rem;
-
-      &[data-thumb="false"] {
-        padding-top: 1.15rem;
-      }
 
       > .eyebrow {
         display: flex;
         justify-content: space-between;
         gap: 0.75rem;
         align-items: center;
-        margin-bottom: 0.9rem;
+        min-height: 1.42rem;
 
         .meta-left,
         .meta-right {
@@ -205,13 +228,18 @@ const StyledWrapper = styled(Link)`
         gap: 1rem;
         justify-content: space-between;
         align-items: flex-start;
+        min-height: 0;
 
         @media (min-width: 768px) {
-          align-items: center;
+          align-items: flex-start;
         }
 
         h2 {
-          margin-bottom: 0.7rem;
+          margin: 0;
+          display: -webkit-box;
+          overflow: hidden;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
           font-size: 1.2rem;
           line-height: 1.8rem;
           font-weight: 700;
@@ -227,11 +255,13 @@ const StyledWrapper = styled(Link)`
       }
       > .date {
         display: flex;
-        margin-bottom: 0.95rem;
         gap: 0.5rem;
         align-items: center;
+        justify-content: space-between;
+        min-height: 1.45rem;
 
         .content {
+          min-width: 0;
           font-size: 0.875rem;
           line-height: 1.25rem;
           font-weight: 500;
@@ -241,11 +271,44 @@ const StyledWrapper = styled(Link)`
             margin-left: 0;
           }
         }
+
+        .comment-badge {
+          display: inline-flex;
+          flex: 0 0 auto;
+          align-items: center;
+          gap: 0.34rem;
+          min-height: 1.45rem;
+          padding: 0 0.5rem;
+          border: 1px solid ${({ theme }) => theme.colors.gray6};
+          border-radius: 9999px;
+          font-size: 0.72rem;
+          line-height: 1;
+          font-weight: 700;
+          color: ${({ theme }) =>
+            theme.scheme === "light" ? "#0f766e" : "#5eead4"};
+          background: ${({ theme }) =>
+            theme.scheme === "light"
+              ? "rgba(240, 253, 250, 0.9)"
+              : "rgba(20, 184, 166, 0.12)"};
+        }
+
+        .comment-icon {
+          width: 0.86rem;
+          height: 0.86rem;
+          flex: 0 0 auto;
+          background: currentColor;
+          mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z'/%3E%3Cpath d='M8 10h.01'/%3E%3Cpath d='M12 10h.01'/%3E%3Cpath d='M16 10h.01'/%3E%3C/svg%3E")
+            center / contain no-repeat;
+          -webkit-mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z'/%3E%3Cpath d='M8 10h.01'/%3E%3Cpath d='M12 10h.01'/%3E%3Cpath d='M16 10h.01'/%3E%3C/svg%3E")
+            center / contain no-repeat;
+        }
       }
       > .summary {
-        margin-bottom: 1rem;
+        display: none;
+        min-height: 0;
 
         p {
+          margin: 0;
           display: -webkit-box;
           overflow: hidden;
           -webkit-line-clamp: 3;
@@ -255,7 +318,7 @@ const StyledWrapper = styled(Link)`
         }
       }
       > .tags {
-        display: flex;
+        display: none;
         flex-wrap: nowrap;
         gap: 0.35rem;
         max-width: 100%;

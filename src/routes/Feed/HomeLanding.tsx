@@ -6,9 +6,29 @@ import { storageKey } from "src/constants/storage"
 import { useUiLanguage } from "src/contexts/UiLanguageContext"
 import useFeedScrollRestoration from "src/hooks/useFeedScrollRestoration"
 import usePostsQuery from "src/hooks/usePostsQuery"
+import useUtterancesCommentCount from "src/hooks/useUtterancesCommentCount"
 import { formatDate } from "src/libs/utils"
 import { filterPosts } from "src/libs/utils/notion"
 import normalizeFeedQueryString from "src/libs/utils/router/normalizeFeedQueryString"
+
+type CommentBadgeProps = {
+  title: string
+}
+
+const CommentBadge: React.FC<CommentBadgeProps> = ({ title }) => {
+  const commentCount = useUtterancesCommentCount(title)
+
+  if (typeof commentCount !== "number") {
+    return null
+  }
+
+  return (
+    <span className="comment-badge" aria-label={`댓글 ${commentCount}개`}>
+      <span className="comment-icon" aria-hidden="true" />
+      {commentCount}
+    </span>
+  )
+}
 
 const HomeLanding: React.FC = () => {
   const { language, locale } = useUiLanguage()
@@ -81,6 +101,7 @@ const HomeLanding: React.FC = () => {
                   locale
                 )}
               </time>
+              <CommentBadge title={recommendedPost.title} />
             </div>
             <Link href={`/${recommendedPost.slug}`} className="hero-link mobile" onClick={() => saveFeedPosition(recommendedPost.id)}>
               {language === "ko" ? "바로 읽기" : "Read now"}
@@ -132,6 +153,7 @@ const HomeLanding: React.FC = () => {
                   <div className="chips">
                     <span>{post.menu?.[0] || (language === "ko" ? "글" : "Post")}</span>
                     <time>{formatDate(post.date?.start_date || post.createdTime, locale)}</time>
+                    <CommentBadge title={post.title} />
                   </div>
                 </div>
                 {post.thumbnail && (
@@ -170,6 +192,7 @@ const HomeLanding: React.FC = () => {
                   <div className="chips">
                     <span>{post.menu?.[0] || (language === "ko" ? "글" : "Post")}</span>
                     <time>{formatDate(post.date?.start_date || post.createdTime, locale)}</time>
+                    <CommentBadge title={post.title} />
                   </div>
                 </div>
               </Link>
@@ -324,10 +347,10 @@ const StyledWrapper = styled.section`
     gap: 0.45rem;
   }
 
-  .meta span,
-  .meta time,
-  .chips span,
-  .chips time {
+  .meta > span,
+  .meta > time,
+  .chips > span:not(.comment-badge),
+  .chips > time {
     display: inline-flex;
     align-items: center;
     min-height: 1.7rem;
@@ -338,6 +361,37 @@ const StyledWrapper = styled.section`
     font-size: 0.74rem;
     line-height: 1rem;
     font-weight: 600;
+  }
+
+  .comment-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.34rem;
+    flex: 0 0 auto;
+    min-height: 1.45rem;
+    padding: 0 0.5rem;
+    border: 1px solid ${({ theme }) => theme.colors.gray6};
+    border-radius: 9999px;
+    font-size: 0.72rem;
+    line-height: 1;
+    color: ${({ theme }) =>
+      theme.scheme === "light" ? "#0f766e" : "#5eead4"};
+    background-color: ${({ theme }) =>
+      theme.scheme === "light"
+        ? "rgba(240, 253, 250, 0.92)"
+        : "rgba(20, 184, 166, 0.12)"};
+    font-weight: 700;
+  }
+
+  .comment-icon {
+    width: 0.86rem;
+    height: 0.86rem;
+    flex: 0 0 auto;
+    background: currentColor;
+    mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z'/%3E%3Cpath d='M8 10h.01'/%3E%3Cpath d='M12 10h.01'/%3E%3Cpath d='M16 10h.01'/%3E%3C/svg%3E")
+      center / contain no-repeat;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z'/%3E%3Cpath d='M8 10h.01'/%3E%3Cpath d='M12 10h.01'/%3E%3Cpath d='M16 10h.01'/%3E%3C/svg%3E")
+      center / contain no-repeat;
   }
 
   .section-header {

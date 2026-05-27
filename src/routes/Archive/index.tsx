@@ -1,7 +1,7 @@
 import styled from "@emotion/styled"
 import Link from "next/link"
 import { useRouter } from "next/router"
-import { useMemo } from "react"
+import { useMemo, useState } from "react"
 import { DEFAULT_CATEGORY } from "src/constants"
 import { useUiLanguage } from "src/contexts/UiLanguageContext"
 import usePostsQuery from "src/hooks/usePostsQuery"
@@ -10,6 +10,7 @@ import { filterPosts } from "src/libs/utils/notion"
 
 const DEFAULT_YEAR = "전체 연도"
 const PAGE_SIZE = 9
+const SIDEBAR_LIMIT = 6
 
 const getPageFromQuery = (value: unknown) => {
   const page = Number(typeof value === "string" ? value : "1")
@@ -20,6 +21,8 @@ const Archive: React.FC = () => {
   const router = useRouter()
   const { language, locale } = useUiLanguage()
   const posts = usePostsQuery()
+  const [isYearExpanded, setIsYearExpanded] = useState(false)
+  const [isMenuExpanded, setIsMenuExpanded] = useState(false)
 
   const currentYear =
     typeof router.query.year === "string" && router.query.year.length > 0
@@ -90,6 +93,35 @@ const Archive: React.FC = () => {
     }
   }, [currentMenu, currentPage, currentYear, posts])
 
+  const visibleYears = useMemo(() => {
+    if (isYearExpanded || years.length <= SIDEBAR_LIMIT) {
+      return years
+    }
+
+    const topYears = years.slice(0, SIDEBAR_LIMIT)
+    if (topYears.includes(currentYear)) {
+      return topYears
+    }
+
+    return [...years.slice(0, SIDEBAR_LIMIT - 1), currentYear]
+  }, [currentYear, isYearExpanded, years])
+
+  const visibleMenus = useMemo(() => {
+    if (isMenuExpanded || menus.length <= SIDEBAR_LIMIT) {
+      return menus
+    }
+
+    const topMenus = menus.slice(0, SIDEBAR_LIMIT)
+    if (topMenus.some((menu) => menu.name === currentMenu)) {
+      return topMenus
+    }
+
+    const selectedMenu = menus.find((menu) => menu.name === currentMenu)
+    return selectedMenu
+      ? [...menus.slice(0, SIDEBAR_LIMIT - 1), selectedMenu]
+      : topMenus
+  }, [currentMenu, isMenuExpanded, menus])
+
   const updateQuery = (next: { year?: string; category?: string }) => {
     router.replace(
       {
@@ -139,7 +171,7 @@ const Archive: React.FC = () => {
           <div className="side-card">
             <div className="side-title">{language === "ko" ? "연도" : "Year"}</div>
             <div className="menu-list">
-              {years.map((year) => (
+              {visibleYears.map((year) => (
                 <button
                   key={year}
                   type="button"
@@ -151,12 +183,23 @@ const Archive: React.FC = () => {
                 </button>
               ))}
             </div>
+            {years.length > SIDEBAR_LIMIT && (
+              <button
+                type="button"
+                className="side-toggle"
+                onClick={() => setIsYearExpanded((value) => !value)}
+              >
+                {isYearExpanded
+                  ? language === "ko" ? "접기" : "Show less"
+                  : language === "ko" ? `전체 ${years.length}개 보기` : `Show all ${years.length}`}
+              </button>
+            )}
           </div>
 
           <div className="side-card">
             <div className="side-title">{language === "ko" ? "메뉴" : "Menu"}</div>
             <div className="menu-list">
-              {menus.map((menu) => (
+              {visibleMenus.map((menu) => (
                 <button
                   key={menu.name}
                   type="button"
@@ -169,6 +212,17 @@ const Archive: React.FC = () => {
                 </button>
               ))}
             </div>
+            {menus.length > SIDEBAR_LIMIT && (
+              <button
+                type="button"
+                className="side-toggle"
+                onClick={() => setIsMenuExpanded((value) => !value)}
+              >
+                {isMenuExpanded
+                  ? language === "ko" ? "접기" : "Show less"
+                  : language === "ko" ? `전체 ${menus.length}개 보기` : `Show all ${menus.length}`}
+              </button>
+            )}
           </div>
         </aside>
 
@@ -352,6 +406,38 @@ const StyledWrapper = styled.div`
     min-width: 0;
   }
 
+  .side-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: calc(100% - 0.2rem);
+    min-height: 2.25rem;
+    box-sizing: border-box;
+    margin: 0.7rem auto 0;
+    padding: 0 0.75rem;
+    border: 1px dashed ${({ theme }) => theme.colors.gray6};
+    border-radius: 0.85rem;
+    background-color: transparent;
+    color: ${({ theme }) => theme.colors.gray10};
+    font-size: 0.78rem;
+    line-height: 1rem;
+    font-weight: 700;
+    text-align: center;
+    white-space: nowrap;
+    cursor: pointer;
+    transition:
+      border-color 180ms ease,
+      background-color 180ms ease,
+      color 180ms ease;
+
+    &:hover {
+      border-color: ${({ theme }) => theme.colors.gray8};
+      background-color: ${({ theme }) => theme.colors.gray2};
+      color: ${({ theme }) => theme.colors.gray12};
+    }
+  }
+
   .menu-item {
     display: flex;
     justify-content: space-between;
@@ -497,12 +583,19 @@ const StyledWrapper = styled.div`
     width: 2.15rem;
     height: 2.15rem;
     border-radius: 0.75rem;
-    background-color: ${({ theme }) =>
-      theme.scheme === "light" ? "rgba(226, 232, 240, 0.86)" : "rgba(45, 55, 72, 0.82)"};
-    color: ${({ theme }) => theme.colors.gray10};
+    background: ${({ theme }) =>
+      theme.scheme === "light"
+        ? "linear-gradient(135deg, rgba(20, 184, 166, 0.18), rgba(59, 130, 246, 0.2))"
+        : "linear-gradient(135deg, rgba(45, 212, 191, 0.22), rgba(96, 165, 250, 0.2))"};
+    color: ${({ theme }) => (theme.scheme === "light" ? "#0f766e" : "#99f6e4")};
     font-size: 0.76rem;
     line-height: 1rem;
     font-weight: 800;
+    box-shadow: inset 0 0 0 1px
+      ${({ theme }) =>
+        theme.scheme === "light"
+          ? "rgba(20, 184, 166, 0.18)"
+          : "rgba(153, 246, 228, 0.16)"};
   }
 
   .post-body {

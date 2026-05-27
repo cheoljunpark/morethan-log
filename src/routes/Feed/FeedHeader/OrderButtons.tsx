@@ -1,4 +1,4 @@
-import styled from "@emotion/styled"
+﻿import styled from "@emotion/styled"
 import { useRouter } from "next/router"
 import React from "react"
 import { useUiLanguage } from "src/contexts/UiLanguageContext"
@@ -124,7 +124,7 @@ const StyledWrapper = styled.div`
       box-shadow: 0 8px 16px -14px rgba(15, 23, 42, 0.42);
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 1023px) {
       width: 4.45rem;
       min-width: 4.45rem;
       min-height: 1.8rem;

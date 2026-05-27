@@ -1,4 +1,4 @@
-import Link from "next/link"
+﻿import Link from "next/link"
 import { CONFIG } from "site.config"
 import { memo } from "react"
 import { formatDate } from "src/libs/utils"
@@ -110,8 +110,37 @@ const StyledWrapper = styled(Link)`
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 300ms;
 
-    @media (min-width: 768px) {
+    @media (min-width: 1024px) {
       margin-bottom: 2rem;
+    }
+
+    @media (max-width: 1023px) {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 4.6rem;
+      gap: 0.75rem;
+      align-items: stretch;
+      margin-bottom: 0;
+      padding: 0.9rem 0.1rem 0.9rem 0.8rem;
+      border: 0;
+      border-bottom: 1px solid ${({ theme }) => theme.colors.gray5};
+      border-radius: 0;
+      background-color: transparent;
+      box-shadow: none;
+      content-visibility: visible;
+      contain-intrinsic-size: auto;
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0.12rem;
+        top: 1rem;
+        bottom: 1rem;
+        width: 0.18rem;
+        border-radius: 9999px;
+        background: linear-gradient(180deg, #14b8a6, #60a5fa);
+        opacity: 0.78;
+      }
     }
 
     :hover {
@@ -151,12 +180,35 @@ const StyledWrapper = styled(Link)`
       @media (min-width: 1024px) {
         padding-bottom: 42%;
       }
+
+      @media (max-width: 1023px) {
+        grid-column: 2;
+        grid-row: 1;
+        align-self: stretch;
+        min-height: 4.2rem;
+        padding-bottom: 0;
+        border-radius: 0.72rem;
+        overflow: hidden;
+
+        .default-thumbnail {
+          background-size: min(40%, 2.3rem) auto;
+        }
+      }
     }
     > .content {
       display: grid;
       grid-template-rows: 1.42rem 4rem 1.45rem;
       row-gap: 0.62rem;
       padding: 1.15rem 1.15rem 1.2rem;
+
+      @media (max-width: 1023px) {
+        grid-column: 1;
+        grid-row: 1;
+        grid-template-rows: auto auto;
+        row-gap: 0.42rem;
+        min-width: 0;
+        padding: 0;
+      }
 
       > .eyebrow {
         display: flex;
@@ -200,6 +252,10 @@ const StyledWrapper = styled(Link)`
           text-transform: uppercase;
         }
 
+        @media (max-width: 1023px) {
+          display: none;
+        }
+
         .type,
         .primary-tag {
           display: inline-flex;
@@ -233,7 +289,7 @@ const StyledWrapper = styled(Link)`
         align-items: flex-start;
         min-height: 0;
 
-        @media (min-width: 768px) {
+        @media (min-width: 1024px) {
           align-items: flex-start;
         }
 
@@ -249,9 +305,14 @@ const StyledWrapper = styled(Link)`
 
           cursor: pointer;
 
-          @media (min-width: 768px) {
+          @media (min-width: 1024px) {
             font-size: 1.4rem;
             line-height: 2rem;
+          }
+
+          @media (max-width: 1023px) {
+            font-size: 0.96rem;
+            line-height: 1.38rem;
           }
         }
 
@@ -270,8 +331,34 @@ const StyledWrapper = styled(Link)`
           font-weight: 500;
           letter-spacing: -0.01em;
           color: ${({ theme }) => theme.colors.gray10};
-          @media (min-width: 768px) {
+          @media (min-width: 1024px) {
             margin-left: 0;
+          }
+        }
+
+        @media (max-width: 1023px) {
+          justify-content: flex-start;
+          gap: 0.38rem;
+          min-height: 1.4rem;
+
+          .content {
+            display: inline-flex;
+            align-items: center;
+            min-height: 1.4rem;
+            padding: 0.14rem 0.48rem;
+            border-radius: 9999px;
+            background-color: ${({ theme }) =>
+              theme.scheme === "light" ? "rgba(240, 253, 250, 0.9)" : "rgba(20, 184, 166, 0.13)"};
+            color: ${({ theme }) => (theme.scheme === "light" ? "#0f766e" : "#5eead4")};
+            font-size: 0.68rem;
+            line-height: 0.9rem;
+            font-weight: 600;
+          }
+
+          .comment-badge {
+            min-height: 1.4rem;
+            padding: 0 0.46rem;
+            font-size: 0.68rem;
           }
         }
 
@@ -332,6 +419,14 @@ const StyledWrapper = styled(Link)`
           font-size: 0.68rem;
           line-height: 0.95rem;
         }
+      }
+    }
+
+    @media (max-width: 1023px) {
+      > .content > .date .comment-badge {
+        min-height: 1.4rem;
+        padding: 0 0.46rem;
+        font-size: 0.68rem;
       }
     }
   }

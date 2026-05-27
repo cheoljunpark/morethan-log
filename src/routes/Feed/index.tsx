@@ -1,4 +1,4 @@
-import styled from "@emotion/styled"
+﻿import styled from "@emotion/styled"
 import dynamic from "next/dynamic"
 import { useRouter } from "next/router"
 import { DEFAULT_CATEGORY } from "src/constants"
@@ -75,7 +75,7 @@ const Feed: React.FC = () => {
       </aside>
 
       <main className="content-column">
-        <MobileProfileCard />
+        <MobileProfileCard className="feed-mobile-profile" />
 
         <section className="toolbar">
           <div className="toolbar-top">
@@ -114,9 +114,9 @@ const StyledWrapper = styled.div`
   gap: 1.35rem;
   padding: 1.4rem 0 2rem;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1023px) {
     display: block;
-    padding: 0.35rem 0 1rem;
+    padding: 1rem 0 1rem;
   }
 
   @media (min-width: 1024px) {
@@ -164,6 +164,13 @@ const StyledWrapper = styled.div`
     @media (min-width: 1024px) {
       grid-column: 2;
     }
+
+  }
+
+  .feed-mobile-profile {
+    @media (max-width: 1023px) {
+      display: none;
+    }
   }
 
   .toolbar {
@@ -182,7 +189,8 @@ const StyledWrapper = styled.div`
       display: none;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 1023px) {
+      display: none;
       gap: 0.65rem;
       margin-bottom: 0.8rem;
       padding: 0.85rem 0.9rem;
@@ -194,7 +202,7 @@ const StyledWrapper = styled.div`
     display: grid;
     gap: 0.75rem;
 
-    @media (min-width: 768px) {
+    @media (min-width: 1024px) {
       justify-content: end;
     }
   }
@@ -215,12 +223,16 @@ const StyledWrapper = styled.div`
       display: none;
     }
 
-    @media (max-width: 768px) {
-      margin-bottom: 0.8rem;
+    @media (max-width: 1023px) {
+      display: none;
     }
   }
 
   .mobile-footer {
+    display: flex;
+    justify-content: flex-end;
+    text-align: right;
+    padding-right: 0.85rem;
     padding-bottom: 2rem;
 
     @media (min-width: 1024px) {

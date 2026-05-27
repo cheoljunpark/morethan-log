@@ -7,9 +7,9 @@ type Props = {
   className?: string
 }
 
-const MobileProfileCard: React.FC<Props> = () => {
+const MobileProfileCard: React.FC<Props> = ({ className }) => {
   return (
-    <StyledWrapper>
+    <StyledWrapper className={className}>
       <div className="mid">
         <div className="wrapper">
           <div className="avatar">

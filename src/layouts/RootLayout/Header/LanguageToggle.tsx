@@ -1,4 +1,4 @@
-import styled from "@emotion/styled"
+﻿import styled from "@emotion/styled"
 import React from "react"
 import { useUiLanguage } from "src/contexts/UiLanguageContext"
 
@@ -34,6 +34,7 @@ const StyledWrapper = styled.div`
   --toggle-width: 4.7rem;
   --toggle-height: 1.82rem;
   --thumb-inset: 2px;
+  --toggle-padding: 0px;
 
   position: relative;
   box-sizing: border-box;
@@ -114,12 +115,12 @@ const StyledWrapper = styled.div`
     }
   }
 
-  @media (max-width: 768px) {
-    --toggle-width: 4.1rem;
-    --toggle-height: 1.62rem;
+  @media (max-width: 1023px) {
+    --toggle-width: 3.85rem;
+    --toggle-height: 1.5rem;
 
     button {
-      font-size: 0.68rem;
+      font-size: 0.64rem;
     }
   }
 `

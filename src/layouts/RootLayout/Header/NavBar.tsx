@@ -1,4 +1,4 @@
-import styled from "@emotion/styled"
+﻿import styled from "@emotion/styled"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import { useCallback, useEffect } from "react"
@@ -6,11 +6,12 @@ import { useUiLanguage } from "src/contexts/UiLanguageContext"
 
 type Props = {
   className?: string
+  onNavigate?: () => void
 }
 
 const PREFETCH_PATHS = ["/archive", "/tags", "/about"]
 
-const NavBar: React.FC<Props> = ({ className }) => {
+const NavBar: React.FC<Props> = ({ className, onNavigate }) => {
   const router = useRouter()
   const { language } = useUiLanguage()
 
@@ -62,6 +63,7 @@ const NavBar: React.FC<Props> = ({ className }) => {
                 onMouseEnter={() => {
                   void router.prefetch(link.to)
                 }}
+                onClick={onNavigate}
               >
                 {link.name}
               </Link>
@@ -84,8 +86,9 @@ const StyledWrapper = styled.div`
     align-items: center;
     gap: 0.02rem;
 
-    @media (max-width: 768px) {
-      gap: 0;
+    @media (max-width: 1023px) {
+      justify-content: center;
+      gap: 0.12rem;
       overflow-x: auto;
       scrollbar-width: none;
       -ms-overflow-style: none;
@@ -136,12 +139,12 @@ const StyledWrapper = styled.div`
       color: ${({ theme }) => theme.colors.gray12};
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 1023px) {
       width: auto;
-      min-width: 3.4rem;
-      min-height: 1.8rem;
-      padding: 0.24rem 0.6rem;
-      font-size: 0.77rem;
+      min-width: 3.25rem;
+      min-height: 1.68rem;
+      padding: 0.2rem 0.55rem;
+      font-size: 0.74rem;
     }
   }
 `

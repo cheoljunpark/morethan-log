@@ -1,4 +1,4 @@
-import styled from "@emotion/styled"
+﻿import styled from "@emotion/styled"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import { useMemo, useState } from "react"
@@ -161,7 +161,7 @@ const Archive: React.FC = () => {
         <h1>{language === "ko" ? "연도별로 글 다시 보기" : "Browse posts by year"}</h1>
         <p>
           {language === "ko"
-            ? "왼쪽에서 연도와 메뉴를 고르면, 조건에 맞는 글만 오른쪽에 정리됩니다."
+            ? "연도와 메뉴를 고르면, 조건에 맞는 글만 정리됩니다."
             : "Pick a year and menu on the left, then browse matching posts on the right."}
         </p>
       </header>
@@ -246,7 +246,7 @@ const Archive: React.FC = () => {
               <h3>{language === "ko" ? "조건에 맞는 글이 아직 없어요." : "No matching posts yet."}</h3>
               <p>
                 {language === "ko"
-                  ? "왼쪽에서 다른 연도나 메뉴를 골라보세요."
+                  ? "다른 연도나 메뉴를 골라보세요."
                   : "Choose another year or menu from the left."}
               </p>
             </div>
@@ -385,6 +385,10 @@ const StyledWrapper = styled.div`
     display: grid;
     gap: 1rem;
     min-width: 0;
+
+    @media (max-width: 1023px) {
+      display: none;
+    }
   }
 
   .side-card,
@@ -631,16 +635,102 @@ const StyledWrapper = styled.div`
     word-break: keep-all;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 1023px) {
+    .hero {
+      background:
+        linear-gradient(135deg, rgba(20, 184, 166, 0.08), rgba(96, 165, 250, 0.08)),
+        ${({ theme }) =>
+          theme.scheme === "light" ? "rgba(255, 255, 255, 0.9)" : "rgba(29, 36, 48, 0.9)"};
+    }
+
+    .hero .eyebrow,
+    .result-eyebrow {
+      color: ${({ theme }) => (theme.scheme === "light" ? "#0f766e" : "#5eead4")};
+    }
+
+    .result-panel {
+      padding: 0.95rem 0.9rem;
+    }
+
+    .post-grid {
+      gap: 0;
+    }
+
     .post-card {
-      grid-template-columns: auto minmax(0, 1fr);
-      gap: 0.65rem;
-      padding: 0.85rem 0.75rem;
+      position: relative;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.42rem;
+      padding: 0.9rem 0.05rem 0.9rem 0.8rem;
+      border-radius: 0;
+      background-color: transparent;
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0.12rem;
+        top: 1rem;
+        bottom: 1rem;
+        width: 0.18rem;
+        border-radius: 9999px;
+        background: linear-gradient(180deg, #14b8a6, #60a5fa);
+        opacity: 0.78;
+      }
+    }
+
+    .post-index {
+      display: none;
+    }
+
+    .post-card h4 {
+      font-size: 0.96rem;
+      line-height: 1.38rem;
+      color: ${({ theme }) => theme.colors.gray12};
+      display: -webkit-box;
+      overflow: hidden;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+
+    .post-card p {
+      display: none;
     }
 
     .post-top {
       justify-content: flex-start;
-      grid-column: 2;
+      grid-column: auto;
+    }
+
+    .badge,
+    .date,
+    .year-header span,
+    .result-meta span {
+      min-height: 1.45rem;
+      padding: 0.16rem 0.5rem;
+      font-size: 0.68rem;
+      line-height: 0.9rem;
+    }
+
+    .badge {
+      background-color: ${({ theme }) =>
+        theme.scheme === "light" ? "rgba(219, 234, 254, 0.72)" : "rgba(37, 99, 235, 0.18)"};
+      color: ${({ theme }) => (theme.scheme === "light" ? "#1d4ed8" : "#93c5fd")};
+    }
+
+    .date {
+      background-color: ${({ theme }) =>
+        theme.scheme === "light" ? "rgba(240, 253, 250, 0.9)" : "rgba(20, 184, 166, 0.13)"};
+      color: ${({ theme }) => (theme.scheme === "light" ? "#0f766e" : "#5eead4")};
+    }
+
+    .year-header h3 {
+      color: ${({ theme }) => (theme.scheme === "light" ? "#0f766e" : "#5eead4")};
+    }
+
+    .year-header span,
+    .result-meta span {
+      background-color: ${({ theme }) =>
+        theme.scheme === "light" ? "rgba(20, 184, 166, 0.1)" : "rgba(20, 184, 166, 0.16)"};
+      color: ${({ theme }) => (theme.scheme === "light" ? "#0f766e" : "#5eead4")};
     }
   }
 

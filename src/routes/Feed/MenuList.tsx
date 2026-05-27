@@ -1,6 +1,6 @@
-import styled from "@emotion/styled"
+﻿import styled from "@emotion/styled"
 import { useRouter } from "next/router"
-import { useMemo } from "react"
+import { useMemo, useState } from "react"
 import { useUiLanguage } from "src/contexts/UiLanguageContext"
 import { storageKey } from "src/constants/storage"
 import usePostsQuery from "src/hooks/usePostsQuery"
@@ -35,10 +35,15 @@ const isIconUrl = (value?: string | null) => {
   return /^(https?:)?\/\//.test(value) || value.startsWith("data:image")
 }
 
-const MenuList: React.FC = () => {
+type Props = {
+  initialVisibleCount?: number
+}
+
+const MenuList: React.FC<Props> = ({ initialVisibleCount }) => {
   const router = useRouter()
   const { language } = useUiLanguage()
   const posts = usePostsQuery()
+  const [showAll, setShowAll] = useState(false)
   const currentMenu =
     typeof router.query.menu === "string" && router.query.menu.length > 0
       ? router.query.menu
@@ -162,11 +167,17 @@ const MenuList: React.FC = () => {
     })
   }
 
+  const shouldCollapse =
+    typeof initialVisibleCount === "number" && menuRows.length > initialVisibleCount
+  const visibleRows =
+    shouldCollapse && !showAll ? menuRows.slice(0, initialVisibleCount) : menuRows
+  const hiddenCount = Math.max(menuRows.length - (initialVisibleCount || menuRows.length), 0)
+
   return (
     <StyledWrapper>
       <div className="label">{language === "ko" ? "메뉴" : "Menus"}</div>
       <div className="content">
-        {menuRows.map((row) => {
+        {visibleRows.map((row) => {
           const accent = getMenuAccent(row.name)
           const submenuRows =
             "submenuRows" in row && Array.isArray(row.submenuRows) ? row.submenuRows : []
@@ -230,6 +241,21 @@ const MenuList: React.FC = () => {
             </div>
           )
         })}
+        {shouldCollapse && (
+          <button
+            type="button"
+            className="show-more"
+            onClick={() => setShowAll((value) => !value)}
+          >
+            {showAll
+              ? language === "ko"
+                ? "접기"
+                : "Collapse"
+              : language === "ko"
+                ? `전체 ${hiddenCount}개 더 보기`
+                : `Show ${hiddenCount} more`}
+          </button>
+        )}
       </div>
     </StyledWrapper>
   )
@@ -250,7 +276,7 @@ const StyledWrapper = styled.div`
     text-transform: uppercase;
     color: ${({ theme }) => theme.colors.gray10};
 
-    @media (max-width: 768px) {
+    @media (max-width: 1023px) {
       margin-bottom: 0.5rem;
     }
   }
@@ -259,7 +285,7 @@ const StyledWrapper = styled.div`
     display: grid;
     gap: 0.55rem;
 
-    @media (max-width: 768px) {
+    @media (max-width: 1023px) {
       gap: 0.45rem;
     }
   }
@@ -302,7 +328,7 @@ const StyledWrapper = styled.div`
       background-color: ${({ theme }) => theme.colors.gray2};
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 1023px) {
       gap: 0.6rem;
       padding: 0.72rem 0.78rem;
       border-radius: 1rem;
@@ -437,5 +463,38 @@ const StyledWrapper = styled.div`
     font-size: 0.66rem;
     line-height: 0.85rem;
     font-weight: 700;
+  }
+
+  .show-more {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    min-height: 2.1rem;
+    box-sizing: border-box;
+    overflow: hidden;
+    padding: 0.45rem 0.7rem;
+    border: 1px dashed ${({ theme }) => theme.colors.gray6};
+    border-radius: 0.95rem;
+    background-color: transparent;
+    color: ${({ theme }) => theme.colors.gray10};
+    font-size: 0.76rem;
+    line-height: 1rem;
+    font-weight: 700;
+    text-align: center;
+    white-space: nowrap;
+    cursor: pointer;
+    transition:
+      border-color 180ms ease,
+      background-color 180ms ease,
+      color 180ms ease;
+
+    &:hover {
+      border-color: ${({ theme }) => theme.colors.gray8};
+      background-color: ${({ theme }) => theme.colors.gray2};
+      color: ${({ theme }) => theme.colors.gray12};
+    }
   }
 `

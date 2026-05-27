@@ -1,4 +1,4 @@
-import Link from "next/link"
+﻿import Link from "next/link"
 import { CONFIG } from "site.config"
 import styled from "@emotion/styled"
 import { pretendard } from "src/assets"
@@ -20,4 +20,13 @@ const StyledWrapper = styled(Link)`
   font-weight: 700;
   letter-spacing: -0.02em;
   color: ${({ theme }) => theme.colors.gray12};
+
+  @media (max-width: 1023px) {
+    display: inline-flex;
+    align-items: center;
+    min-width: 0;
+    min-height: 1.9rem;
+    font-size: 0.95rem;
+    white-space: nowrap;
+  }
 `

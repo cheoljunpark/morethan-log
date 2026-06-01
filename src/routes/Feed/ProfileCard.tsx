@@ -12,7 +12,8 @@ const ProfileCard: React.FC = () => {
             src={CONFIG.profile.image}
             fill
             alt=""
-            css={{ objectFit: "contain", padding: "0.35rem" }}
+            unoptimized
+            css={{ objectFit: "cover" }}
           />
         </div>
         <div className="mid">

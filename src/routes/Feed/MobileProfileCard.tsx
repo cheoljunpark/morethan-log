@@ -16,10 +16,10 @@ const MobileProfileCard: React.FC<Props> = ({ className }) => {
             <Image
               src={CONFIG.profile.image}
               fill
+              unoptimized
               css={{
                 position: "relative",
-                objectFit: "contain",
-                padding: "0.2rem",
+                objectFit: "cover",
               }}
               alt="profile_image"
             />

@@ -49,8 +49,5 @@ export type TPosts = TPost[]
 export type TTags = {
   [tagName: string]: number
 }
-export type TCategories = {
-  [category: string]: number
-}
 
 export type SchemeType = "light" | "dark"

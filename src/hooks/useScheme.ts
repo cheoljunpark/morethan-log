@@ -24,7 +24,12 @@ const getConfiguredScheme = (): SchemeType => {
   return isSchemeType(CONFIG.blog.scheme) ? CONFIG.blog.scheme : "light"
 }
 
-const getStoredScheme = (): SchemeType | undefined => {
+// What the server can know: no window, no localStorage. The first client
+// render must match this exactly or hydration fails and the page goes inert.
+const getInitialScheme = (): SchemeType =>
+  isSchemeType(CONFIG.blog.scheme) ? CONFIG.blog.scheme : "light"
+
+const getStoredScheme =(): SchemeType | undefined => {
   if (typeof window !== "undefined") {
     const localScheme = window.localStorage.getItem(STORAGE_KEY)
     if (isSchemeType(localScheme)) return localScheme
@@ -40,7 +45,8 @@ const useScheme = (): [SchemeType, SetScheme] => {
   const { data } = useQuery({
     queryKey: queryKey.scheme(),
     enabled: false,
-    initialData: () => getStoredScheme() || getConfiguredScheme(),
+    // Saved/system scheme is applied after mount by the effect below.
+    initialData: getInitialScheme,
   })
 
   const setScheme = (scheme: SchemeType) => {

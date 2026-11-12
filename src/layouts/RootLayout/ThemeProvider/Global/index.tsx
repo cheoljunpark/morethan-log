@@ -14,29 +14,40 @@ export const Global = () => {
           padding: 0;
           color: ${theme.colors.gray12};
           background-color: ${theme.colors.gray2};
-          background-image: ${theme.scheme === "dark"
-            ? "linear-gradient(180deg, rgba(18, 22, 29, 0.98) 0%, rgba(23, 28, 36, 0.98) 100%), radial-gradient(circle at 12% 12%, rgba(135, 162, 255, 0.14), transparent 24%), radial-gradient(circle at 88% 10%, rgba(73, 166, 255, 0.10), transparent 20%)"
-            : "linear-gradient(180deg, rgba(245, 247, 251, 0.98) 0%, rgba(239, 243, 249, 0.98) 100%), radial-gradient(circle at 12% 10%, rgba(89, 115, 255, 0.10), transparent 26%), radial-gradient(circle at 88% 8%, rgba(22, 144, 255, 0.08), transparent 20%)"};
-          background-attachment: scroll;
-          font-family: "Pretendard Variable", ${pretendard.style.fontFamily},
-            "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR",
-            "Malgun Gothic", "Segoe UI", sans-serif;
+          font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+            "Pretendard Variable", ${pretendard.style.fontFamily}, "Pretendard",
+            "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+          font-size: 17px;
           font-weight: ${pretendard.style.fontWeight};
           font-style: ${pretendard.style.fontStyle};
-          letter-spacing: -0.01em;
-          line-height: 1.68;
+          letter-spacing: -0.022em;
+          line-height: 1.6;
           -webkit-font-smoothing: antialiased;
           -moz-osx-font-smoothing: grayscale;
           text-rendering: optimizeLegibility;
           word-break: keep-all;
           font-feature-settings: "cv05", "cv10", "cv11";
           min-height: 100vh;
+          overflow-x: clip;
         }
 
-        @media (min-width: 769px) {
-          body {
-            background-attachment: fixed;
-          }
+        :root {
+          --font-text: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+            "Pretendard Variable", "Pretendard", "Apple SD Gothic Neo",
+            "Malgun Gothic", sans-serif;
+          --font-display: system-ui, -apple-system, BlinkMacSystemFont,
+            "SF Pro Display", "Pretendard Variable", "Pretendard",
+            "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+        }
+
+        ::selection {
+          background: ${theme.colors.indigo9};
+          color: ${theme.colors.gray1};
+        }
+
+        :focus-visible {
+          outline: 2px solid ${theme.colors.indigo9};
+          outline-offset: 2px;
         }
 
         * {
@@ -53,7 +64,8 @@ export const Global = () => {
           margin: 0;
           font-weight: inherit;
           font-style: inherit;
-          letter-spacing: -0.028em;
+          letter-spacing: -0.03em;
+          font-family: var(--font-display);
           word-break: keep-all;
         }
 

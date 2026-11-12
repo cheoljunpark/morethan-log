@@ -1,7 +1,8 @@
-import React, { ReactNode } from "react"
+import { ReactNode } from "react"
 import { ThemeProvider } from "./ThemeProvider"
 import useScheme from "src/hooks/useScheme"
 import Header from "./Header"
+import SiteFooter from "./SiteFooter"
 import styled from "@emotion/styled"
 import { useRouter } from "next/router"
 import Scripts from "src/layouts/RootLayout/Scripts"
@@ -18,7 +19,7 @@ const RootLayout = ({ children }: Props) => {
   useGtagEffect()
 
   const isDetailPage = router.pathname === "/[slug]"
-  const isWidePage = ["/", "/archive", "/tags", "/about"].includes(router.pathname)
+  const isWidePage = ["/", "/about"].includes(router.pathname)
 
   return (
     <ThemeProvider scheme={scheme}>
@@ -26,10 +27,11 @@ const RootLayout = ({ children }: Props) => {
         <Scripts />
         {/* // TODO: replace react query */}
         {/* {metaConfig.type !== "Paper" && <Header />} */}
-        <Header fullWidth={isDetailPage} />
+        <Header />
         <StyledMain data-detail-page={isDetailPage} data-wide-page={isWidePage}>
           {children}
         </StyledMain>
+        <SiteFooter />
       </UiLanguageProvider>
     </ThemeProvider>
   )
@@ -49,11 +51,11 @@ const StyledMain = styled.main`
   }
 
   &[data-wide-page="true"] {
-    max-width: 1380px;
-    padding: 0 0.85rem;
+    max-width: 1180px;
+    padding: 0 1.5rem;
 
     @media (max-width: 768px) {
-      padding: 0 0.65rem;
+      padding: 0 1.1rem;
     }
   }
 `

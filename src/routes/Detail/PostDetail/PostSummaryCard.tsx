@@ -78,88 +78,65 @@ const PostSummaryCard: React.FC<Props> = ({ data }) => {
 export default PostSummaryCard
 
 const StyledWrapper = styled.section`
-  margin-bottom: 1.5rem;
-  padding: 1rem 1rem 1.05rem;
-  border: 1px solid ${({ theme }) => theme.colors.gray6};
-  border-radius: 1.2rem;
-  background-color: ${({ theme }) =>
-    theme.scheme === "light"
-      ? "rgba(244, 247, 252, 0.82)"
-      : "rgba(35, 44, 58, 0.82)"};
+  display: grid;
+  gap: 1rem;
+  margin: 0 0 2.75rem;
+  padding: 24px;
+  border-radius: 18px;
+  background: ${({ theme }) => theme.colors.gray1};
+  box-shadow: inset 0 0 0 1px ${({ theme }) => theme.colors.gray6};
 
-  .eyebrow {
-    margin-bottom: 0.55rem;
-    font-size: 0.76rem;
-    line-height: 1rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: ${({ theme }) => theme.colors.gray10};
+  .eyebrow,
+  .support-label {
+    font-family: var(--font-text);
+    font-size: 0.68rem;
+    letter-spacing: -0.01em;
+    color: ${({ theme }) => theme.colors.gray9};
   }
 
   .summary {
-    margin: 0 0 0.9rem;
-    color: ${({ theme }) => theme.colors.gray12};
-    line-height: 1.75rem;
-    font-weight: 500;
+    margin: 0;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: ${({ theme }) => theme.colors.gray11};
   }
 
   .supporting {
     display: grid;
-    gap: 0.8rem;
-    margin-bottom: 0.95rem;
+    gap: 1rem 2rem;
 
-    @media (min-width: 768px) {
+    @media (min-width: 640px) {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 
   .support-card {
+    display: grid;
+    gap: 0.4rem;
     min-width: 0;
-    padding: 0.9rem 0.95rem;
-    border-radius: 1rem;
-    background-color: ${({ theme }) => theme.colors.gray3};
-  }
-
-  .support-label {
-    margin-bottom: 0.45rem;
-    font-size: 0.72rem;
-    line-height: 1rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: ${({ theme }) => theme.colors.gray10};
   }
 
   .support-card ul {
     display: grid;
-    gap: 0.4rem;
+    gap: 0.2rem;
     margin: 0;
-    padding-left: 1rem;
-    color: ${({ theme }) => theme.colors.gray12};
+    padding: 0;
+    list-style: none;
   }
 
   .support-card li {
-    line-height: 1.6rem;
-    word-break: keep-all;
+    overflow-wrap: anywhere;
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: ${({ theme }) => theme.colors.gray11};
+
+    &::before {
+      content: "– ";
+      color: ${({ theme }) => theme.colors.gray8};
+    }
   }
 
   .tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-
-  .tag {
-    display: inline-flex;
-    align-items: center;
-    min-height: 1.75rem;
-    padding: 0.25rem 0.6rem;
-    border-radius: 9999px;
-    background-color: ${({ theme }) => theme.colors.gray3};
-    color: ${({ theme }) => theme.colors.gray10};
-    font-size: 0.76rem;
-    line-height: 1rem;
-    font-weight: 600;
+    display: none;
   }
 `

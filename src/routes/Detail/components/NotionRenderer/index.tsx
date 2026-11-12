@@ -469,56 +469,98 @@ const StyledWrapper = styled.div`
   .notion-list {
     width: 100%;
   }
+  .notion {
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: ${({ theme }) => theme.colors.gray12};
+  }
+  .notion-text {
+    padding: 0.35em 2px;
+  }
+  .notion-h1,
+  .notion-h2,
+  .notion-h3 {
+    font-weight: 700 !important;
+    letter-spacing: -0.03em;
+    scroll-margin-top: 5rem;
+  }
+  .notion-h1,
+  .notion-h2 {
+    padding-bottom: 0.4rem !important;
+    border-bottom: 1px solid ${({ theme }) => theme.colors.gray6};
+  }
+  .notion-h1 {
+    margin-top: 2.75rem !important;
+    font-size: 1.75rem !important;
+  }
+  .notion-h2 {
+    margin-top: 2.25rem !important;
+    font-size: 1.4rem !important;
+  }
+  .notion-h3 {
+    margin-top: 1.75rem !important;
+    font-size: 1.15rem !important;
+  }
+  .notion-link {
+    border-bottom: 0 !important;
+    text-decoration: underline;
+    text-decoration-color: ${({ theme }) => theme.colors.gray7};
+    text-underline-offset: 0.2em;
+    opacity: 1 !important;
+
+    &:hover {
+      color: ${({ theme }) => theme.colors.indigo9};
+      text-decoration-color: currentColor;
+    }
+  }
+  .notion-inline-code {
+    padding: 0.1em 0.35em !important;
+    border-radius: 3px !important;
+    background: ${({ theme }) => theme.colors.gray4} !important;
+    color: ${({ theme }) => theme.colors.indigo10} !important;
+    font-family: var(--font-text) !important;
+    font-size: 0.86em !important;
+  }
+  .notion-quote {
+    border-left: 3px solid ${({ theme }) => theme.colors.gray7} !important;
+    padding-left: 1.1rem !important;
+    color: ${({ theme }) => theme.colors.gray11};
+    font-size: 1.05rem !important;
+  }
+  .notion-hr {
+    border-top-color: ${({ theme }) => theme.colors.gray6} !important;
+  }
+  .notion-asset-wrapper img {
+    border-radius: 12px !important;
+  }
   .notion-callout {
-    margin: 0.95rem 0 !important;
-    padding: 1rem 1rem 1rem 0.9rem !important;
-    border: 1px solid ${({ theme }) => theme.colors.gray6} !important;
-    border-radius: 1rem !important;
-    background-color: ${({ theme }) =>
-      theme.scheme === "light" ? "rgba(246, 248, 252, 0.94)" : "rgba(29, 36, 48, 0.92)"} !important;
-    box-shadow: 0 10px 20px -18px rgba(0, 0, 0, 0.18);
+    margin: 1.25rem 0 !important;
+    padding: 0.9rem 1rem 0.9rem 0.9rem !important;
+    border: 0 !important;
+    border-left: 3px solid ${({ theme }) => theme.colors.gray7} !important;
+    border-radius: 12px !important;
+    background: ${({ theme }) => theme.colors.gray3} !important;
   }
   .notion-callout[data-tone="key"] {
-    border-color: rgba(59, 130, 246, 0.28) !important;
-    background: linear-gradient(
-      135deg,
-      rgba(59, 130, 246, 0.14),
-      rgba(37, 99, 235, 0.04)
-    ) !important;
+    border-left-color: ${({ theme }) => theme.colors.indigo9} !important;
   }
   .notion-callout[data-tone="tip"] {
-    border-color: rgba(16, 185, 129, 0.28) !important;
-    background: linear-gradient(
-      135deg,
-      rgba(16, 185, 129, 0.14),
-      rgba(5, 150, 105, 0.04)
-    ) !important;
+    border-left-color: ${({ theme }) => (theme.scheme === "light" ? "#2f7d4f" : "#6fcf97")} !important;
   }
   .notion-callout[data-tone="warning"] {
-    border-color: rgba(245, 158, 11, 0.3) !important;
-    background: linear-gradient(
-      135deg,
-      rgba(245, 158, 11, 0.14),
-      rgba(217, 119, 6, 0.04)
-    ) !important;
+    border-left-color: ${({ theme }) => (theme.scheme === "light" ? "#b7791f" : "#f6c26b")} !important;
   }
   .notion-callout[data-tone="danger"] {
-    border-color: rgba(239, 68, 68, 0.3) !important;
-    background: linear-gradient(
-      135deg,
-      rgba(239, 68, 68, 0.14),
-      rgba(220, 38, 38, 0.04)
-    ) !important;
+    border-left-color: ${({ theme }) => (theme.scheme === "light" ? "#c53030" : "#fc8181")} !important;
   }
   .notion-callout .notion-page-icon-inline {
-    width: 2rem !important;
-    height: 2rem !important;
-    line-height: 2rem !important;
-    font-size: 1.15rem !important;
-    margin-right: 0.2rem !important;
+    width: 1.6rem !important;
+    height: 1.6rem !important;
+    line-height: 1.6rem !important;
+    font-size: 1rem !important;
   }
   .notion-callout-text {
-    margin-left: 0.7rem !important;
+    margin-left: 0.6rem !important;
     color: ${({ theme }) => theme.colors.gray12};
     line-height: 1.75rem;
   }
@@ -529,33 +571,26 @@ const StyledWrapper = styled.div`
   .notion-code {
     overflow: hidden;
     border: 1px solid ${({ theme }) => theme.colors.gray6};
-    border-radius: 1rem;
-    background-color: ${({ theme }) =>
-      theme.scheme === "light" ? "rgba(245, 247, 251, 0.94)" : "rgba(21, 28, 38, 0.92)"};
+    border-radius: 12px;
+    background-color: ${({ theme }) => theme.colors.gray1};
   }
   .notion-code-toolbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 0.75rem;
-    padding: 0.2rem 0.56rem;
+    padding: 0.35rem 0.75rem;
     border-bottom: 1px solid ${({ theme }) => theme.colors.gray6};
-    background-color: ${({ theme }) =>
-      theme.scheme === "light" ? "rgba(238, 242, 248, 0.96)" : "rgba(26, 34, 46, 0.96)"};
+    background-color: transparent;
   }
   .notion-code-language {
     display: inline-flex;
     align-items: center;
-    min-height: 0.95rem;
-    padding: 0 0.3rem;
-    border-radius: 9999px;
-    background-color: ${({ theme }) => theme.colors.gray3};
-    color: ${({ theme }) => theme.colors.gray10};
-    font-size: 0.72rem;
+    color: ${({ theme }) => theme.colors.gray9};
+    font-family: var(--font-text);
+    font-size: 0.7rem;
     line-height: 1rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
+    letter-spacing: -0.01em;
   }
   .notion-code-actions {
     display: inline-flex;
@@ -576,7 +611,7 @@ const StyledWrapper = styled.div`
     min-width: 1.75rem;
     min-height: 1.75rem;
     border: 1px solid ${({ theme }) => theme.colors.gray6};
-    border-radius: 9999px;
+    border-radius: 2px;
     color: ${({ theme }) => theme.colors.gray10};
     background-color: transparent;
   }
@@ -592,7 +627,7 @@ const StyledWrapper = styled.div`
     min-height: 1.16rem;
     padding: 0.06rem 0.4rem;
     border: 1px solid ${({ theme }) => theme.colors.gray6};
-    border-radius: 9999px;
+    border-radius: 2px;
     background-color: transparent;
     color: ${({ theme }) => theme.colors.gray10};
     font-size: 0.72rem;
@@ -625,11 +660,8 @@ const StyledWrapper = styled.div`
 
     &[data-copied="true"] {
       color: ${({ theme }) =>
-        theme.scheme === "light" ? "#0f766e" : "#5eead4"};
-      border-color: ${({ theme }) =>
-        theme.scheme === "light"
-          ? "rgba(15, 118, 110, 0.28)"
-          : "rgba(94, 234, 212, 0.28)"};
+        theme.colors.indigo9};
+      border-color: ${({ theme }) => theme.colors.indigo9};
     }
 
     &[data-copied="true"]::before {

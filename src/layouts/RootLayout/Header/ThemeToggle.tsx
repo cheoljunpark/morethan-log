@@ -33,9 +33,13 @@ const StyledWrapper = styled.button`
   height: 1.8rem;
   padding: 0;
   border: 0;
-  border-radius: 9999px;
   background: transparent;
-  color: ${({ theme }) => theme.colors.gray12};
+  color: ${({ theme }) => theme.colors.gray10};
+  transition: color 120ms ease;
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.gray12};
+  }
   cursor: pointer;
 
   svg {

@@ -1,108 +1,91 @@
-﻿import styled from "@emotion/styled"
-import dynamic from "next/dynamic"
+import styled from "@emotion/styled"
+import Link from "next/link"
 import { useRouter } from "next/router"
-import { DEFAULT_CATEGORY } from "src/constants"
-import useDebouncedFeedSearch from "src/hooks/useDebouncedFeedSearch"
+import { useState } from "react"
+import { CONFIG } from "site.config"
+import { useUiLanguage } from "src/contexts/UiLanguageContext"
+import usePostTaxonomy from "src/hooks/usePostTaxonomy"
+import getFeedQuery from "src/libs/utils/router/getFeedQuery"
 
-import { FeedHeader } from "./FeedHeader"
-import Footer from "./Footer"
-import HomeLanding from "./HomeLanding"
-import MenuList from "./MenuList"
-import MobileProfileCard from "./MobileProfileCard"
 import PostList from "./PostList"
-import ProfileCard from "./ProfileCard"
-import SearchInput from "./SearchInput"
 
-const HEADER_HEIGHT = 73
-
-const ContactCard = dynamic(() => import("./ContactCard"), {
-  ssr: false,
-})
-
-const ServiceCard = dynamic(() => import("./ServiceCard"), {
-  ssr: false,
-})
+const TAG_LIMIT = 12
 
 const Feed: React.FC = () => {
   const router = useRouter()
-  const q = typeof router.query.q === "string" ? router.query.q : ""
-  const currentTag = typeof router.query.tag === "string" ? router.query.tag : ""
-  const currentMenu = typeof router.query.menu === "string" ? router.query.menu : ""
-  const currentSubmenu =
-    typeof router.query.submenu === "string" ? router.query.submenu : ""
-  const currentCategory =
-    typeof router.query.category === "string"
-      ? router.query.category
-      : DEFAULT_CATEGORY
-  const currentOrder =
-    typeof router.query.order === "string" ? router.query.order : "desc"
-  const currentView = typeof router.query.view === "string" ? router.query.view : ""
-  const showCurated =
-    currentView !== "all" &&
-    !q &&
-    !currentTag &&
-    !currentMenu &&
-    !currentSubmenu &&
-    currentCategory === DEFAULT_CATEGORY &&
-    currentOrder === "desc"
+  const { language } = useUiLanguage()
+  const ko = language === "ko"
+  const { q = "", menu: currentMenu, tag: currentTag } = getFeedQuery(router.query)
+  const { menus, tags, total } = usePostTaxonomy()
+  const [showAllTags, setShowAllTags] = useState(false)
 
-  const {
-    searchValue,
-    handleChange,
-    handleCompositionStart,
-    handleCompositionEnd,
-  } = useDebouncedFeedSearch({ resetPage: true })
+  // Collapsed list keeps the selected tag visible even if it ranks below the cut.
+  const visibleTags =
+    showAllTags || tags.length <= TAG_LIMIT
+      ? tags
+      : tags.filter((tag, index) => index < TAG_LIMIT || tag.name === currentTag)
 
   return (
     <StyledWrapper>
-      <aside
-        className="left-rail"
-        css={{
-          height: `calc(100vh - ${HEADER_HEIGHT}px)`,
-        }}
-      >
-        <div className="rail-stack">
-          <ProfileCard />
-          <div className="menu-panel">
-            <MenuList />
-          </div>
-          <ServiceCard />
-          <ContactCard />
-          <div className="footer">
-            <Footer />
-          </div>
-        </div>
-      </aside>
+      <section className="banner">
+        <p className="eyebrow">{CONFIG.profile.role}</p>
+        <h1>{CONFIG.blog.title}</h1>
+        <p className="subtitle">{CONFIG.profile.bio}</p>
+      </section>
 
-      <main className="content-column">
-        <MobileProfileCard className="feed-mobile-profile" />
+      <nav className="category-chips" aria-label={ko ? "카테고리" : "Categories"}>
+        <Link href="/" data-active={!currentMenu && !currentTag && !q} scroll={false}>
+          {ko ? "전체" : "All"} ({total})
+        </Link>
+        {menus.map(({ name, count }) => (
+          <Link
+            key={name}
+            href={{ pathname: "/", query: { menu: name } }}
+            data-active={currentMenu === name}
+            scroll={false}
+          >
+            {name} ({count})
+          </Link>
+        ))}
+      </nav>
 
-        <section className="toolbar">
-          <div className="toolbar-top">
-            <FeedHeader />
-          </div>
-          <div className="toolbar-search">
-            <SearchInput
-              value={searchValue}
-              onChange={(e) => handleChange(e.target.value)}
-              onCompositionStart={handleCompositionStart}
-              onCompositionEnd={(e) => {
-                handleCompositionEnd(e.currentTarget.value)
-              }}
-            />
-          </div>
-        </section>
+      <div className="layout">
+        <main className="content-column">
+          <PostList />
+        </main>
 
-        <div className="mobile-menu">
-          <MenuList />
-        </div>
-
-        {showCurated ? <HomeLanding /> : <PostList q={q} />}
-
-        <div className="mobile-footer">
-          <Footer />
-        </div>
-      </main>
+        <aside className="sidebar">
+          {tags.length > 0 && (
+            <section>
+              <h2>{ko ? "태그" : "Tags"}</h2>
+              <ul>
+                {visibleTags.map(({ name, count }) => (
+                  <li key={name}>
+                    <Link
+                      href={{ pathname: "/", query: { tag: name } }}
+                      data-active={currentTag === name}
+                      scroll={false}
+                    >
+                      {name} ({count})
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              {tags.length > TAG_LIMIT && (
+                <button
+                  type="button"
+                  className="more"
+                  onClick={() => setShowAllTags((value) => !value)}
+                >
+                  {showAllTags
+                    ? ko ? "접기" : "Show less"
+                    : ko ? `${tags.length}개 모두 보기` : `Show all ${tags.length}`}
+                </button>
+              )}
+            </section>
+          )}
+        </aside>
+      </div>
     </StyledWrapper>
   )
 }
@@ -110,133 +93,161 @@ const Feed: React.FC = () => {
 export default Feed
 
 const StyledWrapper = styled.div`
-  display: grid;
-  gap: 1.35rem;
-  padding: 1.4rem 0 2rem;
+  padding-bottom: 80px;
 
-  @media (max-width: 1023px) {
-    display: block;
-    padding: 1rem 0 1rem;
-  }
+  /* Full-bleed banner */
+  .banner {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    padding: 72px 22px 76px;
+    background: ${({ theme }) => (theme.scheme === "light" ? "#272729" : "#161617")};
+    color: #ffffff;
+    text-align: center;
 
-  @media (min-width: 1024px) {
-    grid-template-columns: minmax(212px, 0.76fr) minmax(0, 2.84fr);
-  }
-
-  .left-rail {
-    display: none;
-    overflow-y: auto;
-    overflow-x: hidden;
-    position: sticky;
-    top: ${HEADER_HEIGHT - 10}px;
-    grid-column: 1;
-    padding-right: 0.3rem;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-
-    &::-webkit-scrollbar {
-      display: none;
+    @media (max-width: 734px) {
+      padding: 52px 20px 56px;
     }
+
+    .eyebrow {
+      margin: 0 0 6px;
+      font-size: 17px;
+      font-weight: 600;
+      color: #a1a1a6;
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(40px, 6vw, 64px);
+      line-height: 1.05;
+      font-weight: 600;
+      letter-spacing: -0.04em;
+    }
+
+    .subtitle {
+      margin: 14px 0 0;
+      font-size: 17px;
+      color: #d2d2d7;
+    }
+  }
+
+  /* Centered category chips */
+  .category-chips {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    max-width: 760px;
+    margin: 56px auto 24px;
+
+    @media (max-width: 734px) {
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      margin: 24px 0 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    a {
+      flex-shrink: 0;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      background: ${({ theme }) => theme.colors.gray1};
+      box-shadow: inset 0 0 0 1px ${({ theme }) => theme.colors.gray6};
+      font-size: 14px;
+      color: ${({ theme }) => theme.colors.gray11};
+      white-space: nowrap;
+      transition: transform 120ms ease;
+
+      &:hover {
+        box-shadow: inset 0 0 0 1px ${({ theme }) => theme.colors.gray8};
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
+
+      &[data-active="true"] {
+        background: ${({ theme }) => theme.colors.gray12};
+        box-shadow: none;
+        color: ${({ theme }) => theme.colors.gray1};
+      }
+    }
+  }
+
+  /* List + plain sidebar */
+  .layout {
+    display: grid;
+    gap: 48px;
+    max-width: 1000px;
+    margin: 0 auto;
 
     @media (min-width: 1024px) {
-      display: block;
+      grid-template-columns: minmax(0, 1fr) 200px;
+      gap: 72px;
+      align-items: start;
     }
-  }
-
-  .rail-stack {
-    display: grid;
-    gap: 1rem;
-  }
-
-  .menu-panel {
-    padding: 1rem;
-    border: 1px solid ${({ theme }) => theme.colors.gray6};
-    border-radius: 1.35rem;
-    background-color: ${({ theme }) =>
-      theme.scheme === "light"
-        ? "rgba(255, 255, 255, 0.84)"
-        : "rgba(29, 36, 48, 0.84)"};
   }
 
   .content-column {
-    grid-column: 1 / -1;
-
-    @media (min-width: 1024px) {
-      grid-column: 2;
-    }
-
+    min-width: 0;
   }
 
-  .feed-mobile-profile {
+  .sidebar {
     @media (max-width: 1023px) {
-      display: none;
-    }
-  }
+      padding-top: 8px;
 
-  .toolbar {
-    display: grid;
-    gap: 0.85rem;
-    margin-bottom: 1.1rem;
-    padding: 1rem 1.1rem;
-    border: 1px solid ${({ theme }) => theme.colors.gray6};
-    border-radius: 1.4rem;
-    background-color: ${({ theme }) =>
-      theme.scheme === "light"
-        ? "rgba(255, 255, 255, 0.84)"
-        : "rgba(29, 36, 48, 0.84)"};
+      ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0 16px;
+      }
+    }
 
     @media (min-width: 1024px) {
-      display: none;
+      position: sticky;
+      top: 76px;
+      display: grid;
+      gap: 32px;
+      padding-top: 36px;
     }
 
-    @media (max-width: 1023px) {
-      display: none;
-      gap: 0.65rem;
-      margin-bottom: 0.8rem;
-      padding: 0.85rem 0.9rem;
-      border-radius: 1.2rem;
-    }
-  }
-
-  .toolbar-top {
-    display: grid;
-    gap: 0.75rem;
-
-    @media (min-width: 1024px) {
-      justify-content: end;
-    }
-  }
-
-  .toolbar-search {
-    display: block;
-
-    @media (min-width: 1024px) {
-      display: none;
-    }
-  }
-
-  .mobile-menu {
-    display: block;
-    margin-bottom: 1rem;
-
-    @media (min-width: 1024px) {
-      display: none;
+    h2 {
+      margin-bottom: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      color: ${({ theme }) => theme.colors.indigo9};
     }
 
-    @media (max-width: 1023px) {
-      display: none;
+    .more {
+      display: block;
+      margin-top: 8px;
+      font-size: 14px;
+      cursor: pointer;
+      color: ${({ theme }) => theme.colors.indigo9};
     }
-  }
 
-  .mobile-footer {
-    display: flex;
-    justify-content: flex-end;
-    text-align: right;
-    padding-right: 0.85rem;
-    padding-bottom: 2rem;
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
 
-    @media (min-width: 1024px) {
-      display: none;
+    a {
+      display: block;
+      padding: 4px 0;
+      font-size: 14px;
+      color: ${({ theme }) => theme.colors.gray11};
+
+      &:hover,
+      &[data-active="true"] {
+        color: ${({ theme }) => theme.colors.gray12};
+        text-decoration: underline;
+        text-underline-offset: 0.2em;
+      }
     }
   }
 `

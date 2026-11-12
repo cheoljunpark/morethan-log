@@ -71,25 +71,16 @@ const CommentBox: React.FC<Props> = ({ data }) => {
 export default CommentBox
 
 const StyledWrapper = styled.div`
-  margin-top: 5.75rem;
-  padding-top: 2.5rem;
-  padding-bottom: 1.5rem;
   width: 100%;
-  border-top: 1px solid ${({ theme }) => theme.colors.gray5};
-  margin-bottom: 1rem;
-
-  .comment-shell {
-    width: min(100%, 42rem);
-    margin: 0 auto;
-  }
+  margin-top: 3.5rem;
 
   .title {
-    margin-bottom: 1.1rem;
-    font-size: 0.8rem;
-    line-height: 1.1rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: ${({ theme }) => theme.colors.gray10};
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid ${({ theme }) => theme.colors.gray6};
+    font-family: var(--font-text);
+    font-size: 0.72rem;
+    letter-spacing: -0.01em;
+    color: ${({ theme }) => theme.colors.gray12};
   }
 `

@@ -1,7 +1,6 @@
 import { ParsedUrlQuery } from "querystring"
 
-type FeedQuery = {
-  category?: string
+export type FeedQuery = {
   menu?: string
   order?: string
   q?: string
@@ -9,18 +8,25 @@ type FeedQuery = {
   tag?: string
 }
 
-const getFeedQuery = (query: ParsedUrlQuery): FeedQuery => {
-  const toStringValue = (value: string | string[] | undefined) =>
-    typeof value === "string" && value.length > 0 ? value : undefined
+const FEED_KEYS: (keyof FeedQuery)[] = ["menu", "order", "q", "submenu", "tag"]
 
-  return {
-    category: toStringValue(query.category),
-    menu: toStringValue(query.menu),
-    order: toStringValue(query.order),
-    q: toStringValue(query.q),
-    submenu: toStringValue(query.submenu),
-    tag: toStringValue(query.tag),
-  }
+/**
+ * Drops empty values. Next.js writes `undefined` query values as `key=`,
+ * so every URL we build goes through this to stay clean.
+ */
+export const compactQuery = <T extends Record<string, unknown>>(query: T) =>
+  Object.fromEntries(
+    Object.entries(query).filter(([, value]) => value !== undefined && value !== "")
+  ) as Partial<T>
+
+/** The feed filters present in the URL; absent or empty params are omitted. */
+const getFeedQuery = (query: ParsedUrlQuery): FeedQuery => {
+  const picked: FeedQuery = {}
+  FEED_KEYS.forEach((key) => {
+    const value = query[key]
+    if (typeof value === "string" && value.length > 0) picked[key] = value
+  })
+  return picked
 }
 
 export default getFeedQuery

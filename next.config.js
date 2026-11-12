@@ -16,6 +16,14 @@ const nextConfig = {
       },
     ],
   },
+  // /archive and /tags were folded into the home feed (?tag=, ?menu=).
+  // Query strings carry over, so /tags?tag=X lands on /?tag=X.
+  async redirects() {
+    return [
+      { source: "/archive", destination: "/", permanent: true },
+      { source: "/tags", destination: "/", permanent: true },
+    ]
+  },
 }
 
 module.exports = nextConfig

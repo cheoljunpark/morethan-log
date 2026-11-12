@@ -1,259 +1,81 @@
-﻿import styled from "@emotion/styled"
+import styled from "@emotion/styled"
 import { useRouter } from "next/router"
-import { useMemo, useState } from "react"
+import { useState } from "react"
 import { useUiLanguage } from "src/contexts/UiLanguageContext"
-import { storageKey } from "src/constants/storage"
-import usePostsQuery from "src/hooks/usePostsQuery"
-import { filterPosts } from "src/libs/utils/notion"
-import getFeedQuery from "src/libs/utils/router/getFeedQuery"
-
-const DEFAULT_MENU = "전체"
-
-const getMenuAccent = (name: string) => {
-  if (name === DEFAULT_MENU) {
-    return { bg: "rgba(59, 130, 246, 0.14)", fg: "#1d4ed8" }
-  }
-
-  return { bg: "rgba(255, 255, 255, 0.86)", fg: "#64748b" }
-}
-
-const getMenuLabel = (name: string) => {
-  if (name === DEFAULT_MENU) return "ALL"
-
-  const compact = name.replace(/[^a-zA-Z0-9가-힣]/g, "")
-  return compact.slice(0, 2).toUpperCase()
-}
-
-const normalizeIcon = (value?: string) => {
-  if (!value) return null
-  const trimmed = value.trim()
-  return trimmed.length > 0 ? trimmed : null
-}
-
-const isIconUrl = (value?: string | null) => {
-  if (!value) return false
-  return /^(https?:)?\/\//.test(value) || value.startsWith("data:image")
-}
+import usePostTaxonomy from "src/hooks/usePostTaxonomy"
+import { clearFeedPosition } from "src/libs/utils/feedScroll"
+import { compactQuery } from "src/libs/utils/router/getFeedQuery"
 
 type Props = {
+  /** Collapse the list to this many categories behind a "show more" toggle. */
   initialVisibleCount?: number
 }
 
+/** Category list for the mobile menu drawer. */
 const MenuList: React.FC<Props> = ({ initialVisibleCount }) => {
   const router = useRouter()
   const { language } = useUiLanguage()
-  const posts = usePostsQuery()
+  const ko = language === "ko"
+  const { menus, total } = usePostTaxonomy()
   const [showAll, setShowAll] = useState(false)
-  const currentMenu =
-    typeof router.query.menu === "string" && router.query.menu.length > 0
-      ? router.query.menu
-      : DEFAULT_MENU
-  const currentSubmenu =
-    typeof router.query.submenu === "string" && router.query.submenu.length > 0
-      ? router.query.submenu
-      : ""
+  const currentMenu = typeof router.query.menu === "string" ? router.query.menu : ""
+  const currentSubmenu = typeof router.query.submenu === "string" ? router.query.submenu : ""
 
-  const menuRows = useMemo(() => {
-    const publicPosts = filterPosts(posts)
-    const map = new Map<
-      string,
-      {
-        name: string
-        count: number
-        icon?: string | null
-        submenus: Map<string, number>
-      }
-    >()
-
-    publicPosts.forEach((post) => {
-      const name = post.menu?.[0]
-      if (!name) return
-
-      const icon = normalizeIcon(post.menuIcon)
-      const submenu = post.submenu?.[0]
-      const existing = map.get(name)
-
-      if (!existing) {
-        map.set(name, {
-          name,
-          count: 1,
-          icon,
-          submenus: new Map(submenu ? [[submenu, 1]] : []),
-        })
-        return
-      }
-
-      existing.count += 1
-      if (!existing.icon && icon) {
-        existing.icon = icon
-      }
-      if (submenu) {
-        existing.submenus.set(submenu, (existing.submenus.get(submenu) || 0) + 1)
-      }
-    })
-
-    return [
-      { name: DEFAULT_MENU, count: publicPosts.length, icon: null, submenus: new Map() },
-      ...Array.from(map.values())
-        .sort((a, b) => b.count - a.count)
-        .map((row) => ({
-          ...row,
-          submenuRows: Array.from(row.submenus.entries())
-            .sort((a, b) => b[1] - a[1])
-            .map(([name, count]) => ({ name, count })),
-        })),
-    ]
-  }, [posts])
-
-  const handleClick = (menu: string) => {
-    const nextFeedQuery = getFeedQuery(router.query)
-
-    if (typeof window !== "undefined") {
-      window.sessionStorage.removeItem(storageKey.feedActivePostId)
-      window.sessionStorage.removeItem(storageKey.feedScrollY)
-    }
-
-    void router.replace(
-      {
-        pathname: "/",
-        query: {
-          ...nextFeedQuery,
-          category: undefined,
-          page: undefined,
-          tag: undefined,
-          submenu: undefined,
-          menu: menu !== DEFAULT_MENU ? menu : undefined,
-          view: menu === DEFAULT_MENU ? "all" : undefined,
-        },
-      },
-      undefined,
-      {
-        shallow: true,
-        scroll: true,
-      }
-    ).then(() => {
-      window.scrollTo({ top: 0, behavior: "auto" })
-    })
+  const select = (menu?: string, submenu?: string) => {
+    clearFeedPosition()
+    void router.push({ pathname: "/", query: compactQuery({ menu, submenu }) }).then(() => window.scrollTo(0, 0))
   }
 
-  const handleSubmenuClick = (menu: string, submenu: string) => {
-    const nextFeedQuery = getFeedQuery(router.query)
-
-    if (typeof window !== "undefined") {
-      window.sessionStorage.removeItem(storageKey.feedActivePostId)
-      window.sessionStorage.removeItem(storageKey.feedScrollY)
-    }
-
-    void router.replace(
-      {
-        pathname: "/",
-        query: {
-          ...nextFeedQuery,
-          category: undefined,
-          page: undefined,
-          tag: undefined,
-          menu: menu !== DEFAULT_MENU ? menu : undefined,
-          submenu,
-          view: undefined,
-        },
-      },
-      undefined,
-      {
-        shallow: true,
-        scroll: true,
-      }
-    ).then(() => {
-      window.scrollTo({ top: 0, behavior: "auto" })
-    })
-  }
-
-  const shouldCollapse =
-    typeof initialVisibleCount === "number" && menuRows.length > initialVisibleCount
-  const visibleRows =
-    shouldCollapse && !showAll ? menuRows.slice(0, initialVisibleCount) : menuRows
-  const hiddenCount = Math.max(menuRows.length - (initialVisibleCount || menuRows.length), 0)
+  const isCollapsible =
+    typeof initialVisibleCount === "number" && menus.length > initialVisibleCount
+  const visibleMenus = isCollapsible && !showAll ? menus.slice(0, initialVisibleCount) : menus
+  const hiddenCount = menus.length - visibleMenus.length
 
   return (
     <StyledWrapper>
-      <div className="label">{language === "ko" ? "메뉴" : "Menus"}</div>
+      <div className="label">{ko ? "카테고리" : "Categories"}</div>
       <div className="content">
-        {visibleRows.map((row) => {
-          const accent = getMenuAccent(row.name)
-          const submenuRows =
-            "submenuRows" in row && Array.isArray(row.submenuRows) ? row.submenuRows : []
-          const isExpanded =
-            row.name !== DEFAULT_MENU &&
-            currentMenu === row.name &&
-            submenuRows.length > 0
+        <button type="button" className="item" data-active={!currentMenu} onClick={() => select()}>
+          <span className="name">{ko ? "전체" : "All"}</span>
+          <span className="count">{total}</span>
+        </button>
 
-          return (
-            <div key={row.name} className="menu-group">
-              <button
-                className="item"
-                data-active={currentMenu === row.name || (row.name === DEFAULT_MENU && !currentMenu)}
-                type="button"
-                onClick={() => handleClick(row.name)}
-              >
-                <span
-                  className="icon"
-                  style={{
-                    backgroundColor: accent.bg,
-                    color: accent.fg,
-                  }}
-                >
-                  {isIconUrl(row.icon) ? (
-                    <span
-                      className="icon-image"
-                      style={{ backgroundImage: `url("${row.icon}")` }}
-                      aria-hidden="true"
-                    />
-                  ) : (
-                    row.icon || getMenuLabel(row.name)
-                  )}
-                </span>
-                <span className="body">
-                  <span className="name">
-                    {row.name === DEFAULT_MENU ? (language === "ko" ? "전체" : "All") : row.name}
-                  </span>
-                  <span className="meta">
-                    {language === "ko" ? `${row.count}개 글` : `${row.count} posts`}
-                  </span>
-                </span>
-                <span className="count">{row.count}</span>
-              </button>
+        {visibleMenus.map((menu) => (
+          <div key={menu.name}>
+            <button
+              type="button"
+              className="item"
+              data-active={currentMenu === menu.name}
+              onClick={() => select(menu.name)}
+            >
+              <span className="name">{menu.name}</span>
+              <span className="count">{menu.count}</span>
+            </button>
 
-              {isExpanded && (
-                <div className="submenu-list">
-                  {submenuRows.map((submenu) => (
-                    <button
-                      key={`${row.name}-${submenu.name}`}
-                      type="button"
-                      className="submenu-item"
-                      data-active={currentSubmenu === submenu.name}
-                      onClick={() => handleSubmenuClick(row.name, submenu.name)}
-                    >
-                      <span className="submenu-name">{submenu.name}</span>
-                      <span className="submenu-count">{submenu.count}</span>
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-          )
-        })}
-        {shouldCollapse && (
-          <button
-            type="button"
-            className="show-more"
-            onClick={() => setShowAll((value) => !value)}
-          >
+            {currentMenu === menu.name && menu.submenus.length > 0 && (
+              <div className="submenu-list">
+                {menu.submenus.map((submenu) => (
+                  <button
+                    key={submenu.name}
+                    type="button"
+                    className="submenu-item"
+                    data-active={currentSubmenu === submenu.name}
+                    onClick={() => select(menu.name, submenu.name)}
+                  >
+                    <span className="submenu-name">{submenu.name}</span>
+                    <span className="submenu-count">{submenu.count}</span>
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        ))}
+
+        {isCollapsible && (
+          <button type="button" className="show-more" onClick={() => setShowAll((v) => !v)}>
             {showAll
-              ? language === "ko"
-                ? "접기"
-                : "Collapse"
-              : language === "ko"
-                ? `전체 ${hiddenCount}개 더 보기`
-                : `Show ${hiddenCount} more`}
+              ? ko ? "접기" : "Collapse"
+              : ko ? `${hiddenCount}개 더 보기` : `Show ${hiddenCount} more`}
           </button>
         )}
       </div>
@@ -268,233 +90,98 @@ const StyledWrapper = styled.div`
   width: 100%;
 
   > .label {
-    margin-bottom: 0.7rem;
-    font-size: 0.72rem;
-    line-height: 1rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: ${({ theme }) => theme.colors.gray10};
-
-    @media (max-width: 1023px) {
-      margin-bottom: 0.5rem;
-    }
+    margin-bottom: 10px;
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: ${({ theme }) => theme.colors.gray12};
   }
 
   > .content {
     display: grid;
-    gap: 0.55rem;
-
-    @media (max-width: 1023px) {
-      gap: 0.45rem;
-    }
-  }
-
-  .menu-group {
-    display: grid;
-    gap: 0.45rem;
   }
 
   .item {
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr) auto;
-    gap: 0.7rem;
-    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.75rem;
     width: 100%;
-    min-width: 0;
-    box-sizing: border-box;
-    overflow: hidden;
-    padding: 0.78rem 0.85rem;
-    border: 1px solid ${({ theme }) => theme.colors.gray6};
-    border-radius: 1.1rem;
-    background-color: ${({ theme }) =>
-      theme.scheme === "light"
-        ? "rgba(255, 255, 255, 0.82)"
-        : "rgba(31, 39, 52, 0.82)"};
-    text-align: left;
+    padding: 0.3rem 0;
+    color: ${({ theme }) => theme.colors.gray10};
+    font-size: 0.9rem;
+    line-height: 1.35;
     cursor: pointer;
-    transition: transform 180ms ease, border-color 180ms ease,
-      background-color 180ms ease, box-shadow 180ms ease;
+    transition: color 120ms ease;
 
     &:hover {
-      transform: translateY(-1px);
-      border-color: ${({ theme }) => theme.colors.gray8};
-      background-color: ${({ theme }) => theme.colors.gray3};
-      box-shadow: 0 12px 24px -18px rgba(15, 23, 42, 0.3);
+      color: ${({ theme }) => theme.colors.gray12};
     }
 
     &[data-active="true"] {
-      border-color: rgba(59, 130, 246, 0.28);
-      background-color: ${({ theme }) => theme.colors.gray2};
-    }
+      color: ${({ theme }) => theme.colors.gray12};
+      font-weight: 600;
 
-    @media (max-width: 1023px) {
-      gap: 0.6rem;
-      padding: 0.72rem 0.78rem;
-      border-radius: 1rem;
+      .count {
+        color: ${({ theme }) => theme.colors.indigo9};
+      }
     }
   }
 
-  .icon {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    width: 2.1rem;
-    height: 2.1rem;
-    border-radius: 0.8rem;
-    font-size: 0.8rem;
-    line-height: 1rem;
-    font-weight: 800;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    overflow: hidden;
 
-    .icon-image {
-      width: 1.15rem;
-      height: 1.15rem;
-      display: block;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: contain;
-    }
-  }
-
-  .body {
-    min-width: 0;
-    display: grid;
-    gap: 0.12rem;
-    overflow: hidden;
-  }
 
   .name {
     min-width: 0;
-    color: ${({ theme }) => theme.colors.gray12};
-    font-size: 0.9rem;
-    line-height: 1.2rem;
-    font-weight: 700;
-    word-break: keep-all;
-    overflow-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
-  .meta {
-    color: ${({ theme }) => theme.colors.gray10};
+  .count,
+  .submenu-count {
+    font-family: var(--font-text);
     font-size: 0.72rem;
-    line-height: 1rem;
-    font-weight: 600;
-  }
-
-  .count {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    min-width: 1.55rem;
-    height: 1.55rem;
-    padding: 0 0.36rem;
-    border-radius: 9999px;
-    background-color: ${({ theme }) => theme.colors.gray4};
-    color: ${({ theme }) => theme.colors.gray10};
-    font-size: 0.7rem;
-    line-height: 0.9rem;
-    font-weight: 800;
+    font-weight: 400;
+    color: ${({ theme }) => theme.colors.gray8};
   }
 
   .submenu-list {
     display: grid;
-    gap: 0.4rem;
-    width: 100%;
-    min-width: 0;
-    box-sizing: border-box;
-    padding-left: 0.8rem;
-    overflow: hidden;
+    margin: 0.1rem 0 0.4rem;
+    padding-left: 0.75rem;
+    border-left: 1px solid ${({ theme }) => theme.colors.gray6};
   }
 
   .submenu-item {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    gap: 0.5rem;
-    width: 100%;
-    min-width: 0;
-    box-sizing: border-box;
-    overflow: hidden;
-    padding: 0.55rem 0.7rem;
-    border: 1px solid ${({ theme }) => theme.colors.gray5};
-    border-radius: 0.9rem;
-    background-color: ${({ theme }) => theme.colors.gray2};
+    align-items: baseline;
+    gap: 0.75rem;
+    padding: 0.2rem 0;
+    font-size: 0.82rem;
     color: ${({ theme }) => theme.colors.gray10};
-    text-align: left;
     cursor: pointer;
-    transition: border-color 180ms ease, background-color 180ms ease, transform 180ms ease;
 
-    &:hover {
-      transform: translateY(-1px);
-      border-color: ${({ theme }) => theme.colors.gray7};
-      background-color: ${({ theme }) => theme.colors.gray3};
-    }
-
+    &:hover,
     &[data-active="true"] {
-      border-color: rgba(59, 130, 246, 0.24);
-      background-color: ${({ theme }) => theme.colors.gray2};
       color: ${({ theme }) => theme.colors.gray12};
     }
-  }
 
-  .submenu-name {
-    min-width: 0;
-    font-size: 0.8rem;
-    line-height: 1.1rem;
-    font-weight: 600;
-    word-break: keep-all;
-    overflow-wrap: break-word;
-    overflow: hidden;
-  }
-
-  .submenu-count {
-    flex-shrink: 0;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    min-width: 1.35rem;
-    height: 1.35rem;
-    padding: 0 0.32rem;
-    border-radius: 9999px;
-    background-color: ${({ theme }) => theme.colors.gray4};
-    color: ${({ theme }) => theme.colors.gray10};
-    font-size: 0.66rem;
-    line-height: 0.85rem;
-    font-weight: 700;
+    &[data-active="true"] .submenu-name {
+      font-weight: 600;
+    }
   }
 
   .show-more {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    max-width: 100%;
-    min-width: 0;
-    min-height: 2.1rem;
-    box-sizing: border-box;
-    overflow: hidden;
-    padding: 0.45rem 0.7rem;
-    border: 1px dashed ${({ theme }) => theme.colors.gray6};
-    border-radius: 0.95rem;
-    background-color: transparent;
-    color: ${({ theme }) => theme.colors.gray10};
-    font-size: 0.76rem;
-    line-height: 1rem;
-    font-weight: 700;
-    text-align: center;
-    white-space: nowrap;
+    margin-top: 0.4rem;
+    font-family: var(--font-text);
+    font-size: 0.72rem;
+    color: ${({ theme }) => theme.colors.gray9};
     cursor: pointer;
-    transition:
-      border-color 180ms ease,
-      background-color 180ms ease,
-      color 180ms ease;
 
     &:hover {
-      border-color: ${({ theme }) => theme.colors.gray8};
-      background-color: ${({ theme }) => theme.colors.gray2};
-      color: ${({ theme }) => theme.colors.gray12};
+      color: ${({ theme }) => theme.colors.indigo9};
     }
   }
 `

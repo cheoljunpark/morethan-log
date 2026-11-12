@@ -1,12 +1,19 @@
-﻿import Link from "next/link"
+import Link from "next/link"
 import { CONFIG } from "site.config"
 import styled from "@emotion/styled"
-import { pretendard } from "src/assets"
 
 const Logo = () => {
+  const [name, ...rest] = CONFIG.blog.title.split(".")
+
   return (
     <StyledWrapper href="/" aria-label={CONFIG.blog.title}>
-      {CONFIG.blog.title}
+      {name}
+      {rest.length > 0 && (
+        <>
+          <span className="dot">.</span>
+          {rest.join(".")}
+        </>
+      )}
     </StyledWrapper>
   )
 }
@@ -14,19 +21,22 @@ const Logo = () => {
 export default Logo
 
 const StyledWrapper = styled(Link)`
-  font-family: ${pretendard.style.fontFamily}, sans-serif;
-  font-size: 1rem;
+  font-family: var(--font-display);
+  font-size: 15px;
   line-height: 1;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: -0.02em;
   color: ${({ theme }) => theme.colors.gray12};
+  white-space: nowrap;
+
+  .dot {
+    opacity: 0.5;
+  }
 
   @media (max-width: 1023px) {
     display: inline-flex;
     align-items: center;
     min-width: 0;
     min-height: 1.9rem;
-    font-size: 0.95rem;
-    white-space: nowrap;
   }
 `

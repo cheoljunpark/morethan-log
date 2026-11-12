@@ -1,13 +1,13 @@
-﻿import styled from "@emotion/styled"
+import styled from "@emotion/styled"
 import dynamic from "next/dynamic"
 import { useRouter } from "next/router"
-import { useState } from "react"
-import useDebouncedFeedSearch from "src/hooks/useDebouncedFeedSearch"
-import SearchInput from "src/routes/Feed/SearchInput"
+import { useEffect, useState } from "react"
+import { FiSearch } from "react-icons/fi"
 import { zIndexes } from "src/styles/zIndexes"
 import LanguageToggle from "./LanguageToggle"
 import Logo from "./Logo"
 import NavBar from "./NavBar"
+import SearchOverlay from "./SearchOverlay"
 import ThemeToggle from "./ThemeToggle"
 
 const MobileMenuList = dynamic(() => import("src/routes/Feed/MenuList"), {
@@ -18,38 +18,24 @@ const MobileProfileCard = dynamic(() => import("src/routes/Feed/MobileProfileCar
   ssr: false,
 })
 
-const MobileArchiveFilters = dynamic(() => import("./MobileArchiveFilters"), {
-  ssr: false,
-})
-
-const MobileTagFilters = dynamic(() => import("./MobileTagFilters"), {
-  ssr: false,
-})
-
-type Props = {
-  fullWidth: boolean
-}
-
-const Header: React.FC<Props> = ({ fullWidth }) => {
+const Header: React.FC = () => {
   const router = useRouter()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isSearchOpen, setIsSearchOpen] = useState(false)
   const isFeedPage = router.pathname === "/"
-  const isArchivePage = router.pathname === "/archive"
-  const isTagsPage = router.pathname === "/tags"
-  const {
-    searchValue,
-    handleChange,
-    handleCompositionStart,
-    handleCompositionEnd,
-  } = useDebouncedFeedSearch()
+
+  // Any navigation (menu link, category, search) closes the drawer.
+  useEffect(() => {
+    const close = () => setIsMobileMenuOpen(false)
+    router.events.on("routeChangeStart", close)
+    return () => router.events.off("routeChangeStart", close)
+  }, [router.events])
 
   return (
-    <StyledWrapper data-detail-safe="true">
-      <div
-        data-full-width={fullWidth}
-        className="container"
-      >
+    <StyledWrapper>
+      <div className="container">
         <Logo />
+        <NavBar className="header-links" />
 
         <button
           type="button"
@@ -61,24 +47,22 @@ const Header: React.FC<Props> = ({ fullWidth }) => {
           <span aria-hidden="true" />
         </button>
 
-        <div className="search-slot">
-          <SearchInput
-            value={searchValue}
-            onChange={(e) => {
-              handleChange(e.target.value)
-            }}
-            onCompositionStart={handleCompositionStart}
-            onCompositionEnd={(e) => {
-              handleCompositionEnd(e.currentTarget.value)
-            }}
-          />
-        </div>
+        <button
+          type="button"
+          className="search-trigger"
+          aria-label="Search"
+          onClick={() => {
+            setIsMobileMenuOpen(false)
+            setIsSearchOpen(true)
+          }}
+        >
+          <FiSearch aria-hidden="true" />
+        </button>
 
         <div className="controls">
           <LanguageToggle />
           <ThemeToggle />
         </div>
-        <NavBar className="header-links" />
 
         <div
           className="mobile-menu-backdrop"
@@ -88,80 +72,11 @@ const Header: React.FC<Props> = ({ fullWidth }) => {
         />
 
         <div className="mobile-menu-panel" data-open={isMobileMenuOpen}>
-          {isFeedPage && (
-            <div className="mobile-menu-search">
-              <SearchInput
-                value={searchValue}
-                onChange={(e) => {
-                  handleChange(e.target.value)
-                }}
-                onCompositionStart={handleCompositionStart}
-                onCompositionEnd={(e) => {
-                  handleCompositionEnd(e.currentTarget.value)
-                }}
-              />
-            </div>
-          )}
-
-          <NavBar
-            className="mobile-menu-links"
-            onNavigate={() => setIsMobileMenuOpen(false)}
-          />
-
-          {isArchivePage && (
-            <div
-              className="mobile-page-filters"
-              onClickCapture={(event) => {
-                const target = event.target as HTMLElement
-
-                if (target.closest(".show-more")) {
-                  return
-                }
-
-                if (target.closest("button")) {
-                  setIsMobileMenuOpen(false)
-                }
-              }}
-            >
-              <MobileArchiveFilters />
-            </div>
-          )}
-
-          {isTagsPage && (
-            <div
-              className="mobile-page-filters"
-              onClickCapture={(event) => {
-                const target = event.target as HTMLElement
-
-                if (target.closest(".show-more")) {
-                  return
-                }
-
-                if (target.closest("button")) {
-                  setIsMobileMenuOpen(false)
-                }
-              }}
-            >
-              <MobileTagFilters />
-            </div>
-          )}
+          <NavBar className="mobile-menu-links" />
 
           {isFeedPage && (
             <>
-              <div
-                className="mobile-feed-menu"
-                onClickCapture={(event) => {
-                  const target = event.target as HTMLElement
-
-                  if (target.closest(".show-more")) {
-                    return
-                  }
-
-                  if (target.closest("button")) {
-                    setIsMobileMenuOpen(false)
-                  }
-                }}
-              >
+              <div className="mobile-feed-menu">
                 <MobileMenuList initialVisibleCount={5} />
               </div>
 
@@ -177,6 +92,7 @@ const Header: React.FC<Props> = ({ fullWidth }) => {
           </div>
         </div>
       </div>
+      <SearchOverlay open={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
     </StyledWrapper>
   )
 }
@@ -187,47 +103,91 @@ const StyledWrapper = styled.div`
   z-index: ${zIndexes.header};
   position: sticky;
   top: 0;
-  background-color: ${({ theme }) =>
-    theme.scheme === "dark" ? "rgba(23, 28, 36, 0.78)" : "rgba(245, 247, 251, 0.72)"};
-  backdrop-filter: blur(14px);
-  border-bottom: 1px solid ${({ theme }) => theme.colors.gray6};
-  box-shadow: 0 8px 30px -24px rgba(15, 23, 42, 0.28);
+  /* Global nav: thin, translucent black in both schemes. */
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  color: rgba(255, 255, 255, 0.8);
 
   .container {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 0.8rem;
+    gap: 2rem;
     width: 100%;
-    max-width: 1120px;
-    min-height: 3rem;
+    max-width: 1024px;
+    min-height: 44px;
     margin: 0 auto;
-    padding: 0 1rem;
+    padding: 0 22px;
 
     @media (max-width: 1023px) {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-columns: minmax(0, 1fr) auto auto;
       align-items: center;
-      gap: 0.38rem 0.55rem;
-      min-height: auto;
-      padding: 0.5rem 0.72rem;
-    }
-
-    @media (min-width: 1024px) {
-      max-width: 1380px;
+      gap: 0.25rem;
+      min-height: 48px;
+      padding: 0 16px;
     }
   }
 
-  .search-slot {
-    display: none;
+  > .container > a,
+  > .container > .header-links a,
+  > .container > .controls button {
+    color: rgba(255, 255, 255, 0.8);
 
-    @media (min-width: 1024px) {
-      display: block;
-      flex: 1;
-      max-width: 24rem;
-      margin-left: 0.8rem;
-      margin-right: auto;
+    &:hover,
+    &[data-active="true"] {
+      color: #ffffff;
+    }
+  }
+
+  > .container > .header-links a {
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+
+    &::after {
+      display: none;
+    }
+  }
+
+  > .container > .controls button + button::before {
+    color: rgba(255, 255, 255, 0.35);
+  }
+
+  .search-trigger {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+    margin-left: auto;
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    &:hover {
+      color: #ffffff;
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+
+    @media (max-width: 1023px) {
+      order: 2;
+      margin-left: 0;
+    }
+  }
+
+  .mobile-menu-trigger {
+    @media (max-width: 1023px) {
+      order: 3;
     }
   }
 
@@ -261,10 +221,9 @@ const StyledWrapper = styled.div`
       width: 2rem;
       height: 2rem;
       padding: 0;
-      border: 1px solid ${({ theme }) => theme.colors.gray6};
-      border-radius: 9999px;
-      background-color: ${({ theme }) => theme.colors.gray2};
-      color: ${({ theme }) => theme.colors.gray12};
+      border: 0;
+      background-color: transparent;
+      color: #ffffff;
       cursor: pointer;
 
       span,
@@ -335,12 +294,7 @@ const StyledWrapper = styled.div`
       touch-action: pan-y;
       -webkit-overflow-scrolling: touch;
       border-right: 1px solid ${({ theme }) => theme.colors.gray6};
-      background-color: ${({ theme }) =>
-        theme.scheme === "light"
-          ? "rgba(255, 255, 255, 0.96)"
-          : "rgba(23, 28, 36, 0.96)"};
-      box-shadow: 24px 0 52px -36px rgba(15, 23, 42, 0.45);
-      backdrop-filter: blur(16px);
+      background-color: ${({ theme }) => theme.colors.gray2};
       transform: translateX(-105%);
       transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
 
@@ -378,17 +332,10 @@ const StyledWrapper = styled.div`
     }
   }
 
-  .mobile-menu-search,
   .mobile-menu-profile,
-  .mobile-page-filters,
   .mobile-feed-menu {
     min-width: 0;
     width: 100%;
-  }
-
-  .mobile-menu-search {
-    padding-bottom: 0.7rem;
-    border-bottom: 1px solid ${({ theme }) => theme.colors.gray5};
   }
 
   .mobile-menu-profile {
@@ -423,9 +370,8 @@ const StyledWrapper = styled.div`
     a {
       min-height: 2rem;
       justify-content: flex-start;
-      padding: 0.65rem 0.8rem;
-      border: 1px solid ${({ theme }) => theme.colors.gray5};
-      background-color: ${({ theme }) => theme.colors.gray2};
+      padding: 0.5rem 0;
+      font-size: 1.05rem;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -436,13 +382,6 @@ const StyledWrapper = styled.div`
     min-width: 0;
     overflow: visible;
     padding-top: 0.15rem;
-    padding-bottom: 0.7rem;
-    border-bottom: 1px solid ${({ theme }) => theme.colors.gray5};
-  }
-
-  .mobile-page-filters {
-    min-width: 0;
-    overflow: visible;
     padding-bottom: 0.7rem;
     border-bottom: 1px solid ${({ theme }) => theme.colors.gray5};
   }

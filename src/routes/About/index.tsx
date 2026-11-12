@@ -106,135 +106,100 @@ const About: React.FC = () => {
 export default About
 
 const StyledWrapper = styled.div`
-  padding: 1.2rem 0 3rem;
+  max-width: 46rem;
+  padding: 3rem 0 5rem;
 
-  .hero,
-  .panel {
-    border: 1px solid ${({ theme }) => theme.colors.gray6};
-    border-radius: 1.4rem;
-    box-shadow: 0 18px 40px -36px rgba(15, 23, 42, 0.18);
-  }
-
-  .hero {
-    margin-bottom: 1rem;
-    padding: 1.35rem;
-    background:
-      ${({ theme }) =>
-        theme.scheme === "light"
-          ? "rgba(255, 255, 255, 0.88)"
-          : "rgba(29, 36, 48, 0.88)"};
-
-    @media (min-width: 1024px) {
-      padding: 1.8rem;
-    }
-  }
-
-  .hero-copy {
-    display: flex;
-    flex-direction: column;
+  @media (max-width: 1023px) {
+    padding: 1.75rem 0 3rem;
   }
 
   .eyebrow,
-  .section-title,
-  .hero-panel-title {
-    margin-bottom: 0.55rem;
-    font-size: 0.78rem;
-    line-height: 1rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: ${({ theme }) => theme.colors.gray10};
+  .section-title {
+    font-family: var(--font-text);
+    font-size: 0.72rem;
+    letter-spacing: -0.01em;
+    color: ${({ theme }) => theme.colors.indigo9};
   }
 
-  h1 {
-    margin-bottom: 0.3rem;
-    font-size: 2.35rem;
-    line-height: 2.8rem;
-    font-weight: 800;
-    letter-spacing: -0.04em;
-    color: ${({ theme }) => theme.colors.gray12};
+  .hero-copy {
+    display: grid;
+    gap: 0.9rem;
 
-    @media (min-width: 1024px) {
-      font-size: 3rem;
-      line-height: 3.35rem;
+    h1 {
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      line-height: 1.05;
+      font-weight: 600;
+      letter-spacing: -0.05em;
     }
   }
 
   .role {
-    margin-bottom: 1rem;
-    font-size: 0.95rem;
-    line-height: 1.45rem;
-    font-weight: 600;
-    color: ${({ theme }) => theme.colors.gray10};
+    font-family: var(--font-text);
+    font-size: 0.85rem;
+    color: ${({ theme }) => theme.colors.gray9};
   }
 
   .lead {
-    margin-bottom: 0.8rem;
-    max-width: 38rem;
-    font-size: 1.05rem;
-    line-height: 1.75rem;
+    margin: 1.5rem 0 0;
+    padding-top: 1.5rem;
+    border-top: 1px solid ${({ theme }) => theme.colors.gray6};
+    font-size: 1.4rem;
+    line-height: 1.5;
     font-weight: 600;
-    color: ${({ theme }) => theme.colors.gray12};
-    word-break: keep-all;
+    letter-spacing: -0.03em;
   }
 
-  .body {
-    max-width: 40rem;
+  .body,
+  .long-copy p {
     margin: 0;
-    line-height: 1.8rem;
+    font-size: 1.02rem;
+    line-height: 1.85;
     color: ${({ theme }) => theme.colors.gray11};
-    word-break: keep-all;
   }
 
   .long-copy {
     display: grid;
-    gap: 0.85rem;
-    margin-top: 1.1rem;
-  }
-
-  .long-copy p {
-    margin: 0;
-    max-width: 44rem;
-    line-height: 1.9rem;
-    color: ${({ theme }) => theme.colors.gray11};
-    word-break: keep-all;
+    gap: 1rem;
   }
 
   .content-grid {
     display: grid;
-    gap: 1rem;
+    gap: 2.5rem;
+    margin-top: 3.5rem;
 
-    @media (min-width: 1024px) {
+    @media (min-width: 768px) {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
-  .panel {
-    padding: 1.2rem 1.1rem;
-    background:
-      ${({ theme }) =>
-        theme.scheme === "light"
-          ? "rgba(255, 255, 255, 0.82)"
-          : "rgba(29, 36, 48, 0.84)"};
-  }
 
-  .panel.muted {
-    background-color: ${({ theme }) =>
-      theme.scheme === "light"
-        ? "rgba(248, 251, 255, 0.82)"
-        : "rgba(31, 39, 53, 0.84)"};
+  .panel .section-title {
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid ${({ theme }) => theme.colors.gray6};
+    color: ${({ theme }) => theme.colors.gray12};
   }
 
   .bullet-list {
-    display: grid;
-    gap: 0.75rem;
     margin: 0;
-    padding-left: 1rem;
+    padding: 0;
+    list-style: none;
+    counter-reset: item;
   }
 
   .bullet-list li {
-    line-height: 1.75rem;
-    color: ${({ theme }) => theme.colors.gray11};
-    word-break: keep-all;
-  }
+    display: grid;
+    grid-template-columns: 2rem minmax(0, 1fr);
+    padding: 0.8rem 0;
+    border-bottom: 1px solid ${({ theme }) => theme.colors.gray6};
+    font-size: 0.95rem;
+    line-height: 1.6;
+    counter-increment: item;
 
+    &::before {
+      content: counter(item, decimal-leading-zero);
+      font-family: var(--font-text);
+      font-size: 0.72rem;
+      line-height: 1.6rem;
+      color: ${({ theme }) => theme.colors.gray9};
+    }
+  }
 `

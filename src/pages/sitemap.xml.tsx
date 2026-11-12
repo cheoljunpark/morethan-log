@@ -26,5 +26,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   return getServerSideSitemap(ctx, fields)
 }
 
-// Default export to prevent next.js errors
-export default () => {}
+// The XML is sent from getServerSideProps; Next.js still needs a page component.
+const Sitemap = () => null
+
+export default Sitemap

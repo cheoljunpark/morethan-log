@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react"
+import { ReactNode } from "react"
 import { Noto_Color_Emoji } from "next/font/google"
 
 const notoColorEmoji = Noto_Color_Emoji({

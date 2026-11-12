@@ -35,18 +35,21 @@ export default Tag
 const StyledWrapper = styled.div`
   display: inline-flex;
   align-items: center;
-  justify-content: center;
   flex: 0 0 auto;
   white-space: nowrap;
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-  border-radius: 50px;
+  font-family: var(--font-text);
   font-size: 0.75rem;
-  line-height: 1rem;
-  font-weight: 400;
+  line-height: 1.2;
   color: ${({ theme }) => theme.colors.gray10};
-  background-color: ${({ theme }) => theme.colors.gray5};
   cursor: pointer;
+  transition: color 120ms ease;
+
+  &::before {
+    content: "#";
+    color: ${({ theme }) => theme.colors.gray8};
+  }
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.indigo9};
+  }
 `

@@ -4,7 +4,6 @@ import Link from "next/link"
 import React from "react"
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi"
 import { CONFIG } from "site.config"
-import { useUiLanguage } from "src/contexts/UiLanguageContext"
 import useAdjacentPosts from "src/hooks/useAdjacentPosts"
 
 type Props = {
@@ -13,7 +12,6 @@ type Props = {
 }
 
 const Footer: React.FC<Props> = ({ children }) => {
-  const { language } = useUiLanguage()
   const { previousPost, nextPost } = useAdjacentPosts()
 
   return (
@@ -36,37 +34,36 @@ const Footer: React.FC<Props> = ({ children }) => {
       {children}
 
       {(previousPost || nextPost) && (
-        <nav
-          className="adjacent"
-          aria-label={language === "ko" ? "이전/다음 글" : "Adjacent posts"}
-        >
+        <nav className="adjacent" aria-label="이전 글과 다음 글">
           {previousPost ? (
             <Link
               href={`/${previousPost.slug}`}
               prefetch={false}
               className="adjacent-link prev"
-              aria-label={`${language === "ko" ? "이전 글" : "Previous"}: ${
-                previousPost.title
-              }`}
             >
-              <FiChevronLeft aria-hidden="true" />
+              <span className="label">
+                <FiChevronLeft aria-hidden="true" />
+                이전 글
+              </span>
               <span className="title">{previousPost.title}</span>
             </Link>
           ) : (
             <span />
           )}
-          {nextPost && (
+          {nextPost ? (
             <Link
               href={`/${nextPost.slug}`}
               prefetch={false}
               className="adjacent-link next"
-              aria-label={`${language === "ko" ? "다음 글" : "Next"}: ${
-                nextPost.title
-              }`}
             >
+              <span className="label">
+                다음 글
+                <FiChevronRight aria-hidden="true" />
+              </span>
               <span className="title">{nextPost.title}</span>
-              <FiChevronRight aria-hidden="true" />
             </Link>
+          ) : (
+            <span />
           )}
         </nav>
       )}
@@ -110,31 +107,38 @@ const StyledWrapper = styled.div`
     color: ${({ theme }) => theme.colors.gray11};
   }
 
+  /* Previous / next: two labelled cards side by side (stacked on phones). */
   .adjacent {
-    margin-top: 40px;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 24px;
-    padding: 8px 0;
+    gap: 12px;
+    margin-top: 40px;
+
+    @media (max-width: 734px) {
+      grid-template-columns: 1fr;
+    }
   }
 
   .adjacent-link {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+    display: grid;
+    gap: 6px;
     min-width: 0;
-    min-height: 44px;
-    color: ${({ theme }) => theme.colors.gray12};
+    padding: 16px 18px;
+    border: 1px solid ${({ theme }) => theme.colors.gray6};
+    border-radius: 14px;
+    background: ${({ theme }) => theme.colors.gray1};
+    transition: border-color 120ms ease;
 
     &.next {
-      justify-content: flex-end;
+      text-align: right;
+
+      .label {
+        justify-content: flex-end;
+      }
     }
 
-    svg {
-      flex-shrink: 0;
-      width: 24px;
-      height: 24px;
-      stroke-width: 1.75;
+    &:hover {
+      border-color: ${({ theme }) => theme.colors.gray8};
     }
 
     &:hover .title {
@@ -142,11 +146,28 @@ const StyledWrapper = styled.div`
     }
   }
 
+  .label {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 13px;
+    color: ${({ theme }) => theme.colors.gray9};
+
+    svg {
+      width: 14px;
+      height: 14px;
+    }
+  }
+
   .title {
+    display: -webkit-box;
     overflow: hidden;
-    font-size: 17px;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: ${({ theme }) => theme.colors.gray12};
     transition: color 120ms ease;
   }
 `

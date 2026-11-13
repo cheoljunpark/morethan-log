@@ -2,7 +2,6 @@ import styled from "@emotion/styled"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import React, { useMemo } from "react"
-import { FiChevronRight } from "react-icons/fi"
 import { useUiLanguage } from "src/contexts/UiLanguageContext"
 import useFeedScrollRestoration from "src/hooks/useFeedScrollRestoration"
 import usePostsQuery from "src/hooks/usePostsQuery"
@@ -51,37 +50,22 @@ const PostList: React.FC = () => {
   useFeedScrollRestoration()
 
   const isFiltered = Boolean(q || tag || menu || submenu)
-  const heading = q ? (
-    ko ? (
-      `‘${q}’ 검색 결과`
-    ) : (
-      `Results for “${q}”`
-    )
-  ) : tag ? (
-    `#${tag}`
-  ) : submenu && menu ? (
-    // Breadcrumb: the parent category links back to all of its posts.
-    <>
-      <Link
-        href={{ pathname: "/", query: { menu } }}
-        scroll={false}
-        className="crumb"
-      >
-        {menu}
-      </Link>
-      <FiChevronRight className="crumb-sep" aria-hidden="true" />
-      <span aria-current="page">{submenu}</span>
-    </>
-  ) : (
-    menu
-  )
+  // Menus already show as selected chips/tabs above, so only search and tag
+  // results get a heading of their own.
+  const heading = q
+    ? ko
+      ? `‘${q}’ 검색 결과`
+      : `Results for “${q}”`
+    : tag
+    ? `#${tag}`
+    : null
 
   return (
     <StyledWrapper id="feed-posts">
       {isFiltered && (
         <div className="overview">
           <div className="heading-row">
-            <h2>{heading}</h2>
+            {heading && <h2>{heading}</h2>}
             <div className="controls">
               <OrderButtons />
             </div>
@@ -175,40 +159,25 @@ const StyledWrapper = styled.section`
   margin-bottom: 3rem;
 
   .overview {
-    padding-top: 36px;
+    padding-top: 20px;
   }
 
   .heading-row {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
     gap: 1rem;
 
     h2 {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: clamp(32px, 3.6vw, 40px);
-      line-height: 1.1;
+      font-size: 20px;
+      line-height: 1.3;
       font-weight: 600;
-      letter-spacing: -0.03em;
+      letter-spacing: -0.02em;
     }
 
-    .crumb {
-      color: ${({ theme }) => theme.colors.gray9};
-      transition: color 120ms ease;
-
-      &:hover {
-        color: ${({ theme }) => theme.colors.indigo9};
-      }
-    }
-
-    .crumb-sep {
-      width: 0.7em;
-      height: 0.7em;
-      color: ${({ theme }) => theme.colors.gray8};
+    .controls {
+      margin-left: auto;
     }
   }
 

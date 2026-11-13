@@ -75,6 +75,9 @@ const CONFIG = {
       github: "https://github.com/cheoljunpark/algorithm",
     },
   ],
+  // About page content: the Notion row with this ID number. Its status can
+  // stay empty, so it never appears in the post list or at its own URL.
+  aboutPageId: "73",
   // blog setting (required)
   blog: {
     title: "cheoljun.dev",

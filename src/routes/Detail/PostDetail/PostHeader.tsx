@@ -1,14 +1,12 @@
-import { CONFIG } from "site.config"
 import Tag from "src/components/Tag"
 import { TPost } from "src/types"
 import { formatIndexDate, getPostDate, siteUrl } from "src/libs/utils"
 import React, { useState } from "react"
 import styled from "@emotion/styled"
 import Image from "next/image"
-import { FiLink } from "react-icons/fi"
+import Link from "next/link"
+import { FiChevronRight, FiLink } from "react-icons/fi"
 import { useUiLanguage } from "src/contexts/UiLanguageContext"
-import useReadingTime from "src/hooks/useReadingTime"
-import usePostQuery from "src/hooks/usePostQuery"
 
 type Props = {
   data: TPost
@@ -16,8 +14,8 @@ type Props = {
 
 const PostHeader: React.FC<Props> = ({ data }) => {
   const { language } = useUiLanguage()
-  const post = usePostQuery()
-  const readingTime = useReadingTime(post)
+  const menu = data.menu?.[0]
+  const submenu = data.submenu?.[0]
   const [isShareCopied, setIsShareCopied] = useState(false)
 
   const handleShare = async () => {
@@ -47,18 +45,28 @@ const PostHeader: React.FC<Props> = ({ data }) => {
 
   return (
     <StyledWrapper>
+      {menu && (
+        // Category path above the title; each part opens that list on the feed.
+        <nav
+          className="category"
+          aria-label={language === "ko" ? "카테고리" : "Category"}
+        >
+          <Link href={{ pathname: "/", query: { menu } }}>{menu}</Link>
+          {submenu && (
+            <>
+              <FiChevronRight aria-hidden="true" />
+              <Link href={{ pathname: "/", query: { menu, submenu } }}>
+                {submenu}
+              </Link>
+            </>
+          )}
+        </nav>
+      )}
       <h1 className="title">{data.title}</h1>
       {data.summary && <p className="summary">{data.summary}</p>}
       <div className="meta-row">
         <p className="meta">
           <time>{formatIndexDate(getPostDate(data))}.</time>
-          <span>{CONFIG.profile.name}</span>
-          {data.menu?.[0] && <span className="sep">{data.menu[0]}</span>}
-          {readingTime && (
-            <span className="sep">
-              {language === "ko" ? `${readingTime}분` : `${readingTime} min`}
-            </span>
-          )}
         </p>
         <button
           className="share"
@@ -140,18 +148,44 @@ const StyledWrapper = styled.div`
     margin: 0;
     font-size: 14px;
     color: ${({ theme }) => theme.colors.gray10};
+  }
 
-    .sep::before {
-      content: "·";
-      margin-right: 8px;
-      color: ${({ theme }) => theme.colors.gray9};
+  .category {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: ${({ theme }) => theme.colors.indigo9};
+
+    svg {
+      width: 14px;
+      height: 14px;
+      color: ${({ theme }) => theme.colors.gray8};
+    }
+
+    a {
+      padding: 6px 0;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      text-underline-offset: 0.2em;
     }
   }
 
+  /* 44px touch area around a small icon */
   .share {
     display: inline-flex;
+    justify-content: center;
     align-items: center;
     flex-shrink: 0;
+    min-width: 44px;
+    height: 44px;
+    margin: -12px -12px -12px 0;
+    border-radius: 10px;
     font-size: 14px;
     color: ${({ theme }) => theme.colors.gray10};
     cursor: pointer;

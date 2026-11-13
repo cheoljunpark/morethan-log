@@ -77,7 +77,6 @@ const usePostTaxonomy = () => {
       .map(({ name, count, submenus }) => ({ name, count, submenus }))
 
     return {
-      total: publicPosts.length,
       menus: menuItems,
       tags: toSortedItems(tags),
     }

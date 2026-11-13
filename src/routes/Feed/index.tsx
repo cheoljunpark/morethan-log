@@ -21,7 +21,7 @@ const Feed: React.FC = () => {
     submenu: currentSubmenu,
     tag: currentTag,
   } = getFeedQuery(router.query)
-  const { menus, tags, total } = usePostTaxonomy()
+  const { menus, tags } = usePostTaxonomy()
   const activeMenu = menus.find((menu) => menu.name === currentMenu)
   const [showAllTags, setShowAllTags] = useState(false)
 
@@ -50,16 +50,16 @@ const Feed: React.FC = () => {
           data-active={!currentMenu && !currentTag && !q}
           scroll={false}
         >
-          {ko ? "전체" : "All"} ({total})
+          {ko ? "전체" : "All"}
         </Link>
-        {menus.map(({ name, count }) => (
+        {menus.map(({ name }) => (
           <Link
             key={name}
             href={{ pathname: "/", query: { menu: name } }}
             data-active={currentMenu === name}
             scroll={false}
           >
-            {name} ({count})
+            {name}
           </Link>
         ))}
       </nav>
@@ -76,9 +76,9 @@ const Feed: React.FC = () => {
             data-active={!currentSubmenu}
             scroll={false}
           >
-            {ko ? "전체" : "All"} ({activeMenu.count})
+            {ko ? "전체" : "All"}
           </Link>
-          {activeMenu.submenus.map(({ name, count }) => (
+          {activeMenu.submenus.map(({ name }) => (
             <Link
               key={name}
               href={{
@@ -88,7 +88,7 @@ const Feed: React.FC = () => {
               data-active={currentSubmenu === name}
               scroll={false}
             >
-              {name} ({count})
+              {name}
             </Link>
           ))}
         </nav>
@@ -148,14 +148,14 @@ const StyledWrapper = styled.div`
   .banner {
     width: 100vw;
     margin-left: calc(50% - 50vw);
-    padding: 72px 22px 76px;
+    padding: 48px 22px 52px;
     background: ${({ theme }) =>
       theme.scheme === "light" ? "#272729" : "#161617"};
     color: #ffffff;
     text-align: center;
 
     @media (max-width: 734px) {
-      padding: 52px 20px 56px;
+      padding: 36px 20px 40px;
     }
 
     .eyebrow {
@@ -180,20 +180,22 @@ const StyledWrapper = styled.div`
     }
   }
 
-  /* Centered category chips */
-  /* Submenus of the selected category: a smaller second row */
+  /* Submenus of the selected category: underline tabs under the chips,
+     so they read as a second level rather than more chips. */
   .submenu-chips {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 6px;
+    gap: 4px 22px;
     max-width: 760px;
-    margin: -12px auto 24px;
+    margin: -8px auto 24px;
+    border-bottom: 1px solid ${({ theme }) => theme.colors.gray6};
 
     @media (max-width: 734px) {
       flex-wrap: nowrap;
       justify-content: flex-start;
-      margin: 0 0 8px;
+      gap: 20px;
+      margin: 4px 0 8px;
       overflow-x: auto;
       scrollbar-width: none;
 
@@ -204,24 +206,27 @@ const StyledWrapper = styled.div`
 
     a {
       flex-shrink: 0;
-      padding: 4px 12px;
-      border-radius: 9999px;
-      font-size: 13px;
-      color: ${({ theme }) => theme.colors.gray10};
+      padding: 10px 0 9px;
+      margin-bottom: -1px;
+      border-bottom: 2px solid transparent;
+      font-size: 14px;
+      color: ${({ theme }) => theme.colors.gray9};
       white-space: nowrap;
+      transition: color 120ms ease, border-color 120ms ease;
 
       &:hover {
         color: ${({ theme }) => theme.colors.gray12};
       }
 
       &[data-active="true"] {
-        background: ${({ theme }) => theme.colors.gray4};
+        border-bottom-color: ${({ theme }) => theme.colors.gray12};
         color: ${({ theme }) => theme.colors.gray12};
         font-weight: 600;
       }
     }
   }
 
+  /* Centered category chips */
   .category-chips {
     display: flex;
     flex-wrap: wrap;
@@ -287,15 +292,10 @@ const StyledWrapper = styled.div`
     min-width: 0;
   }
 
+  /* Tags only on wide screens; on phones they'd trail the list for pages. */
   .sidebar {
     @media (max-width: 1023px) {
-      padding-top: 8px;
-
-      ul {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0 16px;
-      }
+      display: none;
     }
 
     @media (min-width: 1024px) {

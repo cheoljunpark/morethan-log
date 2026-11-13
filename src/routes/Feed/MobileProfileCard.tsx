@@ -45,7 +45,6 @@ const StyledWrapper = styled.div`
   }
 
   > .mid {
-
     > .wrapper {
       display: flex;
       gap: 0.85rem;

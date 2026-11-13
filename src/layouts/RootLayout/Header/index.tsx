@@ -5,7 +5,6 @@ import { useEffect, useRef, useState } from "react"
 import { FiSearch } from "react-icons/fi"
 import { useUiLanguage } from "src/contexts/UiLanguageContext"
 import { zIndexes } from "src/styles/zIndexes"
-import LanguageToggle from "./LanguageToggle"
 import Logo from "./Logo"
 import NavBar from "./NavBar"
 import SearchOverlay from "./SearchOverlay"
@@ -117,7 +116,6 @@ const Header: React.FC = () => {
         </button>
 
         <div className="controls">
-          <LanguageToggle />
           <ThemeToggle />
         </div>
 
@@ -149,7 +147,6 @@ const Header: React.FC = () => {
             </div>
 
             <div className="mobile-menu-controls">
-              <LanguageToggle />
               <ThemeToggle />
             </div>
           </div>
@@ -220,10 +217,6 @@ const StyledWrapper = styled.div`
     &::after {
       display: none;
     }
-  }
-
-  > .container > .controls button + button::before {
-    color: rgba(255, 255, 255, 0.35);
   }
 
   .search-trigger {

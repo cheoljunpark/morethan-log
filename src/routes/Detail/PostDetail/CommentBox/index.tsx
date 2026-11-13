@@ -58,7 +58,7 @@ const CommentBox: React.FC<Props> = ({ data }) => {
   return (
     <StyledWrapper>
       <div ref={shellRef} className="comment-shell">
-        <div className="title">{language === "ko" ? "댓글" : "Comments"}</div>
+        <h2 className="title">{language === "ko" ? "댓글" : "Comments"}</h2>
         {isCommentVisible && CONFIG.utterances.enable && (
           <UtterancesComponent />
         )}
@@ -80,8 +80,10 @@ const StyledWrapper = styled.div`
     margin-bottom: 1.25rem;
     padding-bottom: 0.6rem;
     border-bottom: 1px solid ${({ theme }) => theme.colors.gray6};
-    font-size: 0.72rem;
-    letter-spacing: -0.01em;
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
     color: ${({ theme }) => theme.colors.gray12};
   }
 `

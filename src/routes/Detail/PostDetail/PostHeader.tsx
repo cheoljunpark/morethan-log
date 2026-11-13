@@ -1,7 +1,7 @@
 import { CONFIG } from "site.config"
 import Tag from "src/components/Tag"
 import { TPost } from "src/types"
-import { formatIndexDate } from "src/libs/utils"
+import { formatIndexDate, siteUrl } from "src/libs/utils"
 import React, { useState } from "react"
 import styled from "@emotion/styled"
 import { FiLink } from "react-icons/fi"
@@ -22,8 +22,7 @@ const PostHeader: React.FC<Props> = ({ data }) => {
   const handleShare = async () => {
     if (typeof window === "undefined") return
 
-    const baseUrl = CONFIG.link.replace(/\/$/, "")
-    const shareUrl = `${baseUrl}/${data.slug}`
+    const shareUrl = siteUrl(data.slug)
 
     try {
       if (navigator.clipboard?.writeText) {
@@ -122,7 +121,7 @@ const StyledWrapper = styled.div`
     .sep::before {
       content: "·";
       margin-right: 8px;
-      color: ${({ theme }) => theme.colors.gray8};
+      color: ${({ theme }) => theme.colors.gray9};
     }
   }
 

@@ -107,6 +107,7 @@ export default About
 
 const StyledWrapper = styled.div`
   max-width: 46rem;
+  margin: 0 auto;
   padding: 3rem 0 5rem;
 
   @media (max-width: 1023px) {

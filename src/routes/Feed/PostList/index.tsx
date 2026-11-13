@@ -38,9 +38,7 @@ const PostList: React.FC = () => {
     )
   }
 
-  const isRestored = useFeedScrollRestoration(
-    JSON.stringify([filteredPosts.length, safePage, filter])
-  )
+  useFeedScrollRestoration(JSON.stringify([filteredPosts.length, safePage, filter]))
 
   const isFiltered = Boolean(q || tag || menu || submenu)
   const heading = q
@@ -70,13 +68,7 @@ const PostList: React.FC = () => {
         </div>
       )}
 
-      <div
-        className="post-area"
-        style={{
-          opacity: isRestored ? 1 : 0,
-          transition: "opacity 120ms ease-out",
-        }}
-      >
+      <div className="post-area">
         {!filteredPosts.length ? (
           <div className="empty-state">
             <h3>{language === "ko" ? "조건에 맞는 글이 없어요." : "No posts found"}</h3>
@@ -95,11 +87,12 @@ const PostList: React.FC = () => {
       </div>
 
       {totalPages > 1 && (
-        <nav className="pagination" aria-label="Feed pagination">
+        <nav className="pagination" aria-label={ko ? "페이지 이동" : "Pagination"}>
           <button
             type="button"
             disabled={safePage <= 1}
             onClick={() => updatePage(1)}
+            aria-label={ko ? "첫 페이지" : "First page"}
           >
             {"<<"}
           </button>
@@ -107,6 +100,7 @@ const PostList: React.FC = () => {
             type="button"
             disabled={safePage <= 1}
             onClick={() => updatePage(safePage - 1)}
+            aria-label={ko ? "이전 페이지" : "Previous page"}
           >
             {"<"}
           </button>
@@ -115,6 +109,7 @@ const PostList: React.FC = () => {
               key={page}
               type="button"
               data-active={page === safePage}
+              aria-current={page === safePage ? "page" : undefined}
               onClick={() => updatePage(page)}
             >
               {page}
@@ -124,6 +119,7 @@ const PostList: React.FC = () => {
             type="button"
             disabled={safePage >= totalPages}
             onClick={() => updatePage(safePage + 1)}
+            aria-label={ko ? "다음 페이지" : "Next page"}
           >
             {">"}
           </button>
@@ -131,6 +127,7 @@ const PostList: React.FC = () => {
             type="button"
             disabled={safePage >= totalPages}
             onClick={() => updatePage(totalPages)}
+            aria-label={ko ? "마지막 페이지" : "Last page"}
           >
             {">>"}
           </button>

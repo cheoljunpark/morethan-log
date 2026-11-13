@@ -46,7 +46,7 @@ const StyledWrapper = styled.div`
 
   &::before {
     content: "#";
-    color: ${({ theme }) => theme.colors.gray8};
+    color: ${({ theme }) => theme.colors.gray9};
   }
 
   &:hover {

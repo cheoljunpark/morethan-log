@@ -1,14 +1,14 @@
 import Detail from "src/routes/Detail"
 import { filterPosts } from "src/libs/utils/notion"
+import { siteUrl } from "src/libs/utils"
 import { CONFIG } from "site.config"
 import { NextPageWithLayout } from "../types"
 import CustomError from "src/routes/Error"
 import { getRecordMap, getPosts } from "src/apis"
 import MetaConfig from "src/components/MetaConfig"
 import { GetStaticProps } from "next"
-import { queryClient } from "src/libs/react-query"
 import { queryKey } from "src/constants/queryKey"
-import { dehydrate } from "@tanstack/react-query"
+import { dehydrate, QueryClient } from "@tanstack/react-query"
 import usePostQuery from "src/hooks/usePostQuery"
 import { FilterPostsOptions } from "src/libs/utils/notion/filterPosts"
 
@@ -25,6 +25,8 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
+  // Fresh client per page: a shared one would embed other posts' data here.
+  const queryClient = new QueryClient()
   const slug = context.params?.slug
 
   const posts = await getPosts()
@@ -60,14 +62,13 @@ const DetailPage: NextPageWithLayout = () => {
 
   if (!post) return <CustomError />
 
-  const siteUrl = CONFIG.link.replace(/\/$/, "")
   const image =
     post.thumbnail ??
     `${CONFIG.ogImageGenerateURL}/${encodeURIComponent(post.title)}.png`
 
   const date = post.date?.start_date || post.createdTime || ""
   const modifiedDate = post.updatedAt?.start_date || date
-  const url = `${siteUrl}/${post.slug}`
+  const url = siteUrl(post.slug)
   const keywords = [
     ...(post.tags || []),
     ...(post.menu || []),
@@ -99,8 +100,8 @@ const DetailPage: NextPageWithLayout = () => {
     title: post.title,
     date: new Date(date).toISOString(),
     image: image,
-    description: post.summary || "",
-    type: post.type[0],
+    description: post.summary || CONFIG.blog.description,
+    type: "article" as const,
     url,
     canonicalUrl: url,
     keywords,

@@ -480,7 +480,7 @@ const StyledWrapper = styled.div`
   .notion-h1,
   .notion-h2,
   .notion-h3 {
-    font-weight: 700 !important;
+    font-weight: 600 !important;
     letter-spacing: -0.03em;
     scroll-margin-top: 5rem;
   }

@@ -4,7 +4,7 @@ import Head from "next/head"
 export type MetaConfigProps = {
   title: string
   description: string
-  type: "Website" | "Post" | "Page" | string
+  type: "website" | "article"
   date?: string
   image?: string
   url: string
@@ -29,7 +29,7 @@ const MetaConfig: React.FC<MetaConfigProps> = (props) => {
       <meta property="og:title" content={props.title} />
       <meta property="og:description" content={props.description} />
       <meta property="og:url" content={props.url} />
-      {CONFIG.lang && <meta property="og:locale" content={CONFIG.lang} />}
+      {CONFIG.lang && <meta property="og:locale" content={CONFIG.lang.replace("-", "_")} />}
       {props.image && <meta property="og:image" content={props.image} />}
       {/* twitter */}
       <meta name="twitter:title" content={props.title} />
@@ -37,7 +37,7 @@ const MetaConfig: React.FC<MetaConfigProps> = (props) => {
       <meta name="twitter:card" content="summary_large_image" />
       {props.image && <meta name="twitter:image" content={props.image} />}
       {/* post */}
-      {props.type === "Post" && (
+      {props.type === "article" && (
         <>
           <meta property="article:published_time" content={props.date} />
           <meta property="article:author" content={CONFIG.profile.name} />

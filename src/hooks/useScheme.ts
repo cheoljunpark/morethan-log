@@ -66,7 +66,10 @@ const useScheme = (): [SchemeType, SetScheme] => {
     const nextScheme = getStoredScheme() || getConfiguredScheme()
     if (nextScheme !== data) {
       queryClient.setQueryData(queryKey.scheme(), nextScheme)
+      return
     }
+    // The real theme is rendered: reveal a page hidden by _document's pre-scheme script.
+    document.documentElement.removeAttribute("data-pre-scheme")
   }, [data, queryClient])
 
   return [data, setScheme]

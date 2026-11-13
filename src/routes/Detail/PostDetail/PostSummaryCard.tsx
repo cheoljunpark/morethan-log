@@ -132,7 +132,7 @@ const StyledWrapper = styled.section`
 
     &::before {
       content: "– ";
-      color: ${({ theme }) => theme.colors.gray8};
+      color: ${({ theme }) => theme.colors.gray9};
     }
   }
 

@@ -1,8 +1,9 @@
 import styled from "@emotion/styled"
 import dynamic from "next/dynamic"
 import { useRouter } from "next/router"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { FiSearch } from "react-icons/fi"
+import { useUiLanguage } from "src/contexts/UiLanguageContext"
 import { zIndexes } from "src/styles/zIndexes"
 import LanguageToggle from "./LanguageToggle"
 import Logo from "./Logo"
@@ -22,7 +23,10 @@ const Header: React.FC = () => {
   const router = useRouter()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
-  const isFeedPage = router.pathname === "/"
+  const ko = useUiLanguage().language === "ko"
+
+  const triggerRef = useRef<HTMLButtonElement>(null)
+  const panelRef = useRef<HTMLDivElement>(null)
 
   // Any navigation (menu link, category, search) closes the drawer.
   useEffect(() => {
@@ -31,6 +35,45 @@ const Header: React.FC = () => {
     return () => router.events.off("routeChangeStart", close)
   }, [router.events])
 
+  // Keyboard support while the drawer is open: focus moves into it, Tab stays
+  // inside it, and Escape closes it and returns focus to the menu button.
+  useEffect(() => {
+    if (!isMobileMenuOpen) return
+    const panel = panelRef.current
+    if (!panel) return
+
+    const focusables = () =>
+      Array.from(
+        panel.querySelectorAll<HTMLElement>("a[href], button:not([disabled]), input")
+      ).filter((el) => el.offsetParent !== null)
+
+    focusables()[0]?.focus()
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsMobileMenuOpen(false)
+        triggerRef.current?.focus()
+        return
+      }
+      if (event.key !== "Tab") return
+
+      const items = focusables()
+      if (items.length === 0) return
+      const first = items[0]
+      const last = items[items.length - 1]
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault()
+        last.focus()
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault()
+        first.focus()
+      }
+    }
+
+    document.addEventListener("keydown", handleKeyDown)
+    return () => document.removeEventListener("keydown", handleKeyDown)
+  }, [isMobileMenuOpen])
+
   return (
     <StyledWrapper>
       <div className="container">
@@ -38,9 +81,12 @@ const Header: React.FC = () => {
         <NavBar className="header-links" />
 
         <button
+          ref={triggerRef}
           type="button"
           className="mobile-menu-trigger"
-          aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+          aria-label={
+            isMobileMenuOpen ? (ko ? "메뉴 닫기" : "Close menu") : ko ? "메뉴 열기" : "Open menu"
+          }
           aria-expanded={isMobileMenuOpen}
           onClick={() => setIsMobileMenuOpen((value) => !value)}
         >
@@ -50,7 +96,7 @@ const Header: React.FC = () => {
         <button
           type="button"
           className="search-trigger"
-          aria-label="Search"
+          aria-label={ko ? "검색" : "Search"}
           onClick={() => {
             setIsMobileMenuOpen(false)
             setIsSearchOpen(true)
@@ -71,20 +117,23 @@ const Header: React.FC = () => {
           aria-hidden="true"
         />
 
-        <div className="mobile-menu-panel" data-open={isMobileMenuOpen}>
+        <div
+          ref={panelRef}
+          className="mobile-menu-panel"
+          data-open={isMobileMenuOpen}
+          // Closed drawer is only slid off-screen; inert keeps its links out of
+          // the Tab order and away from screen readers.
+          {...(!isMobileMenuOpen && { inert: "" })}
+        >
           <NavBar className="mobile-menu-links" />
 
-          {isFeedPage && (
-            <>
-              <div className="mobile-feed-menu">
-                <MobileMenuList initialVisibleCount={5} />
-              </div>
+          <div className="mobile-feed-menu">
+            <MobileMenuList initialVisibleCount={5} />
+          </div>
 
-              <div className="mobile-menu-profile">
-                <MobileProfileCard />
-              </div>
-            </>
-          )}
+          <div className="mobile-menu-profile">
+            <MobileProfileCard />
+          </div>
 
           <div className="mobile-menu-controls">
             <LanguageToggle />

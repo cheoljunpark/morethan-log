@@ -1,14 +1,10 @@
 import { CONFIG } from "../../site.config"
-import { NextPageWithLayout, TPosts, TTags } from "../types"
+import { NextPageWithLayout } from "../types"
 import CustomError from "../routes/Error"
 import MetaConfig from "src/components/MetaConfig"
+import { siteUrl } from "src/libs/utils"
 
-type Props = {
-  tags: TTags
-  posts: TPosts
-}
-
-const NotFoundPage: NextPageWithLayout<Props> = () => {
+const NotFoundPage: NextPageWithLayout = () => {
   return <CustomError />
 }
 
@@ -20,7 +16,7 @@ NotFoundPage.getLayout = (page) => {
           title: CONFIG.blog.title,
           description: CONFIG.blog.description,
           type: "website",
-          url: CONFIG.link,
+          url: siteUrl(),
         }}
       />
       {page}

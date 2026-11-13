@@ -15,7 +15,8 @@ const NavBar: React.FC<Props> = ({ className }) => {
   const { language } = useUiLanguage()
 
   const links = [
-    { id: 3, name: language === "ko" ? "소개" : "About", to: "/about" },
+    { id: 1, name: language === "ko" ? "홈" : "Home", to: "/" },
+    { id: 2, name: language === "ko" ? "소개" : "About", to: "/about" },
   ]
   const prefetchStaticPages = useCallback(() => {
     PREFETCH_PATHS.forEach((path) => {
@@ -95,7 +96,7 @@ const StyledWrapper = styled.div`
     color: ${({ theme }) => theme.colors.gray10};
     font-size: 0.875rem;
     line-height: 1;
-    font-weight: 500;
+    font-weight: 400;
     transition: color 120ms ease;
 
     &::after {

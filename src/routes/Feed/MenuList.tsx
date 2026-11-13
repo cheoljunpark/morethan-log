@@ -143,7 +143,7 @@ const StyledWrapper = styled.div`
     font-family: var(--font-text);
     font-size: 0.72rem;
     font-weight: 400;
-    color: ${({ theme }) => theme.colors.gray8};
+    color: ${({ theme }) => theme.colors.gray9};
   }
 
   .submenu-list {

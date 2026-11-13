@@ -1,4 +1,5 @@
 import { CONFIG } from "site.config"
+import { siteUrl } from "src/libs/utils"
 import { ReactCusdis } from "react-cusdis"
 import { useCallback, useEffect, useState } from "react"
 import styled from "@emotion/styled"
@@ -42,7 +43,7 @@ const Cusdis: React.FC<Props> = ({ id, slug, title }) => {
             appId: CONFIG.cusdis.config.appid,
             pageId: id,
             pageTitle: title,
-            pageUrl: `${CONFIG.link}/${slug}`,
+            pageUrl: siteUrl(slug),
             theme: scheme,
           }}
         />

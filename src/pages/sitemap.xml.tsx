@@ -1,27 +1,29 @@
-import { getPosts } from "../apis/notion-client/getPosts"
-import { CONFIG } from "site.config"
-import { getServerSideSitemap, ISitemapField } from "next-sitemap"
 import { GetServerSideProps } from "next"
+import { getServerSideSitemap, ISitemapField } from "next-sitemap"
+import { getPosts } from "src/apis/notion-client/getPosts"
+import { siteUrl } from "src/libs/utils"
+import { filterPosts } from "src/libs/utils/notion"
+
+const toIsoDate = (value?: string) => {
+  const date = value ? new Date(value) : new Date()
+  return Number.isNaN(date.getTime()) ? new Date().toISOString() : date.toISOString()
+}
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const posts = await getPosts()
-  const dynamicPaths = posts.map((post) => `${CONFIG.link}/${post.slug}`)
+  // Only public posts: drafts and private posts must not be advertised.
+  const posts = filterPosts(await getPosts())
+  const latest = posts[0]?.updatedAt?.start_date || posts[0]?.date?.start_date
 
-  // Create an array of fields, each with a loc and lastmod
-  const fields: ISitemapField[] = dynamicPaths.map((path) => ({
-    loc: path,
-    lastmod: new Date().toISOString(),
-    priority: 0.7,
-    changefreq: "daily",
-  }))
-
-  // Include the site root separately
-  fields.unshift({
-    loc: CONFIG.link,
-    lastmod: new Date().toISOString(),
-    priority: 1.0,
-    changefreq: "daily",
-  })
+  const fields: ISitemapField[] = [
+    { loc: siteUrl(), lastmod: toIsoDate(latest), priority: 1.0, changefreq: "daily" },
+    { loc: siteUrl("/about"), lastmod: toIsoDate(latest), priority: 0.5, changefreq: "monthly" },
+    ...posts.map((post) => ({
+      loc: siteUrl(post.slug),
+      lastmod: toIsoDate(post.updatedAt?.start_date || post.date?.start_date || post.createdTime),
+      priority: 0.7,
+      changefreq: "weekly" as const,
+    })),
+  ]
 
   return getServerSideSitemap(ctx, fields)
 }

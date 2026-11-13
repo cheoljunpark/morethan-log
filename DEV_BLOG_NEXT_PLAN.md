@@ -15,20 +15,25 @@
 
 ## 현재 상태
 
+> 2026-11 리디자인 이후 기준. 세부 내역은 `DEV_BLOG_UPGRADE_STATUS.md` 참고.
+
 이미 반영된 것:
 
-- 노션 응답 호환성 보강
+- 노션 응답 호환성 보강 (notion-client 8.x)
 - reading time
-- previous / next navigation
-- related posts
+- previous / next navigation (한 줄 형태)
 - series 지원
-- 검색 / 카테고리 / 정렬 상태 유지
-- 기본 SEO / canonical / JSON-LD 보강
-- 홈 피드 카드 UI 개선
+- 검색(전체 화면 검색) / 카테고리 칩 / 태그 사이드바 / 정렬 상태 유지
+- 기본 SEO / canonical / JSON-LD 보강, 페이지 언어 `ko-KR`
+- 글 상단 요약 박스 ("한눈에 보기": 사전 준비 / 관련 링크)
+
+의도적으로 제거한 것:
+
+- `/archive`, `/tags` 페이지: 글 수 대비 홈 필터와 중복되어 제거 (기존 주소는 `/`로 리다이렉트)
+- related posts, TOC 사이드바: 상세 화면을 단순하게 유지하기 위해 제거
 
 현재 부족한 것:
 
-- 아카이브성 탐색 구조 부족
 - 홈에서 핵심 글을 큐레이션하는 힘 부족
 - 노션 속성 기반 운영 기능 부족
 - 글 신뢰도를 높이는 메타 정보 부족
@@ -54,7 +59,9 @@
 - 새 방문자 유입 시 첫인상 개선
 - 운영 편의성 상승
 
-### 2. Archive / Tags / Series 탐색 페이지
+### 2. Archive / Tags / Series 탐색 페이지 (보류)
+
+> 2026-11: `/archive`, `/tags`는 홈 필터로 대체하며 제거했다. 글이 수백 편 규모가 되면 다시 검토한다.
 
 목표:
 글이 쌓일수록 블로그 가치가 올라가게 만든다.
@@ -212,10 +219,8 @@
 가장 효율적인 순서:
 
 1. `pinned` / `featured` 노션 속성 지원
-2. `/archive` 페이지 추가
-3. 글 상단 요약 박스 추가
-4. `updatedAt` / 참고 링크 / anchor copy
-5. `/tags` / `/series` 탐색 페이지 추가
+2. `updatedAt` / 참고 링크 / anchor copy
+3. `/series` 탐색 페이지 (글 수가 늘면)
 
 ## 구현안 제안
 
@@ -265,14 +270,12 @@
 바로 다음으로 구현하기 가장 좋은 후보:
 
 1. `pinned` / `featured` 노션 속성 지원
-2. `/archive` 페이지 추가
-3. 글 상단 요약 박스 추가
+2. heading anchor copy
 
 ## 다음 액션
 
 원하면 바로 아래 셋 중 하나부터 구현하면 된다.
 
 - `pinned` / `featured` 노션 속성 기반 홈 운영
-- `/archive` 페이지 추가
-- 글 상단 요약 박스 추가
+- heading anchor copy
 

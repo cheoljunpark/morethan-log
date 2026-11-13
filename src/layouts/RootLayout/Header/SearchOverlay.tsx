@@ -114,9 +114,16 @@ const StyledWrapper = styled.div`
     align-items: center;
     width: 100%;
     border-bottom: 2px solid ${({ theme }) => theme.colors.gray12};
+    transition: border-color 120ms ease;
+
+    /* The underline is the focus indicator here, instead of the global ring. */
+    &:focus-within {
+      border-bottom-color: ${({ theme }) => theme.colors.indigo9};
+    }
   }
 
   input {
+    outline: none;
     flex: 1;
     min-width: 0;
     padding: 10px 0;

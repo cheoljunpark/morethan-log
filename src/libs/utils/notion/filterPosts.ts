@@ -9,16 +9,21 @@ const initialOption: FilterPostsOptions = {
   acceptStatus: ["Public"],
   acceptType: ["Post"],
 }
-const current = new Date()
-const tomorrow = new Date(current)
-tomorrow.setDate(tomorrow.getDate() + 1)
-tomorrow.setHours(0, 0, 0, 0)
+// Start of tomorrow, computed per call: a long-running server must not keep
+// the date from when it started, or scheduled posts would publish late.
+const getStartOfTomorrow = () => {
+  const tomorrow = new Date()
+  tomorrow.setDate(tomorrow.getDate() + 1)
+  tomorrow.setHours(0, 0, 0, 0)
+  return tomorrow
+}
 
 export function filterPosts(
   posts: TPosts,
   options: FilterPostsOptions = initialOption
 ) {
   const { acceptStatus = ["Public"], acceptType = ["Post"] } = options
+  const tomorrow = getStartOfTomorrow()
   const filteredPosts = posts
     // filter data
     .filter((post) => {

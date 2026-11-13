@@ -14,7 +14,7 @@ export const Global = () => {
           padding: 0;
           color: ${theme.colors.gray12};
           background-color: ${theme.colors.gray2};
-          font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+          font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text",
             "Pretendard Variable", ${pretendard.style.fontFamily}, "Pretendard",
             "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
           font-size: 17px;
@@ -32,11 +32,14 @@ export const Global = () => {
         }
 
         :root {
-          --font-text: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
-            "Pretendard Variable", "Pretendard", "Apple SD Gothic Neo",
-            "Malgun Gothic", sans-serif;
-          --font-display: system-ui, -apple-system, BlinkMacSystemFont,
-            "SF Pro Display", "Pretendard Variable", "Pretendard",
+          /* Apple platforms get SF Pro (-apple-system); everyone else gets
+             Pretendard. A generic system-ui first would make Windows draw
+             Hangul in Malgun Gothic and never reach Pretendard. */
+          --font-text: -apple-system, BlinkMacSystemFont, "SF Pro Text",
+            "Pretendard Variable", ${pretendard.style.fontFamily},
+            "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+          --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+            "Pretendard Variable", ${pretendard.style.fontFamily},
             "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
         }
 

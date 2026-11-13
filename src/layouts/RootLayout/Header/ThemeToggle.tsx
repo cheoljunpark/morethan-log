@@ -19,12 +19,20 @@ const ThemeToggle: React.FC<Props> = () => {
       type="button"
       aria-label={
         scheme === "light"
-          ? ko ? "다크 모드로 전환" : "Switch to dark mode"
-          : ko ? "라이트 모드로 전환" : "Switch to light mode"
+          ? ko
+            ? "다크 모드로 전환"
+            : "Switch to dark mode"
+          : ko
+          ? "라이트 모드로 전환"
+          : "Switch to light mode"
       }
       onClick={handleClick}
     >
-      {scheme === "light" ? <FiMoon aria-hidden="true" /> : <FiSun aria-hidden="true" />}
+      {scheme === "light" ? (
+        <FiMoon aria-hidden="true" />
+      ) : (
+        <FiSun aria-hidden="true" />
+      )}
     </StyledWrapper>
   )
 }

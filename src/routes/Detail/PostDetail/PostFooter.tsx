@@ -30,7 +30,9 @@ const Footer: React.FC<Props> = ({ children }) => {
           style={{ objectFit: "cover", borderRadius: "9999px" }}
         />
         <div>
-          <div className="author-name">{author?.name || CONFIG.profile.name}</div>
+          <div className="author-name">
+            {author?.name || CONFIG.profile.name}
+          </div>
           <div className="author-role">{CONFIG.profile.role}</div>
           <p className="author-bio">{CONFIG.profile.bio}</p>
         </div>
@@ -39,13 +41,18 @@ const Footer: React.FC<Props> = ({ children }) => {
       {children}
 
       {(previousPost || nextPost) && (
-        <nav className="adjacent" aria-label={language === "ko" ? "이전/다음 글" : "Adjacent posts"}>
+        <nav
+          className="adjacent"
+          aria-label={language === "ko" ? "이전/다음 글" : "Adjacent posts"}
+        >
           {previousPost ? (
             <Link
               href={`/${previousPost.slug}`}
               prefetch={false}
               className="adjacent-link prev"
-              aria-label={`${language === "ko" ? "이전 글" : "Previous"}: ${previousPost.title}`}
+              aria-label={`${language === "ko" ? "이전 글" : "Previous"}: ${
+                previousPost.title
+              }`}
             >
               <FiChevronLeft aria-hidden="true" />
               <span className="title">{previousPost.title}</span>
@@ -58,7 +65,9 @@ const Footer: React.FC<Props> = ({ children }) => {
               href={`/${nextPost.slug}`}
               prefetch={false}
               className="adjacent-link next"
-              aria-label={`${language === "ko" ? "다음 글" : "Next"}: ${nextPost.title}`}
+              aria-label={`${language === "ko" ? "다음 글" : "Next"}: ${
+                nextPost.title
+              }`}
             >
               <span className="title">{nextPost.title}</span>
               <FiChevronRight aria-hidden="true" />

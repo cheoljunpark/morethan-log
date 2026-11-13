@@ -20,8 +20,8 @@ const Cusdis: React.FC<Props> = ({ id, slug, title }) => {
   }, [])
 
   useEffect(() => {
-    const changesObserver = new MutationObserver(
-      () => onDocumentElementChange()
+    const changesObserver = new MutationObserver(() =>
+      onDocumentElementChange()
     )
 
     changesObserver.observe(document.documentElement, {

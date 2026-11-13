@@ -59,7 +59,9 @@ const CommentBox: React.FC<Props> = ({ data }) => {
     <StyledWrapper>
       <div ref={shellRef} className="comment-shell">
         <div className="title">{language === "ko" ? "댓글" : "Comments"}</div>
-        {isCommentVisible && CONFIG.utterances.enable && <UtterancesComponent />}
+        {isCommentVisible && CONFIG.utterances.enable && (
+          <UtterancesComponent />
+        )}
         {isCommentVisible && CONFIG.cusdis.enable && (
           <CusdisComponent id={data.id} slug={data.slug} title={data.title} />
         )}
@@ -78,7 +80,6 @@ const StyledWrapper = styled.div`
     margin-bottom: 1.25rem;
     padding-bottom: 0.6rem;
     border-bottom: 1px solid ${({ theme }) => theme.colors.gray6};
-    font-family: var(--font-text);
     font-size: 0.72rem;
     letter-spacing: -0.01em;
     color: ${({ theme }) => theme.colors.gray12};

@@ -1,4 +1,11 @@
-import React, { createContext, ReactNode, useContext, useEffect, useMemo, useState } from "react"
+import React, {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react"
 
 export type UiLanguage = "ko" | "en"
 
@@ -48,7 +55,9 @@ export const UiLanguageProvider: React.FC<Props> = ({ children }) => {
   )
 
   return (
-    <UiLanguageContext.Provider value={value}>{children}</UiLanguageContext.Provider>
+    <UiLanguageContext.Provider value={value}>
+      {children}
+    </UiLanguageContext.Provider>
   )
 }
 

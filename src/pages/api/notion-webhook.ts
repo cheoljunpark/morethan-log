@@ -31,18 +31,26 @@ type NotionEvent = {
 const readRawBody = async (req: NextApiRequest) => {
   const chunks: Uint8Array[] = []
   for await (const chunk of req) {
-    chunks.push(typeof chunk === "string" ? new TextEncoder().encode(chunk) : chunk)
+    chunks.push(
+      typeof chunk === "string" ? new TextEncoder().encode(chunk) : chunk
+    )
   }
   return Buffer.concat(chunks)
 }
 
-export const isValidSignature = (rawBody: Buffer, header: unknown, secret: string) => {
+export const isValidSignature = (
+  rawBody: Buffer,
+  header: unknown,
+  secret: string
+) => {
   if (typeof header !== "string" || !header.startsWith("sha256=")) return false
   const expected = Buffer.from(
     "sha256=" + createHmac("sha256", secret).update(rawBody).digest("hex")
   )
   const received = Buffer.from(header)
-  return expected.length === received.length && timingSafeEqual(expected, received)
+  return (
+    expected.length === received.length && timingSafeEqual(expected, received)
+  )
 }
 
 const normalizeId = (id = "") => id.replace(/-/g, "").toLowerCase()
@@ -50,13 +58,17 @@ const normalizeId = (id = "") => id.replace(/-/g, "").toLowerCase()
 /** Pages to regenerate for an event on Notion page `pageId`. */
 export const pathsForPage = async (pageId?: string) => {
   const posts = filterPosts(await getPosts())
-  const post = pageId && posts.find((p) => normalizeId(p.id) === normalizeId(pageId))
+  const post =
+    pageId && posts.find((p) => normalizeId(p.id) === normalizeId(pageId))
   // Home and about list posts (feed, categories), so they always refresh.
   // An unknown page (deleted, unpublished, or not a post) only affects lists.
   return post ? [...SITE_PATHS, `/${post.slug}`] : SITE_PATHS
 }
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   if (req.method !== "POST") {
     res.setHeader("Allow", "POST")
     return res.status(405).json({ message: "Method not allowed" })
@@ -73,7 +85,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   // One-time subscription verification: no signature yet. Surface the token
   // in the function log so the owner can copy it into Notion and Vercel.
   if (event.verification_token && !event.type) {
-    console.log(`[notion-webhook] verification_token: ${event.verification_token}`)
+    console.log(
+      `[notion-webhook] verification_token: ${event.verification_token}`
+    )
     return res.status(200).json({ received: true })
   }
 

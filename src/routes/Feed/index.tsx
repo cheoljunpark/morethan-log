@@ -15,7 +15,11 @@ const Feed: React.FC = () => {
   const router = useRouter()
   const { language } = useUiLanguage()
   const ko = language === "ko"
-  const { q = "", menu: currentMenu, tag: currentTag } = getFeedQuery(router.query)
+  const {
+    q = "",
+    menu: currentMenu,
+    tag: currentTag,
+  } = getFeedQuery(router.query)
   const { menus, tags, total } = usePostTaxonomy()
   const [showAllTags, setShowAllTags] = useState(false)
 
@@ -23,7 +27,9 @@ const Feed: React.FC = () => {
   const visibleTags =
     showAllTags || tags.length <= TAG_LIMIT
       ? tags
-      : tags.filter((tag, index) => index < TAG_LIMIT || tag.name === currentTag)
+      : tags.filter(
+          (tag, index) => index < TAG_LIMIT || tag.name === currentTag
+        )
 
   return (
     <StyledWrapper>
@@ -33,8 +39,15 @@ const Feed: React.FC = () => {
         <p className="subtitle">{CONFIG.profile.bio}</p>
       </section>
 
-      <nav className="category-chips" aria-label={ko ? "카테고리" : "Categories"}>
-        <Link href="/" data-active={!currentMenu && !currentTag && !q} scroll={false}>
+      <nav
+        className="category-chips"
+        aria-label={ko ? "카테고리" : "Categories"}
+      >
+        <Link
+          href="/"
+          data-active={!currentMenu && !currentTag && !q}
+          scroll={false}
+        >
           {ko ? "전체" : "All"} ({total})
         </Link>
         {menus.map(({ name, count }) => (
@@ -78,8 +91,12 @@ const Feed: React.FC = () => {
                   onClick={() => setShowAllTags((value) => !value)}
                 >
                   {showAllTags
-                    ? ko ? "접기" : "Show less"
-                    : ko ? `${tags.length}개 모두 보기` : `Show all ${tags.length}`}
+                    ? ko
+                      ? "접기"
+                      : "Show less"
+                    : ko
+                    ? `${tags.length}개 모두 보기`
+                    : `Show all ${tags.length}`}
                 </button>
               )}
             </section>
@@ -100,7 +117,8 @@ const StyledWrapper = styled.div`
     width: 100vw;
     margin-left: calc(50% - 50vw);
     padding: 72px 22px 76px;
-    background: ${({ theme }) => (theme.scheme === "light" ? "#272729" : "#161617")};
+    background: ${({ theme }) =>
+      theme.scheme === "light" ? "#272729" : "#161617"};
     color: #ffffff;
     text-align: center;
 

@@ -4,8 +4,6 @@ import styled from "@emotion/styled"
 import useScheme from "src/hooks/useScheme"
 import { useRouter } from "next/router"
 
-//TODO: useRef?
-
 type Props = {
   issueTerm?: string
 }

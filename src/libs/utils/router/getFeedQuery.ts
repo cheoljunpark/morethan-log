@@ -16,7 +16,9 @@ const FEED_KEYS: (keyof FeedQuery)[] = ["menu", "order", "q", "submenu", "tag"]
  */
 export const compactQuery = <T extends Record<string, unknown>>(query: T) =>
   Object.fromEntries(
-    Object.entries(query).filter(([, value]) => value !== undefined && value !== "")
+    Object.entries(query).filter(
+      ([, value]) => value !== undefined && value !== ""
+    )
   ) as Partial<T>
 
 /** The feed filters present in the URL; absent or empty params are omitted. */

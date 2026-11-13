@@ -24,11 +24,7 @@ class MyDocument extends Document {
           <style dangerouslySetInnerHTML={{ __html: PRE_SCHEME_STYLE }} />
           <script dangerouslySetInnerHTML={{ __html: PRE_SCHEME_SCRIPT }} />
           <link rel="icon" href="/favicon.ico" />
-          <link
-            rel="apple-touch-icon"
-            sizes="192x192"
-            href="/logo.png"
-          ></link>
+          <link rel="apple-touch-icon" sizes="192x192" href="/logo.png"></link>
           {/* google search console */}
           {CONFIG.googleSearchConsole.enable === true && (
             <>

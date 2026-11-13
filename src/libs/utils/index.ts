@@ -1,4 +1,5 @@
 import { CONFIG } from "site.config"
+import { TPost } from "src/types"
 
 // Locale-independent "YYYY.MM.DD" used for index/meta lines.
 export function formatIndexDate(value: string) {
@@ -14,4 +15,9 @@ export function siteUrl(path = "/") {
   const base = CONFIG.link.replace(/\/+$/, "")
   const normalized = path.startsWith("/") ? path : `/${path}`
   return normalized === "/" ? `${base}/` : `${base}${normalized}`
+}
+
+/** When a post was published: its Notion date, or when the page was created. */
+export function getPostDate(post: Pick<TPost, "date" | "createdTime">) {
+  return post.date?.start_date || post.createdTime
 }

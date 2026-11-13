@@ -33,14 +33,18 @@ const PostSummaryCard: React.FC<Props> = ({ data }) => {
 
   return (
     <StyledWrapper>
-      <div className="eyebrow">{language === "ko" ? "한눈에 보기" : "At a glance"}</div>
+      <div className="eyebrow">
+        {language === "ko" ? "한눈에 보기" : "At a glance"}
+      </div>
       {data.summary && <p className="summary">{data.summary}</p>}
 
       {(prerequisites.length > 0 || references.length > 0) && (
         <div className="supporting">
           {prerequisites.length > 0 && (
             <section className="support-card">
-              <div className="support-label">{language === "ko" ? "사전 준비" : "Prerequisites"}</div>
+              <div className="support-label">
+                {language === "ko" ? "사전 준비" : "Prerequisites"}
+              </div>
               <ul>
                 {prerequisites.map((item) => (
                   <li key={item}>{item}</li>
@@ -51,7 +55,9 @@ const PostSummaryCard: React.FC<Props> = ({ data }) => {
 
           {references.length > 0 && (
             <section className="support-card">
-              <div className="support-label">{language === "ko" ? "관련 링크" : "References"}</div>
+              <div className="support-label">
+                {language === "ko" ? "관련 링크" : "References"}
+              </div>
               <ul>
                 {references.map((item) => (
                   <li key={item}>{item}</li>
@@ -88,7 +94,6 @@ const StyledWrapper = styled.section`
 
   .eyebrow,
   .support-label {
-    font-family: var(--font-text);
     font-size: 0.68rem;
     letter-spacing: -0.01em;
     color: ${({ theme }) => theme.colors.gray9};

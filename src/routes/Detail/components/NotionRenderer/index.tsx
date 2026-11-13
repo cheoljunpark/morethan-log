@@ -221,9 +221,12 @@ const decorateCodeBlocks = (root: ParentNode = document) => {
 
 const getCalloutTone = (callout: HTMLElement) => {
   const iconText =
-    callout.querySelector<HTMLElement>(".notion-page-icon-inline")?.innerText || ""
+    callout.querySelector<HTMLElement>(".notion-page-icon-inline")?.innerText ||
+    ""
   const text =
-    callout.querySelector<HTMLElement>(".notion-callout-text")?.innerText.toLowerCase() || ""
+    callout
+      .querySelector<HTMLElement>(".notion-callout-text")
+      ?.innerText.toLowerCase() || ""
 
   const source = `${iconText} ${text}`
 
@@ -286,43 +289,6 @@ const decorateCallouts = (root: ParentNode = document) => {
 const NotionRenderer: FC<Props> = ({ recordMap }) => {
   const [scheme] = useScheme()
   const wrapperRef = useRef<HTMLDivElement | null>(null)
-
-  useEffect(() => {
-    const originalLog = console.log
-    const originalError = console.error
-
-    console.log = (...args: unknown[]) => {
-      const [firstArg] = args
-      if (
-        typeof firstArg === "string" &&
-        firstArg.toLowerCase().includes("missing user")
-      ) {
-        return
-      }
-
-      originalLog(...args)
-    }
-
-    console.error = (...args: unknown[]) => {
-      const [firstArg] = args
-
-      if (
-        typeof firstArg === "string" &&
-        firstArg.includes(
-          "Warning: Can't perform a React state update on a component that hasn't mounted yet."
-        )
-      ) {
-        return
-      }
-
-      originalError(...args)
-    }
-
-    return () => {
-      console.log = originalLog
-      console.error = originalError
-    }
-  }, [])
 
   useEffect(() => {
     let animationFrame: number | null = null
@@ -420,7 +386,7 @@ const NotionRenderer: FC<Props> = ({ recordMap }) => {
 export default NotionRenderer
 
 const StyledWrapper = styled.div`
-  /* // TODO: why render? */
+  /* Notion renders the database property table on top; the post header already shows those values. */
   .notion-collection-page-properties {
     display: none !important;
   }
@@ -518,7 +484,7 @@ const StyledWrapper = styled.div`
     border-radius: 3px !important;
     background: ${({ theme }) => theme.colors.gray4} !important;
     color: ${({ theme }) => theme.colors.indigo10} !important;
-    font-family: var(--font-text) !important;
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace !important;
     font-size: 0.86em !important;
   }
   .notion-quote {
@@ -545,13 +511,16 @@ const StyledWrapper = styled.div`
     border-left-color: ${({ theme }) => theme.colors.indigo9} !important;
   }
   .notion-callout[data-tone="tip"] {
-    border-left-color: ${({ theme }) => (theme.scheme === "light" ? "#2f7d4f" : "#6fcf97")} !important;
+    border-left-color: ${({ theme }) =>
+      theme.scheme === "light" ? "#2f7d4f" : "#6fcf97"} !important;
   }
   .notion-callout[data-tone="warning"] {
-    border-left-color: ${({ theme }) => (theme.scheme === "light" ? "#b7791f" : "#f6c26b")} !important;
+    border-left-color: ${({ theme }) =>
+      theme.scheme === "light" ? "#b7791f" : "#f6c26b"} !important;
   }
   .notion-callout[data-tone="danger"] {
-    border-left-color: ${({ theme }) => (theme.scheme === "light" ? "#c53030" : "#fc8181")} !important;
+    border-left-color: ${({ theme }) =>
+      theme.scheme === "light" ? "#c53030" : "#fc8181"} !important;
   }
   .notion-callout .notion-page-icon-inline {
     width: 1.6rem !important;
@@ -659,8 +628,7 @@ const StyledWrapper = styled.div`
     }
 
     &[data-copied="true"] {
-      color: ${({ theme }) =>
-        theme.colors.indigo9};
+      color: ${({ theme }) => theme.colors.indigo9};
       border-color: ${({ theme }) => theme.colors.indigo9};
     }
 

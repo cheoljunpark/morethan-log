@@ -18,7 +18,10 @@ const OrderButtons: React.FC = () => {
       {
         pathname: "/",
         // desc is the default, so it is left out of the URL.
-        query: compactQuery({ ...getFeedQuery(router.query), order: value === "desc" ? undefined : value }),
+        query: compactQuery({
+          ...getFeedQuery(router.query),
+          order: value === "desc" ? undefined : value,
+        }),
       },
       undefined,
       { shallow: true, scroll: false }
@@ -50,7 +53,6 @@ export default OrderButtons
 const StyledWrapper = styled.div`
   display: inline-flex;
   align-items: center;
-  font-family: var(--font-text);
   font-size: 0.72rem;
 
   .thumb {

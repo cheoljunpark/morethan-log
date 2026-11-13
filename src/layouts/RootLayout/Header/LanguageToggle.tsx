@@ -33,7 +33,6 @@ export default LanguageToggle
 const StyledWrapper = styled.div`
   display: inline-flex;
   align-items: center;
-  font-family: var(--font-text);
   font-size: 0.72rem;
 
   .thumb {

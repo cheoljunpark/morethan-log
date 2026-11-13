@@ -37,7 +37,6 @@ const StyledWrapper = styled.div`
   align-items: center;
   flex: 0 0 auto;
   white-space: nowrap;
-  font-family: var(--font-text);
   font-size: 0.75rem;
   line-height: 1.2;
   color: ${({ theme }) => theme.colors.gray10};

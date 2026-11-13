@@ -29,7 +29,7 @@ const getConfiguredScheme = (): SchemeType => {
 const getInitialScheme = (): SchemeType =>
   isSchemeType(CONFIG.blog.scheme) ? CONFIG.blog.scheme : "light"
 
-const getStoredScheme =(): SchemeType | undefined => {
+const getStoredScheme = (): SchemeType | undefined => {
   if (typeof window !== "undefined") {
     const localScheme = window.localStorage.getItem(STORAGE_KEY)
     if (isSchemeType(localScheme)) return localScheme

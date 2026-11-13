@@ -7,7 +7,10 @@ import { filterPosts } from "src/libs/utils/notion"
 //   a single page: /api/revalidate?secret=<TOKEN_FOR_REVALIDATE>&path=/my-post
 const STATIC_PATHS = ["/", "/about"]
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   const token = process.env.TOKEN_FOR_REVALIDATE
   const { secret, path } = req.query
 

@@ -7,7 +7,11 @@ import { CONFIG } from "site.config"
 import { useUiLanguage } from "src/contexts/UiLanguageContext"
 
 const contactLinks = [
-  CONFIG.profile.github && { name: "GitHub", icon: SiGithub, href: `https://github.com/${CONFIG.profile.github}` },
+  CONFIG.profile.github && {
+    name: "GitHub",
+    icon: SiGithub,
+    href: `https://github.com/${CONFIG.profile.github}`,
+  },
   CONFIG.profile.linkedin && {
     name: "LinkedIn",
     icon: SiLinkedin,
@@ -18,7 +22,11 @@ const contactLinks = [
     icon: BiBrain,
     href: `https://solved.ac/profile/${CONFIG.profile.solved_ac}`,
   },
-  CONFIG.profile.email && { name: "Email", icon: FiMail, href: `mailto:${CONFIG.profile.email}` },
+  CONFIG.profile.email && {
+    name: "Email",
+    icon: FiMail,
+    href: `mailto:${CONFIG.profile.email}`,
+  },
 ].filter(Boolean) as { name: string; icon: IconType; href: string }[]
 
 const SiteFooter: React.FC = () => {
@@ -35,7 +43,12 @@ const SiteFooter: React.FC = () => {
             <div>
               <h3>{ko ? "프로젝트" : "Projects"}</h3>
               {CONFIG.projects.map((project) => (
-                <a key={project.name} href={project.href} target="_blank" rel="noreferrer">
+                <a
+                  key={project.name}
+                  href={project.href}
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   {project.name}
                 </a>
               ))}
@@ -60,7 +73,8 @@ const SiteFooter: React.FC = () => {
           </div>
         </div>
         <p className="legal">
-          Copyright © {since === year ? year : `${since}–${year}`} {CONFIG.profile.name}.
+          Copyright © {since === year ? year : `${since}–${year}`}{" "}
+          {CONFIG.profile.name}.
         </p>
       </div>
     </StyledWrapper>

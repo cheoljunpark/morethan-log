@@ -12,7 +12,9 @@ const FeedPage: NextPageWithLayout = () => {
     description: CONFIG.blog.description,
     type: "website" as const,
     url: siteUrl(),
-    image: `${CONFIG.ogImageGenerateURL}/${encodeURIComponent(CONFIG.blog.title)}.png`,
+    image: `${CONFIG.ogImageGenerateURL}/${encodeURIComponent(
+      CONFIG.blog.title
+    )}.png`,
   }
 
   return (

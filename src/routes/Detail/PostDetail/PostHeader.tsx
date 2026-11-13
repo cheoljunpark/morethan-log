@@ -1,7 +1,7 @@
 import { CONFIG } from "site.config"
 import Tag from "src/components/Tag"
 import { TPost } from "src/types"
-import { formatIndexDate, siteUrl } from "src/libs/utils"
+import { formatIndexDate, getPostDate, siteUrl } from "src/libs/utils"
 import React, { useState } from "react"
 import styled from "@emotion/styled"
 import { FiLink } from "react-icons/fi"
@@ -53,12 +53,14 @@ const PostHeader: React.FC<Props> = ({ data }) => {
         <>
           <div className="meta-row">
             <p className="meta">
-              <time>{formatIndexDate(data?.date?.start_date || data.createdTime)}.</time>
+              <time>{formatIndexDate(getPostDate(data))}.</time>
               <span>{author}</span>
               {data.menu?.[0] && <span className="sep">{data.menu[0]}</span>}
               {readingTime && (
                 <span className="sep">
-                  {language === "ko" ? `${readingTime}분` : `${readingTime} min`}
+                  {language === "ko"
+                    ? `${readingTime}분`
+                    : `${readingTime} min`}
                 </span>
               )}
             </p>
@@ -70,7 +72,15 @@ const PostHeader: React.FC<Props> = ({ data }) => {
               aria-label={language === "ko" ? "링크 복사" : "Copy link"}
               title={language === "ko" ? "링크 복사" : "Copy link"}
             >
-              {isShareCopied ? (language === "ko" ? "복사됨" : "Copied") : <FiLink aria-hidden="true" />}
+              {isShareCopied ? (
+                language === "ko" ? (
+                  "복사됨"
+                ) : (
+                  "Copied"
+                )
+              ) : (
+                <FiLink aria-hidden="true" />
+              )}
             </button>
           </div>
           {data.tags && data.tags.length > 0 && (

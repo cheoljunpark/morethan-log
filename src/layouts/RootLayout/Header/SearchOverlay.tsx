@@ -52,7 +52,11 @@ const SearchOverlay: React.FC<Props> = ({ open, onClose }) => {
   if (!open || typeof document === "undefined") return null
 
   return createPortal(
-    <StyledWrapper role="dialog" aria-modal="true" aria-label={ko ? "검색" : "Search"}>
+    <StyledWrapper
+      role="dialog"
+      aria-modal="true"
+      aria-label={ko ? "검색" : "Search"}
+    >
       <form onSubmit={handleSubmit}>
         <div className="field">
           <input
@@ -63,7 +67,11 @@ const SearchOverlay: React.FC<Props> = ({ open, onClose }) => {
             placeholder={ko ? "검색어를 입력해주세요." : "Search posts"}
             aria-label={ko ? "검색어" : "Search query"}
           />
-          <button type="submit" className="submit" aria-label={ko ? "검색" : "Search"}>
+          <button
+            type="submit"
+            className="submit"
+            aria-label={ko ? "검색" : "Search"}
+          >
             <FiSearch aria-hidden="true" />
           </button>
         </div>
@@ -87,7 +95,9 @@ const StyledWrapper = styled.div`
   justify-content: center;
   padding: 0 24px;
   background: ${({ theme }) =>
-    theme.scheme === "light" ? "rgba(245, 245, 247, 0.94)" : "rgba(22, 22, 23, 0.96)"};
+    theme.scheme === "light"
+      ? "rgba(245, 245, 247, 0.94)"
+      : "rgba(22, 22, 23, 0.96)"};
   backdrop-filter: saturate(180%) blur(20px);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
   animation: search-fade 160ms ease-out;

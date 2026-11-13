@@ -2,7 +2,7 @@ import styled from "@emotion/styled"
 import Link from "next/link"
 import { memo } from "react"
 import { CONFIG } from "site.config"
-import { formatIndexDate } from "src/libs/utils"
+import { formatIndexDate, getPostDate } from "src/libs/utils"
 import { saveFeedPosition } from "src/libs/utils/feedScroll"
 import { TPost } from "src/types"
 
@@ -14,10 +14,14 @@ const PostCard: React.FC<Props> = ({ data }) => {
   const author = data.author?.[0]?.name || CONFIG.profile.name
 
   return (
-    <StyledWrapper href={`/${data.slug}`} prefetch={false} onClick={() => saveFeedPosition(data.id)}>
+    <StyledWrapper
+      href={`/${data.slug}`}
+      prefetch={false}
+      onClick={() => saveFeedPosition(data.id)}
+    >
       <article data-post-id={data.id}>
         <p className="meta">
-          <time>{formatIndexDate(data?.date?.start_date || data.createdTime)}.</time>
+          <time>{formatIndexDate(getPostDate(data))}.</time>
           <span>{author}</span>
         </p>
         <h2>{data.title}</h2>

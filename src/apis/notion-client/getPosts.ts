@@ -7,6 +7,7 @@ import getPageProperties from "src/libs/utils/notion/getPageProperties"
 import { TPosts } from "src/types"
 import { requestWithRetry } from "./requestWithRetry"
 import { createTtlCache, NOTION_CACHE_TTL_MS } from "./ttlCache"
+import { getPostDate } from "src/libs/utils"
 
 const postsCache = createTtlCache<TPosts>(NOTION_CACHE_TTL_MS)
 
@@ -113,8 +114,8 @@ const fetchPosts = async (): Promise<TPosts> => {
   }
 
   data.sort((a: any, b: any) => {
-    const dateA = new Date(a?.date?.start_date || a.createdTime)
-    const dateB = new Date(b?.date?.start_date || b.createdTime)
+    const dateA = new Date(getPostDate(a))
+    const dateB = new Date(getPostDate(b))
     return Number(dateB) - Number(dateA)
   })
 

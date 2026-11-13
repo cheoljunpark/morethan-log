@@ -32,44 +32,43 @@ const useMermaidEffect = () => {
 
     let isCancelled = false
 
-    waitForMermaidElements()
-      .then(async (elements) => {
-        if (isCancelled || elements.length === 0) return
+    waitForMermaidElements().then(async (elements) => {
+      if (isCancelled || elements.length === 0) return
 
-        const mermaid = (await import("mermaid")).default
+      const mermaid = (await import("mermaid")).default
 
-        if (isCancelled) return
+      if (isCancelled) return
 
-        mermaid.initialize({
-          startOnLoad: true,
-          theme: scheme === "dark" ? "dark" : "default",
-        })
-
-        const promises = Array.from(elements)
-          .filter((elements) => elements.tagName === "PRE")
-          .map(async (element, i) => {
-            if (memoMermaid.current.get(i) !== undefined) {
-              const svg = await mermaid
-                .render("mermaid" + i, memoMermaid.current.get(i) || "")
-                .then((res) => res.svg)
-              element.animate(
-                [
-                  { easing: "ease-in", opacity: 0 },
-                  { easing: "ease-out", opacity: 1 },
-                ],
-                { duration: 300, fill: "both" }
-              )
-              element.innerHTML = svg
-              return
-            }
-            const svg = await mermaid
-              .render("mermaid" + i, element.textContent || "")
-              .then((res) => res.svg)
-            memoMermaid.current.set(i, element.textContent ?? "")
-            element.innerHTML = svg
-          })
-        await Promise.all(promises)
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: scheme === "dark" ? "dark" : "default",
       })
+
+      const promises = Array.from(elements)
+        .filter((elements) => elements.tagName === "PRE")
+        .map(async (element, i) => {
+          if (memoMermaid.current.get(i) !== undefined) {
+            const svg = await mermaid
+              .render("mermaid" + i, memoMermaid.current.get(i) || "")
+              .then((res) => res.svg)
+            element.animate(
+              [
+                { easing: "ease-in", opacity: 0 },
+                { easing: "ease-out", opacity: 1 },
+              ],
+              { duration: 300, fill: "both" }
+            )
+            element.innerHTML = svg
+            return
+          }
+          const svg = await mermaid
+            .render("mermaid" + i, element.textContent || "")
+            .then((res) => res.svg)
+          memoMermaid.current.set(i, element.textContent ?? "")
+          element.innerHTML = svg
+        })
+      await Promise.all(promises)
+    })
 
     return () => {
       isCancelled = true

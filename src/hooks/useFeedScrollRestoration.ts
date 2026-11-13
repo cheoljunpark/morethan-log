@@ -11,13 +11,18 @@ const useIsomorphicLayoutEffect =
  */
 const useFeedScrollRestoration = (dependencyKey: string) => {
   useIsomorphicLayoutEffect(() => {
-    const activePostId = window.sessionStorage.getItem(storageKey.feedActivePostId)
+    const activePostId = window.sessionStorage.getItem(
+      storageKey.feedActivePostId
+    )
     const savedScrollY = window.sessionStorage.getItem(storageKey.feedScrollY)
 
     if (activePostId) {
-      const target = document.querySelector<HTMLElement>(`[data-post-id="${activePostId}"]`)
+      const target = document.querySelector<HTMLElement>(
+        `[data-post-id="${activePostId}"]`
+      )
       if (target) {
-        const targetTop = target.getBoundingClientRect().top + window.scrollY - 120
+        const targetTop =
+          target.getBoundingClientRect().top + window.scrollY - 120
         window.scrollTo({ top: Math.max(0, targetTop), behavior: "auto" })
         return
       }

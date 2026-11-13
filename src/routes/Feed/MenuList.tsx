@@ -18,24 +18,35 @@ const MenuList: React.FC<Props> = ({ initialVisibleCount }) => {
   const ko = language === "ko"
   const { menus, total } = usePostTaxonomy()
   const [showAll, setShowAll] = useState(false)
-  const currentMenu = typeof router.query.menu === "string" ? router.query.menu : ""
-  const currentSubmenu = typeof router.query.submenu === "string" ? router.query.submenu : ""
+  const currentMenu =
+    typeof router.query.menu === "string" ? router.query.menu : ""
+  const currentSubmenu =
+    typeof router.query.submenu === "string" ? router.query.submenu : ""
 
   const select = (menu?: string, submenu?: string) => {
     clearFeedPosition()
-    void router.push({ pathname: "/", query: compactQuery({ menu, submenu }) }).then(() => window.scrollTo(0, 0))
+    void router
+      .push({ pathname: "/", query: compactQuery({ menu, submenu }) })
+      .then(() => window.scrollTo(0, 0))
   }
 
   const isCollapsible =
-    typeof initialVisibleCount === "number" && menus.length > initialVisibleCount
-  const visibleMenus = isCollapsible && !showAll ? menus.slice(0, initialVisibleCount) : menus
+    typeof initialVisibleCount === "number" &&
+    menus.length > initialVisibleCount
+  const visibleMenus =
+    isCollapsible && !showAll ? menus.slice(0, initialVisibleCount) : menus
   const hiddenCount = menus.length - visibleMenus.length
 
   return (
     <StyledWrapper>
       <div className="label">{ko ? "카테고리" : "Categories"}</div>
       <div className="content">
-        <button type="button" className="item" data-active={!currentMenu} onClick={() => select()}>
+        <button
+          type="button"
+          className="item"
+          data-active={!currentMenu}
+          onClick={() => select()}
+        >
           <span className="name">{ko ? "전체" : "All"}</span>
           <span className="count">{total}</span>
         </button>
@@ -72,10 +83,18 @@ const MenuList: React.FC<Props> = ({ initialVisibleCount }) => {
         ))}
 
         {isCollapsible && (
-          <button type="button" className="show-more" onClick={() => setShowAll((v) => !v)}>
+          <button
+            type="button"
+            className="show-more"
+            onClick={() => setShowAll((v) => !v)}
+          >
             {showAll
-              ? ko ? "접기" : "Collapse"
-              : ko ? `${hiddenCount}개 더 보기` : `Show ${hiddenCount} more`}
+              ? ko
+                ? "접기"
+                : "Collapse"
+              : ko
+              ? `${hiddenCount}개 더 보기`
+              : `Show ${hiddenCount} more`}
           </button>
         )}
       </div>
@@ -129,8 +148,6 @@ const StyledWrapper = styled.div`
     }
   }
 
-
-
   .name {
     min-width: 0;
     overflow: hidden;
@@ -140,7 +157,6 @@ const StyledWrapper = styled.div`
 
   .count,
   .submenu-count {
-    font-family: var(--font-text);
     font-size: 0.72rem;
     font-weight: 400;
     color: ${({ theme }) => theme.colors.gray9};
@@ -175,7 +191,6 @@ const StyledWrapper = styled.div`
 
   .show-more {
     margin-top: 0.4rem;
-    font-family: var(--font-text);
     font-size: 0.72rem;
     color: ${({ theme }) => theme.colors.gray9};
     cursor: pointer;

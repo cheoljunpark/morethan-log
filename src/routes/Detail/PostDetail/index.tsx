@@ -5,7 +5,7 @@ import CommentBox from "./CommentBox"
 import styled from "@emotion/styled"
 import NotionRenderer from "../components/NotionRenderer"
 import usePostQuery from "src/hooks/usePostQuery"
-import usePostToc from "src/hooks/usePostToc"
+import useHeadingAnchors from "src/hooks/useHeadingAnchors"
 import useReadingProgress from "src/hooks/useReadingProgress"
 import PostSummaryCard from "./PostSummaryCard"
 
@@ -13,8 +13,7 @@ type Props = {}
 
 const PostDetail: React.FC<Props> = () => {
   const data = usePostQuery()
-  // Keeps heading anchor ids in sync so #section links work.
-  usePostToc("post-content")
+  useHeadingAnchors("post-content")
   const progress = useReadingProgress("post-article")
 
   if (!data) return null
@@ -24,7 +23,10 @@ const PostDetail: React.FC<Props> = () => {
   return (
     <StyledWrapper>
       <div className="progress" aria-hidden="true">
-        <div className="bar" style={{ transform: `scaleX(${progress / 100})` }} />
+        <div
+          className="bar"
+          style={{ transform: `scaleX(${progress / 100})` }}
+        />
       </div>
       <div className="shell">
         <article id="post-article">
@@ -82,5 +84,4 @@ const StyledWrapper = styled.div`
   article {
     min-width: 0;
   }
-
 `

@@ -75,7 +75,6 @@ const StyledWrapper = styled.div`
     }
 
     > .wrapper > .wrapper > .mid {
-      font-family: var(--font-text);
       font-size: 0.7rem;
       color: ${({ theme }) => theme.colors.gray9};
     }

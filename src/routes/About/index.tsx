@@ -60,7 +60,8 @@ const About: React.FC = () => {
           "When I explain technology, I try to keep the context and the why together.",
         ]
 
-  const focusTitle = language === "ko" ? "이 블로그에서 다루는 것" : "What I write about"
+  const focusTitle =
+    language === "ko" ? "이 블로그에서 다루는 것" : "What I write about"
   const styleTitle = language === "ko" ? "작업 방식" : "How I work"
   return (
     <StyledWrapper>
@@ -98,7 +99,6 @@ const About: React.FC = () => {
           </ul>
         </article>
       </section>
-
     </StyledWrapper>
   )
 }
@@ -116,7 +116,6 @@ const StyledWrapper = styled.div`
 
   .eyebrow,
   .section-title {
-    font-family: var(--font-text);
     font-size: 0.72rem;
     letter-spacing: -0.01em;
     color: ${({ theme }) => theme.colors.indigo9};
@@ -135,7 +134,6 @@ const StyledWrapper = styled.div`
   }
 
   .role {
-    font-family: var(--font-text);
     font-size: 0.85rem;
     color: ${({ theme }) => theme.colors.gray9};
   }
@@ -197,7 +195,6 @@ const StyledWrapper = styled.div`
 
     &::before {
       content: counter(item, decimal-leading-zero);
-      font-family: var(--font-text);
       font-size: 0.72rem;
       line-height: 1.6rem;
       color: ${({ theme }) => theme.colors.gray9};

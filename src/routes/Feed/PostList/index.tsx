@@ -24,30 +24,43 @@ const PostList: React.FC = () => {
   const posts = usePostsQuery()
   const filter = useMemo(() => getFeedQuery(router.query), [router.query])
   const { q, tag, menu, submenu } = filter
-  const filteredPosts = useMemo(() => filterFeedPosts(posts, filter), [posts, filter])
+  const filteredPosts = useMemo(
+    () => filterFeedPosts(posts, filter),
+    [posts, filter]
+  )
 
   const totalPages = Math.max(1, Math.ceil(filteredPosts.length / PAGE_SIZE))
   const safePage = Math.min(getPageFromQuery(router.query.page), totalPages)
-  const visiblePosts = filteredPosts.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE)
+  const visiblePosts = filteredPosts.slice(
+    (safePage - 1) * PAGE_SIZE,
+    safePage * PAGE_SIZE
+  )
 
   const updatePage = (page: number) => {
     void router.replace(
-      { pathname: "/", query: compactQuery({ ...filter, page: page > 1 ? page : undefined }) },
+      {
+        pathname: "/",
+        query: compactQuery({ ...filter, page: page > 1 ? page : undefined }),
+      },
       undefined,
       { shallow: true, scroll: false }
     )
   }
 
-  useFeedScrollRestoration(JSON.stringify([filteredPosts.length, safePage, filter]))
+  useFeedScrollRestoration(
+    JSON.stringify([filteredPosts.length, safePage, filter])
+  )
 
   const isFiltered = Boolean(q || tag || menu || submenu)
   const heading = q
-    ? ko ? `‘${q}’ 검색 결과` : `Results for “${q}”`
+    ? ko
+      ? `‘${q}’ 검색 결과`
+      : `Results for “${q}”`
     : tag
-      ? `#${tag}`
-      : submenu
-        ? `${menu} · ${submenu}`
-        : menu || (ko ? "최신 글" : "Latest posts")
+    ? `#${tag}`
+    : submenu
+    ? `${menu} · ${submenu}`
+    : menu || (ko ? "최신 글" : "Latest posts")
 
   return (
     <StyledWrapper id="feed-posts">
@@ -71,14 +84,20 @@ const PostList: React.FC = () => {
       <div className="post-area">
         {!filteredPosts.length ? (
           <div className="empty-state">
-            <h3>{language === "ko" ? "조건에 맞는 글이 없어요." : "No posts found"}</h3>
+            <h3>
+              {language === "ko"
+                ? "조건에 맞는 글이 없어요."
+                : "No posts found"}
+            </h3>
             <p>
               {language === "ko"
                 ? "다른 검색어나 메뉴 조건으로 다시 찾아보세요."
                 : "Try another query or different menu filters."}
             </p>
             <div className="empty-links">
-              <Link href="/">{language === "ko" ? "처음으로" : "Back home"}</Link>
+              <Link href="/">
+                {language === "ko" ? "처음으로" : "Back home"}
+              </Link>
             </div>
           </div>
         ) : (
@@ -87,7 +106,10 @@ const PostList: React.FC = () => {
       </div>
 
       {totalPages > 1 && (
-        <nav className="pagination" aria-label={ko ? "페이지 이동" : "Pagination"}>
+        <nav
+          className="pagination"
+          aria-label={ko ? "페이지 이동" : "Pagination"}
+        >
           <button
             type="button"
             disabled={safePage <= 1}
@@ -104,17 +126,19 @@ const PostList: React.FC = () => {
           >
             {"<"}
           </button>
-          {Array.from({ length: totalPages }, (_, index) => index + 1).map((page) => (
-            <button
-              key={page}
-              type="button"
-              data-active={page === safePage}
-              aria-current={page === safePage ? "page" : undefined}
-              onClick={() => updatePage(page)}
-            >
-              {page}
-            </button>
-          ))}
+          {Array.from({ length: totalPages }, (_, index) => index + 1).map(
+            (page) => (
+              <button
+                key={page}
+                type="button"
+                data-active={page === safePage}
+                aria-current={page === safePage ? "page" : undefined}
+                onClick={() => updatePage(page)}
+              >
+                {page}
+              </button>
+            )
+          )}
           <button
             type="button"
             disabled={safePage >= totalPages}
@@ -164,7 +188,6 @@ const StyledWrapper = styled.section`
     }
 
     .count {
-      font-family: var(--font-text);
       font-size: 0.8rem;
       font-weight: 400;
       letter-spacing: 0;
@@ -203,7 +226,6 @@ const StyledWrapper = styled.section`
   }
 
   .empty-links a {
-    font-family: var(--font-text);
     font-size: 0.8rem;
     text-decoration: underline;
     text-underline-offset: 0.2em;
@@ -219,7 +241,6 @@ const StyledWrapper = styled.section`
     justify-content: center;
     gap: 0.25rem;
     margin-top: 2.5rem;
-    font-family: var(--font-text);
     font-size: 0.8rem;
   }
 

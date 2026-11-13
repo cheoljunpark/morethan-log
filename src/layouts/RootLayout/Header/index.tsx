@@ -15,9 +15,12 @@ const MobileMenuList = dynamic(() => import("src/routes/Feed/MenuList"), {
   ssr: false,
 })
 
-const MobileProfileCard = dynamic(() => import("src/routes/Feed/MobileProfileCard"), {
-  ssr: false,
-})
+const MobileProfileCard = dynamic(
+  () => import("src/routes/Feed/MobileProfileCard"),
+  {
+    ssr: false,
+  }
+)
 
 const Header: React.FC = () => {
   const router = useRouter()
@@ -44,7 +47,9 @@ const Header: React.FC = () => {
 
     const focusables = () =>
       Array.from(
-        panel.querySelectorAll<HTMLElement>("a[href], button:not([disabled]), input")
+        panel.querySelectorAll<HTMLElement>(
+          "a[href], button:not([disabled]), input"
+        )
       ).filter((el) => el.offsetParent !== null)
 
     focusables()[0]?.focus()
@@ -85,7 +90,13 @@ const Header: React.FC = () => {
           type="button"
           className="mobile-menu-trigger"
           aria-label={
-            isMobileMenuOpen ? (ko ? "메뉴 닫기" : "Close menu") : ko ? "메뉴 열기" : "Open menu"
+            isMobileMenuOpen
+              ? ko
+                ? "메뉴 닫기"
+                : "Close menu"
+              : ko
+              ? "메뉴 열기"
+              : "Open menu"
           }
           aria-expanded={isMobileMenuOpen}
           onClick={() => setIsMobileMenuOpen((value) => !value)}
@@ -141,7 +152,10 @@ const Header: React.FC = () => {
           </div>
         </div>
       </div>
-      <SearchOverlay open={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
+      <SearchOverlay
+        open={isSearchOpen}
+        onClose={() => setIsSearchOpen(false)}
+      />
     </StyledWrapper>
   )
 }
@@ -283,9 +297,7 @@ const StyledWrapper = styled.div`
         height: 1.5px;
         border-radius: 9999px;
         background-color: currentColor;
-        transition:
-          transform 180ms ease,
-          opacity 180ms ease;
+        transition: transform 180ms ease, opacity 180ms ease;
       }
 
       span {

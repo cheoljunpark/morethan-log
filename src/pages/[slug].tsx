@@ -1,6 +1,6 @@
 import Detail from "src/routes/Detail"
 import { filterPosts } from "src/libs/utils/notion"
-import { siteUrl } from "src/libs/utils"
+import { getPostDate, siteUrl } from "src/libs/utils"
 import { CONFIG } from "site.config"
 import { NextPageWithLayout } from "../types"
 import CustomError from "src/routes/Error"
@@ -66,13 +66,10 @@ const DetailPage: NextPageWithLayout = () => {
     post.thumbnail ??
     `${CONFIG.ogImageGenerateURL}/${encodeURIComponent(post.title)}.png`
 
-  const date = post.date?.start_date || post.createdTime || ""
+  const date = getPostDate(post) || ""
   const modifiedDate = post.updatedAt?.start_date || date
   const url = siteUrl(post.slug)
-  const keywords = [
-    ...(post.tags || []),
-    ...(post.menu || []),
-  ].filter(Boolean)
+  const keywords = [...(post.tags || []), ...(post.menu || [])].filter(Boolean)
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",

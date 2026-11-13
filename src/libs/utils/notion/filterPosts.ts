@@ -1,4 +1,5 @@
 import { TPosts, TPostStatus, TPostType } from "src/types"
+import { getPostDate } from "src/libs/utils"
 
 export type FilterPostsOptions = {
   acceptStatus?: TPostStatus[]
@@ -27,7 +28,7 @@ export function filterPosts(
   const filteredPosts = posts
     // filter data
     .filter((post) => {
-      const postDate = new Date(post?.date?.start_date || post.createdTime)
+      const postDate = new Date(getPostDate(post))
       if (!post.title || !post.slug || postDate > tomorrow) return false
       return true
     })

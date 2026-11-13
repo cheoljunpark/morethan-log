@@ -16,7 +16,10 @@ const usePostTaxonomy = () => {
 
   return useMemo(() => {
     const publicPosts = filterPosts(posts)
-    const menus = new Map<string, { count: number; submenus: Map<string, number> }>()
+    const menus = new Map<
+      string,
+      { count: number; submenus: Map<string, number> }
+    >()
     const tags = new Map<string, number>()
 
     publicPosts.forEach((post) => {
@@ -25,17 +28,21 @@ const usePostTaxonomy = () => {
         const entry = menus.get(menu) ?? { count: 0, submenus: new Map() }
         entry.count += 1
         const submenu = post.submenu?.[0]
-        if (submenu) entry.submenus.set(submenu, (entry.submenus.get(submenu) ?? 0) + 1)
+        if (submenu)
+          entry.submenus.set(submenu, (entry.submenus.get(submenu) ?? 0) + 1)
         menus.set(menu, entry)
       }
       post.tags?.forEach((tag) => tags.set(tag, (tags.get(tag) ?? 0) + 1))
     })
 
-    const menuItems: MenuItem[] = Array.from(menus, ([name, { count, submenus }]) => ({
-      name,
-      count,
-      submenus: toSortedItems(submenus),
-    })).sort(byCountDesc)
+    const menuItems: MenuItem[] = Array.from(
+      menus,
+      ([name, { count, submenus }]) => ({
+        name,
+        count,
+        submenus: toSortedItems(submenus),
+      })
+    ).sort(byCountDesc)
 
     return {
       total: publicPosts.length,

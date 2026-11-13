@@ -25,8 +25,6 @@ const RootLayout = ({ children }: Props) => {
     <ThemeProvider scheme={scheme}>
       <UiLanguageProvider>
         <Scripts />
-        {/* // TODO: replace react query */}
-        {/* {metaConfig.type !== "Paper" && <Header />} */}
         <Header />
         <StyledMain data-detail-page={isDetailPage} data-wide-page={isWidePage}>
           {children}

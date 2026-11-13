@@ -3,7 +3,8 @@ import { storageKey } from "src/constants/storage"
 // Remembers where the reader was in the feed so useFeedScrollRestoration can
 // bring them back after visiting a post.
 
-const session = () => (typeof window === "undefined" ? null : window.sessionStorage)
+const session = () =>
+  typeof window === "undefined" ? null : window.sessionStorage
 
 /** Save the current scroll position, anchored to a post when one is given. */
 export const saveFeedPosition = (postId?: string) => {

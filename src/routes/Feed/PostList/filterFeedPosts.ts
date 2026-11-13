@@ -9,13 +9,22 @@ export type FeedFilter = {
 }
 
 const searchableText = (post: TPost) =>
-  [post.title, post.summary, ...(post.tags ?? []), ...(post.menu ?? []), ...(post.submenu ?? [])]
+  [
+    post.title,
+    post.summary,
+    ...(post.tags ?? []),
+    ...(post.menu ?? []),
+    ...(post.submenu ?? []),
+  ]
     .filter(Boolean)
     .join(" ")
     .toLowerCase()
 
 /** Applies the feed's URL filters. Posts arrive newest-first; order=asc reverses them. */
-export const filterFeedPosts = (posts: TPost[], filter: FeedFilter): TPost[] => {
+export const filterFeedPosts = (
+  posts: TPost[],
+  filter: FeedFilter
+): TPost[] => {
   const query = filter.q?.trim().toLowerCase()
 
   const matched = posts.filter(

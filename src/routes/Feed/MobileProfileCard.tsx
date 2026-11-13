@@ -45,8 +45,6 @@ const StyledWrapper = styled.div`
   }
 
   > .mid {
-    padding-top: 1rem;
-    border-top: 1px solid ${({ theme }) => theme.colors.gray6};
 
     > .wrapper {
       display: flex;
@@ -72,6 +70,7 @@ const StyledWrapper = styled.div`
       font-size: 0.95rem;
       font-weight: 600;
       letter-spacing: -0.02em;
+      color: ${({ theme }) => theme.colors.gray12};
     }
 
     > .wrapper > .wrapper > .mid {

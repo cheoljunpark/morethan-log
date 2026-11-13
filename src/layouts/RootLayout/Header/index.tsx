@@ -124,23 +124,26 @@ const Header: React.FC = () => {
           aria-hidden="true"
         />
 
-        <div
-          ref={panelRef}
-          className="mobile-menu-panel"
-          data-open={isMobileMenuOpen}
-          // Closed drawer is only slid off-screen; inert keeps its links out of
-          // the Tab order and away from screen readers.
-          {...(!isMobileMenuOpen && { inert: "" })}
-        >
-          <NavBar className="mobile-menu-links" />
+        {/* Clips the off-screen drawer so it never widens the page. */}
+        <div className="mobile-menu-clip">
+          <div
+            ref={panelRef}
+            className="mobile-menu-panel"
+            data-open={isMobileMenuOpen}
+            // Closed drawer is only slid off-screen; inert keeps its links out of
+            // the Tab order and away from screen readers.
+            {...(!isMobileMenuOpen && { inert: "" })}
+          >
+            <NavBar className="mobile-menu-links" />
 
-          <div className="mobile-menu-profile">
-            <MobileProfileCard />
-          </div>
+            <div className="mobile-menu-profile">
+              <MobileProfileCard />
+            </div>
 
-          <div className="mobile-menu-controls">
-            <LanguageToggle />
-            <ThemeToggle />
+            <div className="mobile-menu-controls">
+              <LanguageToggle />
+              <ThemeToggle />
+            </div>
           </div>
         </div>
       </div>
@@ -325,14 +328,32 @@ const StyledWrapper = styled.div`
     }
   }
 
-  .mobile-menu-panel {
+  .mobile-menu-clip {
     display: none;
 
     @media (max-width: 1023px) {
       position: fixed;
+      /* The header's backdrop-filter makes it the containing block, so size
+         to the viewport explicitly instead of using inset. */
       top: 0;
       left: 0;
+      width: 100vw;
+      height: 100dvh;
       z-index: ${zIndexes.header + 2};
+      display: block;
+      overflow: hidden;
+      pointer-events: none;
+    }
+  }
+
+  .mobile-menu-panel {
+    display: none;
+
+    @media (max-width: 1023px) {
+      position: absolute;
+      top: 0;
+      right: 0;
+      pointer-events: auto;
       display: grid;
       align-content: flex-start;
       grid-auto-rows: max-content;
@@ -346,9 +367,9 @@ const StyledWrapper = styled.div`
       overscroll-behavior: contain;
       touch-action: pan-y;
       -webkit-overflow-scrolling: touch;
-      border-right: 1px solid ${({ theme }) => theme.colors.gray6};
+      border-left: 1px solid ${({ theme }) => theme.colors.gray6};
       background-color: ${({ theme }) => theme.colors.gray2};
-      transform: translateX(-105%);
+      transform: translateX(105%);
       transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
 
       &[data-open="true"] {

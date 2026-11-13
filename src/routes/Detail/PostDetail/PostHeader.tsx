@@ -4,6 +4,7 @@ import { TPost } from "src/types"
 import { formatIndexDate, getPostDate, siteUrl } from "src/libs/utils"
 import React, { useState } from "react"
 import styled from "@emotion/styled"
+import Image from "next/image"
 import { FiLink } from "react-icons/fi"
 import { useUiLanguage } from "src/contexts/UiLanguageContext"
 import useReadingTime from "src/hooks/useReadingTime"
@@ -85,6 +86,18 @@ const PostHeader: React.FC<Props> = ({ data }) => {
           ))}
         </div>
       )}
+      {data.thumbnail && (
+        <div className="cover">
+          <Image
+            src={data.thumbnail}
+            alt=""
+            fill
+            priority
+            sizes="(max-width: 800px) 100vw, 760px"
+            style={{ objectFit: "cover" }}
+          />
+        </div>
+      )}
     </StyledWrapper>
   )
 }
@@ -154,5 +167,15 @@ const StyledWrapper = styled.div`
     flex-wrap: wrap;
     gap: 6px;
     margin-top: 12px;
+  }
+
+  /* Representative image from the Notion "thumbnail" property */
+  .cover {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    margin-top: 28px;
+    border-radius: 18px;
+    overflow: hidden;
+    background: ${({ theme }) => theme.colors.gray4};
   }
 `

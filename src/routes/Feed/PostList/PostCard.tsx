@@ -1,4 +1,5 @@
 import styled from "@emotion/styled"
+import Image from "next/image"
 import Link from "next/link"
 import { memo } from "react"
 import { CONFIG } from "site.config"
@@ -17,13 +18,26 @@ const PostCard: React.FC<Props> = ({ data }) => {
       prefetch={false}
       onClick={() => saveFeedPosition(data.id)}
     >
-      <article data-post-id={data.id}>
-        <p className="meta">
-          <time>{formatIndexDate(getPostDate(data))}.</time>
-          <span>{CONFIG.profile.name}</span>
-        </p>
-        <h2>{data.title}</h2>
-        {data.summary && <p className="summary">{data.summary}</p>}
+      <article data-post-id={data.id} data-has-thumbnail={!!data.thumbnail}>
+        <div className="body">
+          <p className="meta">
+            <time>{formatIndexDate(getPostDate(data))}.</time>
+            <span>{CONFIG.profile.name}</span>
+          </p>
+          <h2>{data.title}</h2>
+          {data.summary && <p className="summary">{data.summary}</p>}
+        </div>
+        {data.thumbnail && (
+          <div className="thumb">
+            <Image
+              src={data.thumbnail}
+              alt=""
+              fill
+              sizes="(max-width: 734px) 88px, 180px"
+              style={{ objectFit: "cover" }}
+            />
+          </div>
+        )}
       </article>
     </StyledWrapper>
   )
@@ -38,9 +52,25 @@ const StyledWrapper = styled(Link)`
     padding: 36px 0 40px;
     border-bottom: 1px solid ${({ theme }) => theme.colors.gray6};
 
+    &[data-has-thumbnail="true"] {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 180px;
+      gap: 32px;
+      align-items: center;
+
+      @media (max-width: 734px) {
+        grid-template-columns: minmax(0, 1fr) 88px;
+        gap: 16px;
+      }
+    }
+
     @media (max-width: 734px) {
       padding: 28px 0 32px;
     }
+  }
+
+  .body {
+    min-width: 0;
   }
 
   .meta {
@@ -73,7 +103,28 @@ const StyledWrapper = styled(Link)`
     color: ${({ theme }) => theme.colors.gray11};
   }
 
+  .thumb {
+    position: relative;
+    aspect-ratio: 3 / 2;
+    border-radius: 12px;
+    overflow: hidden;
+    background: ${({ theme }) => theme.colors.gray4};
+
+    img {
+      transition: transform 240ms ease;
+    }
+
+    @media (max-width: 734px) {
+      aspect-ratio: 1;
+      border-radius: 8px;
+    }
+  }
+
   &:hover h2 {
     color: ${({ theme }) => theme.colors.indigo9};
+  }
+
+  &:hover .thumb img {
+    transform: scale(1.04);
   }
 `

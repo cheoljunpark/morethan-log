@@ -1,5 +1,4 @@
 import { NotionAPI } from "notion-client"
-import { readDevFixture } from "./devFixture"
 import { normalizeRecordMap } from "./normalizeRecordMap"
 import { requestWithRetry } from "./requestWithRetry"
 
@@ -44,9 +43,6 @@ export const getRecordMap = async (
   pageId: string,
   fallbackUsers: FallbackUser[] = []
 ) => {
-  const fixture = readDevFixture("recordmap.json")
-  if (fixture) return withFallbackUsers(fixture, fallbackUsers)
-
   const cached = recordMapCache.get(pageId)
   if (cached) {
     const recordMap = await cached

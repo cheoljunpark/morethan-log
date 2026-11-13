@@ -6,7 +6,6 @@ import getAllPageIds from "src/libs/utils/notion/getAllPageIds"
 import getPageProperties from "src/libs/utils/notion/getPageProperties"
 import { TPosts } from "src/types"
 import { requestWithRetry } from "./requestWithRetry"
-import { readDevFixture } from "./devFixture"
 
 /**
  * @param {{ includePages: boolean }} - false: posts only / true: include pages
@@ -15,9 +14,6 @@ import { readDevFixture } from "./devFixture"
 let postsPromise: Promise<TPosts> | null = null
 
 export const getPosts = async () => {
-  const fixture = readDevFixture("posts.json")
-  if (fixture) return fixture as TPosts
-
   if (postsPromise) {
     return postsPromise
   }

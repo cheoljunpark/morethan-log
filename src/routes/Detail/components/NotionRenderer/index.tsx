@@ -685,6 +685,8 @@ const StyledWrapper = styled.div`
     overflow: hidden;
   }
   pre.notion-code code {
+    /* Prism's default text color is #ccc (a dark-theme value); keep plain tokens readable. */
+    color: ${({ theme }) => theme.colors.gray12};
     display: block;
     padding: 0.95rem 1rem 1rem !important;
   }

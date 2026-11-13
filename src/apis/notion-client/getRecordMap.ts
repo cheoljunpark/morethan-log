@@ -1,6 +1,7 @@
 import { NotionAPI } from "notion-client"
 import { normalizeRecordMap } from "./normalizeRecordMap"
 import { requestWithRetry } from "./requestWithRetry"
+import { createTtlCache, NOTION_CACHE_TTL_MS } from "./ttlCache"
 
 type FallbackUser = {
   id: string
@@ -8,9 +9,12 @@ type FallbackUser = {
   profile_photo?: string | null
 }
 
-const recordMapCache = new Map<string, Promise<any>>()
+const recordMapCache = createTtlCache<any>(NOTION_CACHE_TTL_MS)
 
-const withFallbackUsers = (recordMap: any, fallbackUsers: FallbackUser[] = []) => {
+const withFallbackUsers = (
+  recordMap: any,
+  fallbackUsers: FallbackUser[] = []
+) => {
   if (!fallbackUsers.length) {
     return recordMap
   }
@@ -43,24 +47,10 @@ export const getRecordMap = async (
   pageId: string,
   fallbackUsers: FallbackUser[] = []
 ) => {
-  const cached = recordMapCache.get(pageId)
-  if (cached) {
-    const recordMap = await cached
-    return withFallbackUsers(recordMap, fallbackUsers)
-  }
-
-  const api = new NotionAPI()
-  const promise = requestWithRetry(() => api.getPage(pageId)).then((recordMap) =>
-    normalizeRecordMap(recordMap)
+  const recordMap = await recordMapCache(pageId, () =>
+    requestWithRetry(() => new NotionAPI().getPage(pageId)).then(
+      normalizeRecordMap
+    )
   )
-
-  recordMapCache.set(pageId, promise)
-
-  try {
-    const recordMap = await promise
-    return withFallbackUsers(recordMap, fallbackUsers)
-  } catch (error) {
-    recordMapCache.delete(pageId)
-    throw error
-  }
+  return withFallbackUsers(recordMap, fallbackUsers)
 }

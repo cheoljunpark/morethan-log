@@ -11,8 +11,6 @@ type Props = {
 }
 
 const PostCard: React.FC<Props> = ({ data }) => {
-  const author = data.author?.[0]?.name || CONFIG.profile.name
-
   return (
     <StyledWrapper
       href={`/${data.slug}`}
@@ -22,7 +20,7 @@ const PostCard: React.FC<Props> = ({ data }) => {
       <article data-post-id={data.id}>
         <p className="meta">
           <time>{formatIndexDate(getPostDate(data))}.</time>
-          <span>{author}</span>
+          <span>{CONFIG.profile.name}</span>
         </p>
         <h2>{data.title}</h2>
         {data.summary && <p className="summary">{data.summary}</p>}

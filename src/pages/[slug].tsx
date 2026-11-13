@@ -1,6 +1,8 @@
 import Detail from "src/routes/Detail"
 import { filterPosts } from "src/libs/utils/notion"
 import { getPostDate, siteUrl } from "src/libs/utils"
+import { slugMatchesId } from "src/libs/utils/slug"
+import legacySlugs from "src/constants/legacySlugs.json"
 import { CONFIG } from "site.config"
 import { NextPageWithLayout } from "../types"
 import CustomError from "src/routes/Error"
@@ -14,7 +16,6 @@ import { FilterPostsOptions } from "src/libs/utils/notion/filterPosts"
 
 const filter: FilterPostsOptions = {
   acceptStatus: ["Public", "PublicOnDetail"],
-  acceptType: ["Paper", "Post", "Page"],
 }
 
 export const getStaticPaths = async () => {
@@ -34,15 +35,24 @@ export const getStaticProps: GetStaticProps = async (context) => {
   await queryClient.prefetchQuery(queryKey.posts(), () => feedPosts)
 
   const detailPosts = filterPosts(posts, filter)
-  const postDetail = detailPosts.find((t: any) => t.slug === slug)
+  const postDetail = detailPosts.find((post) => post.slug === slug)
   if (!postDetail) {
-    return {
-      notFound: true,
-      revalidate: CONFIG.revalidateTime,
+    // Outdated URL: a renamed title (same id fragment) or a pre-2026-11
+    // hand-written slug. Send it to the post's current URL.
+    const requested = typeof slug === "string" ? slug : ""
+    const legacyId = (legacySlugs as Record<string, string>)[requested]
+    const moved = detailPosts.find(
+      (post) => post.id === legacyId || slugMatchesId(requested, post.id)
+    )
+    if (moved) {
+      return {
+        redirect: { destination: encodeURI(`/${moved.slug}`), permanent: true },
+      }
     }
+    return { notFound: true, revalidate: CONFIG.revalidateTime }
   }
 
-  const recordMap = await getRecordMap(postDetail.id, postDetail.author)
+  const recordMap = await getRecordMap(postDetail.id)
 
   await queryClient.prefetchQuery(queryKey.post(`${slug}`), () => ({
     ...postDetail,
@@ -80,7 +90,7 @@ const DetailPage: NextPageWithLayout = () => {
     dateModified: new Date(modifiedDate).toISOString(),
     author: {
       "@type": "Person",
-      name: post.author?.[0]?.name || CONFIG.profile.name,
+      name: CONFIG.profile.name,
     },
     mainEntityOfPage: {
       "@type": "WebPage",

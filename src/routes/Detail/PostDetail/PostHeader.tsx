@@ -44,53 +44,46 @@ const PostHeader: React.FC<Props> = ({ data }) => {
     }, 1200)
   }
 
-  const author = data.author?.[0]?.name || CONFIG.profile.name
-
   return (
     <StyledWrapper>
       <h1 className="title">{data.title}</h1>
-      {data.type[0] !== "Paper" && (
-        <>
-          <div className="meta-row">
-            <p className="meta">
-              <time>{formatIndexDate(getPostDate(data))}.</time>
-              <span>{author}</span>
-              {data.menu?.[0] && <span className="sep">{data.menu[0]}</span>}
-              {readingTime && (
-                <span className="sep">
-                  {language === "ko"
-                    ? `${readingTime}분`
-                    : `${readingTime} min`}
-                </span>
-              )}
-            </p>
-            <button
-              className="share"
-              data-copied={isShareCopied}
-              onClick={handleShare}
-              type="button"
-              aria-label={language === "ko" ? "링크 복사" : "Copy link"}
-              title={language === "ko" ? "링크 복사" : "Copy link"}
-            >
-              {isShareCopied ? (
-                language === "ko" ? (
-                  "복사됨"
-                ) : (
-                  "Copied"
-                )
-              ) : (
-                <FiLink aria-hidden="true" />
-              )}
-            </button>
-          </div>
-          {data.tags && data.tags.length > 0 && (
-            <div className="tags">
-              {data.tags.map((tag: string) => (
-                <Tag key={tag}>{tag}</Tag>
-              ))}
-            </div>
+      {data.summary && <p className="summary">{data.summary}</p>}
+      <div className="meta-row">
+        <p className="meta">
+          <time>{formatIndexDate(getPostDate(data))}.</time>
+          <span>{CONFIG.profile.name}</span>
+          {data.menu?.[0] && <span className="sep">{data.menu[0]}</span>}
+          {readingTime && (
+            <span className="sep">
+              {language === "ko" ? `${readingTime}분` : `${readingTime} min`}
+            </span>
           )}
-        </>
+        </p>
+        <button
+          className="share"
+          data-copied={isShareCopied}
+          onClick={handleShare}
+          type="button"
+          aria-label={language === "ko" ? "링크 복사" : "Copy link"}
+          title={language === "ko" ? "링크 복사" : "Copy link"}
+        >
+          {isShareCopied ? (
+            language === "ko" ? (
+              "복사됨"
+            ) : (
+              "Copied"
+            )
+          ) : (
+            <FiLink aria-hidden="true" />
+          )}
+        </button>
+      </div>
+      {data.tags && data.tags.length > 0 && (
+        <div className="tags">
+          {data.tags.map((tag: string) => (
+            <Tag key={tag}>{tag}</Tag>
+          ))}
+        </div>
       )}
     </StyledWrapper>
   )
@@ -110,6 +103,13 @@ const StyledWrapper = styled.div`
     font-weight: 600;
     letter-spacing: -0.03em;
     word-break: keep-all;
+  }
+
+  .summary {
+    margin: 12px 0 0;
+    font-size: 19px;
+    line-height: 1.55;
+    color: ${({ theme }) => theme.colors.gray10};
   }
 
   .meta-row {

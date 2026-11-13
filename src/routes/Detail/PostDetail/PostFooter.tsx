@@ -6,7 +6,6 @@ import { FiChevronLeft, FiChevronRight } from "react-icons/fi"
 import { CONFIG } from "site.config"
 import { useUiLanguage } from "src/contexts/UiLanguageContext"
 import useAdjacentPosts from "src/hooks/useAdjacentPosts"
-import usePostQuery from "src/hooks/usePostQuery"
 
 type Props = {
   // Rendered between the author box and the previous/next row (comments).
@@ -15,24 +14,20 @@ type Props = {
 
 const Footer: React.FC<Props> = ({ children }) => {
   const { language } = useUiLanguage()
-  const post = usePostQuery()
   const { previousPost, nextPost } = useAdjacentPosts()
-  const author = post?.author?.[0]
 
   return (
     <StyledWrapper>
       <div className="author">
         <Image
-          src={author?.profile_photo || CONFIG.profile.image}
+          src={CONFIG.profile.image}
           alt=""
           width={64}
           height={64}
           style={{ objectFit: "cover", borderRadius: "9999px" }}
         />
         <div>
-          <div className="author-name">
-            {author?.name || CONFIG.profile.name}
-          </div>
+          <div className="author-name">{CONFIG.profile.name}</div>
           <div className="author-role">{CONFIG.profile.role}</div>
           <p className="author-bio">{CONFIG.profile.bio}</p>
         </div>

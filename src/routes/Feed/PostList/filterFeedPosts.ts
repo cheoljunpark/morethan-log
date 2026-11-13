@@ -4,18 +4,11 @@ export type FeedFilter = {
   q?: string
   tag?: string
   menu?: string
-  submenu?: string
   order?: string
 }
 
 const searchableText = (post: TPost) =>
-  [
-    post.title,
-    post.summary,
-    ...(post.tags ?? []),
-    ...(post.menu ?? []),
-    ...(post.submenu ?? []),
-  ]
+  [post.title, post.summary, ...(post.tags ?? []), ...(post.menu ?? [])]
     .filter(Boolean)
     .join(" ")
     .toLowerCase()
@@ -31,7 +24,6 @@ export const filterFeedPosts = (
     (post) =>
       (!filter.tag || post.tags?.includes(filter.tag)) &&
       (!filter.menu || post.menu?.includes(filter.menu)) &&
-      (!filter.submenu || post.submenu?.includes(filter.submenu)) &&
       (!query || searchableText(post).includes(query))
   )
 

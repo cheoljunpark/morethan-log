@@ -7,6 +7,7 @@ import getPageProperties from "src/libs/utils/notion/getPageProperties"
 import { TPosts } from "src/types"
 import { requestWithRetry } from "./requestWithRetry"
 import { createTtlCache, NOTION_CACHE_TTL_MS } from "./ttlCache"
+import { makePostSlug } from "src/libs/utils/slug"
 import { getPostDate } from "src/libs/utils"
 
 const postsCache = createTtlCache<TPosts>(NOTION_CACHE_TTL_MS)
@@ -98,6 +99,8 @@ const fetchPosts = async (): Promise<TPosts> => {
 
     const pageBlockValue = (pageBlock.value as any)?.value ?? pageBlock.value
     properties.createdTime = new Date(pageBlockValue?.created_time).toString()
+    // URLs come from the title; there is no slug property to fill in Notion.
+    properties.slug = makePostSlug(properties.title ?? "", pageId)
 
     if (!properties.updatedAt && pageBlockValue?.last_edited_time) {
       properties.updatedAt = {
@@ -106,9 +109,6 @@ const fetchPosts = async (): Promise<TPosts> => {
           .slice(0, 10),
       }
     }
-
-    properties.fullWidth =
-      (pageBlockValue?.format as any)?.page_full_width ?? false
 
     data.push(properties)
   }

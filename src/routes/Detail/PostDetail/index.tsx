@@ -7,7 +7,6 @@ import NotionRenderer from "../components/NotionRenderer"
 import usePostQuery from "src/hooks/usePostQuery"
 import useHeadingAnchors from "src/hooks/useHeadingAnchors"
 import useReadingProgress from "src/hooks/useReadingProgress"
-import PostSummaryCard from "./PostSummaryCard"
 
 type Props = {}
 
@@ -17,8 +16,6 @@ const PostDetail: React.FC<Props> = () => {
   const progress = useReadingProgress("post-article")
 
   if (!data) return null
-
-  const isPost = data.type[0] === "Post"
 
   return (
     <StyledWrapper>
@@ -30,18 +27,13 @@ const PostDetail: React.FC<Props> = () => {
       </div>
       <div className="shell">
         <article id="post-article">
-          {isPost && <PostHeader data={data} />}
-          {isPost && <PostSummaryCard data={data} />}
+          <PostHeader data={data} />
           <div id="post-content">
             <NotionRenderer recordMap={data.recordMap} />
           </div>
-          {isPost && (
-            <>
-              <Footer>
-                <CommentBox data={data} />
-              </Footer>
-            </>
-          )}
+          <Footer>
+            <CommentBox data={data} />
+          </Footer>
         </article>
       </div>
     </StyledWrapper>

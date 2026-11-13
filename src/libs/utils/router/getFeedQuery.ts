@@ -4,11 +4,10 @@ export type FeedQuery = {
   menu?: string
   order?: string
   q?: string
-  submenu?: string
   tag?: string
 }
 
-const FEED_KEYS: (keyof FeedQuery)[] = ["menu", "order", "q", "submenu", "tag"]
+const FEED_KEYS: (keyof FeedQuery)[] = ["menu", "order", "q", "tag"]
 
 /**
  * Drops empty values. Next.js writes `undefined` query values as `key=`,

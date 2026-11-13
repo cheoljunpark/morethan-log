@@ -18,9 +18,11 @@ const Feed: React.FC = () => {
   const {
     q = "",
     menu: currentMenu,
+    submenu: currentSubmenu,
     tag: currentTag,
   } = getFeedQuery(router.query)
   const { menus, tags, total } = usePostTaxonomy()
+  const activeMenu = menus.find((menu) => menu.name === currentMenu)
   const [showAllTags, setShowAllTags] = useState(false)
 
   // Collapsed list keeps the selected tag visible even if it ranks below the cut.
@@ -61,6 +63,36 @@ const Feed: React.FC = () => {
           </Link>
         ))}
       </nav>
+
+      {activeMenu && activeMenu.submenus.length > 0 && (
+        <nav
+          className="submenu-chips"
+          aria-label={
+            ko ? `${activeMenu.name} 하위 메뉴` : `${activeMenu.name} submenus`
+          }
+        >
+          <Link
+            href={{ pathname: "/", query: { menu: activeMenu.name } }}
+            data-active={!currentSubmenu}
+            scroll={false}
+          >
+            {ko ? "전체" : "All"} ({activeMenu.count})
+          </Link>
+          {activeMenu.submenus.map(({ name, count }) => (
+            <Link
+              key={name}
+              href={{
+                pathname: "/",
+                query: { menu: activeMenu.name, submenu: name },
+              }}
+              data-active={currentSubmenu === name}
+              scroll={false}
+            >
+              {name} ({count})
+            </Link>
+          ))}
+        </nav>
+      )}
 
       <div className="layout">
         <main className="content-column">
@@ -149,6 +181,47 @@ const StyledWrapper = styled.div`
   }
 
   /* Centered category chips */
+  /* Submenus of the selected category: a smaller second row */
+  .submenu-chips {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    max-width: 760px;
+    margin: -12px auto 24px;
+
+    @media (max-width: 734px) {
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      margin: 0 0 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    a {
+      flex-shrink: 0;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      font-size: 13px;
+      color: ${({ theme }) => theme.colors.gray10};
+      white-space: nowrap;
+
+      &:hover {
+        color: ${({ theme }) => theme.colors.gray12};
+      }
+
+      &[data-active="true"] {
+        background: ${({ theme }) => theme.colors.gray4};
+        color: ${({ theme }) => theme.colors.gray12};
+        font-weight: 600;
+      }
+    }
+  }
+
   .category-chips {
     display: flex;
     flex-wrap: wrap;

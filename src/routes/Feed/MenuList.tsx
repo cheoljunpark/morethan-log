@@ -20,11 +20,13 @@ const MenuList: React.FC<Props> = ({ initialVisibleCount }) => {
   const [showAll, setShowAll] = useState(false)
   const currentMenu =
     typeof router.query.menu === "string" ? router.query.menu : ""
+  const currentSubmenu =
+    typeof router.query.submenu === "string" ? router.query.submenu : ""
 
-  const select = (menu?: string) => {
+  const select = (menu?: string, submenu?: string) => {
     clearFeedPosition()
     void router
-      .push({ pathname: "/", query: compactQuery({ menu }) })
+      .push({ pathname: "/", query: compactQuery({ menu, submenu }) })
       .then(() => window.scrollTo(0, 0))
   }
 
@@ -60,6 +62,23 @@ const MenuList: React.FC<Props> = ({ initialVisibleCount }) => {
               <span className="name">{menu.name}</span>
               <span className="count">{menu.count}</span>
             </button>
+
+            {currentMenu === menu.name && menu.submenus.length > 0 && (
+              <div className="submenu-list">
+                {menu.submenus.map((submenu) => (
+                  <button
+                    key={submenu.name}
+                    type="button"
+                    className="submenu-item"
+                    data-active={currentSubmenu === submenu.name}
+                    onClick={() => select(menu.name, submenu.name)}
+                  >
+                    <span className="submenu-name">{submenu.name}</span>
+                    <span className="submenu-count">{submenu.count}</span>
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
         ))}
 
@@ -137,6 +156,39 @@ const StyledWrapper = styled.div`
   }
 
   .count,
+  .submenu-count {
+    font-size: 0.72rem;
+    font-weight: 400;
+    color: ${({ theme }) => theme.colors.gray9};
+  }
+
+  .submenu-list {
+    display: grid;
+    margin: 0.1rem 0 0.4rem;
+    padding-left: 0.75rem;
+    border-left: 1px solid ${({ theme }) => theme.colors.gray6};
+  }
+
+  .submenu-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.75rem;
+    padding: 0.2rem 0;
+    font-size: 0.82rem;
+    color: ${({ theme }) => theme.colors.gray10};
+    cursor: pointer;
+
+    &:hover,
+    &[data-active="true"] {
+      color: ${({ theme }) => theme.colors.gray12};
+    }
+
+    &[data-active="true"] .submenu-name {
+      font-weight: 600;
+    }
+  }
+
   .show-more {
     margin-top: 0.4rem;
     font-size: 0.72rem;

@@ -99,8 +99,11 @@ const fetchPosts = async (): Promise<TPosts> => {
 
     const pageBlockValue = (pageBlock.value as any)?.value ?? pageBlock.value
     properties.createdTime = new Date(pageBlockValue?.created_time).toString()
-    // URLs come from the title; there is no slug property to fill in Notion.
-    properties.slug = makePostSlug(properties.title ?? "", pageId)
+    // URL = the Notion "ID" property (auto-increment number, never changes),
+    // e.g. /70. Rows without it fall back to a title-based slug.
+    const postNumber = properties.ID ? String(properties.ID).trim() : ""
+    delete properties.ID
+    properties.slug = postNumber || makePostSlug(properties.title ?? "", pageId)
 
     if (!properties.updatedAt && pageBlockValue?.last_edited_time) {
       properties.updatedAt = {

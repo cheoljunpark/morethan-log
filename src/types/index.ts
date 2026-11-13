@@ -19,6 +19,7 @@ export type TPost = {
   updatedAt?: { start_date: string }
   slug: string
   menu?: string[]
+  submenu?: string[]
   tags?: string[]
   summary?: string
   title: string

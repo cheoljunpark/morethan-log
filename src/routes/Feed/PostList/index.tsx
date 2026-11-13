@@ -23,7 +23,7 @@ const PostList: React.FC = () => {
   const ko = language === "ko"
   const posts = usePostsQuery()
   const filter = useMemo(() => getFeedQuery(router.query), [router.query])
-  const { q, tag, menu } = filter
+  const { q, tag, menu, submenu } = filter
   const filteredPosts = useMemo(
     () => filterFeedPosts(posts, filter),
     [posts, filter]
@@ -51,13 +51,15 @@ const PostList: React.FC = () => {
     JSON.stringify([filteredPosts.length, safePage, filter])
   )
 
-  const isFiltered = Boolean(q || tag || menu)
+  const isFiltered = Boolean(q || tag || menu || submenu)
   const heading = q
     ? ko
       ? `‘${q}’ 검색 결과`
       : `Results for “${q}”`
     : tag
     ? `#${tag}`
+    : submenu
+    ? `${menu} · ${submenu}`
     : menu || (ko ? "최신 글" : "Latest posts")
 
   return (

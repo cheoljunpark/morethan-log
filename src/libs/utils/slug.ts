@@ -1,4 +1,6 @@
-// Post URLs are generated from the title, so nothing has to be typed in Notion.
+// Posts normally live at their Notion "ID" number (/70, see getPosts). These
+// helpers cover rows without an ID, and resolve the title-based URLs used
+// between 2026-11-13 and the switch to numbers (they redirect to the number).
 //
 //   "Next.js 배포 트러블슈팅" (id ...c0ba026) -> "nextjs-배포-트러블슈팅-c0ba026"
 //

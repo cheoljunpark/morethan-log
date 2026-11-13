@@ -2,6 +2,7 @@ import styled from "@emotion/styled"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import React, { useMemo } from "react"
+import { FiChevronRight } from "react-icons/fi"
 import { useUiLanguage } from "src/contexts/UiLanguageContext"
 import useFeedScrollRestoration from "src/hooks/useFeedScrollRestoration"
 import usePostsQuery from "src/hooks/usePostsQuery"
@@ -47,37 +48,44 @@ const PostList: React.FC = () => {
     )
   }
 
-  useFeedScrollRestoration(
-    JSON.stringify([filteredPosts.length, safePage, filter])
-  )
+  useFeedScrollRestoration()
 
   const isFiltered = Boolean(q || tag || menu || submenu)
-  const heading = q
-    ? ko
-      ? `‘${q}’ 검색 결과`
-      : `Results for “${q}”`
-    : tag
-    ? `#${tag}`
-    : submenu
-    ? `${menu} · ${submenu}`
-    : menu || (ko ? "최신 글" : "Latest posts")
+  const heading = q ? (
+    ko ? (
+      `‘${q}’ 검색 결과`
+    ) : (
+      `Results for “${q}”`
+    )
+  ) : tag ? (
+    `#${tag}`
+  ) : submenu && menu ? (
+    // Breadcrumb: the parent category links back to all of its posts.
+    <>
+      <Link
+        href={{ pathname: "/", query: { menu } }}
+        scroll={false}
+        className="crumb"
+      >
+        {menu}
+      </Link>
+      <FiChevronRight className="crumb-sep" aria-hidden="true" />
+      <span aria-current="page">{submenu}</span>
+    </>
+  ) : (
+    menu
+  )
 
   return (
     <StyledWrapper id="feed-posts">
       {isFiltered && (
         <div className="overview">
           <div className="heading-row">
-            <h2>
-              {heading}
-              <span className="count">{filteredPosts.length}</span>
-            </h2>
+            <h2>{heading}</h2>
             <div className="controls">
               <OrderButtons />
             </div>
           </div>
-          <Link href="/" className="clear">
-            {ko ? "필터 해제" : "Clear filter"} ×
-          </Link>
         </div>
       )}
 
@@ -179,35 +187,33 @@ const StyledWrapper = styled.section`
 
     h2 {
       display: flex;
-      align-items: baseline;
-      gap: 0.75rem;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.4rem;
       font-size: clamp(32px, 3.6vw, 40px);
       line-height: 1.1;
       font-weight: 600;
       letter-spacing: -0.03em;
     }
 
-    .count {
-      font-size: 0.8rem;
-      font-weight: 400;
-      letter-spacing: 0;
+    .crumb {
       color: ${({ theme }) => theme.colors.gray9};
+      transition: color 120ms ease;
+
+      &:hover {
+        color: ${({ theme }) => theme.colors.indigo9};
+      }
+    }
+
+    .crumb-sep {
+      width: 0.7em;
+      height: 0.7em;
+      color: ${({ theme }) => theme.colors.gray8};
     }
   }
 
   .post-area {
     min-height: 6rem;
-  }
-
-  .clear {
-    display: inline-block;
-    margin-top: 10px;
-    font-size: 14px;
-    color: ${({ theme }) => theme.colors.indigo9};
-
-    &:hover {
-      text-decoration: underline;
-    }
   }
 
   .empty-state {

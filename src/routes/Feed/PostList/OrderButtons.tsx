@@ -2,7 +2,6 @@ import styled from "@emotion/styled"
 import { useRouter } from "next/router"
 import React from "react"
 import { useUiLanguage } from "src/contexts/UiLanguageContext"
-import { saveFeedPosition } from "src/libs/utils/feedScroll"
 import getFeedQuery, { compactQuery } from "src/libs/utils/router/getFeedQuery"
 
 type TOrder = "asc" | "desc"
@@ -13,7 +12,6 @@ const OrderButtons: React.FC = () => {
   const currentOrder = `${router.query.order || ""}` || ("desc" as TOrder)
 
   const handleClickOrderBy = (value: TOrder) => {
-    saveFeedPosition()
     void router.replace(
       {
         pathname: "/",

@@ -11,10 +11,6 @@ import NavBar from "./NavBar"
 import SearchOverlay from "./SearchOverlay"
 import ThemeToggle from "./ThemeToggle"
 
-const MobileMenuList = dynamic(() => import("src/routes/Feed/MenuList"), {
-  ssr: false,
-})
-
 const MobileProfileCard = dynamic(
   () => import("src/routes/Feed/MobileProfileCard"),
   {
@@ -137,10 +133,6 @@ const Header: React.FC = () => {
           {...(!isMobileMenuOpen && { inert: "" })}
         >
           <NavBar className="mobile-menu-links" />
-
-          <div className="mobile-feed-menu">
-            <MobileMenuList initialVisibleCount={5} />
-          </div>
 
           <div className="mobile-menu-profile">
             <MobileProfileCard />
@@ -394,11 +386,6 @@ const StyledWrapper = styled.div`
   }
 
   .mobile-menu-profile,
-  .mobile-feed-menu {
-    min-width: 0;
-    width: 100%;
-  }
-
   .mobile-menu-profile {
     padding-top: 0.15rem;
 
@@ -437,14 +424,6 @@ const StyledWrapper = styled.div`
       text-overflow: ellipsis;
       white-space: nowrap;
     }
-  }
-
-  .mobile-feed-menu {
-    min-width: 0;
-    overflow: visible;
-    padding-top: 0.15rem;
-    padding-bottom: 0.7rem;
-    border-bottom: 1px solid ${({ theme }) => theme.colors.gray5};
   }
 
   .mobile-menu-controls {

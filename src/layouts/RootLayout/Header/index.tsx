@@ -262,11 +262,13 @@ const StyledWrapper = styled.div`
     }
   }
 
+  /* Sits right next to the search button, not a full gap away. */
   .controls {
     display: flex;
     gap: 0.6rem;
     align-items: center;
     flex-shrink: 0;
+    margin-left: calc(-2rem + 4px);
 
     @media (max-width: 1023px) {
       display: none;
@@ -483,7 +485,7 @@ const StyledWrapper = styled.div`
 
   .mobile-menu-controls {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     gap: 0.65rem;
     padding: 0.15rem 0 env(safe-area-inset-bottom);

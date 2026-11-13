@@ -156,7 +156,7 @@ const PostList: React.FC = () => {
 export default PostList
 
 const StyledWrapper = styled.section`
-  margin-bottom: 3rem;
+  margin-bottom: 0;
 
   .overview {
     padding-top: 20px;

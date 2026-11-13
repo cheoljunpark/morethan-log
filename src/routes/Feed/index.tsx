@@ -7,6 +7,7 @@ import { useUiLanguage } from "src/contexts/UiLanguageContext"
 import usePostTaxonomy from "src/hooks/usePostTaxonomy"
 import getFeedQuery from "src/libs/utils/router/getFeedQuery"
 
+import MenuChipWithSubmenus from "./MenuChipWithSubmenus"
 import PostList from "./PostList"
 
 const TAG_LIMIT = 12
@@ -22,7 +23,6 @@ const Feed: React.FC = () => {
     tag: currentTag,
   } = getFeedQuery(router.query)
   const { menus, tags } = usePostTaxonomy()
-  const activeMenu = menus.find((menu) => menu.name === currentMenu)
   const [showAllTags, setShowAllTags] = useState(false)
 
   // Collapsed list keeps the selected tag visible even if it ranks below the cut.
@@ -52,47 +52,26 @@ const Feed: React.FC = () => {
         >
           {ko ? "전체" : "All"}
         </Link>
-        {menus.map(({ name }) => (
-          <Link
-            key={name}
-            href={{ pathname: "/", query: { menu: name } }}
-            data-active={currentMenu === name}
-            scroll={false}
-          >
-            {name}
-          </Link>
-        ))}
-      </nav>
-
-      {activeMenu && activeMenu.submenus.length > 0 && (
-        <nav
-          className="submenu-chips"
-          aria-label={
-            ko ? `${activeMenu.name} 하위 메뉴` : `${activeMenu.name} submenus`
-          }
-        >
-          <Link
-            href={{ pathname: "/", query: { menu: activeMenu.name } }}
-            data-active={!currentSubmenu}
-            scroll={false}
-          >
-            {ko ? "전체" : "All"}
-          </Link>
-          {activeMenu.submenus.map(({ name }) => (
+        {menus.map((menu) =>
+          // The selected menu with submenus becomes "Menu › Submenu ▾".
+          menu.name === currentMenu && menu.submenus.length > 0 ? (
+            <MenuChipWithSubmenus
+              key={menu.name}
+              menu={menu}
+              currentSubmenu={currentSubmenu}
+            />
+          ) : (
             <Link
-              key={name}
-              href={{
-                pathname: "/",
-                query: { menu: activeMenu.name, submenu: name },
-              }}
-              data-active={currentSubmenu === name}
+              key={menu.name}
+              href={{ pathname: "/", query: { menu: menu.name } }}
+              data-active={currentMenu === menu.name}
               scroll={false}
             >
-              {name}
+              {menu.name}
             </Link>
-          ))}
-        </nav>
-      )}
+          )
+        )}
+      </nav>
 
       <div className="layout">
         <main className="content-column">
@@ -142,7 +121,7 @@ const Feed: React.FC = () => {
 export default Feed
 
 const StyledWrapper = styled.div`
-  padding-bottom: 80px;
+  padding-bottom: 72px;
 
   /* Full-bleed banner */
   .banner {
@@ -180,52 +159,6 @@ const StyledWrapper = styled.div`
     }
   }
 
-  /* Submenus of the selected category: underline tabs under the chips,
-     so they read as a second level rather than more chips. */
-  .submenu-chips {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 4px 22px;
-    max-width: 760px;
-    margin: -8px auto 24px;
-    border-bottom: 1px solid ${({ theme }) => theme.colors.gray6};
-
-    @media (max-width: 734px) {
-      flex-wrap: nowrap;
-      justify-content: flex-start;
-      gap: 20px;
-      margin: 4px 0 8px;
-      overflow-x: auto;
-      scrollbar-width: none;
-
-      &::-webkit-scrollbar {
-        display: none;
-      }
-    }
-
-    a {
-      flex-shrink: 0;
-      padding: 10px 0 9px;
-      margin-bottom: -1px;
-      border-bottom: 2px solid transparent;
-      font-size: 14px;
-      color: ${({ theme }) => theme.colors.gray9};
-      white-space: nowrap;
-      transition: color 120ms ease, border-color 120ms ease;
-
-      &:hover {
-        color: ${({ theme }) => theme.colors.gray12};
-      }
-
-      &[data-active="true"] {
-        border-bottom-color: ${({ theme }) => theme.colors.gray12};
-        color: ${({ theme }) => theme.colors.gray12};
-        font-weight: 600;
-      }
-    }
-  }
-
   /* Centered category chips */
   .category-chips {
     display: flex;
@@ -247,7 +180,8 @@ const StyledWrapper = styled.div`
       }
     }
 
-    a {
+    > a,
+    > button {
       flex-shrink: 0;
       padding: 6px 14px;
       border-radius: 9999px;

@@ -38,44 +38,24 @@ const SiteFooter: React.FC = () => {
   return (
     <StyledWrapper>
       <div className="inner">
-        <div className="columns">
-          {CONFIG.projects?.length > 0 && (
-            <div>
-              <h3>{ko ? "프로젝트" : "Projects"}</h3>
-              {CONFIG.projects.map((project) => (
-                <a
-                  key={project.name}
-                  href={project.href}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {project.name}
-                </a>
-              ))}
-            </div>
-          )}
-          <div>
-            <h3>{ko ? "연락" : "Contact"}</h3>
-            <div className="contact-icons">
-              {contactLinks.map(({ name, icon: Icon, href }) => (
-                <a
-                  key={name}
-                  href={href}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={name}
-                  title={name}
-                >
-                  <Icon aria-hidden="true" />
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
         <p className="legal">
           Copyright © {since === year ? year : `${since}–${year}`}{" "}
           {CONFIG.profile.name}.
         </p>
+        <nav className="contact-icons" aria-label={ko ? "연락처" : "Contact"}>
+          {contactLinks.map(({ name, icon: Icon, href }) => (
+            <a
+              key={name}
+              href={href}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={name}
+              title={name}
+            >
+              <Icon aria-hidden="true" />
+            </a>
+          ))}
+        </nav>
       </div>
     </StyledWrapper>
   )
@@ -89,38 +69,18 @@ const StyledWrapper = styled.footer`
   color: ${({ theme }) => theme.colors.gray11};
 
   .inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
     max-width: 1180px;
     margin: 0 auto;
-    padding: 40px 1.5rem 24px;
+    padding: 28px 1.5rem;
 
     @media (max-width: 768px) {
-      padding: 32px 1.1rem 24px;
-    }
-  }
-
-  .columns {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 24px;
-  }
-
-  h3 {
-    margin-bottom: 6px;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: -0.01em;
-    color: ${({ theme }) => theme.colors.gray12};
-  }
-
-  a {
-    display: block;
-    font-size: 12px;
-    line-height: 2.2;
-    color: ${({ theme }) => theme.colors.gray10};
-
-    &:hover {
-      color: ${({ theme }) => theme.colors.gray12};
-      text-decoration: underline;
+      flex-direction: column-reverse;
+      align-items: flex-start;
+      padding: 24px 1.1rem;
     }
   }
 
@@ -128,7 +88,6 @@ const StyledWrapper = styled.footer`
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    margin-top: 4px;
 
     a {
       display: inline-flex;
@@ -160,9 +119,7 @@ const StyledWrapper = styled.footer`
   }
 
   .legal {
-    margin: 28px 0 0;
-    padding-top: 16px;
-    border-top: 1px solid ${({ theme }) => theme.colors.gray6};
+    margin: 0;
     font-size: 12px;
     color: ${({ theme }) => theme.colors.gray9};
   }

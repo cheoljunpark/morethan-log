@@ -8,7 +8,7 @@ type Props = {
   className?: string
 }
 
-const PREFETCH_PATHS = ["/about"]
+const PREFETCH_PATHS = ["/projects", "/about"]
 
 const NavBar: React.FC<Props> = ({ className }) => {
   const router = useRouter()
@@ -16,7 +16,12 @@ const NavBar: React.FC<Props> = ({ className }) => {
 
   const links = [
     { id: 1, name: language === "ko" ? "홈" : "Home", to: "/" },
-    { id: 2, name: language === "ko" ? "소개" : "About", to: "/about" },
+    {
+      id: 2,
+      name: language === "ko" ? "프로젝트" : "Projects",
+      to: "/projects",
+    },
+    { id: 3, name: language === "ko" ? "소개" : "About", to: "/about" },
   ]
   const prefetchStaticPages = useCallback(() => {
     PREFETCH_PATHS.forEach((path) => {

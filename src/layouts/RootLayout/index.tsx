@@ -19,7 +19,7 @@ const RootLayout = ({ children }: Props) => {
   useGtagEffect()
 
   const isDetailPage = router.pathname === "/[slug]"
-  const isWidePage = ["/", "/about"].includes(router.pathname)
+  const isWidePage = ["/", "/about", "/projects"].includes(router.pathname)
 
   return (
     <ThemeProvider scheme={scheme}>

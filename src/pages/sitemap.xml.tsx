@@ -24,6 +24,12 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       changefreq: "daily",
     },
     {
+      loc: siteUrl("/projects"),
+      lastmod: toIsoDate(latest),
+      priority: 0.5,
+      changefreq: "monthly",
+    },
+    {
       loc: siteUrl("/about"),
       lastmod: toIsoDate(latest),
       priority: 0.5,

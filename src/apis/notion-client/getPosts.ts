@@ -86,6 +86,18 @@ const fetchPosts = async (): Promise<TPosts> => {
     return []
   }
 
+  // Order of the select options as arranged in Notion ("Edit property"),
+  // so the site lists categories in the same order.
+  const optionOrder = (propertyName: string) => {
+    const property: any = Object.values(schema).find(
+      (value: any) => value?.name === propertyName
+    )
+    const options: { value: string }[] = property?.options ?? []
+    return new Map(options.map((option, index) => [option.value, index]))
+  }
+  const menuOrder = optionOrder("menu")
+  const submenuOrder = optionOrder("submenu")
+
   const pageIds = getAllPageIds(response)
   const data = []
 
@@ -104,6 +116,11 @@ const fetchPosts = async (): Promise<TPosts> => {
     const postNumber = properties.ID ? String(properties.ID).trim() : ""
     delete properties.ID
     properties.slug = postNumber || makePostSlug(properties.title ?? "", pageId)
+
+    const menuIndex = menuOrder.get(properties.menu?.[0])
+    if (menuIndex !== undefined) properties.menuOrder = menuIndex
+    const submenuIndex = submenuOrder.get(properties.submenu?.[0])
+    if (submenuIndex !== undefined) properties.submenuOrder = submenuIndex
 
     if (!properties.updatedAt && pageBlockValue?.last_edited_time) {
       properties.updatedAt = {

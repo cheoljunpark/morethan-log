@@ -26,6 +26,9 @@ export type TPost = {
   status: TPostStatus[]
   createdTime: string
   thumbnail?: string
+  /** Position of the post's menu / submenu among the Notion select options. */
+  menuOrder?: number
+  submenuOrder?: number
 }
 
 export type PostDetail = TPost & {

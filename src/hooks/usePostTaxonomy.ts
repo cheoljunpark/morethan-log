@@ -4,13 +4,28 @@ import { filterPosts } from "src/libs/utils/notion"
 
 export type CountedItem = { name: string; count: number }
 export type MenuItem = CountedItem & { submenus: CountedItem[] }
+type RankedItem = CountedItem & { order?: number }
 
 const byCountDesc = (a: CountedItem, b: CountedItem) => b.count - a.count
+
+/** Notion option order first; anything without one goes last, by count. */
+const byNotionOrder = (a: RankedItem, b: RankedItem) =>
+  (a.order ?? Infinity) - (b.order ?? Infinity) || byCountDesc(a, b)
 
 const toSortedItems = (map: Map<string, number>): CountedItem[] =>
   Array.from(map, ([name, count]) => ({ name, count })).sort(byCountDesc)
 
-/** Category (menu → submenu) and tag counts over the public posts. */
+const toRankedItems = (
+  map: Map<string, { count: number; order?: number }>
+): CountedItem[] =>
+  Array.from(map, ([name, { count, order }]) => ({ name, count, order }))
+    .sort(byNotionOrder)
+    .map(({ name, count }) => ({ name, count }))
+
+/**
+ * Category (menu → submenu) and tag counts over the public posts. Categories
+ * follow the option order set in Notion; tags are sorted by count.
+ */
 const usePostTaxonomy = () => {
   const posts = usePostsQuery()
 
@@ -18,18 +33,32 @@ const usePostTaxonomy = () => {
     const publicPosts = filterPosts(posts)
     const menus = new Map<
       string,
-      { count: number; submenus: Map<string, number> }
+      {
+        count: number
+        order?: number
+        submenus: Map<string, { count: number; order?: number }>
+      }
     >()
     const tags = new Map<string, number>()
 
     publicPosts.forEach((post) => {
       const menu = post.menu?.[0]
       if (menu) {
-        const entry = menus.get(menu) ?? { count: 0, submenus: new Map() }
+        const entry = menus.get(menu) ?? {
+          count: 0,
+          order: post.menuOrder,
+          submenus: new Map(),
+        }
         entry.count += 1
         const submenu = post.submenu?.[0]
-        if (submenu)
-          entry.submenus.set(submenu, (entry.submenus.get(submenu) ?? 0) + 1)
+        if (submenu) {
+          const sub = entry.submenus.get(submenu) ?? {
+            count: 0,
+            order: post.submenuOrder,
+          }
+          sub.count += 1
+          entry.submenus.set(submenu, sub)
+        }
         menus.set(menu, entry)
       }
       post.tags?.forEach((tag) => tags.set(tag, (tags.get(tag) ?? 0) + 1))
@@ -37,12 +66,15 @@ const usePostTaxonomy = () => {
 
     const menuItems: MenuItem[] = Array.from(
       menus,
-      ([name, { count, submenus }]) => ({
+      ([name, { count, order, submenus }]) => ({
         name,
         count,
-        submenus: toSortedItems(submenus),
+        order,
+        submenus: toRankedItems(submenus),
       })
-    ).sort(byCountDesc)
+    )
+      .sort(byNotionOrder)
+      .map(({ name, count, submenus }) => ({ name, count, submenus }))
 
     return {
       total: publicPosts.length,

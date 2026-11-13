@@ -11,6 +11,10 @@ import NavBar from "./NavBar"
 import SearchOverlay from "./SearchOverlay"
 import ThemeToggle from "./ThemeToggle"
 
+const MobileMenuList = dynamic(() => import("src/routes/Feed/MenuList"), {
+  ssr: false,
+})
+
 const MobileProfileCard = dynamic(
   () => import("src/routes/Feed/MobileProfileCard"),
   {
@@ -136,6 +140,10 @@ const Header: React.FC = () => {
           >
             <NavBar className="mobile-menu-links" />
 
+            <div className="mobile-menu-categories">
+              <MobileMenuList />
+            </div>
+
             <div className="mobile-menu-profile">
               <MobileProfileCard />
             </div>
@@ -181,7 +189,7 @@ const StyledWrapper = styled.div`
 
     @media (max-width: 1023px) {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) auto auto;
+      grid-template-columns: auto minmax(0, 1fr) auto;
       align-items: center;
       gap: 0.25rem;
       min-height: 48px;
@@ -198,6 +206,10 @@ const StyledWrapper = styled.div`
     &[data-active="true"] {
       color: #ffffff;
     }
+  }
+
+  > .container > .header-links .nav-indicator {
+    background: #ffffff;
   }
 
   > .container > .header-links a {
@@ -238,14 +250,22 @@ const StyledWrapper = styled.div`
     }
 
     @media (max-width: 1023px) {
-      order: 2;
+      order: 3;
       margin-left: 0;
     }
   }
 
+  /* Mobile: hamburger on the left, then the logo, then search. */
   .mobile-menu-trigger {
     @media (max-width: 1023px) {
-      order: 3;
+      order: 1;
+      margin-left: -0.4rem;
+    }
+  }
+
+  > .container > a {
+    @media (max-width: 1023px) {
+      order: 2;
     }
   }
 
@@ -275,7 +295,7 @@ const StyledWrapper = styled.div`
       display: inline-flex;
       justify-content: center;
       align-items: center;
-      justify-self: end;
+      justify-self: start;
       width: 2rem;
       height: 2rem;
       padding: 0;
@@ -334,11 +354,12 @@ const StyledWrapper = styled.div`
     @media (max-width: 1023px) {
       position: fixed;
       /* The header's backdrop-filter makes it the containing block, so size
-         to the viewport explicitly instead of using inset. */
-      top: 0;
+         to the viewport explicitly instead of using inset. Starts below the
+         bar so the hamburger stays visible as the close button. */
+      top: 48px;
       left: 0;
       width: 100vw;
-      height: 100dvh;
+      height: calc(100dvh - 48px);
       z-index: ${zIndexes.header + 2};
       display: block;
       overflow: hidden;
@@ -352,24 +373,23 @@ const StyledWrapper = styled.div`
     @media (max-width: 1023px) {
       position: absolute;
       top: 0;
-      right: 0;
+      left: 0;
       pointer-events: auto;
-      display: grid;
-      align-content: flex-start;
-      grid-auto-rows: max-content;
+      /* Links at the top; profile and settings pinned to the bottom. */
+      display: flex;
+      flex-direction: column;
       gap: 0.7rem;
-      width: min(22rem, calc(100vw - 2.5rem));
-      height: 100dvh;
-      max-height: 100dvh;
+      width: min(17.5rem, 78vw);
+      height: 100%;
       padding: 1rem;
       overflow-y: auto;
       overflow-x: hidden;
       overscroll-behavior: contain;
       touch-action: pan-y;
       -webkit-overflow-scrolling: touch;
-      border-left: 1px solid ${({ theme }) => theme.colors.gray6};
+      border-right: 1px solid ${({ theme }) => theme.colors.gray6};
       background-color: ${({ theme }) => theme.colors.gray2};
-      transform: translateX(105%);
+      transform: translateX(-105%);
       transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
 
       &[data-open="true"] {
@@ -389,7 +409,10 @@ const StyledWrapper = styled.div`
 
     @media (max-width: 1023px) {
       position: fixed;
-      inset: 0;
+      top: 48px;
+      left: 0;
+      width: 100vw;
+      height: calc(100dvh - 48px);
       z-index: ${zIndexes.header + 1};
       display: block;
       pointer-events: none;
@@ -406,9 +429,17 @@ const StyledWrapper = styled.div`
     }
   }
 
-  .mobile-menu-profile,
+  .mobile-menu-categories {
+    flex-shrink: 0;
+    /* Line up with the nav links, which leave room for the tab indicator. */
+    padding: 0.9rem 0 0 0.85rem;
+    border-top: 1px solid ${({ theme }) => theme.colors.gray5};
+  }
+
   .mobile-menu-profile {
-    padding-top: 0.15rem;
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid ${({ theme }) => theme.colors.gray5};
 
     > div > .mid {
       margin-bottom: 0;
@@ -417,8 +448,7 @@ const StyledWrapper = styled.div`
 
   .mobile-menu-links {
     min-width: 0;
-    padding-bottom: 0.7rem;
-    border-bottom: 1px solid ${({ theme }) => theme.colors.gray5};
+    flex-shrink: 0;
 
     ul {
       display: grid;
@@ -439,11 +469,22 @@ const StyledWrapper = styled.div`
     a {
       min-height: 2rem;
       justify-content: flex-start;
-      padding: 0.5rem 0;
+      padding: 0.5rem 0 0.5rem 0.85rem;
       font-size: 1.05rem;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+    }
+
+    /* Vertical list: the tab indicator becomes a bar on the left. */
+    .nav-indicator {
+      width: 3px;
+      height: calc(var(--h, 0) - 1rem);
+      transform: translateY(calc(var(--y, 0) + 0.5rem));
+
+      &[data-animate="true"] {
+        transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
+      }
     }
   }
 
@@ -452,6 +493,6 @@ const StyledWrapper = styled.div`
     justify-content: space-between;
     align-items: center;
     gap: 0.65rem;
-    padding-top: 0.15rem;
+    padding: 0.15rem 0 env(safe-area-inset-bottom);
   }
 `

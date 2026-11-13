@@ -14,6 +14,7 @@ Notion을 CMS로 쓰는 개인 개발 블로그입니다. 구현 과정과 트�
 | `/about` | 블로그 소개 |
 | `/sitemap.xml` | 공개 글만 포함한 사이트맵 |
 | `/api/revalidate` | 캐시 즉시 갱신 (아래 참고) |
+| `/api/notion-webhook` | Notion 수정 시 자동 갱신 (아래 참고) |
 
 예전 주소 `/archive`, `/tags` 는 홈으로 리다이렉트됩니다 (`next.config.js`).
 
@@ -39,6 +40,7 @@ yarn dev
 |---|---|---|
 | `NOTION_PAGE_ID` | ✅ | 글 데이터베이스가 있는 Notion 페이지 ID |
 | `TOKEN_FOR_REVALIDATE` | 권장 | `/api/revalidate` 비밀 키. 없으면 이 API는 비활성화됩니다 |
+| `NOTION_WEBHOOK_SECRET` | 권장 | Notion webhook verification token. 없으면 webhook은 비활성화됩니다 |
 | `NEXT_PUBLIC_UTTERANCES_REPO` | | 댓글용 GitHub 저장소 (`owner/repo`) |
 | `NEXT_PUBLIC_GOOGLE_MEASUREMENT_ID` | | Google Analytics |
 | `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` | | Google Search Console 인증 |
@@ -48,7 +50,27 @@ yarn dev
 
 ## 글 반영 시점
 
-페이지는 최대 1시간마다 다시 생성됩니다. 바로 반영하려면:
+Notion webhook이 연결되어 있으면 글을 고친 뒤 **약 1분 안에 자동 반영**됩니다
+(`/api/notion-webhook`). 연결이 안 됐거나 알림이 빠져도 페이지는 최대 1시간마다 다시 생성됩니다.
+
+### Notion webhook 연결 (최초 1회)
+
+1. https://www.notion.so/profile/integrations 에서 새 internal connection 생성
+2. 블로그 글 데이터베이스(Notion 페이지) → `···` → **Connections**에서 이 connection 추가
+3. connection 설정 → **Webhooks** 탭 → **Create a subscription**
+   - URL: `https://dev.cheoljunpark.site/api/notion-webhook`
+   - 이벤트: Page 이벤트(content updated, properties updated, created, deleted 등)
+4. Notion이 확인 요청을 보내면 토큰이 Vercel 함수 로그에
+   `[notion-webhook] verification_token: ...` 로 찍힙니다.
+   (Vercel → 프로젝트 → **Logs**에서 `notion-webhook` 검색)
+5. 그 토큰을 Vercel 환경변수 `NOTION_WEBHOOK_SECRET`(Production)에 저장하고 **Redeploy**
+6. Notion의 Verify 창에 같은 토큰을 붙여 넣어 구독 활성화
+
+요청 서명(`X-Notion-Signature`, HMAC-SHA256)이 맞지 않으면 401로 거부합니다.
+
+### 수동 갱신
+
+바로 반영하려면:
 
 ```
 https://dev.cheoljunpark.site/api/revalidate?secret=<TOKEN_FOR_REVALIDATE>
